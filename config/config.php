@@ -2,6 +2,7 @@
 
 namespace Matomo\Dependencies\GoogleAnalyticsImporter;
 
+use Piwik\Config;
 use Piwik\Option;
 use Piwik\Url;
 use Piwik\Container\Container;
@@ -15,7 +16,7 @@ return ['GoogleAnalyticsImporter.pingMysqlEverySecs' => null, 'GoogleAnalyticsIm
     return $previous;
 }), 'GoogleAnalyticsImporter.googleClientClass' => 'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Client', 'GoogleAnalyticsImporter.googleClient' => function (Container $c) {
     $klass = $c->get('GoogleAnalyticsImporter.googleClientClass');
-    /** @var \Google\Client $googleClient */
+    /** @var \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Client $googleClient */
     $googleClient = new $klass();
     $googleClient->addScope(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\Analytics::ANALYTICS_READONLY);
     $googleClient->addScope(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\AnalyticsReporting::ANALYTICS_READONLY);
@@ -23,6 +24,26 @@ return ['GoogleAnalyticsImporter.pingMysqlEverySecs' => null, 'GoogleAnalyticsIm
     $googleClient->setApprovalPrompt('force');
     $redirectUrl = Url::getCurrentUrlWithoutQueryString() . '?module=GoogleAnalyticsImporter&action=processAuthCode';
     $googleClient->setRedirectUri($redirectUrl);
+
+    $proxyHost = Config::getInstance()->proxy['host'];
+
+    if ($proxyHost) {
+        $proxyPort     = Config::getInstance()->proxy['port'];
+        $proxyUser     = Config::getInstance()->proxy['username'];
+        $proxyPassword = Config::getInstance()->proxy['password'];
+
+        if ($proxyUser) {
+            $proxy = sprintf('http://%s:%s@%s:%s', $proxyUser, $proxyPassword, $proxyHost, $proxyPort);
+        } else {
+            $proxy = sprintf('http://%s:%s', $proxyHost, $proxyPort);
+        }
+        $httpClient = new \Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Client([
+            'proxy'      => $proxy,
+            'exceptions' => false,
+            'base_uri'   => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Client::API_BASE_PATH
+        ]);
+        $googleClient->setHttpClient($httpClient);
+    }
     return $googleClient;
 }, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\Analytics::class => \Piwik\DI::autowire()->constructor(\Piwik\DI::get('GoogleAnalyticsImporter.googleClient')), \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\AnalyticsReporting::class => \Piwik\DI::autowire()->constructor(\Piwik\DI::get('GoogleAnalyticsImporter.googleClient')), 'GoogleAnalyticsImporter.googleAnalyticsDataClientClass' => 'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Data\\V1beta\\BetaAnalyticsDataClient', 'GoogleAnalyticsImporter.googleAnalyticsAdminServiceClientClass' => 'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\AnalyticsAdminServiceClient', 'GoogleAnalyticsImporter.recordImporters' => [
     \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitsSummary\RecordImporter::class,
