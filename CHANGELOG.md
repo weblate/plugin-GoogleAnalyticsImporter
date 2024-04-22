@@ -1,5 +1,9 @@
 ## Changelog
 
+# 5.0.14
+- Added code to use proxy config for Google client configuration if available
+- Added plugin category for Marketplace
+
 # 5.0.13
 - Upgraded phpseclib to 3.0.36
 
