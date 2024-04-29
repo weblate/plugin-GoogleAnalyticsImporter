@@ -9,11 +9,8 @@
  */
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
-use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
-use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\AnalyticsAdminServiceClient;
 use Piwik\Container\StaticContainer;
 use Piwik\Piwik;
-use Piwik\Option;
 class AuthorizationGA4
 {
     const CLIENT_CONFIG_OPTION_NAME = 'GoogleAnalyticsImporter.clientConfiguration';
@@ -21,13 +18,13 @@ class AuthorizationGA4
     public function getClient()
     {
         $klass = StaticContainer::get('GoogleAnalyticsImporter.googleAnalyticsDataClientClass');
-        $client = new $klass(['credentials' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build(['keyFile' => $this->getClientConfiguration()])]);
+        $client = new $klass($this->getClientClassArguments());
         return $client;
     }
     public function getAdminClient()
     {
         $klass = StaticContainer::get('GoogleAnalyticsImporter.googleAnalyticsAdminServiceClientClass');
-        $adminClient = new $klass(['credentials' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build(['keyFile' => $this->getClientConfiguration()])]);
+        $adminClient = new $klass($this->getClientClassArguments());
         return $adminClient;
     }
     public function getClientConfiguration()
@@ -40,5 +37,21 @@ class AuthorizationGA4
             throw new \Exception(Piwik::translate('GoogleAnalyticsImporter_MissingClientConfiguration'));
         }
         return $clientConfig;
+    }
+
+    protected function getClientClassArguments(): array
+    {
+        $arguments = [
+            'credentials' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build([
+                'keyFile' => $this->getClientConfiguration()
+            ])
+        ];
+
+        $proxyHttpClient = StaticContainer::get('GoogleAnalyticsImporter.proxyHttpClient');
+        if ($proxyHttpClient) {
+            $arguments['authHttpHandler'] = $proxyHttpClient;
+        }
+
+        return $arguments;
     }
 }
