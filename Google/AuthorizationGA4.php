@@ -42,16 +42,17 @@ class AuthorizationGA4
     protected function getClientClassArguments(): array
     {
         $arguments = [
-            'credentials' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build([
-                'keyFile' => $this->getClientConfiguration()
-            ])
+            'keyFile' => $this->getClientConfiguration()
         ];
 
         $proxyHttpClient = StaticContainer::get('GoogleAnalyticsImporter.proxyHttpClient');
         if ($proxyHttpClient) {
-            $arguments['authHttpHandler'] = $proxyHttpClient;
+            $proxyHttpHandler = \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\HttpHandler\HttpHandlerFactory::build($proxyHttpClient);
+            $arguments['authHttpHandler'] = $proxyHttpHandler;
         }
 
-        return $arguments;
+        $credentialWrapper =  \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build($arguments);
+
+        return ['credentials' => $credentialWrapper];
     }
 }
