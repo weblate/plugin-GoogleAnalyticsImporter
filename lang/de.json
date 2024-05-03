@@ -139,6 +139,8 @@
         "StartFinishTimes": "Start- / Endzeiten",
         "Status": "Status",
         "StreamId": "Stream ID",
+        "StreamIdFilter": "Filtern nach Stream-ID (optional)",
+        "StreamIdFilterHelpText": "Die Stream-ID, für die Sie Daten importieren möchten. %1$sErfahren Sie mehr.%2$s %3$sHinweis:%4$s Lassen Sie dieses Feld leer, um Daten aus allen Streams zu importieren.",
         "ThereAreNoImportJobs": "Es gibt keine Import-Aufträge, die angezeigt werden können.",
         "ThisJobShouldFinishToday": "Dieser Auftrag sollte heute beendet werden.",
         "ThisReportWasImportedFromGoogle": "Dieser Bericht wurde von Google Analytics importiert. Einige Daten werden aufgrund Inkompatibilität zwischen Matomo und Google Analytics fehlen oder als Unbekannt/Nicht gesetzt angezeigt.",
