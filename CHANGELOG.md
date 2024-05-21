@@ -1,7 +1,7 @@
 ## Changelog
 
 # 5.0.15
-- Update grpc/grpc dependency
+- Updated grpc/grpc dependency
 
 # 5.0.14
 - Added code to use proxy config for Google client configuration if available
