@@ -128,7 +128,6 @@ class GoogleAnalyticsQueryService
         $skipReAttempt = \false;
         while ($attempts < $this->maxAttempts) {
             try {
-                throw new \Exception('daily limit reached', 429);
                 $this->issuePointlessMysqlQuery();
                 $result = $this->gaService->reports->batchGet($request, ['quotaUser' => $this->quotaUser]);
                 // @TODO if result->reports[0]->nextPageToken returns a value
