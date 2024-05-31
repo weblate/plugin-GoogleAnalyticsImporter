@@ -18,6 +18,8 @@ use Piwik\Plugins\GoogleAnalyticsImporter\RecordInserter;
 use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
 use Piwik\Log\NullLogger;
+use Piwik\Version;
+
 abstract class BaseRecordImporterTest extends IntegrationTestCase
 {
     /**
@@ -93,8 +95,12 @@ abstract class BaseRecordImporterTest extends IntegrationTestCase
         $testFilesDirectory = $this->getTestDir() . '/..';
         $processedDir = $testFilesDirectory . '/processed/';
         $expectedDir = $testFilesDirectory . '/expected/';
-        $expectedFilePath = $expectedDir . $testName . '.xml';
-        $processedFilePath = $processedDir . $testName . '.xml';
+        $appendOld = '';
+        if (version_compare(Version::VERSION, '5.1.0-rc1') <= 0) {
+            $appendOld = '_old';
+        }
+        $expectedFilePath = $expectedDir . $testName . $appendOld . '.xml';
+        $processedFilePath = $processedDir . $testName . $appendOld . '.xml';
         $this->ensureDirectory($processedDir);
         $this->ensureDirectory($expectedDir);
         $renderer = new Xml();

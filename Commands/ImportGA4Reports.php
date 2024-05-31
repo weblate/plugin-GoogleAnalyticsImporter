@@ -77,7 +77,7 @@ class ImportGA4Reports extends ConsoleCommand
         LogToSingleFileProcessor::handleLogToSingleFileInCliCommand($idSite, $output);
         /** @var ImportStatus $importStatus */
         $importStatus = StaticContainer::get(ImportStatus::class);
-        $canProcessNow = $this->checkIfCanProcess();
+        $canProcessNow = $this->checkIfCanProcess($idSite);
         if ($canProcessNow['canProcess'] === \false) {
             $exceededMessage = 'The import was rate limited and will be restarted automatically at ' . $canProcessNow['nextAvailableAt'];
             if (!empty($canProcessNow['rateLimitType']) && $canProcessNow['rateLimitType'] === 'hourly') {
@@ -332,14 +332,18 @@ class ImportGA4Reports extends ConsoleCommand
             throw new \Exception("Invalid property ID, required format properties/{propertyID}");
         }
     }
-    public function checkIfCanProcess()
+    public function checkIfCanProcess($idSite)
     {
-        $nextAvailableAt = (int) Option::get(GoogleAnalyticsGA4QueryService::DELAY_OPTION_NAME);
+        if (!$idSite) {
+            return ['canProcess' => \true]; // New import, so it should be allowed
+        }
+        $optionKeyName = GoogleAnalyticsGA4QueryService::DELAY_OPTION_NAME . $idSite;
+        $nextAvailableAt = (int) Option::get($optionKeyName);
         if (!$nextAvailableAt) {
             return ['canProcess' => \true];
         }
         if (Date::factory('now')->getTimestamp() >= $nextAvailableAt) {
-            Option::delete(GoogleAnalyticsGA4QueryService::DELAY_OPTION_NAME);
+            Option::delete($optionKeyName);
             return ['canProcess' => \true];
         }
         $rateLimitType = Date::factory('+1 hour')->getTimestamp() > $nextAvailableAt ? 'hourly' : 'daily';

@@ -27,7 +27,7 @@ class GoogleAnalyticsGA4QueryService
     const PING_MYSQL_EVERY = 25;
     const DEFAULT_MIN_BACKOFF_TIME = 2;
     // start at 2s since GA seems to have trouble w/ the 10 requests per 100s limit w/ 1
-    const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt';
+    const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt_';
     private static $problematicMetrics = ['totalUsers', 'eventCount'];
     /**
      * @var int
@@ -76,6 +76,8 @@ class GoogleAnalyticsGA4QueryService
     private $quotaUser;
     private $skipAttemptForExceptionCodes = [401, 403];
     private $singleAttemptForExceptionCodes = [500, 503];
+
+    private $idSite;
     public function __construct(BetaAnalyticsDataClient $gaClient, AnalyticsAdminServiceClient $gaAdminClient, $propertyId, array $goalsMapping, $idSite, $quotaUser, \Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4QueryObjectFactory $googleGA4QueryObjectFactory, LoggerInterface $logger, $streamIds = [])
     {
         $this->gaClient = $gaClient;
@@ -87,6 +89,7 @@ class GoogleAnalyticsGA4QueryService
         $this->metricMapper = new GoogleGA4MetricMapper(Site::isEcommerceEnabledFor($idSite), $goalsMapping);
         $this->quotaUser = $quotaUser;
         $this->streamIds = $streamIds;
+        $this->idSite = $idSite;
     }
     public function query(Date $day, array $dimensions, array $metrics, array $options = [])
     {
@@ -265,7 +268,7 @@ class GoogleAnalyticsGA4QueryService
         if ($backoffLength === 'D') {
             $nextRetry = Date::factory('tomorrow')->getTimestamp();
         }
-        Option::set(self::DELAY_OPTION_NAME, $nextRetry);
+        Option::set(self::DELAY_OPTION_NAME . $this->idSite, $nextRetry);
     }
     private function isIgnorableException(\Exception $ex)
     {

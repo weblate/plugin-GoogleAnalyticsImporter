@@ -54,6 +54,11 @@ class ImportTest extends SystemTestCase
         if (version_compare(Version::VERSION, '4.6.0', '<')) {
             $apiNotToTest[] = 'DevicesDetection.getBrowserEngines';
         }
+
+        if (version_compare(Version::VERSION, '5.1.0-rc1') <= 0) {
+            $apiNotToTest[] = 'CustomDimensions.getConfiguredCustomDimensions';
+        }
+
         return [
             [$apiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month', 'year'], 'apiNotToCall' => $apiNotToTest]],
             [$secondaryApiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month']]],

@@ -78,7 +78,7 @@ class ImportReports extends ConsoleCommand
         $type = $isMobileApp ? \Piwik\Plugins\MobileAppMeasurable\Type::ID : Type::ID;
         $idSite = $this->getIdSite();
         LogToSingleFileProcessor::handleLogToSingleFileInCliCommand($idSite, $output);
-        $canProcessNow = $this->checkIfCanProcess();
+        $canProcessNow = $this->checkIfCanProcess($idSite);
         /** @var ImportStatus $importStatus */
         $importStatus = StaticContainer::get(ImportStatus::class);
         if ($canProcessNow['canProcess'] === \false) {
@@ -367,14 +367,18 @@ class ImportReports extends ConsoleCommand
             return \false;
         }
     }
-    public function checkIfCanProcess()
+    public function checkIfCanProcess($idSite)
     {
-        $nextAvailableAt = (int) Option::get(GoogleAnalyticsQueryService::DELAY_OPTION_NAME);
+        if (!$idSite) {
+            return ['canProcess' => \true];// New import, so it should be allowed
+        }
+        $optionKeyName = GoogleAnalyticsQueryService::DELAY_OPTION_NAME . $idSite;
+        $nextAvailableAt = (int) Option::get($optionKeyName);
         if (!$nextAvailableAt) {
             return ['canProcess' => \true];
         }
         if (Date::factory('now')->getTimestamp() >= $nextAvailableAt) {
-            Option::delete(GoogleAnalyticsQueryService::DELAY_OPTION_NAME);
+            Option::delete($optionKeyName);
             return ['canProcess' => \true];
         }
         $rateLimitType = Date::factory('+1 hour')->getTimestamp() > $nextAvailableAt ? 'hourly' : 'daily';
