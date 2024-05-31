@@ -370,7 +370,7 @@ class ImportReports extends ConsoleCommand
     public function checkIfCanProcess($idSite)
     {
         if (!$idSite) {
-            return true; // New import, so it should be allowed
+            return ['canProcess' => \true];// New import, so it should be allowed
         }
         $optionKeyName = GoogleAnalyticsQueryService::DELAY_OPTION_NAME . $idSite;
         $nextAvailableAt = (int) Option::get($optionKeyName);
