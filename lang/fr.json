@@ -18,6 +18,7 @@
         "ConfigureTheImporter": "Configurer l'importateur",
         "ConfigureTheImporterHelp": "%1$sNote :%2$s Si vous n'importez pas vos données, vos données Google Analytics 3 seront définitivement perdues après le 31 décembre 2023.",
         "ConfigureTheImporterHelpNewDate": "%1$sNote :%2$s Si vous n'importez pas vos données, vos données Google Analytics 3 seront définitivement perdues après le 30 juin 2024.",
+        "ConfigureTheImporterLabel2": "Afin d'importer vos données depuis Google Analytics, Matomo a besoin d'un accès à ces données.",
         "CreationDate": "Date de création du site Web",
         "DeleteUploadedClientConfig": "Si vous souhaitez supprimer la configuration client téléchargée, cliquez ci-dessous",
         "DimensionScope": "Portée des dimensions",
