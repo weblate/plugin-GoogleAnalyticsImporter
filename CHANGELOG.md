@@ -1,5 +1,8 @@
 ## Changelog
 
+# 5.0.17
+- Updated translations
+
 # 5.0.16
 - Changed db backoff time due to rate limit per site instead of setting it globally
 
