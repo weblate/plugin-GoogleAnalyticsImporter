@@ -59,9 +59,14 @@ class ImportTest extends SystemTestCase
             $apiNotToTest[] = 'CustomDimensions.getConfiguredCustomDimensions';
         }
 
+        $secondaryApiNotToTest = [];
+        if (version_compare(Version::VERSION, '5.2.0-alpha', '<')) {
+            $secondaryApiNotToTest[] = 'Goals.get';
+        }
+
         return [
             [$apiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month', 'year'], 'apiNotToCall' => $apiNotToTest]],
-            [$secondaryApiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month']]],
+            [$secondaryApiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month'], 'apiNotToCall' => $secondaryApiNotToTest]],
             [array_merge($secondaryApiToTest, ['Goals.getGoals']), ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['year'], 'testSuffix' => version_compare(Version::VERSION, '5.0.0-b1', '<=') ? '_5b1' : '']],
             [['Goals.getDaysToConversion', 'Goals.getVisitsUntilConversion'], ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month', 'year'], 'idGoal' => 'ecommerceOrder', 'testSuffix' => '_ecommerceOrder']],
             // custom dimensions
