@@ -35,6 +35,9 @@ class ImportTest extends SystemTestCase
         if (version_compare(Version::VERSION, '4.10.0') <= 0) {
             $this->markTestSkipped('Skipping tests for lower version');
         }
+        if ($api === 'Goals.get' && version_compare(Version::VERSION, '5.2.0-alpha', '<')) {
+            $this->markTestSkipped('Skipping tests for lower version');
+        }
         $this->runApiTests($api, $params);
     }
     public function getApiTestsToRun()
@@ -59,14 +62,9 @@ class ImportTest extends SystemTestCase
             $apiNotToTest[] = 'CustomDimensions.getConfiguredCustomDimensions';
         }
 
-        $secondaryApiNotToTest = [];
-        if (version_compare(Version::VERSION, '5.2.0-alpha', '<')) {
-            $secondaryApiNotToTest[] = 'Goals.get';
-        }
-
         return [
             [$apiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month', 'year'], 'apiNotToCall' => $apiNotToTest]],
-            [$secondaryApiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month'], 'apiNotToCall' => $secondaryApiNotToTest]],
+            [$secondaryApiToTest, ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month']]],
             [array_merge($secondaryApiToTest, ['Goals.getGoals']), ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['year'], 'testSuffix' => version_compare(Version::VERSION, '5.0.0-b1', '<=') ? '_5b1' : '']],
             [['Goals.getDaysToConversion', 'Goals.getVisitsUntilConversion'], ['idSite' => self::$fixture->idSite, 'date' => self::$fixture->dateTime, 'periods' => ['day', 'week', 'month', 'year'], 'idGoal' => 'ecommerceOrder', 'testSuffix' => '_ecommerceOrder']],
             // custom dimensions
