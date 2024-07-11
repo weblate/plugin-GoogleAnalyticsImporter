@@ -111,7 +111,10 @@ export default defineComponent({
     },
     isNoDataPage: Boolean,
     hasClientConfiguration: Boolean,
-    indexActionUrl: String,
+    indexActionUrl: {
+      type: String,
+      required: true,
+    },
     authorizeUrl: String,
     forwardToAuthNonce: String,
     isConfigured: Boolean,
