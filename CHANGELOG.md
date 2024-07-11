@@ -1,10 +1,8 @@
 ## Changelog
 
-# 5.0.18
-- Disabled re-import date range feature for GA3 imports
-
 # 5.0.17
 - Updated translations
+- Disabled re-import date range feature for GA3 imports
 
 # 5.0.16
 - Changed db backoff time due to rate limit per site instead of setting it globally
