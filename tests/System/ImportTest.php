@@ -35,8 +35,9 @@ class ImportTest extends SystemTestCase
         if (version_compare(Version::VERSION, '4.10.0') <= 0) {
             $this->markTestSkipped('Skipping tests for lower version');
         }
-        if ($api === 'Goals.get' && version_compare(Version::VERSION, '5.2.0-alpha', '<')) {
-            $this->markTestSkipped('Skipping tests for lower version');
+        if (version_compare(Version::VERSION, '5.2.0-alpha', '<') && is_array($api) && in_array('Goals.get', $api)) {
+            $keyToDelete = array_search('Goals.get', $api);
+            unset($api[$keyToDelete]);
         }
         $this->runApiTests($api, $params);
     }
