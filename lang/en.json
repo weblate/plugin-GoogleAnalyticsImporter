@@ -145,6 +145,7 @@
         "GAImportNoDataScreenStep04": "Navigate to the %1$sGoogle Analytics Import admin page%2$s. %3$sLearn more%4$s.",
         "GAImportNoDataScreenStep05": "Select the Import type.",
         "GAImportNoDataScreenStep06": "Fill out the Schedule an Import form.",
+        "GAImportNoDataScreenStep06GA4": "Fill out the Schedule an Import for Google Analytics 4 (GA4) form.",
         "GAImportNoDataScreenStep07": "Click \"%1$s\".",
         "GAImportNoDataScreenStep07Note": "%1$sNote:%2$s Once you click \"%3$s\", Matomo will automatically create a new Matomo website for each selected property.",
         "GAImportNoDataScreenStep08": "Importing data takes time, %1$sclick here to monitor the status of your data import%2$s.",

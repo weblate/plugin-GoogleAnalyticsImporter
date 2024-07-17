@@ -53,6 +53,8 @@ class ImportReports extends ConsoleCommand
      */
     protected function doExecute() : int
     {
+        $this->getOutput()->writeln("GA3 Import disabled");
+        return self::FAILURE;
         try {
             return $this->executeImpl();
         } catch (ImportWasCancelledException $ex) {

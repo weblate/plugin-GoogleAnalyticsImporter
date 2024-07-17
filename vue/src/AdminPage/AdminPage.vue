@@ -21,36 +21,12 @@
 
     <ContentBlock
       v-if="hasClientConfiguration && isConfigured"
-      :content-title="translate('GoogleAnalyticsImporter_SelectImporter')"
     >
-      <p>{{ translate('GoogleAnalyticsImporter_SelectImporterSelection') }}</p>
-      <ImportSelector
-        :import-options-ua="importOptionsUa"
-        :import-options-ga4="importOptionsGa4"
-        @update:selected-importer="selectedImporter = $event"
-      >
-      </ImportSelector>
-
-      <div
-        class="hide-import-main-div ga-import-main-div ua-main-div"
-        v-show="selectedImporter === 'ua'"
-      >
-        <h3>{{ translate('GoogleAnalyticsImporter_ScheduleAnImport') }}</h3>
-        <ImportScheduler
-          vue-entry="GoogleAnalyticsImporter.ImportScheduler"
-          :has-client-configuration="hasClientConfiguration"
-          :is-configured="isConfigured"
-          :start-import-nonce="startImportNonce"
-          :max-end-date-desc="maxEndDateDesc"
-          :extra-custom-dimensions-field="extraCustomDimensionsField"
-        />
-      </div>
 
       <div
         class="hide-import-main-div ga-import-main-div ga4-main-div"
-        v-show="selectedImporter === 'ga4'"
       >
-        <h3>{{ translate('GoogleAnalyticsImporter_ScheduleAnImportGA4') }}</h3>
+        <h2>{{ translate('GoogleAnalyticsImporter_ScheduleAnImportGA4') }}</h2>
         <ImportSchedulerGA4
           :start-import-nonce="startImportNonce"
           :max-end-date-desc="maxEndDateDesc"
@@ -101,9 +77,7 @@ import {
   useExternalPluginComponent,
 } from 'CoreHome';
 import ClientConfig from '../ClientConfig/ClientConfig.vue';
-import ImportScheduler from '../ImportScheduler/ImportScheduler.vue';
 import ImportStatus from '../ImportStatus/ImportStatus.vue';
-import ImportSelector from '../ImportScheduler/ImportSelector.vue';
 import ImportSchedulerGA4 from '../ImportScheduler/ImportSchedulerGA4.vue';
 import CommonConnect from './CommonConnect.vue';
 
@@ -201,9 +175,7 @@ export default defineComponent({
     ImportSchedulerGA4,
     ContentBlock,
     ClientConfig,
-    ImportScheduler,
     ImportStatus,
-    ImportSelector,
   },
   data(): AdminPageState {
     return {
