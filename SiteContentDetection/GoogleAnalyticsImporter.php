@@ -65,7 +65,7 @@ class GoogleAnalyticsImporter extends \Piwik\Plugins\SitesManager\SiteContentDet
         $view->auth_nonce = Nonce::getNonce('gaimport.auth', 1200);
         $view->isConnectAccountsActivated = $isConnectAccountsPluginActivated;
         $view->strategy = $isConnectAccountsPluginActivated && GoogleConnect::isStrategyActive() ? GoogleConnect::getStrategyName() : 'CUSTOM';
-        $view->isGA3 = $detector->wasDetected(GoogleAnalytics3::getId());
+        $view->isGA3 = false;
         $view->configureConnectionProps = \Piwik\Plugins\GoogleAnalyticsImporter\GoogleAnalyticsImporter::getConfigureConnectProps($nonce);
         $view->extensions = Controller::getComponentExtensions(\true);
         $view->hasClientConfiguration = $authorization->hasClientConfiguration();

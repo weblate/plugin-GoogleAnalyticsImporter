@@ -70,47 +70,7 @@ class TasksTest extends IntegrationTestCase
         Option::set(ImportStatus::OPTION_NAME_PREFIX . 1, json_encode(['idSite' => 1, 'status' => ImportStatus::STATUS_STARTED]));
         $tasks = new \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec();
         $tasks->resumeScheduledImports();
-        $this->assertEquals([
-            // nohup /home/travis/.phpenv/versions/7.2.27/bin/php -q /home/travis/build/matomo-org/plugin-GoogleAnalyticsImporter/matomo/tests/PHPUnit/proxy/console --matomo-domain='localhost' googleanalyticsimporter:import-reports --idsite=1 >> /home/travis/build/matomo-org/plugin-GoogleAnalyticsImporter/matomo/tmp/logs/gaimportlog.1.localhost.log 2>&1 &
-            [\false, 'nohup ' . $this->getPhpBinary() . ' ' . PIWIK_INCLUDE_PATH . "/tests/PHPUnit/proxy/console{$this->getCommandHostOption()} googleanalyticsimporter:import-reports --idsite=1 >> " . $this->tmpPath . '/logs/gaimportlog.1.' . SettingsPiwik::getPiwikInstanceId() . '.log 2>&1 &'],
-        ], \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec::$commandsRun);
-    }
-    public function test_resumeScheduledImports_runAStatusWithVerboseLoggingCorrectly()
-    {
-        Option::set(ImportStatus::OPTION_NAME_PREFIX . 1, json_encode(['idSite' => 1, 'is_verbose_logging_enabled' => 1, 'status' => ImportStatus::STATUS_STARTED]));
-        $tasks = new \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec();
-        $tasks->resumeScheduledImports();
-        $this->assertEquals([[\false, 'nohup ' . $this->getPhpBinary() . ' ' . PIWIK_INCLUDE_PATH . "/tests/PHPUnit/proxy/console{$this->getCommandHostOption()} googleanalyticsimporter:import-reports --idsite=1 -vvv > " . $this->tmpPath . '/logs/gaimportlog.1.' . SettingsPiwik::getPiwikInstanceId() . '.log 2>&1 &']], \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec::$commandsRun);
-    }
-    public function test_resumeScheduledImports_runAStatusWithVerboseLoggingCorrectlyWithInstanceIdUpdated()
-    {
-        $oldValue = GeneralConfig::getConfigValue('instance_id');
-        GeneralConfig::setConfigValue('instance_id', 'touch /tmp/success');
-        Option::set(ImportStatus::OPTION_NAME_PREFIX . 1, json_encode(['idSite' => 1, 'is_verbose_logging_enabled' => 1, 'status' => ImportStatus::STATUS_STARTED]));
-        $tasks = new \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec();
-        $tasks->resumeScheduledImports();
-        $expected = 'nohup ' . $this->getPhpBinary() . ' ' . PIWIK_INCLUDE_PATH . "/tests/PHPUnit/proxy/console{$this->getCommandHostOption()} googleanalyticsimporter:import-reports --idsite=1 -vvv > /dev/null 2>&1 &";
-        //since instance id is now sanitized in Matomo 5.x
-        if (version_compare(Version::VERSION, '5.0.0-b1', '>=')) {
-            $expected = 'nohup ' . $this->getPhpBinary() . ' ' . PIWIK_INCLUDE_PATH . "/tests/PHPUnit/proxy/console{$this->getCommandHostOption()} googleanalyticsimporter:import-reports --idsite=1 -vvv > " . PIWIK_INCLUDE_PATH . '/tmp/logs/gaimportlog.1.touchtmpsuccess.log' . " 2>&1 &";
-        }
-        $this->assertEquals([[\false, $expected]], \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec::$commandsRun);
-        GeneralConfig::setConfigValue('instance_id', $oldValue);
-    }
-    public function test_resumeScheduledImports_runAStatusWithVerboseLoggingCorrectlyWithInstanceIdUpdated_1()
-    {
-        $oldValue = GeneralConfig::getConfigValue('instance_id');
-        GeneralConfig::setConfigValue('instance_id', 'test; rm -rf .');
-        Option::set(ImportStatus::OPTION_NAME_PREFIX . 1, json_encode(['idSite' => 1, 'is_verbose_logging_enabled' => 1, 'status' => ImportStatus::STATUS_STARTED]));
-        $tasks = new \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec();
-        $tasks->resumeScheduledImports();
-        $expected = 'nohup ' . $this->getPhpBinary() . ' ' . PIWIK_INCLUDE_PATH . "/tests/PHPUnit/proxy/console{$this->getCommandHostOption()} googleanalyticsimporter:import-reports --idsite=1 -vvv > " . $this->tmpPath . '/logs/gaimportlog.1.test\\; rm -rf ..log 2>&1 &';
-        //since instance id is now sanitized in Matomo 5.x
-        if (version_compare(Version::VERSION, '5.0.0-b1', '>=')) {
-            $expected = 'nohup ' . $this->getPhpBinary() . ' ' . PIWIK_INCLUDE_PATH . "/tests/PHPUnit/proxy/console{$this->getCommandHostOption()} googleanalyticsimporter:import-reports --idsite=1 -vvv > " . $this->tmpPath . '/logs/gaimportlog.1.testrm-rf..log 2>&1 &';
-        }
-        $this->assertEquals([[\false, $expected]], \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec::$commandsRun);
-        GeneralConfig::setConfigValue('instance_id', $oldValue);
+        $this->assertEquals([], \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\TasksWithMockExec::$commandsRun);
     }
     public function test_archiveImportedReports_shouldSkipBrokenStatusEntries_ImportsThatHaveNotImportedAnything_OrLastArchivedDateIsEqualOrGreaterToLastImportedDate()
     {
