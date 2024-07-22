@@ -1,5 +1,8 @@
 ## Changelog
 
+# 5.0.19
+- Removed option to schedule GA3 imports
+
 # 5.0.18
 - Disabled re-import date range feature for GA3 imports
 
