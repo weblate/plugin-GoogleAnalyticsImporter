@@ -50,6 +50,7 @@
         "GAImportNoDataScreenStep04": "Μεταβείτε στη %1$sσελίδα διαχείρισης εισαγωγής από το Google Analytics%2$s. %3$sΜάθετε περισσότερα%4$s.",
         "GAImportNoDataScreenStep05": "Επιλέξτε τον τύπο Εισαγωγής.",
         "GAImportNoDataScreenStep06": "Συμπληρώστε την φόρμα για τον προγραμματισμό εισαγωγής.",
+        "GAImportNoDataScreenStep06GA4": "Συμπληρώστε τη φόρμα προγραμματισμού εισαγωγής από το Google Analytics (GA4).",
         "GAImportNoDataScreenStep07": "Κάντε κλικ στο \"%1$s\".",
         "GAImportNoDataScreenStep07Note": "%1$sΣημείωση:%2$s Αφού κάνετε κλικ στο \"%3$s\", το Matomo αυτόματα θα δημιουργήσει ένα νέο ιστοτόπο για κάθε επιλεγμένη ιδιότητα.",
         "GAImportNoDataScreenStep08": "Η εισαγωγή των δεδομένων απαιτεί χρόνο, %1$sκάντε κλικ εδώ για να βλέπετε την κατάσταση της εισαγωγής των δεδομένων σας%2$s.",
