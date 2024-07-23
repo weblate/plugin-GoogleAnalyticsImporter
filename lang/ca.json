@@ -50,6 +50,7 @@
         "GAImportNoDataScreenStep04": "Aneu a la pàgina d'administració d'importació de %1$sGoogle Analytics%2$s. %3$sMés informació%4$s.",
         "GAImportNoDataScreenStep05": "Seleccioneu el tipus d'importació.",
         "GAImportNoDataScreenStep06": "Ompliu el formulari Programar una importació.",
+        "GAImportNoDataScreenStep06GA4": "Ompliu el formulari Programar una importació per a Google Analytics 4 (GA4).",
         "GAImportNoDataScreenStep07": "Feu clic a \"%1$s\".",
         "GAImportNoDataScreenStep07Note": "%1$sNota:%2$s Un cop feu clic a \"%3$s\", Matomo crearà automàticament un nou lloc web de Matomo per a cada propietat seleccionada.",
         "GAImportNoDataScreenStep08": "La importació de dades vol temps, %1$s feu clic aquí per supervisar l'estat de la vostra importació de dades%2$s.",
