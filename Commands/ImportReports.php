@@ -53,6 +53,8 @@ class ImportReports extends ConsoleCommand
      */
     protected function doExecute() : int
     {
+        $this->getOutput()->writeln("GA3 Import disabled");
+        return self::FAILURE;
         try {
             return $this->executeImpl();
         } catch (ImportWasCancelledException $ex) {
@@ -78,7 +80,7 @@ class ImportReports extends ConsoleCommand
         $type = $isMobileApp ? \Piwik\Plugins\MobileAppMeasurable\Type::ID : Type::ID;
         $idSite = $this->getIdSite();
         LogToSingleFileProcessor::handleLogToSingleFileInCliCommand($idSite, $output);
-        $canProcessNow = $this->checkIfCanProcess();
+        $canProcessNow = $this->checkIfCanProcess($idSite);
         /** @var ImportStatus $importStatus */
         $importStatus = StaticContainer::get(ImportStatus::class);
         if ($canProcessNow['canProcess'] === \false) {
@@ -186,7 +188,10 @@ class ImportReports extends ConsoleCommand
                 $output->writeln(LogToSingleFileProcessor::$cliOutputPrefix . "Failed to import property entities, aborting.");
                 return self::FAILURE;
             }
-            $dateRangesToReImport = empty($status['reimport_ranges']) ? [] : $status['reimport_ranges'];
+
+            // Disabled reimport of daterange for GA3
+//            $dateRangesToReImport = empty($status['reimport_ranges']) ? [] : $status['reimport_ranges'];
+            $dateRangesToReImport = [];
             $dateRangesToReImport = array_map(function ($d) {
                 return [Date::factory($d[0]), Date::factory($d[1])];
             }, $dateRangesToReImport);
@@ -367,14 +372,18 @@ class ImportReports extends ConsoleCommand
             return \false;
         }
     }
-    public function checkIfCanProcess()
+    public function checkIfCanProcess($idSite)
     {
-        $nextAvailableAt = (int) Option::get(GoogleAnalyticsQueryService::DELAY_OPTION_NAME);
+        if (!$idSite) {
+            return ['canProcess' => \true];// New import, so it should be allowed
+        }
+        $optionKeyName = GoogleAnalyticsQueryService::DELAY_OPTION_NAME . $idSite;
+        $nextAvailableAt = (int) Option::get($optionKeyName);
         if (!$nextAvailableAt) {
             return ['canProcess' => \true];
         }
         if (Date::factory('now')->getTimestamp() >= $nextAvailableAt) {
-            Option::delete(GoogleAnalyticsQueryService::DELAY_OPTION_NAME);
+            Option::delete($optionKeyName);
             return ['canProcess' => \true];
         }
         $rateLimitType = Date::factory('+1 hour')->getTimestamp() > $nextAvailableAt ? 'hourly' : 'daily';

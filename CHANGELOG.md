@@ -1,5 +1,20 @@
 ## Changelog
 
+# 5.0.19
+- Removed option to schedule GA3 imports
+
+# 5.0.18
+- Disabled re-import date range feature for GA3 imports
+
+# 5.0.17
+- Updated translations
+
+# 5.0.16
+- Changed db backoff time due to rate limit per site instead of setting it globally
+
+# 5.0.15
+- Updated grpc/grpc dependency
+
 # 5.0.14
 - Added code to use proxy config for Google client configuration if available
 - Added plugin category for Marketplace

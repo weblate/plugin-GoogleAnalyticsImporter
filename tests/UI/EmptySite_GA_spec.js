@@ -27,7 +27,7 @@ describe("EmptySite_GA", function () {
     testEnvironment.save();
   });
 
-  it('should show no data screen with GA import recommended', async function () {
+  it('should not show no data screen with GA3 import recommended', async function () {
     testEnvironment.detectedContentDetections = ['GoogleAnalytics3', 'Cloudflare'];
     testEnvironment.connectedConsentManagers = [];
     testEnvironment.save();
@@ -37,13 +37,6 @@ describe("EmptySite_GA", function () {
 
     const pageElement = await page.$('.page');
     expect(await pageElement.screenshot()).to.matchImage('list');
-  });
-
-  it('should show import details with ga3 offset banner', async function () {
-    await page.evaluate(() => $('#start-tracking-detection a[href="#googleanalyticsimporter"]')[0].click());
-
-    const pageElement = await page.$('.page');
-    expect(await pageElement.screenshot()).to.matchImage('details_ga3');
   });
 
   it('should show no data screen with GA import recommended', async function () {

@@ -247,68 +247,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             Notification\Manager::notify('GoogleAnalyticsImporter_changeImportEndDate_failure', $notification);
         }
     }
-    public function startImport()
-    {
-        Piwik::checkUserHasSuperUserAccess();
-        $this->checkTokenInUrl();
-        Json::sendHeaderJSON();
-        try {
-            Nonce::checkNonce('GoogleAnalyticsImporter.startImportNonce', Common::getRequestVar('nonce'));
-            $startDate = trim(Common::getRequestVar('startDate', ''));
-            if (!empty($startDate)) {
-                $startDate = Date::factory($startDate . ' 00:00:00');
-            }
-            $endDate = trim(Common::getRequestVar('endDate', ''));
-            $inputEndDate = StaticContainer::get(EndDate::class);
-            $endDate = $inputEndDate->limitMaxEndDateIfNeeded($endDate);
-            if (!empty($endDate)) {
-                $endDate = Date::factory($endDate)->getStartOfDay();
-            }
-            // set credentials in google client
-            $googleAuth = StaticContainer::get(Authorization::class);
-            $googleAuth->getConfiguredClient();
-            /** @var Importer $importer */
-            $importer = StaticContainer::get(\Piwik\Plugins\GoogleAnalyticsImporter\Importer::class);
-            $propertyId = trim(Common::getRequestVar('propertyId'));
-            $viewId = trim(Common::getRequestVar('viewId'));
-            $accountId = trim(Common::getRequestVar('accountId', \false));
-            $account = $accountId ?: ImportReports::guessAccountFromProperty($propertyId);
-            $isMobileApp = Common::getRequestVar('isMobileApp', 0, 'int') == 1;
-            $timezone = trim(Common::getRequestVar('timezone', '', 'string'));
-            $extraCustomDimensions = Common::getRequestVar('extraCustomDimensions', [], $type = 'array');
-            $isVerboseLoggingEnabled = Common::getRequestVar('isVerboseLoggingEnabled', 0, $type = 'int') == 1;
-            $forceCustomDimensionSlotCheck = Common::getRequestVar('forceCustomDimensionSlotCheck', 1, $type = 'int') == 1;
-            $idSite = $importer->makeSite($account, $propertyId, $viewId, $timezone, $isMobileApp ? Type::ID : \Piwik\Plugins\WebsiteMeasurable\Type::ID, $extraCustomDimensions, $forceCustomDimensionSlotCheck);
-            try {
-                if (empty($idSite)) {
-                    throw new \Exception("Unable to import site entity.");
-                    // sanity check
-                }
-                /** @var ImportStatus $importStatus */
-                $importStatus = StaticContainer::get(\Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus::class);
-                if (!empty($startDate) || !empty($endDate)) {
-                    // we set the last imported date to one day before the start date
-                    $importStatus->setImportDateRange($idSite, $startDate ?: null, $endDate ?: null);
-                }
-                if ($isVerboseLoggingEnabled) {
-                    $importStatus->setIsVerboseLoggingEnabled($idSite, $isVerboseLoggingEnabled);
-                }
-                // start import now since the scheduled task may not run until tomorrow
-                \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImport($importStatus->getImportStatus($idSite));
-            } catch (\Exception $ex) {
-                $importStatus->erroredImport($idSite, $ex->getMessage());
-                throw $ex;
-            }
-            echo json_encode(['result' => 'ok']);
-        } catch (\Exception $ex) {
-            $this->logException($ex, __FUNCTION__);
-            $notification = new Notification($this->getNotificationExceptionText($ex));
-            $notification->type = Notification::TYPE_TRANSIENT;
-            $notification->context = Notification::CONTEXT_ERROR;
-            $notification->title = Piwik::translate('General_Error');
-            Notification\Manager::notify('GoogleAnalyticsImporter_startImport_failure', $notification);
-        }
-    }
+
     public function startImportGA4()
     {
         Piwik::checkUserHasSuperUserAccess();
@@ -393,8 +332,6 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             }
             if ($isGA4) {
                 \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImportGA4($status);
-            } else {
-                \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImport($status);
             }
             echo json_encode(['result' => 'ok']);
         } catch (\Exception $ex) {
@@ -416,6 +353,9 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $idSite = Common::getRequestVar('idSite', null, 'int');
             new Site($idSite);
             $isGA4 = Common::getRequestVar('isGA4', 0, 'int') == 1;
+            if (!$isGA4) {
+                throw new \Exception('Reimport for GA3 is disabled, as it will lead to data loss for already imported date ranges.');
+            }
             $startDate = Common::getRequestVar('startDate', null, 'string');
             $startDate = Date::factory($startDate);
             $endDate = Common::getRequestVar('endDate', null, 'string');
@@ -434,8 +374,6 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             // start import now since the scheduled task may not run until tomorrow
             if ($isGA4) {
                 \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImportGA4($importStatus->getImportStatus($idSite));
-            } else {
-                \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImport($importStatus->getImportStatus($idSite));
             }
             echo json_encode(['result' => 'ok']);
         } catch (\Exception $ex) {
@@ -489,7 +427,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             }
             if (empty($status)) {
                 $siteContentDetector = new \Piwik\SiteContentDetector();
-                $siteContentDetector->detectContent([GoogleAnalytics3::getId(), GoogleAnalytics4::getId()], $currentIdSite);
+                $siteContentDetector->detectContent([GoogleAnalytics4::getId()], $currentIdSite);
                 if ($siteContentDetector->wasDetected(GoogleAnalytics3::getId()) || $siteContentDetector->wasDetected(GoogleAnalytics4::getId())) {
                     $showNotification = \true;
                     $settingsUrl = SettingsPiwik::getPiwikUrl() . 'index.php?' . Url::getQueryStringFromParameters(['idSite' => $currentIdSite, 'module' => 'GoogleAnalyticsImporter', 'action' => 'index']);

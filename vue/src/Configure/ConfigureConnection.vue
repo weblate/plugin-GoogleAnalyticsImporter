@@ -74,10 +74,7 @@
   </li>
   <li v-if="isNoDataPage" v-html="$sanitize(getAdvanceConnectStep04Text)"></li>
   <li v-if="isNoDataPage"
-      v-text="translate('GoogleAnalyticsImporter_GAImportNoDataScreenStep05')">
-  </li>
-  <li v-if="isNoDataPage"
-      v-text="translate('GoogleAnalyticsImporter_GAImportNoDataScreenStep06')">
+      v-text="translate('GoogleAnalyticsImporter_GAImportNoDataScreenStep06GA4')">
   </li>
   <li v-if="isNoDataPage" v-html="$sanitize(getAdvanceConnectStep07Text)"></li>
   <li v-if="isNoDataPage" v-html="$sanitize(getAdvanceConnectStep08Text)"></li>
@@ -111,7 +108,10 @@ export default defineComponent({
     },
     isNoDataPage: Boolean,
     hasClientConfiguration: Boolean,
-    indexActionUrl: String,
+    indexActionUrl: {
+      type: String,
+      required: true,
+    },
     authorizeUrl: String,
     forwardToAuthNonce: String,
     isConfigured: Boolean,

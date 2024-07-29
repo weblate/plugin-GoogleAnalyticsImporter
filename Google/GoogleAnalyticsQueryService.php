@@ -25,7 +25,7 @@ class GoogleAnalyticsQueryService
     const PING_MYSQL_EVERY = 25;
     const DEFAULT_MIN_BACKOFF_TIME = 2;
     // start at 2s since GA seems to have trouble w/ the 10 requests per 100s limit w/ 1
-    const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt';
+    const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt_';
     private static $problematicMetrics = ['ga:users', 'ga:hits'];
     /**
      * @var int
@@ -66,6 +66,8 @@ class GoogleAnalyticsQueryService
     private $quotaUser;
     private $skipAttemptForExceptionCodes = [401, 403];
     private $singleAttemptForExceptionCodes = [500, 503];
+
+    private $idSite;
     public function __construct(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\AnalyticsReporting $gaService, $viewId, array $goalsMapping, $idSite, $quotaUser, \Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleQueryObjectFactory $googleQueryObjectFactory, LoggerInterface $logger)
     {
         $this->gaService = $gaService;
@@ -75,6 +77,7 @@ class GoogleAnalyticsQueryService
         $this->pingMysqlEverySecs = StaticContainer::get('GoogleAnalyticsImporter.pingMysqlEverySecs') ?: self::PING_MYSQL_EVERY;
         $this->metricMapper = new \Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleMetricMapper(Site::isEcommerceEnabledFor($idSite), $goalsMapping);
         $this->quotaUser = $quotaUser;
+        $this->idSite = $idSite;
     }
     public function query(Date $day, array $dimensions, array $metrics, array $options = [])
     {
@@ -255,6 +258,6 @@ class GoogleAnalyticsQueryService
         if ($backoffLength === 'D') {
             $nextRetry = Date::factory('tomorrow')->getTimestamp();
         }
-        Option::set(self::DELAY_OPTION_NAME, $nextRetry);
+        Option::set(self::DELAY_OPTION_NAME . $this->idSite, $nextRetry);
     }
 }

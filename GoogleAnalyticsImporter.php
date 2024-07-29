@@ -223,7 +223,7 @@ class GoogleAnalyticsImporter extends \Piwik\Plugin
         $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep03';
         $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep04';
         $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep05';
-        $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep06';
+        $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep06GA4';
         $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep07';
         $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep07Note';
         $translationKeys[] = 'GoogleAnalyticsImporter_GAImportNoDataScreenStep08';
