@@ -50,7 +50,7 @@ class AuthorizationGA4
             $proxyHttpHandler = \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\HttpHandler\HttpHandlerFactory::build($proxyHttpClient);
             $arguments['credentialsConfig'] = ['authHttpHandler' => $proxyHttpHandler, 'keyFile' => $arguments['keyFile']];
             $arguments['transport'] = 'rest';
-            $arguments['transportConfig'] = ['rest' => ['httpHandler' => $proxyHttpHandler]];
+            $arguments['transportConfig'] = ['rest' => ['httpHandler' => [$proxyHttpHandler, 'async']]];
 
             return $arguments;
         }
