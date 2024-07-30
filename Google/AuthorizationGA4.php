@@ -48,7 +48,11 @@ class AuthorizationGA4
         $proxyHttpClient = StaticContainer::get('GoogleAnalyticsImporter.proxyHttpClient');
         if ($proxyHttpClient) {
             $proxyHttpHandler = \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\HttpHandler\HttpHandlerFactory::build($proxyHttpClient);
-            $arguments['authHttpHandler'] = $proxyHttpHandler;
+            $arguments['credentialsConfig'] = ['authHttpHandler' => $proxyHttpHandler];
+            $arguments['transport'] = 'rest';
+            $arguments['transportConfig'] = ['rest' => ['httpHandler' => $proxyHttpHandler]];
+
+            return $arguments;
         }
 
         $credentialWrapper =  \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build($arguments);
