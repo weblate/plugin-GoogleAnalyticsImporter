@@ -24,8 +24,10 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
  *       google.api.HttpBody http_body = 2;
  *     }
  *     service ResourceService {
- *       rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
- *       rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty);
+ *       rpc GetResource(GetResourceRequest)
+ *         returns (google.api.HttpBody);
+ *       rpc UpdateResource(google.api.HttpBody)
+ *         returns (google.protobuf.Empty);
  *     }
  * Example with streaming methods:
  *     service CaldavService {
@@ -42,17 +44,17 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class HttpBody extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * The HTTP Content-Type string representing the content type of the body.
+     * The HTTP Content-Type header value specifying the content type of the body.
      *
      * Generated from protobuf field <code>string content_type = 1;</code>
      */
-    private $content_type = '';
+    protected $content_type = '';
     /**
-     * HTTP body binary data.
+     * The HTTP request/response body as raw binary.
      *
      * Generated from protobuf field <code>bytes data = 2;</code>
      */
-    private $data = '';
+    protected $data = '';
     /**
      * Application specific response metadata. Must be set in the first response
      * for streaming APIs.
@@ -67,10 +69,10 @@ class HttpBody extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
      *     Optional. Data for populating the Message object.
      *
      *     @type string $content_type
-     *           The HTTP Content-Type string representing the content type of the body.
+     *           The HTTP Content-Type header value specifying the content type of the body.
      *     @type string $data
-     *           HTTP body binary data.
-     *     @type \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $extensions
+     *           The HTTP request/response body as raw binary.
+     *     @type array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $extensions
      *           Application specific response metadata. Must be set in the first response
      *           for streaming APIs.
      * }
@@ -81,7 +83,7 @@ class HttpBody extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
         parent::__construct($data);
     }
     /**
-     * The HTTP Content-Type string representing the content type of the body.
+     * The HTTP Content-Type header value specifying the content type of the body.
      *
      * Generated from protobuf field <code>string content_type = 1;</code>
      * @return string
@@ -91,7 +93,7 @@ class HttpBody extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
         return $this->content_type;
     }
     /**
-     * The HTTP Content-Type string representing the content type of the body.
+     * The HTTP Content-Type header value specifying the content type of the body.
      *
      * Generated from protobuf field <code>string content_type = 1;</code>
      * @param string $var
@@ -104,7 +106,7 @@ class HttpBody extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
         return $this;
     }
     /**
-     * HTTP body binary data.
+     * The HTTP request/response body as raw binary.
      *
      * Generated from protobuf field <code>bytes data = 2;</code>
      * @return string
@@ -114,7 +116,7 @@ class HttpBody extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
         return $this->data;
     }
     /**
-     * HTTP body binary data.
+     * The HTTP request/response body as raw binary.
      *
      * Generated from protobuf field <code>bytes data = 2;</code>
      * @param string $var
@@ -142,7 +144,7 @@ class HttpBody extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
      * for streaming APIs.
      *
      * Generated from protobuf field <code>repeated .google.protobuf.Any extensions = 3;</code>
-     * @param \Google\Protobuf\Any[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Protobuf\Any>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setExtensions($var)

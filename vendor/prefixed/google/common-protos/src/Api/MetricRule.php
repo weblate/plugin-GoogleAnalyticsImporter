@@ -9,9 +9,7 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Repeate
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil;
 /**
  * Bind API methods to metrics. Binding a method to a metric causes that
- * metric's configured quota, billing, and monitoring behaviors to apply to the
- * method call.
- * Used by metric-based quotas only.
+ * metric's configured quota behaviors to apply to the method call.
  *
  * Generated from protobuf message <code>google.api.MetricRule</code>
  */
@@ -19,11 +17,12 @@ class MetricRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
 {
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      */
-    private $selector = '';
+    protected $selector = '';
     /**
      * Metrics to update when the selected methods are called, and the associated
      * cost applied to each metric.
@@ -42,7 +41,8 @@ class MetricRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *
      *     @type string $selector
      *           Selects the methods to which this rule applies.
-     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     *           details.
      *     @type array|\Google\Protobuf\Internal\MapField $metric_costs
      *           Metrics to update when the selected methods are called, and the associated
      *           cost applied to each metric.
@@ -58,7 +58,8 @@ class MetricRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
     }
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @return string
@@ -69,7 +70,8 @@ class MetricRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
     }
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @param string $var

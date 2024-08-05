@@ -6,8 +6,7 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1a
 
 use UnexpectedValueException;
 /**
- * Consent field of the Google Signals settings (i.e., whether the user has
- * consented to the Google Signals terms of service.)
+ * Consent field of the Google Signals settings.
  *
  * Protobuf type <code>google.analytics.admin.v1alpha.GoogleSignalsConsent</code>
  */

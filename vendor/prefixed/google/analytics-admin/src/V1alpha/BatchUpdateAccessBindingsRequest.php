@@ -16,8 +16,9 @@ class BatchUpdateAccessBindingsRequest extends \Matomo\Dependencies\GoogleAnalyt
 {
     /**
      * Required. The account or property that owns the access bindings. The parent
-     * field in the UpdateAccessBindingRequest messages must either be empty or
-     * match this field. Formats:
+     * of all provided AccessBinding in UpdateAccessBindingRequest messages must
+     * match this field.
+     * Formats:
      * - accounts/{account}
      * - properties/{property}
      *
@@ -39,8 +40,9 @@ class BatchUpdateAccessBindingsRequest extends \Matomo\Dependencies\GoogleAnalyt
      *
      *     @type string $parent
      *           Required. The account or property that owns the access bindings. The parent
-     *           field in the UpdateAccessBindingRequest messages must either be empty or
-     *           match this field. Formats:
+     *           of all provided AccessBinding in UpdateAccessBindingRequest messages must
+     *           match this field.
+     *           Formats:
      *           - accounts/{account}
      *           - properties/{property}
      *     @type array<\Google\Analytics\Admin\V1alpha\UpdateAccessBindingRequest>|\Google\Protobuf\Internal\RepeatedField $requests
@@ -55,8 +57,9 @@ class BatchUpdateAccessBindingsRequest extends \Matomo\Dependencies\GoogleAnalyt
     }
     /**
      * Required. The account or property that owns the access bindings. The parent
-     * field in the UpdateAccessBindingRequest messages must either be empty or
-     * match this field. Formats:
+     * of all provided AccessBinding in UpdateAccessBindingRequest messages must
+     * match this field.
+     * Formats:
      * - accounts/{account}
      * - properties/{property}
      *
@@ -69,8 +72,9 @@ class BatchUpdateAccessBindingsRequest extends \Matomo\Dependencies\GoogleAnalyt
     }
     /**
      * Required. The account or property that owns the access bindings. The parent
-     * field in the UpdateAccessBindingRequest messages must either be empty or
-     * match this field. Formats:
+     * of all provided AccessBinding in UpdateAccessBindingRequest messages must
+     * match this field.
+     * Formats:
      * - accounts/{account}
      * - properties/{property}
      *

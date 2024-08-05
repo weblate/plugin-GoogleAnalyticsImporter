@@ -26,7 +26,7 @@ class FilterExpressionList extends \Matomo\Dependencies\GoogleAnalyticsImporter\
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Analytics\Data\V1alpha\FilterExpression[]|\Google\Protobuf\Internal\RepeatedField $expressions
+     *     @type array<\Google\Analytics\Data\V1alpha\FilterExpression>|\Google\Protobuf\Internal\RepeatedField $expressions
      *           A list of filter expressions.
      * }
      */
@@ -49,7 +49,7 @@ class FilterExpressionList extends \Matomo\Dependencies\GoogleAnalyticsImporter\
      * A list of filter expressions.
      *
      * Generated from protobuf field <code>repeated .google.analytics.data.v1alpha.FilterExpression expressions = 1;</code>
-     * @param \Google\Analytics\Data\V1alpha\FilterExpression[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Analytics\Data\V1alpha\FilterExpression>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setExpressions($var)

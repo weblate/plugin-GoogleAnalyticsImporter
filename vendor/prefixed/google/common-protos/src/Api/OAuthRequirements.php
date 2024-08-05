@@ -36,7 +36,7 @@ class OAuthRequirements extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goo
      *
      * Generated from protobuf field <code>string canonical_scopes = 1;</code>
      */
-    private $canonical_scopes = '';
+    protected $canonical_scopes = '';
     /**
      * Constructor.
      *

@@ -15,18 +15,18 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class Fraction extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * The portion of the denominator in the faction, e.g. 2 in 2/3.
+     * The numerator in the fraction, e.g. 2 in 2/3.
      *
      * Generated from protobuf field <code>int64 numerator = 1;</code>
      */
-    private $numerator = 0;
+    protected $numerator = 0;
     /**
      * The value by which the numerator is divided, e.g. 3 in 2/3. Must be
      * positive.
      *
      * Generated from protobuf field <code>int64 denominator = 2;</code>
      */
-    private $denominator = 0;
+    protected $denominator = 0;
     /**
      * Constructor.
      *
@@ -34,7 +34,7 @@ class Fraction extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
      *     Optional. Data for populating the Message object.
      *
      *     @type int|string $numerator
-     *           The portion of the denominator in the faction, e.g. 2 in 2/3.
+     *           The numerator in the fraction, e.g. 2 in 2/3.
      *     @type int|string $denominator
      *           The value by which the numerator is divided, e.g. 3 in 2/3. Must be
      *           positive.
@@ -46,7 +46,7 @@ class Fraction extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
         parent::__construct($data);
     }
     /**
-     * The portion of the denominator in the faction, e.g. 2 in 2/3.
+     * The numerator in the fraction, e.g. 2 in 2/3.
      *
      * Generated from protobuf field <code>int64 numerator = 1;</code>
      * @return int|string
@@ -56,7 +56,7 @@ class Fraction extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
         return $this->numerator;
     }
     /**
-     * The portion of the denominator in the faction, e.g. 2 in 2/3.
+     * The numerator in the fraction, e.g. 2 in 2/3.
      *
      * Generated from protobuf field <code>int64 numerator = 1;</code>
      * @param int|string $var

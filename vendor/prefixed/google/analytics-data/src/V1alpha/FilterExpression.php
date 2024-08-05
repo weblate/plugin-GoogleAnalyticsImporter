@@ -8,9 +8,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\RepeatedField;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil;
 /**
- * To express dimension or metric filters.
- * The fields in the same FilterExpression need to be either all dimensions or
- * all metrics.
+ * To express dimension or metric filters. The fields in the same
+ * FilterExpression need to be either all dimensions or all metrics.
  *
  * Generated from protobuf message <code>google.analytics.data.v1alpha.FilterExpression</code>
  */
@@ -30,9 +29,8 @@ class FilterExpression extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *     @type \Google\Analytics\Data\V1alpha\FilterExpression $not_expression
      *           The FilterExpression is NOT of not_expression.
      *     @type \Google\Analytics\Data\V1alpha\Filter $filter
-     *           A primitive filter.
-     *           All fields in filter in same FilterExpression needs to be either all
-     *           dimensions or metrics.
+     *           A primitive filter. In the same FilterExpression, all of the filter's
+     *           field names need to be either all dimensions or all metrics.
      * }
      */
     public function __construct($data = NULL)
@@ -122,9 +120,8 @@ class FilterExpression extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
         return $this;
     }
     /**
-     * A primitive filter.
-     * All fields in filter in same FilterExpression needs to be either all
-     * dimensions or metrics.
+     * A primitive filter. In the same FilterExpression, all of the filter's
+     * field names need to be either all dimensions or all metrics.
      *
      * Generated from protobuf field <code>.google.analytics.data.v1alpha.Filter filter = 4;</code>
      * @return \Google\Analytics\Data\V1alpha\Filter|null
@@ -138,9 +135,8 @@ class FilterExpression extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
         return $this->hasOneof(4);
     }
     /**
-     * A primitive filter.
-     * All fields in filter in same FilterExpression needs to be either all
-     * dimensions or metrics.
+     * A primitive filter. In the same FilterExpression, all of the filter's
+     * field names need to be either all dimensions or all metrics.
      *
      * Generated from protobuf field <code>.google.analytics.data.v1alpha.Filter filter = 4;</code>
      * @param \Google\Analytics\Data\V1alpha\Filter $var

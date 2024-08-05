@@ -61,9 +61,9 @@ class CustomMetric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      */
     private $scope = 0;
     /**
-     * Optional. Types of restricted data that this metric may contain. Required for metrics
-     * with CURRENCY measurement unit. Must be empty for metrics with a
-     * non-CURRENCY measurement unit.
+     * Optional. Types of restricted data that this metric may contain. Required
+     * for metrics with CURRENCY measurement unit. Must be empty for metrics with
+     * a non-CURRENCY measurement unit.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.CustomMetric.RestrictedMetricType restricted_metric_type = 8 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
@@ -97,9 +97,9 @@ class CustomMetric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *     @type int $scope
      *           Required. Immutable. The scope of this custom metric.
      *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $restricted_metric_type
-     *           Optional. Types of restricted data that this metric may contain. Required for metrics
-     *           with CURRENCY measurement unit. Must be empty for metrics with a
-     *           non-CURRENCY measurement unit.
+     *           Optional. Types of restricted data that this metric may contain. Required
+     *           for metrics with CURRENCY measurement unit. Must be empty for metrics with
+     *           a non-CURRENCY measurement unit.
      * }
      */
     public function __construct($data = NULL)
@@ -266,9 +266,9 @@ class CustomMetric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
         return $this;
     }
     /**
-     * Optional. Types of restricted data that this metric may contain. Required for metrics
-     * with CURRENCY measurement unit. Must be empty for metrics with a
-     * non-CURRENCY measurement unit.
+     * Optional. Types of restricted data that this metric may contain. Required
+     * for metrics with CURRENCY measurement unit. Must be empty for metrics with
+     * a non-CURRENCY measurement unit.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.CustomMetric.RestrictedMetricType restricted_metric_type = 8 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -278,9 +278,9 @@ class CustomMetric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
         return $this->restricted_metric_type;
     }
     /**
-     * Optional. Types of restricted data that this metric may contain. Required for metrics
-     * with CURRENCY measurement unit. Must be empty for metrics with a
-     * non-CURRENCY measurement unit.
+     * Optional. Types of restricted data that this metric may contain. Required
+     * for metrics with CURRENCY measurement unit. Must be empty for metrics with
+     * a non-CURRENCY measurement unit.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.CustomMetric.RestrictedMetricType restricted_metric_type = 8 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var

@@ -15,12 +15,14 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * Deprecated. Please use the MetricDescriptor.launch_stage instead.
-     * The launch stage of the metric definition.
+     * Deprecated. Must use the
+     * [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage]
+     * instead.
      *
      * Generated from protobuf field <code>.google.api.LaunchStage launch_stage = 1 [deprecated = true];</code>
+     * @deprecated
      */
-    private $launch_stage = 0;
+    protected $launch_stage = 0;
     /**
      * The sampling period of metric data points. For metrics which are written
      * periodically, consecutive data points are stored at this time interval,
@@ -29,7 +31,7 @@ class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpor
      *
      * Generated from protobuf field <code>.google.protobuf.Duration sample_period = 2;</code>
      */
-    private $sample_period = null;
+    protected $sample_period = null;
     /**
      * The delay of data points caused by ingestion. Data points older than this
      * age are guaranteed to be ingested and available to be read, excluding
@@ -37,7 +39,7 @@ class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpor
      *
      * Generated from protobuf field <code>.google.protobuf.Duration ingest_delay = 3;</code>
      */
-    private $ingest_delay = null;
+    protected $ingest_delay = null;
     /**
      * Constructor.
      *
@@ -45,8 +47,9 @@ class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpor
      *     Optional. Data for populating the Message object.
      *
      *     @type int $launch_stage
-     *           Deprecated. Please use the MetricDescriptor.launch_stage instead.
-     *           The launch stage of the metric definition.
+     *           Deprecated. Must use the
+     *           [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage]
+     *           instead.
      *     @type \Google\Protobuf\Duration $sample_period
      *           The sampling period of metric data points. For metrics which are written
      *           periodically, consecutive data points are stored at this time interval,
@@ -64,26 +67,32 @@ class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpor
         parent::__construct($data);
     }
     /**
-     * Deprecated. Please use the MetricDescriptor.launch_stage instead.
-     * The launch stage of the metric definition.
+     * Deprecated. Must use the
+     * [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage]
+     * instead.
      *
      * Generated from protobuf field <code>.google.api.LaunchStage launch_stage = 1 [deprecated = true];</code>
      * @return int
+     * @deprecated
      */
     public function getLaunchStage()
     {
+        @trigger_error('launch_stage is deprecated.', \E_USER_DEPRECATED);
         return $this->launch_stage;
     }
     /**
-     * Deprecated. Please use the MetricDescriptor.launch_stage instead.
-     * The launch stage of the metric definition.
+     * Deprecated. Must use the
+     * [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage]
+     * instead.
      *
      * Generated from protobuf field <code>.google.api.LaunchStage launch_stage = 1 [deprecated = true];</code>
      * @param int $var
      * @return $this
+     * @deprecated
      */
     public function setLaunchStage($var)
     {
+        @trigger_error('launch_stage is deprecated.', \E_USER_DEPRECATED);
         GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\LaunchStage::class);
         $this->launch_stage = $var;
         return $this;
@@ -95,11 +104,19 @@ class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpor
      * a smaller sampling period.
      *
      * Generated from protobuf field <code>.google.protobuf.Duration sample_period = 2;</code>
-     * @return \Google\Protobuf\Duration
+     * @return \Google\Protobuf\Duration|null
      */
     public function getSamplePeriod()
     {
         return $this->sample_period;
+    }
+    public function hasSamplePeriod()
+    {
+        return isset($this->sample_period);
+    }
+    public function clearSamplePeriod()
+    {
+        unset($this->sample_period);
     }
     /**
      * The sampling period of metric data points. For metrics which are written
@@ -123,11 +140,19 @@ class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpor
      * data loss due to errors.
      *
      * Generated from protobuf field <code>.google.protobuf.Duration ingest_delay = 3;</code>
-     * @return \Google\Protobuf\Duration
+     * @return \Google\Protobuf\Duration|null
      */
     public function getIngestDelay()
     {
         return $this->ingest_delay;
+    }
+    public function hasIngestDelay()
+    {
+        return isset($this->ingest_delay);
+    }
+    public function clearIngestDelay()
+    {
+        unset($this->ingest_delay);
     }
     /**
      * The delay of data points caused by ingestion. Data points older than this
@@ -145,5 +170,3 @@ class MetricDescriptorMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpor
         return $this;
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(MetricDescriptorMetadata::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor_MetricDescriptorMetadata::class);

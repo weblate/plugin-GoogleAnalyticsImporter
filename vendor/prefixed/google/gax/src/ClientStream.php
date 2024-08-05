@@ -33,6 +33,7 @@
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\Code;
+use Matomo\Dependencies\GoogleAnalyticsImporter\Grpc\ClientStreamingCall;
 /**
  * ClientStream is the response object from a gRPC client streaming API call.
  */
@@ -42,12 +43,12 @@ class ClientStream
     /**
      * ClientStream constructor.
      *
-     * @param \Grpc\ClientStreamingCall $clientStreamingCall The gRPC client streaming call object
+     * @param ClientStreamingCall $clientStreamingCall The gRPC client streaming call object
      * @param array $streamingDescriptor
      */
     public function __construct(
         // @phpstan-ignore-line
-        $clientStreamingCall,
+        ClientStreamingCall $clientStreamingCall,
         array $streamingDescriptor = []
     )
     {
@@ -84,7 +85,7 @@ class ClientStream
      * @param mixed[] $requests An iterator of request objects to write to the server
      * @return mixed The response object from the server
      */
-    public function writeAllAndReadResponse($requests)
+    public function writeAllAndReadResponse(array $requests)
     {
         foreach ($requests as $request) {
             $this->write($request);

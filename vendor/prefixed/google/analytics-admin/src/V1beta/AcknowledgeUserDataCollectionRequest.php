@@ -21,8 +21,8 @@ class AcknowledgeUserDataCollectionRequest extends \Matomo\Dependencies\GoogleAn
      */
     private $property = '';
     /**
-     * Required. An acknowledgement that the caller of this method understands the terms
-     * of user data collection.
+     * Required. An acknowledgement that the caller of this method understands the
+     * terms of user data collection.
      * This field must contain the exact value:
      * "I acknowledge that I have the necessary privacy disclosures and rights
      * from my end users for the collection and processing of their data,
@@ -41,8 +41,8 @@ class AcknowledgeUserDataCollectionRequest extends \Matomo\Dependencies\GoogleAn
      *     @type string $property
      *           Required. The property for which to acknowledge user data collection.
      *     @type string $acknowledgement
-     *           Required. An acknowledgement that the caller of this method understands the terms
-     *           of user data collection.
+     *           Required. An acknowledgement that the caller of this method understands the
+     *           terms of user data collection.
      *           This field must contain the exact value:
      *           "I acknowledge that I have the necessary privacy disclosures and rights
      *           from my end users for the collection and processing of their data,
@@ -79,8 +79,8 @@ class AcknowledgeUserDataCollectionRequest extends \Matomo\Dependencies\GoogleAn
         return $this;
     }
     /**
-     * Required. An acknowledgement that the caller of this method understands the terms
-     * of user data collection.
+     * Required. An acknowledgement that the caller of this method understands the
+     * terms of user data collection.
      * This field must contain the exact value:
      * "I acknowledge that I have the necessary privacy disclosures and rights
      * from my end users for the collection and processing of their data,
@@ -95,8 +95,8 @@ class AcknowledgeUserDataCollectionRequest extends \Matomo\Dependencies\GoogleAn
         return $this->acknowledgement;
     }
     /**
-     * Required. An acknowledgement that the caller of this method understands the terms
-     * of user data collection.
+     * Required. An acknowledgement that the caller of this method understands the
+     * terms of user data collection.
      * This field must contain the exact value:
      * "I acknowledge that I have the necessary privacy disclosures and rights
      * from my end users for the collection and processing of their data,

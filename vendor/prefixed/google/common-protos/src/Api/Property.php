@@ -26,19 +26,19 @@ class Property extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
      *
      * Generated from protobuf field <code>string name = 1;</code>
      */
-    private $name = '';
+    protected $name = '';
     /**
      * The type of this property.
      *
      * Generated from protobuf field <code>.google.api.Property.PropertyType type = 2;</code>
      */
-    private $type = 0;
+    protected $type = 0;
     /**
      * The description of the property
      *
      * Generated from protobuf field <code>string description = 3;</code>
      */
-    private $description = '';
+    protected $description = '';
     /**
      * Constructor.
      *
@@ -100,7 +100,7 @@ class Property extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Proto
      */
     public function setType($var)
     {
-        GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Property_PropertyType::class);
+        GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Property\PropertyType::class);
         $this->type = $var;
         return $this;
     }

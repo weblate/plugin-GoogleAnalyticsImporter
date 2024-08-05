@@ -31,6 +31,22 @@ class UpdateAudienceRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter
      */
     private $update_mask = null;
     /**
+     * @param \Google\Analytics\Admin\V1alpha\Audience $audience   Required. The audience to update.
+     *                                                             The audience's `name` field is used to identify the audience to be updated.
+     * @param \Google\Protobuf\FieldMask               $updateMask Required. The list of fields to be updated. Field names must be in snake
+     *                                                             case (e.g., "field_to_update"). Omitted fields will not be updated. To
+     *                                                             replace the entire entity, use one path with the string "*" to match all
+     *                                                             fields.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\UpdateAudienceRequest
+     *
+     * @experimental
+     */
+    public static function build(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\Audience $audience, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\FieldMask $updateMask) : self
+    {
+        return (new self())->setAudience($audience)->setUpdateMask($updateMask);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

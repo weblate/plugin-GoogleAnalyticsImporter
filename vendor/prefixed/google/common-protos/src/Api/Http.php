@@ -24,7 +24,7 @@ class Http extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\
      */
     private $rules;
     /**
-     * When set to true, URL path parmeters will be fully URI-decoded except in
+     * When set to true, URL path parameters will be fully URI-decoded except in
      * cases of single segment matches in reserved expansion, where "%2F" will be
      * left encoded.
      * The default behavior is to not decode RFC 6570 reserved characters in multi
@@ -32,18 +32,18 @@ class Http extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\
      *
      * Generated from protobuf field <code>bool fully_decode_reserved_expansion = 2;</code>
      */
-    private $fully_decode_reserved_expansion = \false;
+    protected $fully_decode_reserved_expansion = \false;
     /**
      * Constructor.
      *
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Api\HttpRule[]|\Google\Protobuf\Internal\RepeatedField $rules
+     *     @type array<\Google\Api\HttpRule>|\Google\Protobuf\Internal\RepeatedField $rules
      *           A list of HTTP configuration rules that apply to individual API methods.
      *           **NOTE:** All service configuration rules follow "last one wins" order.
      *     @type bool $fully_decode_reserved_expansion
-     *           When set to true, URL path parmeters will be fully URI-decoded except in
+     *           When set to true, URL path parameters will be fully URI-decoded except in
      *           cases of single segment matches in reserved expansion, where "%2F" will be
      *           left encoded.
      *           The default behavior is to not decode RFC 6570 reserved characters in multi
@@ -71,7 +71,7 @@ class Http extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\
      * **NOTE:** All service configuration rules follow "last one wins" order.
      *
      * Generated from protobuf field <code>repeated .google.api.HttpRule rules = 1;</code>
-     * @param \Google\Api\HttpRule[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\HttpRule>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRules($var)
@@ -81,7 +81,7 @@ class Http extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\
         return $this;
     }
     /**
-     * When set to true, URL path parmeters will be fully URI-decoded except in
+     * When set to true, URL path parameters will be fully URI-decoded except in
      * cases of single segment matches in reserved expansion, where "%2F" will be
      * left encoded.
      * The default behavior is to not decode RFC 6570 reserved characters in multi
@@ -95,7 +95,7 @@ class Http extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\
         return $this->fully_decode_reserved_expansion;
     }
     /**
-     * When set to true, URL path parmeters will be fully URI-decoded except in
+     * When set to true, URL path parameters will be fully URI-decoded except in
      * cases of single segment matches in reserved expansion, where "%2F" will be
      * left encoded.
      * The default behavior is to not decode RFC 6570 reserved characters in multi

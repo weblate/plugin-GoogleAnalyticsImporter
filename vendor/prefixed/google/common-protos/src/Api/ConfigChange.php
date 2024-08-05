@@ -25,33 +25,33 @@ class ConfigChange extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * 'key' is used. If the field has no unique identifier, the numeric index
      * is used.
      * Examples:
-     * - visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
+     * - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
      * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
      * - logging.producer_destinations[0]
      *
      * Generated from protobuf field <code>string element = 1;</code>
      */
-    private $element = '';
+    protected $element = '';
     /**
      * Value of the changed object in the old Service configuration,
      * in JSON format. This field will not be populated if ChangeType == ADDED.
      *
      * Generated from protobuf field <code>string old_value = 2;</code>
      */
-    private $old_value = '';
+    protected $old_value = '';
     /**
      * Value of the changed object in the new Service configuration,
      * in JSON format. This field will not be populated if ChangeType == REMOVED.
      *
      * Generated from protobuf field <code>string new_value = 3;</code>
      */
-    private $new_value = '';
+    protected $new_value = '';
     /**
      * The type for this change, either ADDED, REMOVED, or MODIFIED.
      *
      * Generated from protobuf field <code>.google.api.ChangeType change_type = 4;</code>
      */
-    private $change_type = 0;
+    protected $change_type = 0;
     /**
      * Collection of advice provided for this change, useful for determining the
      * possible impact of this change.
@@ -72,7 +72,7 @@ class ConfigChange extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *           'key' is used. If the field has no unique identifier, the numeric index
      *           is used.
      *           Examples:
-     *           - visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
+     *           - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
      *           - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
      *           - logging.producer_destinations[0]
      *     @type string $old_value
@@ -83,7 +83,7 @@ class ConfigChange extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *           in JSON format. This field will not be populated if ChangeType == REMOVED.
      *     @type int $change_type
      *           The type for this change, either ADDED, REMOVED, or MODIFIED.
-     *     @type \Google\Api\Advice[]|\Google\Protobuf\Internal\RepeatedField $advices
+     *     @type array<\Google\Api\Advice>|\Google\Protobuf\Internal\RepeatedField $advices
      *           Collection of advice provided for this change, useful for determining the
      *           possible impact of this change.
      * }
@@ -100,7 +100,7 @@ class ConfigChange extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * 'key' is used. If the field has no unique identifier, the numeric index
      * is used.
      * Examples:
-     * - visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
+     * - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
      * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
      * - logging.producer_destinations[0]
      *
@@ -118,7 +118,7 @@ class ConfigChange extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * 'key' is used. If the field has no unique identifier, the numeric index
      * is used.
      * Examples:
-     * - visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
+     * - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
      * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
      * - logging.producer_destinations[0]
      *
@@ -221,7 +221,7 @@ class ConfigChange extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * possible impact of this change.
      *
      * Generated from protobuf field <code>repeated .google.api.Advice advices = 5;</code>
-     * @param \Google\Api\Advice[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\Advice>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setAdvices($var)

@@ -8,12 +8,12 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\RepeatedField;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil;
 /**
- * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
- * [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
- * uniquely identify a monitored resource instance. There is some other useful
- * auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion
- * pipeline to extract metadata for cloud resources of all types , and stores
- * the metadata in this message.
+ * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource]
+ * object. [MonitoredResource][google.api.MonitoredResource] objects contain the
+ * minimum set of information to uniquely identify a monitored resource
+ * instance. There is some other useful auxiliary metadata. Monitoring and
+ * Logging use an ingestion pipeline to extract metadata for cloud resources of
+ * all types, and store the metadata in this message.
  *
  * Generated from protobuf message <code>google.api.MonitoredResourceMetadata</code>
  */
@@ -21,9 +21,8 @@ class MonitoredResourceMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpo
 {
     /**
      * Output only. Values for predefined system metadata labels.
-     * System labels are a kind of metadata extracted by Google Stackdriver.
-     * Stackdriver determines what system labels are useful and how to obtain
-     * their values. Some examples: "machine_image", "vpc", "subnet_id",
+     * System labels are a kind of metadata extracted by Google, including
+     * "machine_image", "vpc", "subnet_id",
      * "security_group", "name", etc.
      * System label values can be only strings, Boolean values, or a list of
      * strings. For example:
@@ -33,7 +32,7 @@ class MonitoredResourceMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpo
      *
      * Generated from protobuf field <code>.google.protobuf.Struct system_labels = 1;</code>
      */
-    private $system_labels = null;
+    protected $system_labels = null;
     /**
      * Output only. A map of user-defined metadata labels.
      *
@@ -48,9 +47,8 @@ class MonitoredResourceMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpo
      *
      *     @type \Google\Protobuf\Struct $system_labels
      *           Output only. Values for predefined system metadata labels.
-     *           System labels are a kind of metadata extracted by Google Stackdriver.
-     *           Stackdriver determines what system labels are useful and how to obtain
-     *           their values. Some examples: "machine_image", "vpc", "subnet_id",
+     *           System labels are a kind of metadata extracted by Google, including
+     *           "machine_image", "vpc", "subnet_id",
      *           "security_group", "name", etc.
      *           System label values can be only strings, Boolean values, or a list of
      *           strings. For example:
@@ -68,9 +66,8 @@ class MonitoredResourceMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpo
     }
     /**
      * Output only. Values for predefined system metadata labels.
-     * System labels are a kind of metadata extracted by Google Stackdriver.
-     * Stackdriver determines what system labels are useful and how to obtain
-     * their values. Some examples: "machine_image", "vpc", "subnet_id",
+     * System labels are a kind of metadata extracted by Google, including
+     * "machine_image", "vpc", "subnet_id",
      * "security_group", "name", etc.
      * System label values can be only strings, Boolean values, or a list of
      * strings. For example:
@@ -79,17 +76,24 @@ class MonitoredResourceMetadata extends \Matomo\Dependencies\GoogleAnalyticsImpo
      *       "spot_instance": false }
      *
      * Generated from protobuf field <code>.google.protobuf.Struct system_labels = 1;</code>
-     * @return \Google\Protobuf\Struct
+     * @return \Google\Protobuf\Struct|null
      */
     public function getSystemLabels()
     {
         return $this->system_labels;
     }
+    public function hasSystemLabels()
+    {
+        return isset($this->system_labels);
+    }
+    public function clearSystemLabels()
+    {
+        unset($this->system_labels);
+    }
     /**
      * Output only. Values for predefined system metadata labels.
-     * System labels are a kind of metadata extracted by Google Stackdriver.
-     * Stackdriver determines what system labels are useful and how to obtain
-     * their values. Some examples: "machine_image", "vpc", "subnet_id",
+     * System labels are a kind of metadata extracted by Google, including
+     * "machine_image", "vpc", "subnet_id",
      * "security_group", "name", etc.
      * System label values can be only strings, Boolean values, or a list of
      * strings. For example:

@@ -8,8 +8,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\RepeatedField;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil;
 /**
- * A contiguous set of days: startDate, startDate + 1, ..., endDate. Requests
- * are allowed up to 4 date ranges.
+ * A contiguous set of days: `startDate`, `startDate + 1`, ..., `endDate`.
+ * Requests are allowed up to 4 date ranges.
  *
  * Generated from protobuf message <code>google.analytics.data.v1beta.DateRange</code>
  */

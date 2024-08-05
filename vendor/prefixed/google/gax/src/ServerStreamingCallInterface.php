@@ -32,6 +32,9 @@
  */
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore;
 
+/**
+ * @internal
+ */
 interface ServerStreamingCallInterface
 {
     /**

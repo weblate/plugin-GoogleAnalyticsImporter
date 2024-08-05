@@ -33,8 +33,15 @@
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Testing;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message;
+/**
+ * @internal
+ */
 trait SerializationTrait
 {
+    /**
+     * @param mixed $message
+     * @param mixed $deserialize
+     */
     protected function deserializeMessage($message, $deserialize)
     {
         if ($message === null) {

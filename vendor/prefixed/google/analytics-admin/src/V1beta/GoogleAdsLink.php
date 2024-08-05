@@ -15,7 +15,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class GoogleAdsLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * Output only. Format: properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
+     * Output only. Format:
+     * properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
      * Note: googleAdsLinkId is not the Google Ads customer ID.
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -68,7 +69,8 @@ class GoogleAdsLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\
      *     Optional. Data for populating the Message object.
      *
      *     @type string $name
-     *           Output only. Format: properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
+     *           Output only. Format:
+     *           properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
      *           Note: googleAdsLinkId is not the Google Ads customer ID.
      *     @type string $customer_id
      *           Immutable. Google Ads customer ID.
@@ -94,7 +96,8 @@ class GoogleAdsLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\
         parent::__construct($data);
     }
     /**
-     * Output only. Format: properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
+     * Output only. Format:
+     * properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
      * Note: googleAdsLinkId is not the Google Ads customer ID.
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -105,7 +108,8 @@ class GoogleAdsLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\
         return $this->name;
     }
     /**
-     * Output only. Format: properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
+     * Output only. Format:
+     * properties/{propertyId}/googleAdsLinks/{googleAdsLinkId}
      * Note: googleAdsLinkId is not the Google Ads customer ID.
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>

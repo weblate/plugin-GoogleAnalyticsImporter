@@ -21,9 +21,9 @@ class FirebaseLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      */
     private $name = '';
     /**
-     * Immutable. Firebase project resource name. When creating a FirebaseLink, you may
-     * provide this resource name using either a project number or project ID.
-     * Once this resource has been created, returned FirebaseLinks will always
+     * Immutable. Firebase project resource name. When creating a FirebaseLink,
+     * you may provide this resource name using either a project number or project
+     * ID. Once this resource has been created, returned FirebaseLinks will always
      * have a project_name that contains a project number.
      * Format: 'projects/{project number}'
      * Example: 'projects/1234'
@@ -46,9 +46,9 @@ class FirebaseLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *     @type string $name
      *           Output only. Example format: properties/1234/firebaseLinks/5678
      *     @type string $project
-     *           Immutable. Firebase project resource name. When creating a FirebaseLink, you may
-     *           provide this resource name using either a project number or project ID.
-     *           Once this resource has been created, returned FirebaseLinks will always
+     *           Immutable. Firebase project resource name. When creating a FirebaseLink,
+     *           you may provide this resource name using either a project number or project
+     *           ID. Once this resource has been created, returned FirebaseLinks will always
      *           have a project_name that contains a project number.
      *           Format: 'projects/{project number}'
      *           Example: 'projects/1234'
@@ -85,9 +85,9 @@ class FirebaseLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
         return $this;
     }
     /**
-     * Immutable. Firebase project resource name. When creating a FirebaseLink, you may
-     * provide this resource name using either a project number or project ID.
-     * Once this resource has been created, returned FirebaseLinks will always
+     * Immutable. Firebase project resource name. When creating a FirebaseLink,
+     * you may provide this resource name using either a project number or project
+     * ID. Once this resource has been created, returned FirebaseLinks will always
      * have a project_name that contains a project number.
      * Format: 'projects/{project number}'
      * Example: 'projects/1234'
@@ -100,9 +100,9 @@ class FirebaseLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
         return $this->project;
     }
     /**
-     * Immutable. Firebase project resource name. When creating a FirebaseLink, you may
-     * provide this resource name using either a project number or project ID.
-     * Once this resource has been created, returned FirebaseLinks will always
+     * Immutable. Firebase project resource name. When creating a FirebaseLink,
+     * you may provide this resource name using either a project number or project
+     * ID. Once this resource has been created, returned FirebaseLinks will always
      * have a project_name that contains a project number.
      * Format: 'projects/{project number}'
      * Example: 'projects/1234'

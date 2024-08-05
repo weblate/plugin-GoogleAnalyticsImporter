@@ -28,10 +28,9 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\HttpHandler\HttpHand
 use Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Psr7\Request;
 use Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Psr7\Utils;
 use InvalidArgumentException;
-use phpseclib\Crypt\RSA;
-use phpseclib\Math\BigInteger as BigInteger2;
 use Matomo\Dependencies\GoogleAnalyticsImporter\phpseclib3\Crypt\PublicKeyLoader;
-use Matomo\Dependencies\GoogleAnalyticsImporter\phpseclib3\Math\BigInteger as BigInteger3;
+use Matomo\Dependencies\GoogleAnalyticsImporter\phpseclib3\Crypt\RSA;
+use Matomo\Dependencies\GoogleAnalyticsImporter\phpseclib3\Math\BigInteger;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Psr\Cache\CacheItemPoolInterface;
 use RuntimeException;
 use SimpleJWT\InvalidTokenException;
@@ -326,8 +325,8 @@ class AccessToken
      */
     private function checkAndInitializePhpsec()
     {
-        if (!$this->checkAndInitializePhpsec2() && !$this->checkPhpsec3()) {
-            throw new RuntimeException('Please require phpseclib/phpseclib v2 or v3 to use this utility.');
+        if (!class_exists(RSA::class)) {
+            throw new RuntimeException('Please require phpseclib/phpseclib v3 to use this utility.');
         }
     }
     /**
@@ -336,51 +335,12 @@ class AccessToken
      */
     private function loadPhpsecPublicKey(string $modulus, string $exponent) : string
     {
-        if (class_exists(RSA::class) && class_exists(BigInteger2::class)) {
-            $key = new RSA();
-            $key->loadKey(['n' => new BigInteger2($this->callJwtStatic('urlsafeB64Decode', [$modulus]), 256), 'e' => new BigInteger2($this->callJwtStatic('urlsafeB64Decode', [$exponent]), 256)]);
-            return $key->getPublicKey();
-        }
-        $key = PublicKeyLoader::load(['n' => new BigInteger3($this->callJwtStatic('urlsafeB64Decode', [$modulus]), 256), 'e' => new BigInteger3($this->callJwtStatic('urlsafeB64Decode', [$exponent]), 256)]);
+        $key = PublicKeyLoader::load(['n' => new BigInteger($this->callJwtStatic('urlsafeB64Decode', [$modulus]), 256), 'e' => new BigInteger($this->callJwtStatic('urlsafeB64Decode', [$exponent]), 256)]);
         $formattedPublicKey = $key->toString('PKCS8');
         if (!is_string($formattedPublicKey)) {
             throw new TypeError('Failed to initialize the key');
         }
         return $formattedPublicKey;
-    }
-    /**
-     * @return bool
-     */
-    private function checkAndInitializePhpsec2() : bool
-    {
-        if (!class_exists('phpseclib\\Crypt\\RSA')) {
-            return \false;
-        }
-        /**
-         * phpseclib calls "phpinfo" by default, which requires special
-         * whitelisting in the AppEngine VM environment. This function
-         * sets constants to bypass the need for phpseclib to check phpinfo
-         *
-         * @see phpseclib/Math/BigInteger
-         * @see https://github.com/GoogleCloudPlatform/getting-started-php/issues/85
-         * @codeCoverageIgnore
-         */
-        if (filter_var(getenv('GAE_VM'), \FILTER_VALIDATE_BOOLEAN)) {
-            if (!defined('Matomo\\Dependencies\\GoogleAnalyticsImporter\\MATH_BIGINTEGER_OPENSSL_ENABLED')) {
-                define('Matomo\\Dependencies\\GoogleAnalyticsImporter\\MATH_BIGINTEGER_OPENSSL_ENABLED', \true);
-            }
-            if (!defined('Matomo\\Dependencies\\GoogleAnalyticsImporter\\CRYPT_RSA_MODE')) {
-                define('Matomo\\Dependencies\\GoogleAnalyticsImporter\\CRYPT_RSA_MODE', RSA::MODE_OPENSSL);
-            }
-        }
-        return \true;
-    }
-    /**
-     * @return bool
-     */
-    private function checkPhpsec3() : bool
-    {
-        return class_exists('Matomo\\Dependencies\\GoogleAnalyticsImporter\\phpseclib3\\Crypt\\RSA');
     }
     /**
      * @return void

@@ -21,13 +21,27 @@ class UpdateCustomMetricRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
      */
     private $custom_metric = null;
     /**
-     * Required. The list of fields to be updated. Omitted fields will not be updated.
-     * To replace the entire entity, use one path with the string "*" to match
-     * all fields.
+     * Required. The list of fields to be updated. Omitted fields will not be
+     * updated. To replace the entire entity, use one path with the string "*" to
+     * match all fields.
      *
      * Generated from protobuf field <code>.google.protobuf.FieldMask update_mask = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     private $update_mask = null;
+    /**
+     * @param \Google\Analytics\Admin\V1beta\CustomMetric $customMetric The CustomMetric to update
+     * @param \Google\Protobuf\FieldMask                  $updateMask   Required. The list of fields to be updated. Omitted fields will not be
+     *                                                                  updated. To replace the entire entity, use one path with the string "*" to
+     *                                                                  match all fields.
+     *
+     * @return \Google\Analytics\Admin\V1beta\UpdateCustomMetricRequest
+     *
+     * @experimental
+     */
+    public static function build(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1beta\CustomMetric $customMetric, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\FieldMask $updateMask) : self
+    {
+        return (new self())->setCustomMetric($customMetric)->setUpdateMask($updateMask);
+    }
     /**
      * Constructor.
      *
@@ -37,9 +51,9 @@ class UpdateCustomMetricRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
      *     @type \Google\Analytics\Admin\V1beta\CustomMetric $custom_metric
      *           The CustomMetric to update
      *     @type \Google\Protobuf\FieldMask $update_mask
-     *           Required. The list of fields to be updated. Omitted fields will not be updated.
-     *           To replace the entire entity, use one path with the string "*" to match
-     *           all fields.
+     *           Required. The list of fields to be updated. Omitted fields will not be
+     *           updated. To replace the entire entity, use one path with the string "*" to
+     *           match all fields.
      * }
      */
     public function __construct($data = NULL)
@@ -79,9 +93,9 @@ class UpdateCustomMetricRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
         return $this;
     }
     /**
-     * Required. The list of fields to be updated. Omitted fields will not be updated.
-     * To replace the entire entity, use one path with the string "*" to match
-     * all fields.
+     * Required. The list of fields to be updated. Omitted fields will not be
+     * updated. To replace the entire entity, use one path with the string "*" to
+     * match all fields.
      *
      * Generated from protobuf field <code>.google.protobuf.FieldMask update_mask = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      * @return \Google\Protobuf\FieldMask|null
@@ -99,9 +113,9 @@ class UpdateCustomMetricRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
         unset($this->update_mask);
     }
     /**
-     * Required. The list of fields to be updated. Omitted fields will not be updated.
-     * To replace the entire entity, use one path with the string "*" to match
-     * all fields.
+     * Required. The list of fields to be updated. Omitted fields will not be
+     * updated. To replace the entire entity, use one path with the string "*" to
+     * match all fields.
      *
      * Generated from protobuf field <code>.google.protobuf.FieldMask update_mask = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      * @param \Google\Protobuf\FieldMask $var

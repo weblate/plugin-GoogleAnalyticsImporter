@@ -42,11 +42,25 @@ class CreatedByDeserializeCheck implements \Serializable
         return '0';
     }
     /**
+     * @return string
+     */
+    public function __serialize()
+    {
+        return $this->serialize();
+    }
+    /**
      * @param string $data
      */
     public function unserialize($data)
     {
         $this->data = 1;
+    }
+    /**
+     * @param string $data
+     */
+    public function __unserialize($data)
+    {
+        $this->unserialize($data);
     }
     /**
      * @param $data

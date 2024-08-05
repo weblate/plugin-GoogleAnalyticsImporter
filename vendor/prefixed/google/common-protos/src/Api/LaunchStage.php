@@ -7,7 +7,7 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api;
 use UnexpectedValueException;
 /**
  * The launch stage as defined by [Google Cloud Platform
- * Launch Stages](http://cloud.google.com/terms/launch-stages).
+ * Launch Stages](https://cloud.google.com/terms/launch-stages).
  *
  * Protobuf type <code>google.api.LaunchStage</code>
  */
@@ -19,6 +19,18 @@ class LaunchStage
      * Generated from protobuf enum <code>LAUNCH_STAGE_UNSPECIFIED = 0;</code>
      */
     const LAUNCH_STAGE_UNSPECIFIED = 0;
+    /**
+     * The feature is not yet implemented. Users can not use it.
+     *
+     * Generated from protobuf enum <code>UNIMPLEMENTED = 6;</code>
+     */
+    const UNIMPLEMENTED = 6;
+    /**
+     * Prelaunch features are hidden from users and are only visible internally.
+     *
+     * Generated from protobuf enum <code>PRELAUNCH = 7;</code>
+     */
+    const PRELAUNCH = 7;
     /**
      * Early Access features are limited to a closed group of testers. To use
      * these features, you must sign up in advance and sign a Trusted Tester
@@ -34,7 +46,7 @@ class LaunchStage
      * for widespread use. By Alpha, all significant design issues are resolved
      * and we are in the process of verifying functionality. Alpha customers
      * need to apply for access, agree to applicable terms, and have their
-     * projects whitelisted. Alpha releases don’t have to be feature complete,
+     * projects allowlisted. Alpha releases don't have to be feature complete,
      * no SLAs are provided, and there are no technical support obligations, but
      * they will be far enough along that customers can actually use them in
      * test environments or for limited-use tests -- just like they would in
@@ -62,7 +74,7 @@ class LaunchStage
     const GA = 4;
     /**
      * Deprecated features are scheduled to be shut down and removed. For more
-     * information, see the “Deprecation Policy” section of our [Terms of
+     * information, see the "Deprecation Policy" section of our [Terms of
      * Service](https://cloud.google.com/terms/)
      * and the [Google Cloud Platform Subject to the Deprecation
      * Policy](https://cloud.google.com/terms/deprecation) documentation.
@@ -70,7 +82,7 @@ class LaunchStage
      * Generated from protobuf enum <code>DEPRECATED = 5;</code>
      */
     const DEPRECATED = 5;
-    private static $valueToName = [self::LAUNCH_STAGE_UNSPECIFIED => 'LAUNCH_STAGE_UNSPECIFIED', self::EARLY_ACCESS => 'EARLY_ACCESS', self::ALPHA => 'ALPHA', self::BETA => 'BETA', self::GA => 'GA', self::DEPRECATED => 'DEPRECATED'];
+    private static $valueToName = [self::LAUNCH_STAGE_UNSPECIFIED => 'LAUNCH_STAGE_UNSPECIFIED', self::UNIMPLEMENTED => 'UNIMPLEMENTED', self::PRELAUNCH => 'PRELAUNCH', self::EARLY_ACCESS => 'EARLY_ACCESS', self::ALPHA => 'ALPHA', self::BETA => 'BETA', self::GA => 'GA', self::DEPRECATED => 'DEPRECATED'];
     public static function name($value)
     {
         if (!isset(self::$valueToName[$value])) {

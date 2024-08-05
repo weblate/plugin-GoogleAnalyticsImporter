@@ -37,8 +37,15 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\DescriptorPool;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\RepeatedField;
 use PHPUnit\Framework\TestCase;
+/**
+ * @internal
+ */
 abstract class GeneratedTest extends TestCase
 {
+    /**
+     * @param mixed $expected
+     * @param mixed $actual
+     */
     public function assertProtobufEquals(&$expected, &$actual)
     {
         if ($expected === $actual) {
@@ -74,6 +81,9 @@ abstract class GeneratedTest extends TestCase
             }
         }
     }
+    /**
+     * @param iterable $field
+     */
     private function getValues($field)
     {
         return array_values(is_array($field) ? $field : iterator_to_array($field));

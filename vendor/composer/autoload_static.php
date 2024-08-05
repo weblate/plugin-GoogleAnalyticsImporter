@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
+class ComposerStaticInit54cb5964df745acb578c0235eaab1abc
 {
     public static $files = array(
 );
@@ -18,6 +18,11 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         'b' => 
         array (
             'bcmath_compat\\' => 14,
+        ),
+        'R' => 
+        array (
+            'Ramsey\\Uuid\\' => 12,
+            'Ramsey\\Collection\\' => 18,
         ),
         'P' => 
         array (
@@ -33,25 +38,39 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
             'GuzzleHttp\\' => 11,
             'Grpc\\Gcp\\' => 9,
             'Grpc\\' => 5,
+            'Google\\Type\\' => 12,
             'Google\\Service\\' => 15,
+            'Google\\Rpc\\' => 11,
             'Google\\Protobuf\\' => 16,
             'Google\\LongRunning\\' => 19,
+            'Google\\Iam\\' => 11,
+            'Google\\Cloud\\' => 13,
             'Google\\Auth\\' => 12,
+            'Google\\Api\\' => 11,
             'Google\\ApiCore\\LongRunning\\' => 27,
             'Google\\ApiCore\\' => 15,
             'Google\\Analytics\\Data\\' => 22,
             'Google\\Analytics\\Admin\\' => 23,
             'Google\\' => 7,
+            'GPBMetadata\\Google\\Type\\' => 24,
+            'GPBMetadata\\Google\\Rpc\\' => 23,
             'GPBMetadata\\Google\\Protobuf\\' => 28,
             'GPBMetadata\\Google\\Longrunning\\' => 31,
+            'GPBMetadata\\Google\\Logging\\' => 27,
+            'GPBMetadata\\Google\\Iam\\' => 23,
+            'GPBMetadata\\Google\\Cloud\\' => 25,
+            'GPBMetadata\\Google\\Api\\' => 23,
             'GPBMetadata\\Google\\Analytics\\Data\\' => 34,
             'GPBMetadata\\Google\\Analytics\\Admin\\' => 35,
-            'GPBMetadata\\Google\\' => 19,
             'GPBMetadata\\ApiCore\\' => 20,
         ),
         'F' => 
         array (
             'Firebase\\JWT\\' => 13,
+        ),
+        'B' => 
+        array (
+            'Brick\\Math\\' => 11,
         ),
     );
 
@@ -63,6 +82,14 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         'bcmath_compat\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/bcmath_compat/src',
+        ),
+        'Ramsey\\Uuid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/uuid/src',
+        ),
+        'Ramsey\\Collection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -101,9 +128,17 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         array (
             0 => __DIR__ . '/..' . '/grpc/grpc/src/lib',
         ),
+        'Google\\Type\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/src/Type',
+        ),
         'Google\\Service\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/apiclient-services/src',
+        ),
+        'Google\\Rpc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/src/Rpc',
         ),
         'Google\\Protobuf\\' => 
         array (
@@ -113,9 +148,21 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         array (
             0 => __DIR__ . '/..' . '/google/longrunning/src/LongRunning',
         ),
+        'Google\\Iam\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/src/Iam',
+        ),
+        'Google\\Cloud\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/src/Cloud',
+        ),
         'Google\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/auth/src',
+        ),
+        'Google\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/src/Api',
         ),
         'Google\\ApiCore\\LongRunning\\' => 
         array (
@@ -136,7 +183,14 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         'Google\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/apiclient/src',
-            1 => __DIR__ . '/..' . '/google/common-protos/src',
+        ),
+        'GPBMetadata\\Google\\Type\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Type',
+        ),
+        'GPBMetadata\\Google\\Rpc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Rpc',
         ),
         'GPBMetadata\\Google\\Protobuf\\' => 
         array (
@@ -146,6 +200,22 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         array (
             0 => __DIR__ . '/..' . '/google/longrunning/metadata/Longrunning',
         ),
+        'GPBMetadata\\Google\\Logging\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Logging',
+        ),
+        'GPBMetadata\\Google\\Iam\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Iam',
+        ),
+        'GPBMetadata\\Google\\Cloud\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Cloud',
+        ),
+        'GPBMetadata\\Google\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Api',
+        ),
         'GPBMetadata\\Google\\Analytics\\Data\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/analytics-data/metadata',
@@ -154,10 +224,6 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         array (
             0 => __DIR__ . '/..' . '/google/analytics-admin/metadata',
         ),
-        'GPBMetadata\\Google\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/metadata',
-        ),
         'GPBMetadata\\ApiCore\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/gax/metadata/ApiCore',
@@ -165,6 +231,10 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
+        'Brick\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/math/src',
         ),
     );
 
@@ -175,9 +245,9 @@ class ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4772b4f8b1accc7fd3f3497a28a4653b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit54cb5964df745acb578c0235eaab1abc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit54cb5964df745acb578c0235eaab1abc::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit54cb5964df745acb578c0235eaab1abc::$classMap;
 
         }, null, ClassLoader::class);
     }

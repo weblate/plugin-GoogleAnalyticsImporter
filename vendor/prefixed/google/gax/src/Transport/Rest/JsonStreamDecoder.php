@@ -38,7 +38,7 @@ class JsonStreamDecoder
 {
     const ESCAPE_CHAR = '\\';
     /**
-     * @var StreamInterface
+     * @var \Matomo\Dependencies\GoogleAnalyticsImporter\Psr\Http\Message\StreamInterface
      */
     private $stream;
     /**
@@ -79,7 +79,7 @@ class JsonStreamDecoder
      *
      * @experimental
      */
-    public function __construct(StreamInterface $stream, $decodeType, $options = [])
+    public function __construct(StreamInterface $stream, string $decodeType, array $options = [])
     {
         $this->stream = $stream;
         $this->decodeType = $decodeType;

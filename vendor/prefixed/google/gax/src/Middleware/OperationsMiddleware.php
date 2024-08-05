@@ -35,16 +35,21 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Middleware;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Call;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\OperationResponse;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message;
+use Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Promise\PromiseInterface;
 /**
  * Middleware which wraps the response in an OperationResponse object.
  */
-class OperationsMiddleware
+class OperationsMiddleware implements MiddlewareInterface
 {
     /** @var callable */
     private $nextHandler;
-    /** @var object */
+    /**
+     * @var object
+     */
     private $operationsClient;
-    /** @var array */
+    /**
+     * @var mixed[]
+     */
     private $descriptor;
     public function __construct(callable $nextHandler, $operationsClient, array $descriptor)
     {
@@ -57,7 +62,7 @@ class OperationsMiddleware
         $next = $this->nextHandler;
         return $next($call, $options)->then(function (Message $response) {
             $options = $this->descriptor + ['lastProtoResponse' => $response];
-            $operationNameMethod = isset($options['operationNameMethod']) ? $options['operationNameMethod'] : 'getName';
+            $operationNameMethod = $options['operationNameMethod'] ?? 'getName';
             $operationName = call_user_func([$response, $operationNameMethod]);
             return new OperationResponse($operationName, $this->operationsClient, $options);
         });

@@ -27,6 +27,19 @@ class CreateSearchAds360LinkRequest extends \Matomo\Dependencies\GoogleAnalytics
      */
     private $search_ads_360_link = null;
     /**
+     * @param string                                           $parent           Required. Example format: properties/1234
+     *                                                                           Please see {@see AnalyticsAdminServiceClient::propertyName()} for help formatting this field.
+     * @param \Google\Analytics\Admin\V1alpha\SearchAds360Link $searchAds360Link Required. The SearchAds360Link to create.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\CreateSearchAds360LinkRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\SearchAds360Link $searchAds360Link) : self
+    {
+        return (new self())->setParent($parent)->setSearchAds360Link($searchAds360Link);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

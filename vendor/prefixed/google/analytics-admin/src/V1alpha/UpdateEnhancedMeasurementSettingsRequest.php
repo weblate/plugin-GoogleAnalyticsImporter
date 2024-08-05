@@ -22,13 +22,30 @@ class UpdateEnhancedMeasurementSettingsRequest extends \Matomo\Dependencies\Goog
      */
     private $enhanced_measurement_settings = null;
     /**
-     * Required. The list of fields to be updated. Field names must be in snake case
-     * (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-     * the entire entity, use one path with the string "*" to match all fields.
+     * Required. The list of fields to be updated. Field names must be in snake
+     * case (e.g., "field_to_update"). Omitted fields will not be updated. To
+     * replace the entire entity, use one path with the string "*" to match all
+     * fields.
      *
      * Generated from protobuf field <code>.google.protobuf.FieldMask update_mask = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      */
     private $update_mask = null;
+    /**
+     * @param \Google\Analytics\Admin\V1alpha\EnhancedMeasurementSettings $enhancedMeasurementSettings Required. The settings to update.
+     *                                                                                                 The `name` field is used to identify the settings to be updated.
+     * @param \Google\Protobuf\FieldMask                                  $updateMask                  Required. The list of fields to be updated. Field names must be in snake
+     *                                                                                                 case (e.g., "field_to_update"). Omitted fields will not be updated. To
+     *                                                                                                 replace the entire entity, use one path with the string "*" to match all
+     *                                                                                                 fields.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\UpdateEnhancedMeasurementSettingsRequest
+     *
+     * @experimental
+     */
+    public static function build(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\EnhancedMeasurementSettings $enhancedMeasurementSettings, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\FieldMask $updateMask) : self
+    {
+        return (new self())->setEnhancedMeasurementSettings($enhancedMeasurementSettings)->setUpdateMask($updateMask);
+    }
     /**
      * Constructor.
      *
@@ -39,9 +56,10 @@ class UpdateEnhancedMeasurementSettingsRequest extends \Matomo\Dependencies\Goog
      *           Required. The settings to update.
      *           The `name` field is used to identify the settings to be updated.
      *     @type \Google\Protobuf\FieldMask $update_mask
-     *           Required. The list of fields to be updated. Field names must be in snake case
-     *           (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-     *           the entire entity, use one path with the string "*" to match all fields.
+     *           Required. The list of fields to be updated. Field names must be in snake
+     *           case (e.g., "field_to_update"). Omitted fields will not be updated. To
+     *           replace the entire entity, use one path with the string "*" to match all
+     *           fields.
      * }
      */
     public function __construct($data = NULL)
@@ -58,7 +76,7 @@ class UpdateEnhancedMeasurementSettingsRequest extends \Matomo\Dependencies\Goog
      */
     public function getEnhancedMeasurementSettings()
     {
-        return isset($this->enhanced_measurement_settings) ? $this->enhanced_measurement_settings : null;
+        return $this->enhanced_measurement_settings;
     }
     public function hasEnhancedMeasurementSettings()
     {
@@ -83,16 +101,17 @@ class UpdateEnhancedMeasurementSettingsRequest extends \Matomo\Dependencies\Goog
         return $this;
     }
     /**
-     * Required. The list of fields to be updated. Field names must be in snake case
-     * (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-     * the entire entity, use one path with the string "*" to match all fields.
+     * Required. The list of fields to be updated. Field names must be in snake
+     * case (e.g., "field_to_update"). Omitted fields will not be updated. To
+     * replace the entire entity, use one path with the string "*" to match all
+     * fields.
      *
      * Generated from protobuf field <code>.google.protobuf.FieldMask update_mask = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      * @return \Google\Protobuf\FieldMask|null
      */
     public function getUpdateMask()
     {
-        return isset($this->update_mask) ? $this->update_mask : null;
+        return $this->update_mask;
     }
     public function hasUpdateMask()
     {
@@ -103,9 +122,10 @@ class UpdateEnhancedMeasurementSettingsRequest extends \Matomo\Dependencies\Goog
         unset($this->update_mask);
     }
     /**
-     * Required. The list of fields to be updated. Field names must be in snake case
-     * (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-     * the entire entity, use one path with the string "*" to match all fields.
+     * Required. The list of fields to be updated. Field names must be in snake
+     * case (e.g., "field_to_update"). Omitted fields will not be updated. To
+     * replace the entire entity, use one path with the string "*" to match all
+     * fields.
      *
      * Generated from protobuf field <code>.google.protobuf.FieldMask update_mask = 2 [(.google.api.field_behavior) = REQUIRED];</code>
      * @param \Google\Protobuf\FieldMask $var

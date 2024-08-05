@@ -13,7 +13,7 @@ use UnexpectedValueException;
 class Month
 {
     /**
-     * The unspecifed month.
+     * The unspecified month.
      *
      * Generated from protobuf enum <code>MONTH_UNSPECIFIED = 0;</code>
      */

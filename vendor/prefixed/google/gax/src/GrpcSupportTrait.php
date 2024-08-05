@@ -34,6 +34,8 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore;
 
 /**
  * Provides helper methods for gRPC support.
+ *
+ * @internal
  */
 trait GrpcSupportTrait
 {

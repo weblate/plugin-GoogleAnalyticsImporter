@@ -26,6 +26,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      * If this is a user-scoped dimension, then this is the user property name.
      * If this is an event-scoped dimension, then this is the event parameter
      * name.
+     * If this is an item-scoped dimension, then this is the parameter
+     * name found in the eCommerce items array.
      * May only contain alphanumeric and underscore characters, starting with a
      * letter. Max length of 24 characters for user-scoped dimensions, 40
      * characters for event-scoped dimensions.
@@ -34,8 +36,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      */
     private $parameter_name = '';
     /**
-     * Required. Display name for this custom dimension as shown in the Analytics UI.
-     * Max length of 82 characters, alphanumeric plus space and underscore
+     * Required. Display name for this custom dimension as shown in the Analytics
+     * UI. Max length of 82 characters, alphanumeric plus space and underscore
      * starting with a letter. Legacy system-generated display names may contain
      * square brackets, but updates to this field will never permit square
      * brackets.
@@ -44,7 +46,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      */
     private $display_name = '';
     /**
-     * Optional. Description for this custom dimension. Max length of 150 characters.
+     * Optional. Description for this custom dimension. Max length of 150
+     * characters.
      *
      * Generated from protobuf field <code>string description = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
@@ -56,8 +59,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      */
     private $scope = 0;
     /**
-     * Optional. If set to true, sets this dimension as NPA and excludes it from ads
-     * personalization.
+     * Optional. If set to true, sets this dimension as NPA and excludes it from
+     * ads personalization.
      * This is currently only supported by user-scoped custom dimensions.
      *
      * Generated from protobuf field <code>bool disallow_ads_personalization = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
@@ -77,22 +80,25 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      *           If this is a user-scoped dimension, then this is the user property name.
      *           If this is an event-scoped dimension, then this is the event parameter
      *           name.
+     *           If this is an item-scoped dimension, then this is the parameter
+     *           name found in the eCommerce items array.
      *           May only contain alphanumeric and underscore characters, starting with a
      *           letter. Max length of 24 characters for user-scoped dimensions, 40
      *           characters for event-scoped dimensions.
      *     @type string $display_name
-     *           Required. Display name for this custom dimension as shown in the Analytics UI.
-     *           Max length of 82 characters, alphanumeric plus space and underscore
+     *           Required. Display name for this custom dimension as shown in the Analytics
+     *           UI. Max length of 82 characters, alphanumeric plus space and underscore
      *           starting with a letter. Legacy system-generated display names may contain
      *           square brackets, but updates to this field will never permit square
      *           brackets.
      *     @type string $description
-     *           Optional. Description for this custom dimension. Max length of 150 characters.
+     *           Optional. Description for this custom dimension. Max length of 150
+     *           characters.
      *     @type int $scope
      *           Required. Immutable. The scope of this dimension.
      *     @type bool $disallow_ads_personalization
-     *           Optional. If set to true, sets this dimension as NPA and excludes it from ads
-     *           personalization.
+     *           Optional. If set to true, sets this dimension as NPA and excludes it from
+     *           ads personalization.
      *           This is currently only supported by user-scoped custom dimensions.
      * }
      */
@@ -131,6 +137,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      * If this is a user-scoped dimension, then this is the user property name.
      * If this is an event-scoped dimension, then this is the event parameter
      * name.
+     * If this is an item-scoped dimension, then this is the parameter
+     * name found in the eCommerce items array.
      * May only contain alphanumeric and underscore characters, starting with a
      * letter. Max length of 24 characters for user-scoped dimensions, 40
      * characters for event-scoped dimensions.
@@ -147,6 +155,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      * If this is a user-scoped dimension, then this is the user property name.
      * If this is an event-scoped dimension, then this is the event parameter
      * name.
+     * If this is an item-scoped dimension, then this is the parameter
+     * name found in the eCommerce items array.
      * May only contain alphanumeric and underscore characters, starting with a
      * letter. Max length of 24 characters for user-scoped dimensions, 40
      * characters for event-scoped dimensions.
@@ -162,8 +172,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this;
     }
     /**
-     * Required. Display name for this custom dimension as shown in the Analytics UI.
-     * Max length of 82 characters, alphanumeric plus space and underscore
+     * Required. Display name for this custom dimension as shown in the Analytics
+     * UI. Max length of 82 characters, alphanumeric plus space and underscore
      * starting with a letter. Legacy system-generated display names may contain
      * square brackets, but updates to this field will never permit square
      * brackets.
@@ -176,8 +186,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this->display_name;
     }
     /**
-     * Required. Display name for this custom dimension as shown in the Analytics UI.
-     * Max length of 82 characters, alphanumeric plus space and underscore
+     * Required. Display name for this custom dimension as shown in the Analytics
+     * UI. Max length of 82 characters, alphanumeric plus space and underscore
      * starting with a letter. Legacy system-generated display names may contain
      * square brackets, but updates to this field will never permit square
      * brackets.
@@ -193,7 +203,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this;
     }
     /**
-     * Optional. Description for this custom dimension. Max length of 150 characters.
+     * Optional. Description for this custom dimension. Max length of 150
+     * characters.
      *
      * Generated from protobuf field <code>string description = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @return string
@@ -203,7 +214,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this->description;
     }
     /**
-     * Optional. Description for this custom dimension. Max length of 150 characters.
+     * Optional. Description for this custom dimension. Max length of 150
+     * characters.
      *
      * Generated from protobuf field <code>string description = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @param string $var
@@ -239,8 +251,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this;
     }
     /**
-     * Optional. If set to true, sets this dimension as NPA and excludes it from ads
-     * personalization.
+     * Optional. If set to true, sets this dimension as NPA and excludes it from
+     * ads personalization.
      * This is currently only supported by user-scoped custom dimensions.
      *
      * Generated from protobuf field <code>bool disallow_ads_personalization = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
@@ -251,8 +263,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this->disallow_ads_personalization;
     }
     /**
-     * Optional. If set to true, sets this dimension as NPA and excludes it from ads
-     * personalization.
+     * Optional. If set to true, sets this dimension as NPA and excludes it from
+     * ads personalization.
      * This is currently only supported by user-scoped custom dimensions.
      *
      * Generated from protobuf field <code>bool disallow_ads_personalization = 6 [(.google.api.field_behavior) = OPTIONAL];</code>

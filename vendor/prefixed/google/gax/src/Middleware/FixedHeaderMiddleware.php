@@ -33,16 +33,23 @@
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Middleware;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Call;
+use Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Promise\PromiseInterface;
 /**
  * Middleware to add fixed headers to an API call.
  */
-class FixedHeaderMiddleware
+class FixedHeaderMiddleware implements MiddlewareInterface
 {
     /** @var callable */
     private $nextHandler;
+    /**
+     * @var mixed[]
+     */
     private $headers;
+    /**
+     * @var bool
+     */
     private $overrideUserHeaders;
-    public function __construct(callable $nextHandler, array $headers, $overrideUserHeaders = \false)
+    public function __construct(callable $nextHandler, array $headers, bool $overrideUserHeaders = \false)
     {
         $this->nextHandler = $nextHandler;
         $this->headers = $headers;
@@ -50,7 +57,7 @@ class FixedHeaderMiddleware
     }
     public function __invoke(Call $call, array $options)
     {
-        $userHeaders = isset($options['headers']) ? $options['headers'] : [];
+        $userHeaders = $options['headers'] ?? [];
         if ($this->overrideUserHeaders) {
             $options['headers'] = $this->headers + $userHeaders;
         } else {

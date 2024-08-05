@@ -61,6 +61,12 @@ class ServiceAccountCredentials extends CredentialsLoader implements GetQuotaPro
 {
     use ServiceAccountSignerTrait;
     /**
+     * Used in observability metric headers
+     *
+     * @var string
+     */
+    private const CRED_TYPE = 'sa';
+    /**
      * The OAuth2 instance used to conduct authorization.
      *
      * @var OAuth2
@@ -169,16 +175,26 @@ class ServiceAccountCredentials extends CredentialsLoader implements GetQuotaPro
             }
             return $accessToken;
         }
-        return $this->auth->fetchAuthToken($httpHandler);
+        $authRequestType = empty($this->auth->getAdditionalClaims()['target_audience']) ? 'at' : 'it';
+        return $this->auth->fetchAuthToken($httpHandler, $this->applyTokenEndpointMetrics([], $authRequestType));
     }
     /**
+     * Return the Cache Key for the credentials.
+     * For the cache key format is one of the following:
+     * ClientEmail.Scope[.Sub]
+     * ClientEmail.Audience[.Sub]
+     *
      * @return string
      */
     public function getCacheKey()
     {
-        $key = $this->auth->getIssuer() . ':' . $this->auth->getCacheKey();
+        $scopeOrAudience = $this->auth->getScope();
+        if (!$scopeOrAudience) {
+            $scopeOrAudience = $this->auth->getAudience();
+        }
+        $key = $this->auth->getIssuer() . '.' . $scopeOrAudience;
         if ($sub = $this->auth->getSub()) {
-            $key .= ':' . $sub;
+            $key .= '.' . $sub;
         }
         return $key;
     }
@@ -280,6 +296,10 @@ class ServiceAccountCredentials extends CredentialsLoader implements GetQuotaPro
     public function getUniverseDomain() : string
     {
         return $this->universeDomain;
+    }
+    protected function getCredType() : string
+    {
+        return self::CRED_TYPE;
     }
     /**
      * @return bool

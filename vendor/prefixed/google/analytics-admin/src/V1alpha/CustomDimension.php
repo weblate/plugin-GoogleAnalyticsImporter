@@ -26,6 +26,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      * If this is a user-scoped dimension, then this is the user property name.
      * If this is an event-scoped dimension, then this is the event parameter
      * name.
+     * If this is an item-scoped dimension, then this is the parameter
+     * name found in the eCommerce items array.
      * May only contain alphanumeric and underscore characters, starting with a
      * letter. Max length of 24 characters for user-scoped dimensions, 40
      * characters for event-scoped dimensions.
@@ -78,6 +80,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      *           If this is a user-scoped dimension, then this is the user property name.
      *           If this is an event-scoped dimension, then this is the event parameter
      *           name.
+     *           If this is an item-scoped dimension, then this is the parameter
+     *           name found in the eCommerce items array.
      *           May only contain alphanumeric and underscore characters, starting with a
      *           letter. Max length of 24 characters for user-scoped dimensions, 40
      *           characters for event-scoped dimensions.
@@ -133,6 +137,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      * If this is a user-scoped dimension, then this is the user property name.
      * If this is an event-scoped dimension, then this is the event parameter
      * name.
+     * If this is an item-scoped dimension, then this is the parameter
+     * name found in the eCommerce items array.
      * May only contain alphanumeric and underscore characters, starting with a
      * letter. Max length of 24 characters for user-scoped dimensions, 40
      * characters for event-scoped dimensions.
@@ -149,6 +155,8 @@ class CustomDimension extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      * If this is a user-scoped dimension, then this is the user property name.
      * If this is an event-scoped dimension, then this is the event parameter
      * name.
+     * If this is an item-scoped dimension, then this is the parameter
+     * name found in the eCommerce items array.
      * May only contain alphanumeric and underscore characters, starting with a
      * letter. Max length of 24 characters for user-scoped dimensions, 40
      * characters for event-scoped dimensions.

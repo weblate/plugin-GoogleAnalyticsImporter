@@ -15,9 +15,13 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * The Data Access Report is requested for this property.
-     * For example if "123" is your GA4 property ID, then entity should be
-     * "properties/123".
+     * The Data Access Report supports requesting at the property level or account
+     * level. If requested at the account level, Data Access Reports include all
+     * access for all properties under that account.
+     * To request at the property level, entity should be for example
+     * 'properties/123' if "123" is your GA4 property ID. To request at the
+     * account level, entity should be for example 'accounts/1234' if "1234" is
+     * your GA4 Account ID.
      *
      * Generated from protobuf field <code>string entity = 1;</code>
      */
@@ -109,11 +113,31 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
     private $order_bys;
     /**
      * Toggles whether to return the current state of this Analytics Property's
-     * quota. Quota is returned in [AccessQuota](#AccessQuota).
+     * quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+     * requests, this field must be false.
      *
      * Generated from protobuf field <code>bool return_entity_quota = 11;</code>
      */
     private $return_entity_quota = \false;
+    /**
+     * Optional. Determines whether to include users who have never made an API
+     * call in the response. If true, all users with access to the specified
+     * property or account are included in the response, regardless of whether
+     * they have made an API call or not. If false, only the users who have made
+     * an API call will be included.
+     *
+     * Generated from protobuf field <code>bool include_all_users = 12 [(.google.api.field_behavior) = OPTIONAL];</code>
+     */
+    private $include_all_users = \false;
+    /**
+     * Optional. Decides whether to return the users within user groups. This
+     * field works only when include_all_users is set to true. If true, it will
+     * return all users with access to the specified property or account.
+     * If false, only the users with direct access will be returned.
+     *
+     * Generated from protobuf field <code>bool expand_groups = 13 [(.google.api.field_behavior) = OPTIONAL];</code>
+     */
+    private $expand_groups = \false;
     /**
      * Constructor.
      *
@@ -121,9 +145,13 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
      *     Optional. Data for populating the Message object.
      *
      *     @type string $entity
-     *           The Data Access Report is requested for this property.
-     *           For example if "123" is your GA4 property ID, then entity should be
-     *           "properties/123".
+     *           The Data Access Report supports requesting at the property level or account
+     *           level. If requested at the account level, Data Access Reports include all
+     *           access for all properties under that account.
+     *           To request at the property level, entity should be for example
+     *           'properties/123' if "123" is your GA4 property ID. To request at the
+     *           account level, entity should be for example 'accounts/1234' if "1234" is
+     *           your GA4 Account ID.
      *     @type array<\Google\Analytics\Admin\V1alpha\AccessDimension>|\Google\Protobuf\Internal\RepeatedField $dimensions
      *           The dimensions requested and displayed in the response. Requests are
      *           allowed up to 9 dimensions.
@@ -175,7 +203,19 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
      *           Specifies how rows are ordered in the response.
      *     @type bool $return_entity_quota
      *           Toggles whether to return the current state of this Analytics Property's
-     *           quota. Quota is returned in [AccessQuota](#AccessQuota).
+     *           quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+     *           requests, this field must be false.
+     *     @type bool $include_all_users
+     *           Optional. Determines whether to include users who have never made an API
+     *           call in the response. If true, all users with access to the specified
+     *           property or account are included in the response, regardless of whether
+     *           they have made an API call or not. If false, only the users who have made
+     *           an API call will be included.
+     *     @type bool $expand_groups
+     *           Optional. Decides whether to return the users within user groups. This
+     *           field works only when include_all_users is set to true. If true, it will
+     *           return all users with access to the specified property or account.
+     *           If false, only the users with direct access will be returned.
      * }
      */
     public function __construct($data = NULL)
@@ -184,9 +224,13 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
         parent::__construct($data);
     }
     /**
-     * The Data Access Report is requested for this property.
-     * For example if "123" is your GA4 property ID, then entity should be
-     * "properties/123".
+     * The Data Access Report supports requesting at the property level or account
+     * level. If requested at the account level, Data Access Reports include all
+     * access for all properties under that account.
+     * To request at the property level, entity should be for example
+     * 'properties/123' if "123" is your GA4 property ID. To request at the
+     * account level, entity should be for example 'accounts/1234' if "1234" is
+     * your GA4 Account ID.
      *
      * Generated from protobuf field <code>string entity = 1;</code>
      * @return string
@@ -196,9 +240,13 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
         return $this->entity;
     }
     /**
-     * The Data Access Report is requested for this property.
-     * For example if "123" is your GA4 property ID, then entity should be
-     * "properties/123".
+     * The Data Access Report supports requesting at the property level or account
+     * level. If requested at the account level, Data Access Reports include all
+     * access for all properties under that account.
+     * To request at the property level, entity should be for example
+     * 'properties/123' if "123" is your GA4 property ID. To request at the
+     * account level, entity should be for example 'accounts/1234' if "1234" is
+     * your GA4 Account ID.
      *
      * Generated from protobuf field <code>string entity = 1;</code>
      * @param string $var
@@ -497,7 +545,8 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
     }
     /**
      * Toggles whether to return the current state of this Analytics Property's
-     * quota. Quota is returned in [AccessQuota](#AccessQuota).
+     * quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+     * requests, this field must be false.
      *
      * Generated from protobuf field <code>bool return_entity_quota = 11;</code>
      * @return bool
@@ -508,7 +557,8 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
     }
     /**
      * Toggles whether to return the current state of this Analytics Property's
-     * quota. Quota is returned in [AccessQuota](#AccessQuota).
+     * quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+     * requests, this field must be false.
      *
      * Generated from protobuf field <code>bool return_entity_quota = 11;</code>
      * @param bool $var
@@ -518,6 +568,66 @@ class RunAccessReportRequest extends \Matomo\Dependencies\GoogleAnalyticsImporte
     {
         GPBUtil::checkBool($var);
         $this->return_entity_quota = $var;
+        return $this;
+    }
+    /**
+     * Optional. Determines whether to include users who have never made an API
+     * call in the response. If true, all users with access to the specified
+     * property or account are included in the response, regardless of whether
+     * they have made an API call or not. If false, only the users who have made
+     * an API call will be included.
+     *
+     * Generated from protobuf field <code>bool include_all_users = 12 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @return bool
+     */
+    public function getIncludeAllUsers()
+    {
+        return $this->include_all_users;
+    }
+    /**
+     * Optional. Determines whether to include users who have never made an API
+     * call in the response. If true, all users with access to the specified
+     * property or account are included in the response, regardless of whether
+     * they have made an API call or not. If false, only the users who have made
+     * an API call will be included.
+     *
+     * Generated from protobuf field <code>bool include_all_users = 12 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIncludeAllUsers($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->include_all_users = $var;
+        return $this;
+    }
+    /**
+     * Optional. Decides whether to return the users within user groups. This
+     * field works only when include_all_users is set to true. If true, it will
+     * return all users with access to the specified property or account.
+     * If false, only the users with direct access will be returned.
+     *
+     * Generated from protobuf field <code>bool expand_groups = 13 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @return bool
+     */
+    public function getExpandGroups()
+    {
+        return $this->expand_groups;
+    }
+    /**
+     * Optional. Decides whether to return the users within user groups. This
+     * field works only when include_all_users is set to true. If true, it will
+     * return all users with access to the specified property or account.
+     * If false, only the users with direct access will be returned.
+     *
+     * Generated from protobuf field <code>bool expand_groups = 13 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setExpandGroups($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->expand_groups = $var;
         return $this;
     }
 }

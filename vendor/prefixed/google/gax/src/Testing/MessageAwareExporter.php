@@ -19,6 +19,9 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Testing;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message;
 use SebastianBergmann\Exporter\Exporter;
+/**
+ * @internal
+ */
 class MessageAwareExporter extends Exporter
 {
     /**

@@ -32,39 +32,39 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *
      * Generated from protobuf field <code>int64 count = 1;</code>
      */
-    private $count = 0;
+    protected $count = 0;
     /**
      * The arithmetic mean of the values in the population. If `count` is zero
      * then this field must be zero.
      *
      * Generated from protobuf field <code>double mean = 2;</code>
      */
-    private $mean = 0.0;
+    protected $mean = 0.0;
     /**
      * The sum of squared deviations from the mean of the values in the
      * population. For values x_i this is:
      *     Sum[i=1..n]((x_i - mean)^2)
-     * Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition
+     * Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition
      * describes Welford's method for accumulating this sum in one pass.
      * If `count` is zero then this field must be zero.
      *
      * Generated from protobuf field <code>double sum_of_squared_deviation = 3;</code>
      */
-    private $sum_of_squared_deviation = 0.0;
+    protected $sum_of_squared_deviation = 0.0;
     /**
      * If specified, contains the range of the population values. The field
      * must not be present if the `count` is zero.
      *
      * Generated from protobuf field <code>.google.api.Distribution.Range range = 4;</code>
      */
-    private $range = null;
+    protected $range = null;
     /**
      * Defines the histogram bucket boundaries. If the distribution does not
      * contain a histogram, then omit this field.
      *
      * Generated from protobuf field <code>.google.api.Distribution.BucketOptions bucket_options = 6;</code>
      */
-    private $bucket_options = null;
+    protected $bucket_options = null;
     /**
      * The number of values in each bucket of the histogram, as described in
      * `bucket_options`. If the distribution does not have a histogram, then omit
@@ -106,7 +106,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *           The sum of squared deviations from the mean of the values in the
      *           population. For values x_i this is:
      *               Sum[i=1..n]((x_i - mean)^2)
-     *           Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition
+     *           Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition
      *           describes Welford's method for accumulating this sum in one pass.
      *           If `count` is zero then this field must be zero.
      *     @type \Google\Api\Distribution\Range $range
@@ -115,7 +115,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *     @type \Google\Api\Distribution\BucketOptions $bucket_options
      *           Defines the histogram bucket boundaries. If the distribution does not
      *           contain a histogram, then omit this field.
-     *     @type int[]|string[]|\Google\Protobuf\Internal\RepeatedField $bucket_counts
+     *     @type array<int>|array<string>|\Google\Protobuf\Internal\RepeatedField $bucket_counts
      *           The number of values in each bucket of the histogram, as described in
      *           `bucket_options`. If the distribution does not have a histogram, then omit
      *           this field. If there is a histogram, then the sum of the values in
@@ -129,7 +129,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *           count for the underflow bucket (number 0). The next N-2 values are the
      *           counts for the finite buckets (number 1 through N-2). The N'th value in
      *           `bucket_counts` is the count for the overflow bucket (number N-1).
-     *     @type \Google\Api\Distribution\Exemplar[]|\Google\Protobuf\Internal\RepeatedField $exemplars
+     *     @type array<\Google\Api\Distribution\Exemplar>|\Google\Protobuf\Internal\RepeatedField $exemplars
      *           Must be in increasing order of `value` field.
      * }
      */
@@ -194,7 +194,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * The sum of squared deviations from the mean of the values in the
      * population. For values x_i this is:
      *     Sum[i=1..n]((x_i - mean)^2)
-     * Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition
+     * Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition
      * describes Welford's method for accumulating this sum in one pass.
      * If `count` is zero then this field must be zero.
      *
@@ -209,7 +209,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * The sum of squared deviations from the mean of the values in the
      * population. For values x_i this is:
      *     Sum[i=1..n]((x_i - mean)^2)
-     * Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition
+     * Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition
      * describes Welford's method for accumulating this sum in one pass.
      * If `count` is zero then this field must be zero.
      *
@@ -228,11 +228,19 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * must not be present if the `count` is zero.
      *
      * Generated from protobuf field <code>.google.api.Distribution.Range range = 4;</code>
-     * @return \Google\Api\Distribution\Range
+     * @return \Google\Api\Distribution\Range|null
      */
     public function getRange()
     {
         return $this->range;
+    }
+    public function hasRange()
+    {
+        return isset($this->range);
+    }
+    public function clearRange()
+    {
+        unset($this->range);
     }
     /**
      * If specified, contains the range of the population values. The field
@@ -244,7 +252,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      */
     public function setRange($var)
     {
-        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Distribution_Range::class);
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Distribution\Range::class);
         $this->range = $var;
         return $this;
     }
@@ -253,11 +261,19 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * contain a histogram, then omit this field.
      *
      * Generated from protobuf field <code>.google.api.Distribution.BucketOptions bucket_options = 6;</code>
-     * @return \Google\Api\Distribution\BucketOptions
+     * @return \Google\Api\Distribution\BucketOptions|null
      */
     public function getBucketOptions()
     {
         return $this->bucket_options;
+    }
+    public function hasBucketOptions()
+    {
+        return isset($this->bucket_options);
+    }
+    public function clearBucketOptions()
+    {
+        unset($this->bucket_options);
     }
     /**
      * Defines the histogram bucket boundaries. If the distribution does not
@@ -269,7 +285,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      */
     public function setBucketOptions($var)
     {
-        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Distribution_BucketOptions::class);
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Distribution\BucketOptions::class);
         $this->bucket_options = $var;
         return $this;
     }
@@ -311,7 +327,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * `bucket_counts` is the count for the overflow bucket (number N-1).
      *
      * Generated from protobuf field <code>repeated int64 bucket_counts = 7;</code>
-     * @param int[]|string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<int>|array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setBucketCounts($var)
@@ -334,7 +350,7 @@ class Distribution extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      * Must be in increasing order of `value` field.
      *
      * Generated from protobuf field <code>repeated .google.api.Distribution.Exemplar exemplars = 10;</code>
-     * @param \Google\Api\Distribution\Exemplar[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\Distribution\Exemplar>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setExemplars($var)

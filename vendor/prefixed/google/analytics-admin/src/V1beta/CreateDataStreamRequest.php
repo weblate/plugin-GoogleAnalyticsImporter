@@ -27,6 +27,19 @@ class CreateDataStreamRequest extends \Matomo\Dependencies\GoogleAnalyticsImport
      */
     private $data_stream = null;
     /**
+     * @param string                                    $parent     Required. Example format: properties/1234
+     *                                                              Please see {@see AnalyticsAdminServiceClient::propertyName()} for help formatting this field.
+     * @param \Google\Analytics\Admin\V1beta\DataStream $dataStream Required. The DataStream to create.
+     *
+     * @return \Google\Analytics\Admin\V1beta\CreateDataStreamRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1beta\DataStream $dataStream) : self
+    {
+        return (new self())->setParent($parent)->setDataStream($dataStream);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

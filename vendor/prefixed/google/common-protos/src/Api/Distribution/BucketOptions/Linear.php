@@ -25,19 +25,19 @@ class Linear extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
      *
      * Generated from protobuf field <code>int32 num_finite_buckets = 1;</code>
      */
-    private $num_finite_buckets = 0;
+    protected $num_finite_buckets = 0;
     /**
      * Must be greater than 0.
      *
      * Generated from protobuf field <code>double width = 2;</code>
      */
-    private $width = 0.0;
+    protected $width = 0.0;
     /**
      * Lower bound of the first bucket.
      *
      * Generated from protobuf field <code>double offset = 3;</code>
      */
-    private $offset = 0.0;
+    protected $offset = 0.0;
     /**
      * Constructor.
      *
@@ -127,5 +127,3 @@ class Linear extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
         return $this;
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(Linear::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Distribution_BucketOptions_Linear::class);

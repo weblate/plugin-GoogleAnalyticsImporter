@@ -52,6 +52,12 @@ class BigQueryLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      */
     private $streaming_export_enabled = \false;
     /**
+     * If set true, enables fresh daily export to the linked Google Cloud project.
+     *
+     * Generated from protobuf field <code>bool fresh_daily_export_enabled = 9;</code>
+     */
+    private $fresh_daily_export_enabled = \false;
+    /**
      * If set true, exported data will include advertising identifiers for mobile
      * app streams.
      *
@@ -96,6 +102,8 @@ class BigQueryLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
      *           If set true, enables daily data export to the linked Google Cloud project.
      *     @type bool $streaming_export_enabled
      *           If set true, enables streaming export to the linked Google Cloud project.
+     *     @type bool $fresh_daily_export_enabled
+     *           If set true, enables fresh daily export to the linked Google Cloud project.
      *     @type bool $include_advertising_id
      *           If set true, exported data will include advertising identifiers for mobile
      *           app streams.
@@ -248,6 +256,29 @@ class BigQueryLink extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\P
     {
         GPBUtil::checkBool($var);
         $this->streaming_export_enabled = $var;
+        return $this;
+    }
+    /**
+     * If set true, enables fresh daily export to the linked Google Cloud project.
+     *
+     * Generated from protobuf field <code>bool fresh_daily_export_enabled = 9;</code>
+     * @return bool
+     */
+    public function getFreshDailyExportEnabled()
+    {
+        return $this->fresh_daily_export_enabled;
+    }
+    /**
+     * If set true, enables fresh daily export to the linked Google Cloud project.
+     *
+     * Generated from protobuf field <code>bool fresh_daily_export_enabled = 9;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setFreshDailyExportEnabled($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->fresh_daily_export_enabled = $var;
         return $this;
     }
     /**

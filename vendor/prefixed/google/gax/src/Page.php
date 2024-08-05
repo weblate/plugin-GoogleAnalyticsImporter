@@ -98,7 +98,7 @@ class Page implements IteratorAggregate
      * @throws ApiException if the call to fetch the next page fails.
      * @return Page
      */
-    public function getNextPage($pageSize = null)
+    public function getNextPage(int $pageSize = null)
     {
         if (!$this->hasNextPage()) {
             throw new ValidationException('Could not complete getNextPage operation: ' . 'there are no more pages to retrieve.');

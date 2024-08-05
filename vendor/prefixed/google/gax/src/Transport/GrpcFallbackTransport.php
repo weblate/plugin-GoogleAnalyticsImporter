@@ -53,12 +53,15 @@ class GrpcFallbackTransport implements TransportInterface
     use ValidationTrait;
     use ServiceAddressTrait;
     use HttpUnaryTransportTrait;
+    /**
+     * @var string
+     */
     private $baseUri;
     /**
      * @param string $baseUri
      * @param callable $httpHandler A handler used to deliver PSR-7 requests.
      */
-    public function __construct($baseUri, callable $httpHandler)
+    public function __construct(string $baseUri, callable $httpHandler)
     {
         $this->baseUri = $baseUri;
         $this->httpHandler = $httpHandler;
@@ -77,7 +80,7 @@ class GrpcFallbackTransport implements TransportInterface
      * @return GrpcFallbackTransport
      * @throws ValidationException
      */
-    public static function build($apiEndpoint, array $config = [])
+    public static function build(string $apiEndpoint, array $config = [])
     {
         $config += ['httpHandler' => null, 'clientCertSource' => null];
         list($baseUri, $port) = self::normalizeServiceAddress($apiEndpoint);
@@ -142,7 +145,7 @@ class GrpcFallbackTransport implements TransportInterface
      */
     private function getCallOptions(array $options)
     {
-        $callOptions = isset($options['transportOptions']['grpcFallbackOptions']) ? $options['transportOptions']['grpcFallbackOptions'] : [];
+        $callOptions = $options['transportOptions']['grpcFallbackOptions'] ?? [];
         if (isset($options['timeoutMillis'])) {
             $callOptions['timeout'] = $options['timeoutMillis'] / 1000;
         }

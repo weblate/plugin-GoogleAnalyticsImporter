@@ -40,6 +40,20 @@ class ListMeasurementProtocolSecretsRequest extends \Matomo\Dependencies\GoogleA
      */
     private $page_token = '';
     /**
+     * @param string $parent Required. The resource name of the parent stream.
+     *                       Format:
+     *                       properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets
+     *                       Please see {@see AnalyticsAdminServiceClient::dataStreamName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1beta\ListMeasurementProtocolSecretsRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent) : self
+    {
+        return (new self())->setParent($parent);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

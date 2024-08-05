@@ -23,6 +23,20 @@ class GetConversionEventRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
      */
     private $name = '';
     /**
+     * @param string $name Required. The resource name of the conversion event to retrieve.
+     *                     Format: properties/{property}/conversionEvents/{conversion_event}
+     *                     Example: "properties/123/conversionEvents/456"
+     *                     Please see {@see AnalyticsAdminServiceClient::conversionEventName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1beta\GetConversionEventRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

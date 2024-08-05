@@ -22,23 +22,25 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
 {
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      */
-    private $selector = '';
+    protected $selector = '';
     /**
      * The requirements for OAuth credentials.
      *
      * Generated from protobuf field <code>.google.api.OAuthRequirements oauth = 2;</code>
      */
-    private $oauth = null;
+    protected $oauth = null;
     /**
      * If true, the service accepts API keys without any other credential.
+     * This flag only applies to HTTP and gRPC requests.
      *
      * Generated from protobuf field <code>bool allow_without_credential = 5;</code>
      */
-    private $allow_without_credential = \false;
+    protected $allow_without_credential = \false;
     /**
      * Requirements for additional authentication providers.
      *
@@ -53,12 +55,14 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
      *
      *     @type string $selector
      *           Selects the methods to which this rule applies.
-     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     *           details.
      *     @type \Google\Api\OAuthRequirements $oauth
      *           The requirements for OAuth credentials.
      *     @type bool $allow_without_credential
      *           If true, the service accepts API keys without any other credential.
-     *     @type \Google\Api\AuthRequirement[]|\Google\Protobuf\Internal\RepeatedField $requirements
+     *           This flag only applies to HTTP and gRPC requests.
+     *     @type array<\Google\Api\AuthRequirement>|\Google\Protobuf\Internal\RepeatedField $requirements
      *           Requirements for additional authentication providers.
      * }
      */
@@ -69,7 +73,8 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @return string
@@ -80,7 +85,8 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @param string $var
@@ -96,11 +102,19 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
      * The requirements for OAuth credentials.
      *
      * Generated from protobuf field <code>.google.api.OAuthRequirements oauth = 2;</code>
-     * @return \Google\Api\OAuthRequirements
+     * @return \Google\Api\OAuthRequirements|null
      */
     public function getOauth()
     {
         return $this->oauth;
+    }
+    public function hasOauth()
+    {
+        return isset($this->oauth);
+    }
+    public function clearOauth()
+    {
+        unset($this->oauth);
     }
     /**
      * The requirements for OAuth credentials.
@@ -117,6 +131,7 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * If true, the service accepts API keys without any other credential.
+     * This flag only applies to HTTP and gRPC requests.
      *
      * Generated from protobuf field <code>bool allow_without_credential = 5;</code>
      * @return bool
@@ -127,6 +142,7 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * If true, the service accepts API keys without any other credential.
+     * This flag only applies to HTTP and gRPC requests.
      *
      * Generated from protobuf field <code>bool allow_without_credential = 5;</code>
      * @param bool $var
@@ -152,7 +168,7 @@ class AuthenticationRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
      * Requirements for additional authentication providers.
      *
      * Generated from protobuf field <code>repeated .google.api.AuthRequirement requirements = 7;</code>
-     * @param \Google\Api\AuthRequirement[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\AuthRequirement>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRequirements($var)

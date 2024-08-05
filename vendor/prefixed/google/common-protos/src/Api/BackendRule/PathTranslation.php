@@ -78,5 +78,3 @@ class PathTranslation
         return constant($const);
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(PathTranslation::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\BackendRule_PathTranslation::class);

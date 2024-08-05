@@ -33,6 +33,7 @@
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\Code;
+use Matomo\Dependencies\GoogleAnalyticsImporter\Grpc\BidiStreamingCall;
 /**
  * BidiStream is the response object from a gRPC bidirectional streaming API call.
  */
@@ -46,10 +47,10 @@ class BidiStream
     /**
      * BidiStream constructor.
      *
-     * @param \Grpc\BidiStreamingCall $bidiStreamingCall The gRPC bidirectional streaming call object
+     * @param BidiStreamingCall $bidiStreamingCall The gRPC bidirectional streaming call object
      * @param array $streamingDescriptor
      */
-    public function __construct($bidiStreamingCall, array $streamingDescriptor = [])
+    public function __construct(BidiStreamingCall $bidiStreamingCall, array $streamingDescriptor = [])
     {
         $this->call = $bidiStreamingCall;
         if (array_key_exists('resourcesGetMethod', $streamingDescriptor)) {
@@ -75,7 +76,7 @@ class BidiStream
     /**
      * Write all requests in $requests.
      *
-     * @param mixed[] $requests An Iterable of request objects to write to the server
+     * @param iterable $requests An Iterable of request objects to write to the server
      *
      * @throws ValidationException
      */

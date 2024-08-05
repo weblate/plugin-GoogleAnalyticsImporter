@@ -38,7 +38,7 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Promise\PromiseInterf
 /**
  * Middleware which transforms $response into [$response, $metadata]
  */
-class ResponseMetadataMiddleware
+class ResponseMetadataMiddleware implements MiddlewareInterface
 {
     /** @var callable */
     private $nextHandler;

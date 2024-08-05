@@ -36,6 +36,8 @@ use Exception;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\RepeatedField;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\Status;
 use Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Exception\RequestException;
+use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Testing\MockStatus;
+use stdClass;
 /**
  * Represents an exception thrown during an RPC.
  */
@@ -56,7 +58,7 @@ class ApiException extends Exception
      *     @type string|null $basicMessage
      * }
      */
-    public function __construct($message, $code, $status, array $optionalArgs = [])
+    public function __construct(string $message, int $code, string $status = null, array $optionalArgs = [])
     {
         $optionalArgs += ['previous' => null, 'metadata' => null, 'basicMessage' => $message];
         parent::__construct($message, $code, $optionalArgs['previous']);
@@ -122,13 +124,13 @@ class ApiException extends Exception
         return $this->decodedMetadataErrorInfo ? $this->decodedMetadataErrorInfo['errorInfoMetadata'] : null;
     }
     /**
-     * @param \stdClass $status
+     * @param stdClass $status
      * @return ApiException
      */
-    public static function createFromStdClass($status)
+    public static function createFromStdClass(stdClass $status)
     {
         $metadata = property_exists($status, 'metadata') ? $status->metadata : null;
-        return self::create($status->details, $status->code, $metadata, Serializer::decodeMetadata($metadata));
+        return self::create($status->details, $status->code, $metadata, Serializer::decodeMetadata((array) $metadata));
     }
     /**
      * @param string $basicMessage
@@ -139,7 +141,7 @@ class ApiException extends Exception
      */
     public static function createFromApiResponse($basicMessage, $rpcCode, array $metadata = null, Exception $previous = null)
     {
-        return self::create($basicMessage, $rpcCode, $metadata, Serializer::decodeMetadata($metadata), $previous);
+        return self::create($basicMessage, $rpcCode, $metadata, Serializer::decodeMetadata((array) $metadata), $previous);
     }
     /**
      * For REST-based responses, the metadata does not need to be decoded.
@@ -184,12 +186,12 @@ class ApiException extends Exception
      *
      * @param string $basicMessage
      * @param int $rpcCode
-     * @param array<mixed>|RepeatedField $metadata
+     * @param iterable|null $metadata
      * @param array $decodedMetadata
      * @param Exception|null $previous
      * @return ApiException
      */
-    private static function create($basicMessage, $rpcCode, $metadata, array $decodedMetadata, $previous = null)
+    private static function create(string $basicMessage, int $rpcCode, $metadata, array $decodedMetadata, Exception $previous = null)
     {
         $containsErrorInfo = self::containsErrorInfo($decodedMetadata);
         $rpcStatus = ApiStatus::statusFromRpcCode($rpcCode);
@@ -219,7 +221,7 @@ class ApiException extends Exception
      * @return ApiException
      * @throws ValidationException
      */
-    public static function createFromRequestException(RequestException $ex, $isStream = \false)
+    public static function createFromRequestException(RequestException $ex, bool $isStream = \false)
     {
         $res = $ex->getResponse();
         $body = (string) $res->getBody();
@@ -231,9 +233,9 @@ class ApiException extends Exception
         }
         if (isset($decoded['error']) && $decoded['error']) {
             $error = $decoded['error'];
-            $basicMessage = isset($error['message']) ? $error['message'] : null;
+            $basicMessage = $error['message'] ?? '';
             $code = isset($error['status']) ? ApiStatus::rpcCodeFromStatus($error['status']) : $ex->getCode();
-            $metadata = isset($error['details']) ? $error['details'] : null;
+            $metadata = $error['details'] ?? null;
             return static::createFromRestApiResponse($basicMessage, $code, $metadata);
         }
         // Use the RPC code instead of the HTTP Status Code.

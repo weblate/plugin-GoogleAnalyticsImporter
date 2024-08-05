@@ -36,6 +36,7 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\ValidationExcepti
 /**
  * Represents a segment in a resource template. This is used internally by RelativeResourceTemplate,
  * but is not intended for public use and may change without notice.
+ *
  * @internal
  */
 class Segment
@@ -44,17 +45,29 @@ class Segment
     const WILDCARD_SEGMENT = 1;
     const DOUBLE_WILDCARD_SEGMENT = 2;
     const VARIABLE_SEGMENT = 3;
-    /** @var int */
+    /**
+     * @var int
+     */
     private $segmentType;
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     private $value;
-    /** @var string|null */
+    /**
+     * @var string|null
+     */
     private $key;
-    /** @var RelativeResourceTemplate|null */
+    /**
+     * @var \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\ResourceTemplate\RelativeResourceTemplate|null
+     */
     private $template;
-    /** @var string */
+    /**
+     * @var string|null
+     */
     private $stringRepr;
-    /** @var string */
+    /**
+     * @var string|null
+     */
     private $separator;
     /**
      * Segment constructor.
@@ -65,7 +78,7 @@ class Segment
      * @param string $separator The separator that belongs at the end of a segment. Ending segments should use '/'.
      * @throws ValidationException
      */
-    public function __construct($segmentType, $value = null, $key = null, RelativeResourceTemplate $template = null, $separator = '/')
+    public function __construct(int $segmentType, string $value = null, string $key = null, RelativeResourceTemplate $template = null, string $separator = '/')
     {
         $this->segmentType = $segmentType;
         $this->value = $value;
@@ -103,7 +116,7 @@ class Segment
      * @return bool
      * @throws ValidationException
      */
-    public function matches($value)
+    public function matches(string $value)
     {
         switch ($this->segmentType) {
             case Segment::LITERAL_SEGMENT:
@@ -160,7 +173,7 @@ class Segment
      * @param string $binding
      * @return bool
      */
-    private static function isValidBinding($binding)
+    private static function isValidBinding(string $binding)
     {
         return preg_match("-^[^/]+\$-", $binding) === 1;
     }
@@ -171,7 +184,7 @@ class Segment
      * @param string $binding
      * @return bool
      */
-    private static function isValidDoubleWildcardBinding($binding)
+    private static function isValidDoubleWildcardBinding(string $binding)
     {
         return preg_match("-^.+\$-", $binding) === 1;
     }

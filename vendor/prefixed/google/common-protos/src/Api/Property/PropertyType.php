@@ -59,5 +59,3 @@ class PropertyType
         return constant($const);
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(PropertyType::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Property_PropertyType::class);

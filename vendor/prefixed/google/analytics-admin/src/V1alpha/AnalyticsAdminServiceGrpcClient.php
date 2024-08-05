@@ -1200,6 +1200,61 @@ class AnalyticsAdminServiceGrpcClient extends \Matomo\Dependencies\GoogleAnalyti
         return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/DeleteExpandedDataSet', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Protobuf\\GPBEmpty', 'decode'], $metadata, $options);
     }
     /**
+     * Lookup for a single ChannelGroup.
+     * @param \Google\Analytics\Admin\V1alpha\GetChannelGroupRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetChannelGroup(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\GetChannelGroupRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/GetChannelGroup', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ChannelGroup', 'decode'], $metadata, $options);
+    }
+    /**
+     * Lists ChannelGroups on a property.
+     * @param \Google\Analytics\Admin\V1alpha\ListChannelGroupsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ListChannelGroups(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ListChannelGroupsRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/ListChannelGroups', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ListChannelGroupsResponse', 'decode'], $metadata, $options);
+    }
+    /**
+     * Creates a ChannelGroup.
+     * @param \Google\Analytics\Admin\V1alpha\CreateChannelGroupRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateChannelGroup(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\CreateChannelGroupRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/CreateChannelGroup', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ChannelGroup', 'decode'], $metadata, $options);
+    }
+    /**
+     * Updates a ChannelGroup.
+     * @param \Google\Analytics\Admin\V1alpha\UpdateChannelGroupRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function UpdateChannelGroup(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\UpdateChannelGroupRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/UpdateChannelGroup', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ChannelGroup', 'decode'], $metadata, $options);
+    }
+    /**
+     * Deletes a ChannelGroup on a property.
+     * @param \Google\Analytics\Admin\V1alpha\DeleteChannelGroupRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function DeleteChannelGroup(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\DeleteChannelGroupRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/DeleteChannelGroup', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Protobuf\\GPBEmpty', 'decode'], $metadata, $options);
+    }
+    /**
      * Sets the opt out status for the automated GA4 setup process for a UA
      * property.
      * Note: this has no effect on GA4 property.
@@ -1246,5 +1301,180 @@ class AnalyticsAdminServiceGrpcClient extends \Matomo\Dependencies\GoogleAnalyti
     public function ListBigQueryLinks(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ListBigQueryLinksRequest $argument, $metadata = [], $options = [])
     {
         return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/ListBigQueryLinks', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ListBigQueryLinksResponse', 'decode'], $metadata, $options);
+    }
+    /**
+     * Returns the enhanced measurement settings for this data stream.
+     * Note that the stream must enable enhanced measurement for these settings to
+     * take effect.
+     * @param \Google\Analytics\Admin\V1alpha\GetEnhancedMeasurementSettingsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetEnhancedMeasurementSettings(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\GetEnhancedMeasurementSettingsRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/GetEnhancedMeasurementSettings', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\EnhancedMeasurementSettings', 'decode'], $metadata, $options);
+    }
+    /**
+     * Updates the enhanced measurement settings for this data stream.
+     * Note that the stream must enable enhanced measurement for these settings to
+     * take effect.
+     * @param \Google\Analytics\Admin\V1alpha\UpdateEnhancedMeasurementSettingsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function UpdateEnhancedMeasurementSettings(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\UpdateEnhancedMeasurementSettingsRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/UpdateEnhancedMeasurementSettings', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\EnhancedMeasurementSettings', 'decode'], $metadata, $options);
+    }
+    /**
+     * Creates a connected site tag for a Universal Analytics property. You can
+     * create a maximum of 20 connected site tags per property.
+     * Note: This API cannot be used on GA4 properties.
+     * @param \Google\Analytics\Admin\V1alpha\CreateConnectedSiteTagRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateConnectedSiteTag(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\CreateConnectedSiteTagRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/CreateConnectedSiteTag', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\CreateConnectedSiteTagResponse', 'decode'], $metadata, $options);
+    }
+    /**
+     * Deletes a connected site tag for a Universal Analytics property.
+     * Note: this has no effect on GA4 properties.
+     * @param \Google\Analytics\Admin\V1alpha\DeleteConnectedSiteTagRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function DeleteConnectedSiteTag(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\DeleteConnectedSiteTagRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/DeleteConnectedSiteTag', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Protobuf\\GPBEmpty', 'decode'], $metadata, $options);
+    }
+    /**
+     * Lists the connected site tags for a Universal Analytics property. A maximum
+     * of 20 connected site tags will be returned. Note: this has no effect on GA4
+     * property.
+     * @param \Google\Analytics\Admin\V1alpha\ListConnectedSiteTagsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ListConnectedSiteTags(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ListConnectedSiteTagsRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/ListConnectedSiteTags', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ListConnectedSiteTagsResponse', 'decode'], $metadata, $options);
+    }
+    /**
+     * Given a specified UA property, looks up the GA4 property connected to it.
+     * Note: this cannot be used with GA4 properties.
+     * @param \Google\Analytics\Admin\V1alpha\FetchConnectedGa4PropertyRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function FetchConnectedGa4Property(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\FetchConnectedGa4PropertyRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/FetchConnectedGa4Property', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\FetchConnectedGa4PropertyResponse', 'decode'], $metadata, $options);
+    }
+    /**
+     * Looks up a single AdSenseLink.
+     * @param \Google\Analytics\Admin\V1alpha\GetAdSenseLinkRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetAdSenseLink(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\GetAdSenseLinkRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/GetAdSenseLink', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\AdSenseLink', 'decode'], $metadata, $options);
+    }
+    /**
+     * Creates an AdSenseLink.
+     * @param \Google\Analytics\Admin\V1alpha\CreateAdSenseLinkRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateAdSenseLink(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\CreateAdSenseLinkRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/CreateAdSenseLink', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\AdSenseLink', 'decode'], $metadata, $options);
+    }
+    /**
+     * Deletes an AdSenseLink.
+     * @param \Google\Analytics\Admin\V1alpha\DeleteAdSenseLinkRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function DeleteAdSenseLink(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\DeleteAdSenseLinkRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/DeleteAdSenseLink', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Protobuf\\GPBEmpty', 'decode'], $metadata, $options);
+    }
+    /**
+     * Lists AdSenseLinks on a property.
+     * @param \Google\Analytics\Admin\V1alpha\ListAdSenseLinksRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ListAdSenseLinks(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ListAdSenseLinksRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/ListAdSenseLinks', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ListAdSenseLinksResponse', 'decode'], $metadata, $options);
+    }
+    /**
+     * Lookup for a single EventCreateRule.
+     * @param \Google\Analytics\Admin\V1alpha\GetEventCreateRuleRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function GetEventCreateRule(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\GetEventCreateRuleRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/GetEventCreateRule', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\EventCreateRule', 'decode'], $metadata, $options);
+    }
+    /**
+     * Lists EventCreateRules on a web data stream.
+     * @param \Google\Analytics\Admin\V1alpha\ListEventCreateRulesRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function ListEventCreateRules(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ListEventCreateRulesRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/ListEventCreateRules', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\ListEventCreateRulesResponse', 'decode'], $metadata, $options);
+    }
+    /**
+     * Creates an EventCreateRule.
+     * @param \Google\Analytics\Admin\V1alpha\CreateEventCreateRuleRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function CreateEventCreateRule(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\CreateEventCreateRuleRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/CreateEventCreateRule', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\EventCreateRule', 'decode'], $metadata, $options);
+    }
+    /**
+     * Updates an EventCreateRule.
+     * @param \Google\Analytics\Admin\V1alpha\UpdateEventCreateRuleRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function UpdateEventCreateRule(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\UpdateEventCreateRuleRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/UpdateEventCreateRule', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Analytics\\Admin\\V1alpha\\EventCreateRule', 'decode'], $metadata, $options);
+    }
+    /**
+     * Deletes an EventCreateRule.
+     * @param \Google\Analytics\Admin\V1alpha\DeleteEventCreateRuleRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     * @return \Grpc\UnaryCall
+     */
+    public function DeleteEventCreateRule(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\DeleteEventCreateRuleRequest $argument, $metadata = [], $options = [])
+    {
+        return $this->_simpleRequest('/google.analytics.admin.v1alpha.AnalyticsAdminService/DeleteEventCreateRule', $argument, ['Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Protobuf\\GPBEmpty', 'decode'], $metadata, $options);
     }
 }
