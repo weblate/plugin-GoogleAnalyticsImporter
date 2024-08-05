@@ -50,6 +50,7 @@
         "GAImportNoDataScreenStep04": "Navigera till %1$sGoogle Analytics importadministrationssida%2$s. %3$sLäs mer%4$s.",
         "GAImportNoDataScreenStep05": "Välj typ av import.",
         "GAImportNoDataScreenStep06": "Fyll i schema- och importformulär.",
+        "GAImportNoDataScreenStep06GA4": "Fyll i formuläret för att schemalägga en import för Google Analytics 4 (GA4).",
         "GAImportNoDataScreenStep07": "Klicka \"%1$s\".",
         "GAImportNoDataScreenStep07Note": "%1$sNotera:%2$s När du klickat \"%3$s\" kommer Matomo automatiskt att skapa nya Matomo-webbplatser för varje vald egendom.",
         "GAImportNoDataScreenStep08": "Att importera data tar tid. %1$sKlicka här för att följa statusen för din dataimport%2$s.",
