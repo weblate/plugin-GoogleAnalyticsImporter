@@ -12,6 +12,7 @@ use Piwik\Config;
 use Piwik\Container\StaticContainer;
 use Piwik\Date;
 use Piwik\Option;
+use Piwik\Piwik;
 use Piwik\Plugin\ConsoleCommand;
 use Piwik\Plugin\Manager;
 use Piwik\Plugins\GoogleAnalyticsImporter\CannotProcessImportException;
@@ -172,6 +173,15 @@ class ImportGA4Reports extends ConsoleCommand
                 $output->writeln(LogToSingleFileProcessor::$cliOutputPrefix . "Failed to import property entities, aborting.");
                 return self::FAILURE;
             }
+
+            // Record the correct activity for the command. It's either a new import or a resumed import
+            $status = $importStatus->getImportStatus($idSite);
+            if ($createdSiteInCommand) {
+                Piwik::postEvent('GoogleAnalyticsImporter.startImportGA4.end', [$status]);
+            } else {
+                Piwik::postEvent('GoogleAnalyticsImporter.resumeImport.end', [$status]);
+            }
+
             $dateRangesToReImport = empty($status['reimport_ranges']) ? [] : $status['reimport_ranges'];
             $dateRangesToReImport = array_map(function ($d) {
                 return [Date::factory($d[0]), Date::factory($d[1])];

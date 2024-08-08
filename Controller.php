@@ -126,7 +126,9 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         Nonce::checkNonce('GoogleAnalyticsImporter.deleteGoogleClientConfig', Common::getRequestVar('config_nonce'));
         /** @var Authorization $authorization */
         $authorization = StaticContainer::get(Authorization::class);
+        $config = $authorization->getClientConfiguration();
         $authorization->deleteClientConfiguration();
+        Piwik::postEvent('GoogleAnalyticsImporter.removeClientConfiguration.end', [$config]);
         // Redirect to index so that will be the URL and not the delete URL
         Url::redirectToUrl(Url::getCurrentUrlWithoutQueryString() . Url::getCurrentQueryStringWithParametersModified(['action' => 'index', 'code' => null, 'scope' => null, 'state' => null]));
     }
@@ -155,6 +157,8 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $authorization = StaticContainer::get(Authorization::class);
             $client = $authorization->getConfiguredClient();
             $authorization->saveAccessToken($oauthCode, $client);
+            $config = $authorization->getClientConfiguration();
+            Piwik::postEvent('GoogleAnalyticsImporter.authorizedClientConfiguration.end', [$config]);
         } catch (\Exception $e) {
             return $this->index($this->getNotificationExceptionText($e));
         }
@@ -188,6 +192,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             }
             $authorization->validateConfig($config);
             $authorization->saveConfig($config);
+            Piwik::postEvent('GoogleAnalyticsImporter.addClientConfiguration.end', [$config]);
         } catch (\Exception $ex) {
             $errorMessage = $this->getNotificationExceptionText($ex);
             $errorMessage = substr($errorMessage, 0, 1024);
@@ -211,8 +216,10 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $idSite = Common::getRequestVar('idSite', null, 'int');
             /** @var ImportStatus $importStatus */
             $importStatus = StaticContainer::get(\Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus::class);
+            $status = $importStatus->getImportStatus($idSite);
             $importStatus->deleteStatus($idSite);
             echo json_encode(['result' => 'ok']);
+            Piwik::postEvent('GoogleAnalyticsImporter.deleteImportStatus.end', [$status]);
         } catch (\Exception $ex) {
             $this->logException($ex, __FUNCTION__);
             $notification = new Notification($this->getNotificationExceptionText($ex));
@@ -295,7 +302,9 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                     $importStatus->setIsVerboseLoggingEnabled($idSite, $isVerboseLoggingEnabled);
                 }
                 // start import now since the scheduled task may not run until tomorrow
-                \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImportGA4($importStatus->getImportStatus($idSite));
+                $status = $importStatus->getImportStatus($idSite);
+                \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImportGA4($status);
+                Piwik::postEvent('GoogleAnalyticsImporter.startImportGA4.end', [$status]);
             } catch (\Exception $ex) {
                 $importStatus->erroredImport($idSite, $ex->getMessage());
                 throw $ex;
@@ -334,6 +343,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                 \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImportGA4($status);
             }
             echo json_encode(['result' => 'ok']);
+            Piwik::postEvent('GoogleAnalyticsImporter.resumeImport.end', [$status]);
         } catch (\Exception $ex) {
             $this->logException($ex, __FUNCTION__);
             $notification = new Notification($this->getNotificationExceptionText($ex));
@@ -376,6 +386,8 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                 \Piwik\Plugins\GoogleAnalyticsImporter\Tasks::startImportGA4($importStatus->getImportStatus($idSite));
             }
             echo json_encode(['result' => 'ok']);
+            $status = $importStatus->getImportStatus($idSite);
+            Piwik::postEvent('GoogleAnalyticsImporter.scheduleReImport.end', [$status]);
         } catch (\Exception $ex) {
             $this->logException($ex, __FUNCTION__);
             $notification = new Notification($this->getNotificationExceptionText($ex));
