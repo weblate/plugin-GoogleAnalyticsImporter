@@ -51,7 +51,7 @@ class ImportReports extends ConsoleCommand
     /**
      * @return int
      */
-    protected function doExecute() : int
+    protected function doExecute(): int
     {
         $this->getOutput()->writeln("GA3 Import disabled");
         return self::FAILURE;
@@ -65,7 +65,7 @@ class ImportReports extends ConsoleCommand
             return self::FAILURE;
         }
     }
-    protected function executeImpl() : int
+    protected function executeImpl(): int
     {
         $isAccountDeduced = \false;
         $input = $this->getInput();

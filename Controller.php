@@ -13,16 +13,11 @@ use Piwik\Common;
 use Piwik\Container\StaticContainer;
 use Piwik\DataTable\Renderer\Json;
 use Piwik\Date;
-use Piwik\Http;
 use Piwik\Nonce;
 use Piwik\Notification;
 use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\ConnectAccounts\ConnectAccounts;
-use Piwik\Plugins\ConnectAccounts\helpers\ConnectHelper;
 use Piwik\Plugins\ConnectAccounts\Strategy\Google\GoogleConnect;
 use Piwik\Plugins\GoogleAnalyticsImporter\Commands\ImportGA4Reports;
-use Piwik\Plugins\GoogleAnalyticsImporter\Commands\ImportReports;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\Authorization;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\AuthorizationGA4;
 use Piwik\Plugins\GoogleAnalyticsImporter\Input\EndDate;
@@ -457,10 +452,11 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
      * @return array Map of component extensions. Like [ [ 'plugin' => 'PluginName', 'component' => 'ComponentName' ] ]
      * See {@link https://developer.matomo.org/guides/in-depth-vue#allowing-plugins-to-add-content-to-your-vue-components the developer documentation} for more information.
      */
-    public static function getComponentExtensions($isNoDataPage = \false) : array
+    public static function getComponentExtensions($isNoDataPage = \false): array
     {
         $componentExtensions = [];
         Piwik::postEvent('GoogleAnalyticsImporter.getGoogleConfigComponentExtensions', [&$componentExtensions, $isNoDataPage]);
+
         return $componentExtensions;
     }
     private function getStreamIdsFromRequest()

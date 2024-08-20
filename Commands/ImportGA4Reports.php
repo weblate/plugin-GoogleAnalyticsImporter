@@ -48,7 +48,7 @@ class ImportGA4Reports extends ConsoleCommand
     /**
      * @return int
      */
-    protected function doExecute() : int
+    protected function doExecute(): int
     {
         try {
             return $this->executeImpl();
@@ -60,7 +60,7 @@ class ImportGA4Reports extends ConsoleCommand
             return self::FAILURE;
         }
     }
-    protected function executeImpl() : int
+    protected function executeImpl(): int
     {
         $input = $this->getInput();
         $output = $this->getOutput();

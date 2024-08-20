@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitefbbfbccb77cf1d72296999539684a3b
+class ComposerStaticInitc95590851081563f7669f40e0329eaac
 {
     public static $files = array (
         '3b866681a14a27c0c8adec54ba7f6a5c' => __DIR__ . '/../..' . '/google/apiclient/src/aliases.php',
@@ -93,7 +93,7 @@ class ComposerStaticInitefbbfbccb77cf1d72296999539684a3b
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Iam\\V1\\Policy' => __DIR__ . '/../..' . '/google/common-protos/metadata/Iam/V1/Policy.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Logging\\Type\\HttpRequest' => __DIR__ . '/../..' . '/google/common-protos/metadata/Logging/Type/HttpRequest.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Logging\\Type\\LogSeverity' => __DIR__ . '/../..' . '/google/common-protos/metadata/Logging/Type/LogSeverity.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Longrunning\\Operations' => __DIR__ . '/../..' . '/google/longrunning/metadata/Longrunning/Operations.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Longrunning\\Operations' => __DIR__ . '/../..' . '/google/common-protos/metadata/Longrunning/Operations.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Protobuf\\Any' => __DIR__ . '/../..' . '/google/protobuf/src/GPBMetadata/Google/Protobuf/Any.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Protobuf\\Api' => __DIR__ . '/../..' . '/google/protobuf/src/GPBMetadata/Google/Protobuf/Api.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\GPBMetadata\\Google\\Protobuf\\Duration' => __DIR__ . '/../..' . '/google/protobuf/src/GPBMetadata/Google/Protobuf/Duration.php',
@@ -969,13 +969,13 @@ class ComposerStaticInitefbbfbccb77cf1d72296999539684a3b
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Http\\MediaFileUpload' => __DIR__ . '/../..' . '/google/apiclient/src/Http/MediaFileUpload.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Http\\REST' => __DIR__ . '/../..' . '/google/apiclient/src/Http/REST.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Iam\\V1\\Logging\\AuditData' => __DIR__ . '/../..' . '/google/common-protos/src/Iam/V1/Logging/AuditData.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\CancelOperationRequest' => __DIR__ . '/../..' . '/google/longrunning/src/LongRunning/CancelOperationRequest.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\DeleteOperationRequest' => __DIR__ . '/../..' . '/google/longrunning/src/LongRunning/DeleteOperationRequest.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\GetOperationRequest' => __DIR__ . '/../..' . '/google/longrunning/src/LongRunning/GetOperationRequest.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\ListOperationsRequest' => __DIR__ . '/../..' . '/google/longrunning/src/LongRunning/ListOperationsRequest.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\ListOperationsResponse' => __DIR__ . '/../..' . '/google/longrunning/src/LongRunning/ListOperationsResponse.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\Operation' => __DIR__ . '/../..' . '/google/longrunning/src/LongRunning/Operation.php',
-        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\OperationInfo' => __DIR__ . '/../..' . '/google/longrunning/src/LongRunning/OperationInfo.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\CancelOperationRequest' => __DIR__ . '/../..' . '/google/common-protos/src/LongRunning/CancelOperationRequest.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\DeleteOperationRequest' => __DIR__ . '/../..' . '/google/common-protos/src/LongRunning/DeleteOperationRequest.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\GetOperationRequest' => __DIR__ . '/../..' . '/google/common-protos/src/LongRunning/GetOperationRequest.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\ListOperationsRequest' => __DIR__ . '/../..' . '/google/common-protos/src/LongRunning/ListOperationsRequest.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\ListOperationsResponse' => __DIR__ . '/../..' . '/google/common-protos/src/LongRunning/ListOperationsResponse.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\Operation' => __DIR__ . '/../..' . '/google/common-protos/src/LongRunning/Operation.php',
+        'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\LongRunning\\OperationInfo' => __DIR__ . '/../..' . '/google/common-protos/src/LongRunning/OperationInfo.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Model' => __DIR__ . '/../..' . '/google/apiclient/src/Model.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Protobuf\\Any' => __DIR__ . '/../..' . '/google/protobuf/src/Google/Protobuf/Any.php',
         'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Protobuf\\Api' => __DIR__ . '/../..' . '/google/protobuf/src/Google/Protobuf/Api.php',
@@ -1840,7 +1840,7 @@ class ComposerStaticInitefbbfbccb77cf1d72296999539684a3b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitefbbfbccb77cf1d72296999539684a3b::$classMap;
+            $loader->classMap = ComposerStaticInitc95590851081563f7669f40e0329eaac::$classMap;
 
         }, null, ClassLoader::class);
     }
