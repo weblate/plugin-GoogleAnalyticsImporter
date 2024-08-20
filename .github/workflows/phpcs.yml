@@ -19,15 +19,20 @@ jobs:
     name: PHPCS
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: false
           persist-credentials: false
-          php-version: '7.2'
+      - name: Install dependencies
+        run: composer install --dev --prefer-dist --no-progress --no-suggest
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
           tools: cs2pr
       - name: Check PHP code styles
         id: phpcs
-        run: ls -l;./vendor/bin/phpcs --report-full --standard=plugins/GoogleAnalyticsImporter/phpcs.xml --report-checkstyle=./phpcs-report.xml plugins/GoogleAnalyticsImporter
+        run: ./vendor/bin/phpcs --report-full -standard=phpcs.xml --report-checkstyle=./phpcs-report.xml
       - name: Show PHPCS results in PR
         if: ${{ always() && steps.phpcs.outcome == 'failure' }}
         run: cs2pr ./phpcs-report.xml --prepend-filename
