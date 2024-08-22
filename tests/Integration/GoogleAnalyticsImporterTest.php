@@ -24,7 +24,7 @@ use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
  */
 class GoogleAnalyticsImporterTest extends IntegrationTestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         Fixture::createWebsite('2015-01-02');

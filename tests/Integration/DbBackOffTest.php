@@ -8,11 +8,9 @@
  */
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration;
 
-use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\BetaAnalyticsDataClient;
 use Piwik\Container\StaticContainer;
 use Piwik\Date;
 use Piwik\Option;
-use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsGA4QueryService;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsQueryService;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleQueryObjectFactory;
 use Piwik\Plugins\SitesManager\API;
@@ -25,12 +23,12 @@ use Piwik\Log\LoggerInterface;
  */
 class DbBackOffTest extends IntegrationTestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         // set up your test here if needed
     }
-    public function tearDown() : void
+    public function tearDown(): void
     {
         // clean up your test here if needed
         parent::tearDown();

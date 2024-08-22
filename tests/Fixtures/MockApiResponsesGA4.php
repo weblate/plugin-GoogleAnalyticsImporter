@@ -20,7 +20,7 @@ class MockApiResponsesGA4 extends Fixture
     {
         $this->createSite = $createSite;
     }
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         if ($this->createSite) {

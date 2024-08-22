@@ -30,7 +30,7 @@ class RecordImporterTest extends BaseRecordImporterTest
     {
         return 'CustomDimensions';
     }
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $idMapper = StaticContainer::get(IdMapper::class);

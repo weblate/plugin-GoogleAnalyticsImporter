@@ -80,7 +80,7 @@ class EndDateTest extends TestCase
     private function getMockConfig(array $gaConfig)
     {
         $mock = $this->getMockBuilder(\Piwik\Config::class)->disableOriginalConstructor()->onlyMethods(['__get'])->getMock();
-        $mock->method('__get')->willReturnCallback(function ($section) use($gaConfig) {
+        $mock->method('__get')->willReturnCallback(function ($section) use ($gaConfig) {
             if ($section != 'GoogleAnalyticsImporter') {
                 return [];
             }

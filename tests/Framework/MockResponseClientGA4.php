@@ -12,9 +12,11 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\GapicClientTrait;
 require_once PIWIK_INCLUDE_PATH . '/plugins/GoogleAnalyticsImporter/vendor/autoload.php';
 class MockResponseClientGA4 extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\BetaAnalyticsDataClient
 {
+    use GapicClientTrait;
+
     public static $isForSystemTest = \false;
     private $mockResponses = [];
-    use GapicClientTrait;
+
     public function __construct(array $options = [])
     {
         $defaultOptions = $this->getDefaultOptions();

@@ -12,6 +12,7 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\GapicClientTrait;
 class CapturingGoogleAdminServiceClientGA4 extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\AnalyticsAdminServiceClient
 {
     use GapicClientTrait;
+
     public function __construct(array $options = [])
     {
         $defaultOptions = $this->getDefaultOptions();

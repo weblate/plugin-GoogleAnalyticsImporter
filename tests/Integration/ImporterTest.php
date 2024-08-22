@@ -26,7 +26,7 @@ class ImporterTest extends IntegrationTestCase
      * @var Importer
      */
     private $importer;
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->mockData = [];

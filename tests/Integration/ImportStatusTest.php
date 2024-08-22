@@ -26,7 +26,7 @@ class ImportStatusTest extends IntegrationTestCase
      * @var ImportStatus
      */
     private $instance;
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         Fixture::createWebsite('2012-01-02 00:00:00');

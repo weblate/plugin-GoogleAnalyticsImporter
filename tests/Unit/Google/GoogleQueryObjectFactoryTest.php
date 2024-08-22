@@ -23,7 +23,7 @@ class GoogleQueryObjectFactoryTest extends TestCase
      * @var GoogleQueryObjectFactory
      */
     private $instance;
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->instance = new GoogleQueryObjectFactory(new NullLogger());

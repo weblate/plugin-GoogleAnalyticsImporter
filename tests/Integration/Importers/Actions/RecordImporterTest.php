@@ -18,7 +18,7 @@ use Piwik\Tests\Framework\Fixture;
  */
 class RecordImporterTest extends BaseRecordImporterTest
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         Fixture::createWebsite('2012-02-02 03:04:04', 1, 'mobile app', \false, 0, null, null, null, Type::ID);

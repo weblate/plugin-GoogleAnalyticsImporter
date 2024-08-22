@@ -51,7 +51,7 @@ class ImportedFromGoogleGA4 extends Fixture
         $this->extraPluginsToLoad = ['Funnels', 'MarketingCampaignsReporting'];
         $this->isCapturingResponses = getenv('MATOMO_TEST_CAPTURE_GA4_RESPONSES') == 1;
     }
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         if (SystemTestCase::isCIEnvironment()) {

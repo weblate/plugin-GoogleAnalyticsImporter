@@ -17,6 +17,7 @@ use Piwik\Option;
 class CaptureRestTransport extends RestTransport
 {
     use HttpUnaryTransportTrait;
+
     public function __construct(RequestBuilder $requestBuilder, callable $httpHandler)
     {
         $this->capturedDataFile = PIWIK_INCLUDE_PATH . \Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework\MockResponseBuilderGA4::PATH_TO_CAPTURED_DATA_FILE;

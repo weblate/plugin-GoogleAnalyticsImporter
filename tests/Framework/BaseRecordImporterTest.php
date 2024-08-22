@@ -26,13 +26,13 @@ abstract class BaseRecordImporterTest extends IntegrationTestCase
      * @var Map
      */
     protected $capturedReports;
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         Fixture::createWebsite('2010-02-01 00:00:00');
     }
-    abstract function getTestDir();
-    abstract function getTestedPluginName();
+    abstract public function getTestDir();
+    abstract public function getTestedPluginName();
     protected function runImporterTest($testName, $mockGaResponses, $idSite = 1)
     {
         $this->capturedReports = new Map();
@@ -48,7 +48,7 @@ abstract class BaseRecordImporterTest extends IntegrationTestCase
     protected function makeMockGaQuery($responses)
     {
         $mock = $this->getMockBuilder(GoogleAnalyticsQueryService::class)->onlyMethods(['query'])->disableOriginalConstructor()->getMock();
-        $mock->method('query')->willReturnCallback(function () use(&$responses) {
+        $mock->method('query')->willReturnCallback(function () use (&$responses) {
             if (empty($responses)) {
                 throw new \Exception("out of mock GA responses");
             }

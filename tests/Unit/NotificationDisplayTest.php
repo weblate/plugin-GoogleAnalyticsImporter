@@ -8,7 +8,6 @@
  */
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Unit;
 
-use Piwik\Common;
 use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\GoogleAnalyticsImporter;
 /**
@@ -18,11 +17,11 @@ use Piwik\Plugins\GoogleAnalyticsImporter\GoogleAnalyticsImporter;
  */
 class NotificationDisplayTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         // set up here if needed
     }
-    public function tearDown() : void
+    public function tearDown(): void
     {
         // tear down here if needed
     }

@@ -26,7 +26,7 @@ class ImporterTestGA4 extends IntegrationTestCase
      * @var ImporterGA4
      */
     private $importer;
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->mockData = [];

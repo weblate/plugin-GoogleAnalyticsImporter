@@ -23,7 +23,7 @@ class GoogleGA4QueryObjectFactoryTest extends TestCase
      * @var GoogleGA4QueryObjectFactory
      */
     private $instance;
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->instance = new GoogleGA4QueryObjectFactory(new NullLogger());
@@ -163,15 +163,15 @@ EOF;
     {
         return [[['metric1', 'metric2'], ['orderBys' => [['field' => 'somedim1'], ['field' => 'metric2']]], 'metric2'], [['metric1', 'metric2'], ['orderBys' => [['field' => 'metric2'], ['field' => 'somedim1']]], 'metric2'], [['metric1', 'uniqueScreenviews'], ['orderBys' => [['field' => 'uniqueScreenviews'], ['field' => 'somedim1']]], 'uniqueScreenviews'], [['metric1', 'pageviews'], ['orderBys' => [['field' => 'pageviews'], ['field' => 'somedim1']]], 'pageviews'], [['metric1', 'screenviews'], ['orderBys' => [['field' => 'pageviews'], ['field' => 'screenviews']]], 'screenviews'], [['metric1', 'sessions'], ['orderBys' => [['field' => 'sessions'], ['field' => 'sessions']]], 'sessions'], [['sessions', 'uniquePageviews'], [], 'sessions'], [['screenPageViews', 'alskdjf'], [], 'screenPageViews'], [['metric1', 'sessions'], [], 'sessions'], [['metric1', 'conversions'], [], 'conversions']];
     }
-    private function arrayMapRecursive(callable $callback, array $value) : array
+    private function arrayMapRecursive(callable $callback, array $value): array
     {
         $fn = null;
-        $fn = function ($item) use(&$fn, $callback) {
+        $fn = function ($item) use (&$fn, $callback) {
             return is_array($item) ? array_map($fn, $item) : call_user_func($callback, $item);
         };
         return array_map($fn, $value);
     }
-    private function getGaMessageAsJson($message) : string
+    private function getGaMessageAsJson($message): string
     {
         $message = $this->arrayMapRecursive(function ($item) {
             if (is_object($item) && method_exists($item, 'serializeToJsonString')) {
