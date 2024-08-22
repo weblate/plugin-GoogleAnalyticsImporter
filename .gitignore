@@ -16,6 +16,8 @@ vendor/**/composer.lock
 /vue/dist/*.common.js
 /vue/dist/*.map
 /vue/dist/*.development.*
+vendor/bin/phpcs
+vendor/bin/phpcbf
 vendor/dealerdirect
 vendor/matomo-org/matomo-coding-standards
 vendor/phpstan
