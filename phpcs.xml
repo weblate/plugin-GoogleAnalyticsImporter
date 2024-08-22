@@ -9,7 +9,6 @@
 
     <exclude-pattern>tests/javascript/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>Monolog/Handler/GASystemLogHandler.php</exclude-pattern>
 
     <!-- exclude all plugins included as submodule as long as they might not fully follow this CS -->
     <exclude-pattern>plugins/(AnonymousPiwikUsageMeasurement|Bandwidth|CustomAlerts|CustomVariables|DeviceDetectorCache|LogViewer|LoginLdap|MarketingCampaignsReporting|Provider|QueuedTracking|SecurityInfo|TagManager|TasksTimetable|TrackingSpamPrevention|TreemapVisualization|VisitorGenerator)/*</exclude-pattern>
@@ -44,20 +43,18 @@
 
     <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
         <!-- Classnames for our update files don't match PascalCase, this can't be changed easily -->
-        <exclude-pattern>core/Updates/*</exclude-pattern>
-        <exclude-pattern>plugins/*/Updates/*</exclude-pattern>
+        <exclude-pattern>Updates/*</exclude-pattern>
     </rule>
 
     <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
         <!-- Allow using method name without camel caps in tests as long as some methods are named test_* -->
-        <exclude-pattern>tests/PHPUnit/*</exclude-pattern>
-        <exclude-pattern>plugins/*/tests/*</exclude-pattern>
+        <exclude-pattern>tests/*</exclude-pattern>
     </rule>
 
     <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
         <!-- Allow using multiple classes in one file for tests -->
-        <exclude-pattern>tests/PHPUnit/*</exclude-pattern>
-        <exclude-pattern>plugins/*/tests/*</exclude-pattern>
+        <exclude-pattern>tests/*</exclude-pattern>
+        <exclude-pattern>Monolog/Handler/GASystemLogHandler.php</exclude-pattern>
     </rule>
 
 
@@ -84,6 +81,6 @@
             </property>
         </properties>
         <!-- still allow those functions in tests -->
-        <exclude-pattern>*/tests/*</exclude-pattern>
+        <exclude-pattern>tests/*</exclude-pattern>
     </rule>
 </ruleset>
