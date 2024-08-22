@@ -19,5 +19,6 @@ vendor/**/composer.lock
 vendor/dealerdirect
 vendor/matomo-org/matomo-coding-standards
 vendor/phpstan
+vendor/slevomat
 vendor/squizlabs
 phpcs-report.xml
