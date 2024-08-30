@@ -50,6 +50,7 @@
         "GAImportNoDataScreenStep04": "%1$sGoogle Analytics içe aktarma yönetimi sayfasına%2$s gidin. %3$sAyrıntılı bilgi alın%4$s.",
         "GAImportNoDataScreenStep05": "İçe aktarma türünü seçin.",
         "GAImportNoDataScreenStep06": "İçe aktarma formunda zamanlamayı doldurun.",
+        "GAImportNoDataScreenStep06GA4": "Google Analytics 4 (GA4) için içe aktarmayı zamanlama formunu doldurun.",
         "GAImportNoDataScreenStep07": "\"%1$s\" üzerine tıklayın.",
         "GAImportNoDataScreenStep07Note": "%1$sNot:%2$s \"%3$s\" üzerine tıkladığınızda, Matomo seçilmiş her mülk için otomatik olarak yeni bir Matomo sitesi oluşturur.",
         "GAImportNoDataScreenStep08": "Verilerin içe aktarılması zaman alır. %1$sVerileri içe aktarma işleminizin durumunu izlemek için buraya tıklayın %2$s.",
