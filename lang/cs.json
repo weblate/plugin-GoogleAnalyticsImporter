@@ -1,10 +1,14 @@
 {
     "GoogleAnalyticsImporter": {
-        "IsMobileApp": "Mobilní aplikace",
-        "Optional": "Volitelné",
-        "None": "Žádní",
+        "Actions": "Akce",
+        "AdminMenuTitle": "Google Analytics Import",
         "Change": "Změnit",
-        "Status": "Stav",
-        "Actions": "Akce"
+        "ConfigureTheImporter": "Konfigurace importéru",
+        "ConfigureTheImporterLabel1": "Importujte své vlastnosti Google Analytics a data z hlášení, vytvořte si zálohu a analyzujte je pomocí výkonných analytických nástrojů Matomo. Po připojení importéru vyberte, které vlastnosti Google Analytics chcete importovat, a Matomo pro každou z nich automaticky vytvoří novou webovou stránku.",
+        "ConfigureTheImporterLabel2": "K importu dat ze služby Google Analytics potřebuje Matomo přístup k těmto datům.",
+        "IsMobileApp": "Mobilní aplikace",
+        "None": "Žádní",
+        "Optional": "Volitelné",
+        "Status": "Stav"
     }
 }
