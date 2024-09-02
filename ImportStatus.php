@@ -70,11 +70,11 @@ class ImportStatus
         }
         return $dates;
     }
-    public function dayImportFinished($idSite, Date $date, $isMainImport = \true)
+    public function dayImportFinished($idSite, Date $date, $isMainImport = \true, $skipRecentDateImportFirst = false)
     {
         $status = $this->getImportStatus($idSite);
         $status['status'] = self::STATUS_ONGOING;
-        if (empty($status['last_date_imported']) || !Date::factory($status['last_date_imported'])->isEarlier($date) || !empty($status['future_resume_date']) && Date::factory($status['last_date_imported'])->isEarlier($date)) {
+        if (empty($status['last_date_imported']) || $skipRecentDateImportFirst || !Date::factory($status['last_date_imported'])->isEarlier($date) || !empty($status['future_resume_date']) && Date::factory($status['last_date_imported'])->isEarlier($date)) {
             $status['last_date_imported'] = $date->toString();
             $this->setImportedDateRange($idSite, $startDate = null, $date);
             if ($isMainImport) {
