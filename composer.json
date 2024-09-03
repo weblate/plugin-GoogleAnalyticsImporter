@@ -1,10 +1,4 @@
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/matomo-org/matomo-coding-standards.git"
-        }
-    ],
     "require": {
         "php": ">=7.2.5",
         "google/apiclient": "^2.15.3",
@@ -20,7 +14,7 @@
     "config": {
         "platform-check": "false",
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": false
         }
     },
     "replace": {
@@ -36,8 +30,5 @@
             "AnalyticsReporting",
             "Oauth2"
         ]
-    },
-    "require-dev": {
-        "matomo-org/matomo-coding-standards": "dev-master"
     }
 }

@@ -24,7 +24,11 @@ jobs:
           lfs: false
           persist-credentials: false
       - name: Install dependencies
-        run: composer install --dev --prefer-dist --no-progress --no-suggest
+        run:
+          composer --no-plugins config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true -n; 
+          composer config repositories.matomo-coding-standards vcs https://github.com/matomo-org/matomo-coding-standards.git -n 
+          composer require matomo-org/matomo-coding-standards:dev-master;
+          composer install --dev --prefer-dist --no-progress --no-suggest
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
