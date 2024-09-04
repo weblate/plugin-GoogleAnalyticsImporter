@@ -344,7 +344,7 @@ class ImporterGA4
         $command .= ' customvariables:set-max-custom-variables ' . $numCustomVarSlots;
         passthru($command);
     }
-    public function import($idSite, $propertyId, Date $start, Date $end, Lock $lock, $segment = '', $streamIds = [])
+    public function import($idSite, $propertyId, Date $start, Date $end, Lock $lock, $segment = '', $streamIds = [], $skipRecentDateImportFirst = false)
     {
         $date = null;
         try {
@@ -358,7 +358,11 @@ class ImporterGA4
             }
             $recordImporters = $this->getRecordImporters($idSite, $propertyId, $streamIds);
             $site = new Site($idSite);
-            $dates = $this->getRecentDatesToImport($start, $endPlusOne, Date::today()->getTimestamp());
+            if (!$skipRecentDateImportFirst) {
+                $dates = $this->getRecentDatesToImport($start, $endPlusOne, Date::today()->getTimestamp());
+            } else {
+                $dates = $this->getDatesToImport($start, $end);
+            }
             foreach ($dates as $date) {
                 if ($date->isToday() || $date->isLater(Date::yesterday())) {
                     $this->logger->info("Encountered Future Date while Importing data for GA4 Property {propertyID} for date {date}, the import would be stopped", ['viewId' => $propertyId, 'date' => $date->toString()]);
@@ -372,7 +376,7 @@ class ImporterGA4
                     // force delete all tables in case they aren't all freed
                     \Piwik\DataTable\Manager::getInstance()->deleteAll();
                 }
-                $this->importStatus->dayImportFinished($idSite, $date, $this->isMainImport);
+                $this->importStatus->dayImportFinished($idSite, $date, $this->isMainImport, $skipRecentDateImportFirst);
             }
             $this->importStatus->finishImportIfNothingLeft($idSite);
             unset($recordImporters);
@@ -632,6 +636,20 @@ class ImporterGA4
             } else {
                 array_unshift($dates, $date);
             }
+        }
+        return $dates;
+    }
+
+    /**
+     * @param Date $startDate
+     * @param Date $endDate
+     * @return array of dates between $startDate and $endDate
+     */
+    public function getDatesToImport(Date $startDate, Date $endDate)
+    {
+        $dates = [];
+        for ($date = $startDate; $date->getTimestamp() <= $endDate->getTimestamp(); $date = $date->addDay(1)) {
+            array_push($dates, $date);
         }
         return $dates;
     }
