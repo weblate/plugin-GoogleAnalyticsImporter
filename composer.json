@@ -12,10 +12,7 @@
         "phpseclib/bcmath_compat": "^2.0"
     },
     "config": {
-        "platform-check": "false",
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": false
-        }
+        "platform-check": "false"
     },
     "replace": {
         "monolog/monolog": "*"
