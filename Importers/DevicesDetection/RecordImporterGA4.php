@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\DevicesDetection;
 
 use DeviceDetector\Parser\Client\Browser;
@@ -21,6 +22,7 @@ use Piwik\Plugins\DevicesDetection\Archiver;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsGA4QueryService;
 use Piwik\Log\LoggerInterface;
 use DeviceDetector\Parser\Device\AbstractDeviceParser as DeviceParser;
+
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
     const PLUGIN_NAME = 'DevicesDetection';

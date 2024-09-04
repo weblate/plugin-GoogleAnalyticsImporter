@@ -6,11 +6,13 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Concurrency\Lock;
 use Piwik\Concurrency\LockBackend\MySqlLockBackend;
 use Piwik\Config;
+
 class ImportLock extends Lock
 {
     const LOCK_TTL = 300;

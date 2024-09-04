@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Config as PiwikConfig;
@@ -15,6 +16,7 @@ use Piwik\Date;
 use Piwik\Metrics;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsQueryService;
 use Piwik\Log\LoggerInterface;
+
 abstract class RecordImporter
 {
     const IS_IMPORTED_FROM_GOOGLE_METADATA_NAME = 'is_imported_from_google';

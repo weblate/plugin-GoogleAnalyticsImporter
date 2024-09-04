@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Common;
@@ -29,6 +30,7 @@ use Piwik\SettingsPiwik;
 use Piwik\Url;
 use Piwik\Log\LoggerInterface;
 use Piwik\Plugins\SitesManager\SitesManager;
+
 class Controller extends \Piwik\Plugin\ControllerAdmin
 {
     const OAUTH_STATE_NONCE_NAME = 'GoogleAnalyticsImporter.oauthStateNonce';

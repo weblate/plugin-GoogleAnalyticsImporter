@@ -6,12 +6,14 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\Importers\Actions;
 
 use Piwik\Metrics;
 use Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework\BaseRecordImporterTest;
 use Piwik\Plugins\MobileAppMeasurable\Type;
 use Piwik\Tests\Framework\Fixture;
+
 /**
  * @group GoogleAnalyticsImporter
  * @group GoogleAnalyticsImporter_Integration

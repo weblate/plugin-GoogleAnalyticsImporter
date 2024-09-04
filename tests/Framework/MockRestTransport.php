@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Call;
@@ -13,6 +14,7 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\RequestBuilder;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Transport\RestTransport;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Transport\HttpUnaryTransportTrait;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\ValidationException;
+
 class MockRestTransport extends RestTransport
 {
     use HttpUnaryTransportTrait;

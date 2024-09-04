@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration;
 
 use Piwik\ArchiveProcessor\Parameters;
@@ -18,6 +19,7 @@ use Piwik\Segment;
 use Piwik\Site;
 use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+
 /**
  * @group GoogleAnalyticsImporter
  * @group GoogleAnalyticsImporter_Integration

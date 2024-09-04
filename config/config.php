@@ -7,6 +7,7 @@ use Piwik\Option;
 use Piwik\Url;
 use Piwik\Container\Container;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\AuthorizationGA4;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 return ['GoogleAnalyticsImporter.pingMysqlEverySecs' => null, 'GoogleAnalyticsImporter.useNohup' => \true, 'GoogleAnalyticsImporter.logToSingleFile' => \false, 'GoogleAnalyticsImporter.isClientConfigurable' => \true, 'log.processors' => \Piwik\DI::decorate(function ($previous, Container $container) {
     $idSite = (int) \getenv('MATOMO_GA_IMPORTER_LOG_TO_SINGLE_FILE');

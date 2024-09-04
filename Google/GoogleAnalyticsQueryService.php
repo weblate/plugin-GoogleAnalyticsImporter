@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\Common;
@@ -17,6 +18,7 @@ use Piwik\Option;
 use Piwik\Piwik;
 use Piwik\Site;
 use Piwik\Log\LoggerInterface;
+
 class GoogleAnalyticsQueryService
 {
     const DEFAULT_MAX_ATTEMPTS = 30;

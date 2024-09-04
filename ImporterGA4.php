@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\AnalyticsAdminServiceClient;
@@ -44,6 +45,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4QueryObjectFactory;
 use Piwik\Plugins\GoogleAnalyticsImporter\Input\MaxEndDateReached;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\DailyRateLimitReached;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\HourlyRateLimitReached;
+
 class ImporterGA4
 {
     const IS_IMPORTED_FROM_GA_NUMERIC = 'GoogleAnalyticsImporter_isImportedFromGa';

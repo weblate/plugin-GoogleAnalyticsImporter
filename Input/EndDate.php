@@ -7,11 +7,13 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Input;
 
 use Piwik\Config;
 use Piwik\Date;
 use Piwik\SettingsServer;
+
 class EndDate
 {
     const CONFIG_NAME = 'forced_max_end_date';

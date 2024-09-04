@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration;
 
 use Piwik\CliMulti\CliPhp;
@@ -17,6 +18,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Tasks;
 use Piwik\SettingsPiwik;
 use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+
 class TasksWithMockExec extends Tasks
 {
     public static $commandsRun = [];

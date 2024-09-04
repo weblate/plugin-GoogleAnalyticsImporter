@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\SiteContentDetection;
 
 use Piwik\Container\StaticContainer;
@@ -19,6 +20,7 @@ use Piwik\Plugins\SitesManager\SiteContentDetection\GoogleAnalytics3;
 use Piwik\Plugins\SitesManager\SiteContentDetection\GoogleAnalytics4;
 use Piwik\SiteContentDetector;
 use Piwik\View;
+
 class GoogleAnalyticsImporter extends \Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract
 {
     public static function getName(): string

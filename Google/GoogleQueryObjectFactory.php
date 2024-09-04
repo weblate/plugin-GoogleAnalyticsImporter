@@ -6,11 +6,13 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\Importer;
 use Piwik\Log\LoggerInterface;
+
 class GoogleQueryObjectFactory
 {
     private static $defaultMetricOrderByPriority = ['ga:uniquePageviews', 'ga:uniqueScreenviews', 'ga:pageviews', 'ga:screenviews', 'ga:sessions', 'ga:goalCompletionsAll'];

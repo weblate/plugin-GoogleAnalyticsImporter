@@ -10,35 +10,11 @@
     <exclude-pattern>tests/javascript/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
-    <!-- exclude all plugins included as submodule as long as they might not fully follow this CS -->
-    <exclude-pattern>plugins/(AnonymousPiwikUsageMeasurement|Bandwidth|CustomAlerts|CustomVariables|DeviceDetectorCache|LogViewer|LoginLdap|MarketingCampaignsReporting|Provider|QueuedTracking|SecurityInfo|TagManager|TasksTimetable|TrackingSpamPrevention|TreemapVisualization|VisitorGenerator)/*</exclude-pattern>
-
-    <config name="installed_paths" value="vendor/slevomat/coding-standard"/>
-
-    <!-- Use PSR 12 standard as default -->
-    <!-- Some rules are currently excluded/restricted, but those restrictions should be removed in the future -->
-
-    <rule ref="PSR12">
-        <!-- can't use this as long as we have functions.php files that need to be required manually -->
-        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols" />
-
-        <exclude name="Generic.ControlStructures.InlineControlStructure.NotAllowed" />
-        <exclude name="Generic.Files.LineLength" />
-        <exclude name="Generic.PHP.LowerCaseConstant.Found" />
-        <exclude name="PSR12.ControlStructures.ControlStructureSpacing.CloseParenthesisIndent" />
-        <exclude name="PSR12.ControlStructures.ControlStructureSpacing.CloseParenthesisLine" />
-        <exclude name="PSR12.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace" />
-        <exclude name="PSR12.Files.FileHeader" />
-        <exclude name="PSR12.Properties.ConstantVisibility" />
-        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore" />
-        <exclude name="PSR2.ControlStructures.ElseIfDeclaration.NotAllowed" />
-        <exclude name="PSR2.Methods.MethodDeclaration.Underscore" />
-        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseParenthesis" />
-        <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword" />
-        <exclude name="Squiz.ControlStructures.ForLoopDeclaration.NoSpaceAfterFirst" />
-        <exclude name="Squiz.ControlStructures.ForLoopDeclaration.NoSpaceAfterSecond" />
-        <exclude name="Squiz.Functions.FunctionDeclaration.Found" />
-        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing.SpacingAfterOpen" />
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="400"/>
+        </properties>
+        <exclude-pattern>tests/*</exclude-pattern>
     </rule>
 
     <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
@@ -55,32 +31,5 @@
         <!-- Allow using multiple classes in one file for tests -->
         <exclude-pattern>tests/*</exclude-pattern>
         <exclude-pattern>Monolog/Handler/GASystemLogHandler.php</exclude-pattern>
-    </rule>
-
-
-    <!-- Additional rules that are not covered by PSR above -->
-
-    <!-- Forbid unused use statements -->
-    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
-        <properties>
-            <property name="searchAnnotations" value="true"/>
-            <property name="ignoredAnnotations" type="array">
-                <element value="@group"/>
-                <element value="@api"/>
-            </property>
-        </properties>
-    </rule>
-
-    <!-- Forbid some functions that should not be used (directly) -->
-    <rule ref="Generic.PHP.ForbiddenFunctions">
-        <properties>
-            <property name="forbiddenFunctions" type="array">
-                <element key="eval" value="null"/>
-                <element key="create_function" value="null"/>
-                <element key="unserialize" value="\Piwik\Common::safe_unserialize"/>
-            </property>
-        </properties>
-        <!-- still allow those functions in tests -->
-        <exclude-pattern>tests/*</exclude-pattern>
     </rule>
 </ruleset>

@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\Resolution;
 
 use Piwik\Common;
@@ -14,6 +15,7 @@ use Piwik\DataTable;
 use Piwik\Date;
 use Piwik\Metrics;
 use Piwik\Plugins\Resolution\Archiver;
+
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\Importers\DevicesDetection\RecordImporter
 {
     const PLUGIN_NAME = 'Resolution';

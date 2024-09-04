@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\AnalyticsAdminServiceClient;
@@ -20,6 +21,7 @@ use Piwik\Piwik;
 use Piwik\Site;
 use Piwik\Log\LoggerInterface;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4MetricMapper;
+
 class GoogleAnalyticsGA4QueryService
 {
     const DEFAULT_MAX_ATTEMPTS = 30;

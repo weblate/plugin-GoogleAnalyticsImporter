@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Diagnostic;
 
 use Piwik\CliMulti\CliPhp;
@@ -14,6 +15,7 @@ use Piwik\Plugins\Diagnostics\Diagnostic\Diagnostic;
 use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
 use Piwik\SettingsServer;
 use Piwik\Translation\Translator;
+
 class RequiredExecutablesCheck implements Diagnostic
 {
     /**

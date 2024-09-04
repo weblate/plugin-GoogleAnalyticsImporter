@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Common;
@@ -18,6 +19,7 @@ use Piwik\Piwik;
 use Piwik\Plugins\GoogleAnalyticsImporter\Commands\ImportReports;
 use Piwik\SettingsPiwik;
 use Piwik\Site;
+
 // TODO: maybe make an import status entity class
 class ImportStatus
 {

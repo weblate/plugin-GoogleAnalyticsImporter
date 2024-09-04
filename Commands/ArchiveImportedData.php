@@ -6,6 +6,7 @@
  * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Commands;
 
 use Piwik\Container\StaticContainer;
@@ -13,6 +14,7 @@ use Piwik\Plugin\ConsoleCommand;
 use Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus;
 use Piwik\Plugins\GoogleAnalyticsImporter\Logger\LogToSingleFileProcessor;
 use Piwik\Plugins\GoogleAnalyticsImporter\Tasks;
+
 class ArchiveImportedData extends ConsoleCommand
 {
     protected function configure()

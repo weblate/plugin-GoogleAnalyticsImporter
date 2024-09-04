@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitorInterest;
 
 use Piwik\Common;
@@ -14,6 +15,7 @@ use Piwik\Date;
 use Piwik\Plugins\VisitorInterest\Archiver;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4ResponseDataTableFactory;
 use Piwik\DataTable\Row;
+
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
     const PLUGIN_NAME = 'VisitorInterest';

@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Commands;
 
 use Piwik\Config;
@@ -28,6 +29,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus;
 use Piwik\Plugins\GoogleAnalyticsImporter\ImportWasCancelledException;
 use Piwik\Plugins\GoogleAnalyticsImporter\Logger\LogToSingleFileProcessor;
 use Piwik\Plugins\GoogleAnalyticsImporter\Tasks;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 class ImportGA4Reports extends ConsoleCommand
 {

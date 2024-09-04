@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\ArchiveProcessor\Parameters;
@@ -30,6 +31,7 @@ use Piwik\SettingsPiwik;
 use Piwik\Url;
 use Piwik\Site;
 use Piwik\Log\LoggerInterface;
+
 class GoogleAnalyticsImporter extends \Piwik\Plugin
 {
     const OPTION_ARCHIVING_FINISHED_FOR_SITE_PREFIX = 'GoogleAnalyticsImporter.archivingFinished.';
