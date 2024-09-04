@@ -211,8 +211,21 @@ class ImportGA4Reports extends ConsoleCommand
             $output->writeln(LogToSingleFileProcessor::$cliOutputPrefix . "Importing the following date ranges in order: " . $dateRangesText);
             // NOTE: date ranges to reimport are handled first, then we go back to the main import (which could be
             // continuous)
+
+            // If no date ranges to re-import and import reached till startDate, check if futureDates need to be imported or not and update the start and EdnDate
+            if (count($dateRangesToImport) == 1 && !empty($status['last_day_archived'])  && $status['last_day_archived'] === $status['import_range_start'] && $dates[1]->isLater(Date::factory('yesterday')) && !empty($status['import_start_time'])) {
+                $dateRangesToImport[0][0] = Date::factory($status['import_start_time'])->subDay(1);
+                $status['do_not_import_latest_dates_first'] = true;
+                $status['main_import_progress'] = $dateRangesToImport[0][0]->toString();
+                $importStatus->saveStatus($status);
+            }
+
             foreach (array_values($dateRangesToImport) as $index => $datesToImport) {
                 $status = $importStatus->getImportStatus($idSite);
+                $isDoNotImportLatestDatesFirst = !empty($status['do_not_import_latest_dates_first']);
+                if ($isDoNotImportLatestDatesFirst) {
+                    $status['last_date_imported'] = null;
+                }
                 // can change in the meantime, so we refetch
                 if (!is_array($datesToImport) || count($datesToImport) != 2) {
                     $output->writeln(LogToSingleFileProcessor::$cliOutputPrefix . "Found broken entry in date ranges to import (entry #{$index}) with improper type, skipping.");
@@ -231,7 +244,9 @@ class ImportGA4Reports extends ConsoleCommand
                 if (!empty($lastDateImported) && $isFutureDateImport) {
                     $startDate = Date::factory($status['future_resume_date']);
                 } else {
-                    if (!empty($lastDateImported) && Date::factory($lastDateImported)->subDay(1)->isEarlier($endDate)) {
+                    if ($isDoNotImportLatestDatesFirst) {
+                        $startDate =  Date::factory($lastDateImported)->addDay(1);
+                    } elseif (!empty($lastDateImported) && Date::factory($lastDateImported)->subDay(1)->isEarlier($endDate)) {
                         $endDate = Date::factory($lastDateImported)->subDay(1);
                     }
                 }
@@ -240,7 +255,7 @@ class ImportGA4Reports extends ConsoleCommand
                     $importStatus->removeReImportEntry($idSite, $datesToImport);
                     continue;
                 }
-                if ($endDate->isEarlier($startDate)) {
+                if ($endDate->isEarlier($startDate) && !$isDoNotImportLatestDatesFirst) {
                     $output->writeln(LogToSingleFileProcessor::$cliOutputPrefix . "(Entry #{$index}) is finished, moving on.");
                     $importStatus->removeReImportEntry($idSite, $datesToImport);
                     continue;
@@ -248,7 +263,7 @@ class ImportGA4Reports extends ConsoleCommand
                 $output->writeln(LogToSingleFileProcessor::$cliOutputPrefix . "Importing reports for date range {$startDate} - {$endDate} from GA property {$property}.");
                 try {
                     $importer->setIsMainImport($isMainImport);
-                    $aborted = $importer->import($idSite, $property, $startDate, $endDate, $lock, '', $streamIds);
+                    $aborted = $importer->import($idSite, $property, $startDate, $endDate, $lock, '', $streamIds, $isDoNotImportLatestDatesFirst);
                     if ($aborted == -1) {
                         $shouldFinishImportIfNothingLeft = \false;
                     }

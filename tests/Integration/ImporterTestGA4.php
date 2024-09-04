@@ -67,6 +67,17 @@ class ImporterTestGA4 extends IntegrationTestCase
         }
         $this->assertEquals(['2019-07-13', '2019-07-12', '2019-07-11', '2019-07-10', '2019-07-09', '2019-07-08', '2019-07-07'], $processed);
     }
+    public function test_getDatesToImport()
+    {
+        $startDate = Date::factory('2022-07-07');
+        $endDate = Date::factory('2022-07-13');
+        $dates = $this->importer->getDatesToImport($startDate, $endDate);
+        $processed = [];
+        foreach ($dates as $dateObj) {
+            $processed[] = $dateObj->toString();
+        }
+        $this->assertEquals(['2022-07-07', '2022-07-08', '2022-07-09', '2022-07-10', '2022-07-11', '2022-07-12', '2022-07-13'], $processed);
+    }
     public function makeMockService()
     {
         return new \Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\MockGoogleServiceAnalytics($this);
