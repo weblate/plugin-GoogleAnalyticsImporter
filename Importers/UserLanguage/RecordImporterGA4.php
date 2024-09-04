@@ -16,7 +16,7 @@ use Piwik\Plugins\UserLanguage\Archiver;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'UserLanguage';
+    public const PLUGIN_NAME = 'UserLanguage';
     public function importRecords(Date $day)
     {
         $recordName = Archiver::LANGUAGE_RECORD_NAME;

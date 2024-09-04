@@ -14,7 +14,7 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Psr\Http\Message\RequestInterfac
 
 class CapturingGoogleClient extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Client
 {
-    const PATH_TO_CAPTURED_DATA_FILE = '/plugins/GoogleAnalyticsImporter/tests/resources/capturedresponses.log';
+    public const PATH_TO_CAPTURED_DATA_FILE = '/plugins/GoogleAnalyticsImporter/tests/resources/capturedresponses.log';
     /**
      * @var string
      */

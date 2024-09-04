@@ -47,8 +47,8 @@ use Piwik\Log\LoggerInterface;
 
 class Importer
 {
-    const IS_IMPORTED_FROM_GA_NUMERIC = 'GoogleAnalyticsImporter_isImportedFromGa';
-    const PAGE_SIZE = 100000;
+    public const IS_IMPORTED_FROM_GA_NUMERIC = 'GoogleAnalyticsImporter_isImportedFromGa';
+    public const PAGE_SIZE = 100000;
     /**
      * @var ReportsProvider
      */

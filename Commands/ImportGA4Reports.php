@@ -41,11 +41,22 @@ class ImportGA4Reports extends ConsoleCommand
         $this->addRequiredValueOption('streamIds', null, 'The streamId for which you want to pull data. For multiple streams, use comma separated streamIds. By default it pulls data for all streams');
         $this->addRequiredValueOption('dates', null, 'The dates to import, eg, 2015-03-04,2015-04-12.');
         $this->addRequiredValueOption('idsite', null, 'The site to import into. This will attempt to continue an existing import.');
-        $this->addRequiredValueOption('cvar-count', null, 'The number of custom variables to support (if not supplied defaults to however many are currently available). ' . 'NOTE: This option will attempt to set the number of custom variable slots which should be done with care on an existing system.');
+        $this->addRequiredValueOption(
+            'cvar-count',
+            null,
+            'The number of custom variables to support (if not supplied defaults to however many are currently available). ' .
+            'NOTE: This option will attempt to set the number of custom variable slots which should be done with care on an existing system.'
+        );
         $this->addNoValueOption('skip-archiving', null, 'Skips launching archiving at the end of an import. Use this only if executing PHP from the command line results in an error on your system.');
         $this->addNoValueOption('mobile-app', null, 'If this option is used, the Matomo measurable that is created will be a mobile app. Requires the MobileAppMeasurable be activated.');
         $this->addRequiredValueOption('timezone', null, 'If your GA property\'s timezone is set to a value that is not a timezone recognized by PHP, you can specify a valid timezone manually with this option.');
-        $this->addRequiredValueOption('extra-custom-dimension', null, 'Map extra google analytics dimensions as matomo dimensions. This can be used to import dimensions like age & gender. Values should be like "gaDimension,dimensionScope", for example "userAgeBracket,visit".', [], \true);
+        $this->addRequiredValueOption(
+            'extra-custom-dimension',
+            null,
+            'Map extra google analytics dimensions as matomo dimensions. This can be used to import dimensions like age & gender. Values should be like "gaDimension,dimensionScope", for example "userAgeBracket,visit".',
+            [],
+            \true
+        );
     }
     /**
      * @return int

@@ -18,7 +18,7 @@ use Piwik\DataTable\Row;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'VisitorInterest';
+    public const PLUGIN_NAME = 'VisitorInterest';
     private $secondsGap;
     public function importRecords(Date $day)
     {

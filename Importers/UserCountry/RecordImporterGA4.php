@@ -16,7 +16,7 @@ use Piwik\Plugins\UserCountry\Archiver;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'UserCountry';
+    public const PLUGIN_NAME = 'UserCountry';
     public function importRecords(Date $day)
     {
         $this->queryDimension($day, 'countryId', Archiver::COUNTRY_RECORD_NAME);

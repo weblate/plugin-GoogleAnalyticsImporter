@@ -13,6 +13,8 @@ class HourlyRateLimitReached extends \RuntimeException
 {
     public function __construct()
     {
-        parent::__construct('Hourly rate limit reached, try again after an hour. (Note: GA by default sets a hourly limit on the number' . ' of API requests made per hour to 5000. It looks like you\'ve reached this limit. Continue the import after an hour.)');
+        parent::__construct(
+            'Hourly rate limit reached, try again after an hour. (Note: GA by default sets a hourly limit on the number' . ' of API requests made per hour to 5000. It looks like you\'ve reached this limit. Continue the import after an hour.)'
+        );
     }
 }

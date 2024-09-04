@@ -24,12 +24,12 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4MetricMapper;
 
 class GoogleAnalyticsGA4QueryService
 {
-    const DEFAULT_MAX_ATTEMPTS = 30;
-    const MAX_BACKOFF_TIME = 60;
-    const PING_MYSQL_EVERY = 25;
-    const DEFAULT_MIN_BACKOFF_TIME = 2;
+    public const DEFAULT_MAX_ATTEMPTS = 30;
+    public const MAX_BACKOFF_TIME = 60;
+    public const PING_MYSQL_EVERY = 25;
+    public const DEFAULT_MIN_BACKOFF_TIME = 2;
     // start at 2s since GA seems to have trouble w/ the 10 requests per 100s limit w/ 1
-    const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt_';
+    public const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt_';
     private static $problematicMetrics = ['totalUsers', 'eventCount'];
     /**
      * @var int
@@ -80,8 +80,18 @@ class GoogleAnalyticsGA4QueryService
     private $singleAttemptForExceptionCodes = [500, 503];
 
     private $idSite;
-    public function __construct(BetaAnalyticsDataClient $gaClient, AnalyticsAdminServiceClient $gaAdminClient, $propertyId, array $goalsMapping, $idSite, $quotaUser, \Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4QueryObjectFactory $googleGA4QueryObjectFactory, LoggerInterface $logger, $streamIds = [])
-    {
+
+    public function __construct(
+        BetaAnalyticsDataClient $gaClient,
+        AnalyticsAdminServiceClient $gaAdminClient,
+        $propertyId,
+        array $goalsMapping,
+        $idSite,
+        $quotaUser,
+        \Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4QueryObjectFactory $googleGA4QueryObjectFactory,
+        LoggerInterface $logger,
+        $streamIds = []
+    ) {
         $this->gaClient = $gaClient;
         $this->gaAdminClient = $gaAdminClient;
         $this->propertyId = $propertyId;

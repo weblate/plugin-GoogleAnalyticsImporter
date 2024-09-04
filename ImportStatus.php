@@ -23,17 +23,17 @@ use Piwik\Site;
 // TODO: maybe make an import status entity class
 class ImportStatus
 {
-    const OPTION_NAME_PREFIX = 'GoogleAnalyticsImporter.importStatus_';
-    const IMPORTED_DATE_RANGE_PREFIX = 'GoogleAnalyticsImporter.importedDateRange_';
-    const STATUS_STARTED = 'started';
-    const STATUS_ONGOING = 'ongoing';
-    const STATUS_FINISHED = 'finished';
-    const STATUS_ERRORED = 'errored';
-    const STATUS_RATE_LIMITED = 'rate_limited';
-    const STATUS_FUTURE_DATE_IMPORT_PENDING = 'future_date_import_pending';
-    const STATUS_RATE_LIMITED_HOURLY = 'rate_limited_hourly';
-    const STATUS_CLOUD_RATE_LIMITED = 'cloud_rate_limited';
-    const STATUS_KILLED = 'killed';
+    public const OPTION_NAME_PREFIX = 'GoogleAnalyticsImporter.importStatus_';
+    public const IMPORTED_DATE_RANGE_PREFIX = 'GoogleAnalyticsImporter.importedDateRange_';
+    public const STATUS_STARTED = 'started';
+    public const STATUS_ONGOING = 'ongoing';
+    public const STATUS_FINISHED = 'finished';
+    public const STATUS_ERRORED = 'errored';
+    public const STATUS_RATE_LIMITED = 'rate_limited';
+    public const STATUS_FUTURE_DATE_IMPORT_PENDING = 'future_date_import_pending';
+    public const STATUS_RATE_LIMITED_HOURLY = 'rate_limited_hourly';
+    public const STATUS_CLOUD_RATE_LIMITED = 'cloud_rate_limited';
+    public const STATUS_KILLED = 'killed';
     public static function isImportRunning($status)
     {
         $idSite = $status['idSite'];
@@ -57,7 +57,24 @@ class ImportStatus
         }
         $now = Date::getNowTimestamp();
         $isGA4 = $importType === 'ga4';
-        $status = ['status' => self::STATUS_STARTED, 'idSite' => $idSite, 'ga' => ['import_type' => $isGA4 ? 'GA4' : 'Universal Analytics', 'property' => $propertyId, 'account' => $accountId, 'view' => $viewId], 'last_date_imported' => null, 'main_import_progress' => null, 'import_start_time' => $now, 'import_end_time' => null, 'last_job_start_time' => $now, 'last_day_archived' => null, 'import_range_start' => null, 'import_range_end' => null, 'extra_custom_dimensions' => $extraCustomDimensions, 'days_finished_since_rate_limit' => 0, 'reimport_ranges' => [], 'isGA4' => $isGA4, 'streamIds' => $streamIds];
+        $status = [
+            'status' => self::STATUS_STARTED,
+            'idSite' => $idSite,
+            'ga' => ['import_type' => $isGA4 ? 'GA4' : 'Universal Analytics', 'property' => $propertyId, 'account' => $accountId, 'view' => $viewId],
+            'last_date_imported' => null,
+            'main_import_progress' => null,
+            'import_start_time' => $now,
+            'import_end_time' => null,
+            'last_job_start_time' => $now,
+            'last_day_archived' => null,
+            'import_range_start' => null,
+            'import_range_end' => null,
+            'extra_custom_dimensions' => $extraCustomDimensions,
+            'days_finished_since_rate_limit' => 0,
+            'reimport_ranges' => [],
+            'isGA4' => $isGA4,
+            'streamIds' => $streamIds
+        ];
         $this->saveStatus($status);
         return $status;
     }
@@ -75,7 +92,11 @@ class ImportStatus
     {
         $status = $this->getImportStatus($idSite);
         $status['status'] = self::STATUS_ONGOING;
-        if (empty($status['last_date_imported']) || !Date::factory($status['last_date_imported'])->isEarlier($date) || !empty($status['future_resume_date']) && Date::factory($status['last_date_imported'])->isEarlier($date)) {
+        if (
+            empty($status['last_date_imported']) ||
+            !Date::factory($status['last_date_imported'])->isEarlier($date) ||
+            !empty($status['future_resume_date']) && Date::factory($status['last_date_imported'])->isEarlier($date)
+        ) {
             $status['last_date_imported'] = $date->toString();
             $this->setImportedDateRange($idSite, $startDate = null, $date);
             if ($isMainImport) {
@@ -255,7 +276,14 @@ class ImportStatus
                 $status['gaInfoPretty'] = 'Import Type: Universal Analytics' . "\n" . 'Property: ' . $status['ga']['property'] . "\nAccount: " . $status['ga']['account'] . "\nView: " . $status['ga']['view'];
             }
         }
-        if ($checkKilledStatus && ($status['status'] == self::STATUS_ONGOING || $status['status'] == self::STATUS_STARTED) && !self::isImportRunning($status) && (empty($status['last_job_start_time']) || Date::factory($status['last_job_start_time'])->getTimestamp() < Date::now()->getTimestamp() - 300)) {
+        if (
+            $checkKilledStatus &&
+            ($status['status'] == self::STATUS_ONGOING || $status['status'] == self::STATUS_STARTED) &&
+            !self::isImportRunning($status) &&
+            (
+                empty($status['last_job_start_time']) ||
+                Date::factory($status['last_job_start_time'])->getTimestamp() < Date::now()->getTimestamp() - 300)
+        ) {
             $status['status'] = self::STATUS_KILLED;
         }
         return $status;
@@ -415,7 +443,17 @@ class ImportStatus
                 $mainImportProgress = $status['last_date_imported'];
             }
         }
-        if (!empty($status['import_range_start']) && !empty($mainImportProgress) && ($mainImportProgress == $status['import_range_start'] || !empty($status['future_resume_date']) && $mainImportProgress == $status['import_range_end'] || Date::factory($mainImportProgress)->isEarlier(Date::factory($status['import_range_start']))) && empty($status['reimport_ranges'])) {
+        if (
+            !empty($status['import_range_start']) &&
+            !empty($mainImportProgress) &&
+            (
+                $mainImportProgress == $status['import_range_start'] ||
+                !empty($status['future_resume_date']) &&
+                $mainImportProgress == $status['import_range_end'] ||
+                Date::factory($mainImportProgress)->isEarlier(Date::factory($status['import_range_start']))
+            ) &&
+            empty($status['reimport_ranges'])
+        ) {
             $this->finishedImport($idSite);
         }
     }

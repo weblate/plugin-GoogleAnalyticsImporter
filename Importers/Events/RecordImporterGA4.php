@@ -21,7 +21,7 @@ use Piwik\Log\LoggerInterface;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'Events';
+    public const PLUGIN_NAME = 'Events';
     private $maximumRowsInDataTable;
     private $maximumRowsInSubDataTable;
     private $records;
@@ -33,7 +33,14 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
     }
     public function importRecords(Date $day)
     {
-        $this->records = [Archiver::EVENTS_ACTION_CATEGORY_RECORD_NAME => new DataTable(), Archiver::EVENTS_ACTION_NAME_RECORD_NAME => new DataTable(), Archiver::EVENTS_CATEGORY_ACTION_RECORD_NAME => new DataTable(), Archiver::EVENTS_CATEGORY_NAME_RECORD_NAME => new DataTable(), Archiver::EVENTS_NAME_ACTION_RECORD_NAME => new DataTable(), Archiver::EVENTS_NAME_CATEGORY_RECORD_NAME => new DataTable()];
+        $this->records = [
+            Archiver::EVENTS_ACTION_CATEGORY_RECORD_NAME => new DataTable(),
+            Archiver::EVENTS_ACTION_NAME_RECORD_NAME => new DataTable(),
+            Archiver::EVENTS_CATEGORY_ACTION_RECORD_NAME => new DataTable(),
+            Archiver::EVENTS_CATEGORY_NAME_RECORD_NAME => new DataTable(),
+            Archiver::EVENTS_NAME_ACTION_RECORD_NAME => new DataTable(),
+            Archiver::EVENTS_NAME_CATEGORY_RECORD_NAME => new DataTable()
+        ];
         $this->queryEvents($day);
         foreach ($this->records as $recordName => $record) {
             $this->insertRecord($recordName, $record, $this->maximumRowsInDataTable, $this->maximumRowsInSubDataTable, Metrics::INDEX_NB_VISITS);

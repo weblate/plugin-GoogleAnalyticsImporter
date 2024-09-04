@@ -18,7 +18,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitsSummary\RecordImporter
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'VisitFrequency';
+    public const PLUGIN_NAME = 'VisitFrequency';
     public function importRecords(Date $day)
     {
         $filters = ['dimensionFilter' => ['dimension' => 'newVsReturning', 'filterType' => 'inList', 'filterValue' => ['(not set)', 'returning']]];

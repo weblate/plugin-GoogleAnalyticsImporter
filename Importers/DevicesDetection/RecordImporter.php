@@ -25,7 +25,7 @@ use DeviceDetector\Parser\Device\AbstractDeviceParser as DeviceParser;
 
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporter
 {
-    const PLUGIN_NAME = 'DevicesDetection';
+    public const PLUGIN_NAME = 'DevicesDetection';
     /**
      * @var array
      */

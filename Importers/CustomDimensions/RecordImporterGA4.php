@@ -28,7 +28,7 @@ use Piwik\Log\LoggerInterface;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'CustomDimensions';
+    public const PLUGIN_NAME = 'CustomDimensions';
     private $maximumRowsInDataTableLevelZero;
     private $maximumRowsInSubDataTable;
     private $isMobileApp;

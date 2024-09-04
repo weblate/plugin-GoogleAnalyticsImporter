@@ -11,7 +11,7 @@ namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework;
 
 class MockResponseBuilderGA4
 {
-    const PATH_TO_CAPTURED_DATA_FILE = '/plugins/GoogleAnalyticsImporter/tests/resources/capturedresponses-ga4.log';
+    public const PATH_TO_CAPTURED_DATA_FILE = '/plugins/GoogleAnalyticsImporter/tests/resources/capturedresponses-ga4.log';
     public static $responses = [];
     public static function populateMockResponse()
     {

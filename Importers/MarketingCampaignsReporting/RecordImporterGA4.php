@@ -22,7 +22,7 @@ use Piwik\Log\LoggerInterface;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'MarketingCampaignsReporting';
+    public const PLUGIN_NAME = 'MarketingCampaignsReporting';
     private $records = [];
     protected $columnToSortByBeforeTruncation;
     protected $maximumRowsInDataTable;
@@ -109,7 +109,16 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
      */
     public static function getRecordToDimensions()
     {
-        return array(Archiver::CAMPAIGN_NAME_RECORD_NAME => array(array("sessionCampaignName"), array("sessionGoogleAdsKeyword", "sessionManualAdContent")), Archiver::CAMPAIGN_KEYWORD_RECORD_NAME => array(array("sessionGoogleAdsKeyword")), Archiver::CAMPAIGN_ID_RECORD_NAME => array(array("sessionCampaignId")), Archiver::CAMPAIGN_SOURCE_RECORD_NAME => array(array("sessionSource")), Archiver::CAMPAIGN_MEDIUM_RECORD_NAME => array(array("sessionMedium")), Archiver::CAMPAIGN_CONTENT_RECORD_NAME => array(array("sessionManualAdContent")), Archiver::HIERARCHICAL_SOURCE_MEDIUM_RECORD_NAME => array(array("sessionSource", "sessionMedium"), array("sessionCampaignName")));
+        return array(
+            Archiver::CAMPAIGN_NAME_RECORD_NAME => array(array("sessionCampaignName"),
+                array("sessionGoogleAdsKeyword", "sessionManualAdContent")),
+            Archiver::CAMPAIGN_KEYWORD_RECORD_NAME => array(array("sessionGoogleAdsKeyword")),
+            Archiver::CAMPAIGN_ID_RECORD_NAME => array(array("sessionCampaignId")),
+            Archiver::CAMPAIGN_SOURCE_RECORD_NAME => array(array("sessionSource")),
+            Archiver::CAMPAIGN_MEDIUM_RECORD_NAME => array(array("sessionMedium")),
+            Archiver::CAMPAIGN_CONTENT_RECORD_NAME => array(array("sessionManualAdContent")),
+            Archiver::HIERARCHICAL_SOURCE_MEDIUM_RECORD_NAME => array(array("sessionSource", "sessionMedium"), array("sessionCampaignName"))
+        );
     }
     private function getDimensionsToQuery()
     {

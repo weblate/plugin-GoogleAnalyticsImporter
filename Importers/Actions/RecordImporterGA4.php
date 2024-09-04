@@ -27,8 +27,8 @@ use Piwik\Log\LoggerInterface;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'Actions';
-    const LABEL_DEFAULT_NAME = '__mtm_ga_default_name_placeholder__';
+    public const PLUGIN_NAME = 'Actions';
+    public const LABEL_DEFAULT_NAME = '__mtm_ga_default_name_placeholder__';
     /**
      * @var DataTable[]
      */
@@ -72,7 +72,11 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
         Config::getInstance()->General['action_default_name'] = self::LABEL_DEFAULT_NAME;
         try {
             ArchivingHelper::reloadConfig();
-            $this->dataTables = [Action::TYPE_PAGE_URL => $this->makeDataTable(ArchivingHelper::$maximumRowsInDataTableLevelZero), Action::TYPE_PAGE_TITLE => $this->makeDataTable(ArchivingHelper::$maximumRowsInDataTableLevelZero), Action::TYPE_SITE_SEARCH => $this->makeDataTable(ArchivingHelper::$maximumRowsInDataTableSiteSearch)];
+            $this->dataTables = [
+                Action::TYPE_PAGE_URL => $this->makeDataTable(ArchivingHelper::$maximumRowsInDataTableLevelZero),
+                Action::TYPE_PAGE_TITLE => $this->makeDataTable(ArchivingHelper::$maximumRowsInDataTableLevelZero),
+                Action::TYPE_SITE_SEARCH => $this->makeDataTable(ArchivingHelper::$maximumRowsInDataTableSiteSearch)
+            ];
             $this->pageTitleRowsByPageTitle = [];
             $this->pageUrlsByPagePath = [];
             $this->siteSearchUrls = [];
@@ -155,12 +159,46 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
     {
         $gaQuery = $this->getGaClient();
         if ($this->isMobileApp) {
-            $table = $gaQuery->query($day, $dimensions = [$this->pageTitleDimension], $this->getPageMetrics(), ['orderBys' => [], 'mappings' => [Metrics::INDEX_PAGE_NB_HITS => $this->hitsMetric]]);
+            $table = $gaQuery->query(
+                $day,
+                $dimensions = [$this->pageTitleDimension],
+                $this->getPageMetrics(),
+                [
+                    'orderBys' => [],
+                    'mappings' => [Metrics::INDEX_PAGE_NB_HITS => $this->hitsMetric]
+                ]
+            );
         } else {
-            $table = $gaQuery->query($day, $dimensions = [$this->pageTitleDimension, 'pagePath'], $this->getPageMetrics(), ['orderBys' => [['field' => 'screenPageViews', 'order' => 'descending'], ['field' => $this->pageTitleDimension, 'order' => 'ascending']]]);
+            $table = $gaQuery->query(
+                $day,
+                $dimensions = [$this->pageTitleDimension, 'pagePath'],
+                $this->getPageMetrics(),
+                [
+                    'orderBys' => [
+                        ['field' => 'screenPageViews', 'order' => 'descending'],
+                        ['field' => $this->pageTitleDimension, 'order' => 'ascending']
+                    ]
+                ]
+            );
             // pageTitle + pagePath combination is not supported for this date
             if ($table->getRowsCount() == 0) {
-                $table = $gaQuery->query($day, $dimensions = [$this->pageTitleDimension], $this->getPageMetrics(), ['orderBys' => [['field' => 'screenPageViews', 'order' => 'descending'], ['field' => $this->pageTitleDimension, 'order' => 'ascending']]]);
+                $table = $gaQuery->query(
+                    $day,
+                    $dimensions = [$this->pageTitleDimension],
+                    $this->getPageMetrics(),
+                    [
+                        'orderBys' => [
+                            [
+                                'field' => 'screenPageViews',
+                                'order' => 'descending'
+                            ],
+                            [
+                                'field' => $this->pageTitleDimension,
+                                'order' => 'ascending'
+                            ]
+                        ]
+                    ]
+                );
             }
         }
         foreach ($table->getRows() as $row) {
@@ -385,7 +423,20 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
     {
         $record = new DataTable();
         $gaQuery = $this->getGaClient();
-        $table = $gaQuery->query($day, $dimensions = ['ga:searchCategory'], array_merge($this->getConversionAwareVisitMetrics(), $this->getActionMetrics()), ['mappings' => [Metrics::INDEX_NB_VISITS => 'ga:searchUniques', Metrics::INDEX_NB_ACTIONS => 'ga:searchResultViews']]);
+        $table = $gaQuery->query(
+            $day,
+            $dimensions = ['ga:searchCategory'],
+            array_merge(
+                $this->getConversionAwareVisitMetrics(),
+                $this->getActionMetrics()
+            ),
+            [
+                'mappings' => [
+                    Metrics::INDEX_NB_VISITS => 'ga:searchUniques',
+                    Metrics::INDEX_NB_ACTIONS => 'ga:searchResultViews'
+                ]
+            ]
+        );
         foreach ($table->getRows() as $row) {
             $searchCategory = $row->getMetadata('ga:searchCategory');
             if (empty($searchCategory)) {

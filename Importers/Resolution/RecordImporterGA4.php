@@ -18,7 +18,7 @@ use Piwik\Plugins\Resolution\Archiver;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\Importers\DevicesDetection\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'Resolution';
+    public const PLUGIN_NAME = 'Resolution';
     public function importRecords(Date $day)
     {
         $this->queryScreenResolution($day);

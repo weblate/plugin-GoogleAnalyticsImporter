@@ -25,7 +25,7 @@ use Piwik\Log\LoggerInterface;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'Referrers';
+    public const PLUGIN_NAME = 'Referrers';
     private $maximumRowsInDataTableLevelZero;
     private $maximumRowsInSubDataTable;
     private $columnToSortByBeforeTruncation;
@@ -80,7 +80,13 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
         unset($blob);
         unset($this->campaignKeywords);
         // numeric records
-        $numericRecords = array(Archiver::METRIC_DISTINCT_SEARCH_ENGINE_RECORD_NAME => $distinctSearchEngines, Archiver::METRIC_DISTINCT_SOCIAL_NETWORK_RECORD_NAME => $distinctSocialNetworks, Archiver::METRIC_DISTINCT_KEYWORD_RECORD_NAME => $distinctKeywords, Archiver::METRIC_DISTINCT_CAMPAIGN_RECORD_NAME => $distinctCampaigns, Archiver::METRIC_DISTINCT_WEBSITE_RECORD_NAME => $distinctWebsites);
+        $numericRecords = array(
+            Archiver::METRIC_DISTINCT_SEARCH_ENGINE_RECORD_NAME => $distinctSearchEngines,
+            Archiver::METRIC_DISTINCT_SOCIAL_NETWORK_RECORD_NAME => $distinctSocialNetworks,
+            Archiver::METRIC_DISTINCT_KEYWORD_RECORD_NAME => $distinctKeywords,
+            Archiver::METRIC_DISTINCT_CAMPAIGN_RECORD_NAME => $distinctCampaigns,
+            Archiver::METRIC_DISTINCT_WEBSITE_RECORD_NAME => $distinctWebsites
+        );
         $this->insertNumericRecords($numericRecords);
     }
     private function getKeywordByCampaign(Date $day)

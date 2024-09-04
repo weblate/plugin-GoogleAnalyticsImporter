@@ -34,7 +34,7 @@ use Piwik\Log\LoggerInterface;
 
 class GoogleAnalyticsImporter extends \Piwik\Plugin
 {
-    const OPTION_ARCHIVING_FINISHED_FOR_SITE_PREFIX = 'GoogleAnalyticsImporter.archivingFinished.';
+    public const OPTION_ARCHIVING_FINISHED_FOR_SITE_PREFIX = 'GoogleAnalyticsImporter.archivingFinished.';
     private static $keywordMethods = ['Referrers.getKeywords', 'Referrers.getKeywordsForPageUrl', 'Referrers.getKeywordsForPageTitle', 'Referrers.getKeywordsFromSearchEngineId', 'Referrers.getKeywordsFromCampaignId'];
     private static $unsupportedDataTableReports = ["Actions.getDownloads", "Actions.getDownload", "Actions.getOutlinks", "Actions.getOutlink", "Actions.getPageUrlsFollowingSiteSearch", "Actions.getPageTitlesFollowingSiteSearch", "Actions.getSiteSearchNoResultKeywords", "VisitTime.getVisitInformationPerLocalTime", "DevicesDetection.getBrowserEngines", "DevicePlugins.getPlugin", "UserId.getUsers", "Contents.getContentNames", "Contents.getContentPieces", "VisitorInterest.getNumberOfVisitsPerPage", "Provider.getProvider"];
     public function registerEvents()

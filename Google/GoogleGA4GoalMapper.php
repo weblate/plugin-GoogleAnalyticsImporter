@@ -39,7 +39,17 @@ class GoogleGA4GoalMapper
     }
     private function mapBasicGoalProperties(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ConversionEvent $gaGoal)
     {
-        $result = ['name' => $gaGoal->getEventName(), 'description' => '(imported from Google Analytics(GA4), original id = ' . $gaGoal->id . ')', 'match_attribute' => \false, 'pattern' => \false, 'pattern_type' => \false, 'case_sensitive' => \false, 'revenue' => \false, 'allow_multiple_conversions' => \false, 'use_event_value_as_revenue' => \false];
+        $result = [
+            'name' => $gaGoal->getEventName(),
+            'description' => '(imported from Google Analytics(GA4), original id = ' . $gaGoal->id . ')',
+            'match_attribute' => \false,
+            'pattern' => \false,
+            'pattern_type' => \false,
+            'case_sensitive' => \false,
+            'revenue' => \false,
+            'allow_multiple_conversions' => \false,
+            'use_event_value_as_revenue' => \false
+        ];
         return $result;
     }
     private function mapFunnelSteps(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\Analytics\Goal $gaGoal, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\Analytics\GoalUrlDestinationDetails $urlMatchDetails)

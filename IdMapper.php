@@ -13,7 +13,7 @@ use Piwik\Option;
 
 class IdMapper
 {
-    const OPTION_PREFIX = 'GoogleAnalytics.idMapping.';
+    public const OPTION_PREFIX = 'GoogleAnalytics.idMapping.';
     public function mapEntityId($type, $gaEntiyId, $entiyId, $idSite)
     {
         $optionName = $this->getOptionName($type, $entiyId, $idSite);

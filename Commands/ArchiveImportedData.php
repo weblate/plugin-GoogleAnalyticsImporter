@@ -20,7 +20,9 @@ class ArchiveImportedData extends ConsoleCommand
     protected function configure()
     {
         $this->setName('googleanalyticsimporter:archive-imported-data');
-        $this->setDescription('Initiates core:archive for an imported site. This is run automatically every day, but can be run manually if needed.' . ' All it really does is call core:archive w/ a few custom parameters so data from years back gets archived.');
+        $this->setDescription(
+            'Initiates core:archive for an imported site. This is run automatically every day, but can be run manually if needed.' . ' All it really does is call core:archive w/ a few custom parameters so data from years back gets archived.'
+        );
         $this->addRequiredValueOption('idSite', null, 'The ID of the imported site to initiate archiving for.');
     }
     /**

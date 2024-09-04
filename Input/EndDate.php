@@ -16,7 +16,7 @@ use Piwik\SettingsServer;
 
 class EndDate
 {
-    const CONFIG_NAME = 'forced_max_end_date';
+    public const CONFIG_NAME = 'forced_max_end_date';
     // value can be anything that works for Date::factory()
     /**
      * @internal tests only

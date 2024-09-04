@@ -17,7 +17,7 @@ use Piwik\Log\LoggerInterface;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'VisitsSummary';
+    public const PLUGIN_NAME = 'VisitsSummary';
     /**
      * @var array
      */

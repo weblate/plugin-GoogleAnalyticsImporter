@@ -26,7 +26,7 @@ use Piwik\Log\LoggerInterface;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'CustomVariables';
+    public const PLUGIN_NAME = 'CustomVariables';
     protected $maximumRowsInDataTableLevelZero;
     protected $maximumRowsInSubDataTable;
     /**

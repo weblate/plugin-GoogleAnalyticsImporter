@@ -25,7 +25,7 @@ use DeviceDetector\Parser\Device\AbstractDeviceParser as DeviceParser;
 
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'DevicesDetection';
+    public const PLUGIN_NAME = 'DevicesDetection';
     /**
      * @var array
      */

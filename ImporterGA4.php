@@ -48,8 +48,8 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Google\HourlyRateLimitReached;
 
 class ImporterGA4
 {
-    const IS_IMPORTED_FROM_GA_NUMERIC = 'GoogleAnalyticsImporter_isImportedFromGa';
-    const PAGE_SIZE = 100000;
+    public const IS_IMPORTED_FROM_GA_NUMERIC = 'GoogleAnalyticsImporter_isImportedFromGa';
+    public const PAGE_SIZE = 100000;
     /**
      * @var BetaAnalyticsDataClient
      */
@@ -119,8 +119,17 @@ class ImporterGA4
      * @var bool
      */
     private $isMainImport = \true;
-    public function __construct(ReportsProvider $reportsProvider, LoggerInterface $logger, GoogleGA4GoalMapper $goalMapper, GoogleGA4CustomDimensionMapper $customDimensionMapper, \Piwik\Plugins\GoogleAnalyticsImporter\IdMapper $idMapper, \Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus $importStatus, ArchiveInvalidator $invalidator, EndDate $endDate, \Piwik\Plugins\GoogleAnalyticsImporter\ApiQuotaHelper $apiQuotaHelper)
-    {
+    public function __construct(
+        ReportsProvider $reportsProvider,
+        LoggerInterface $logger,
+        GoogleGA4GoalMapper $goalMapper,
+        GoogleGA4CustomDimensionMapper $customDimensionMapper,
+        \Piwik\Plugins\GoogleAnalyticsImporter\IdMapper $idMapper,
+        \Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus $importStatus,
+        ArchiveInvalidator $invalidator,
+        EndDate $endDate,
+        \Piwik\Plugins\GoogleAnalyticsImporter\ApiQuotaHelper $apiQuotaHelper
+    ) {
         $this->reportsProvider = $reportsProvider;
         $this->logger = $logger;
         $this->goalMapper = $goalMapper;
@@ -154,7 +163,19 @@ class ImporterGA4
             $webProperty = $this->gaAdminClient->getProperty($propertyId);
             $startDate = Date::factory($webProperty->getCreateTime()->toDateTime()->getTimestamp())->toString();
             if (!method_exists(SettingsServer::class, 'isMatomoForWordPress') || !SettingsServer::isMatomoForWordPress()) {
-                $siteOptions = ['siteName' => $webProperty->getDisplayName(), 'urls' => [$webProperty->getDisplayName()], 'ecommerce' => 1, 'siteSearch' => 0, 'searchKeywordParameters' => '', 'searchCategoryParameters' => '', 'excludedQueryParameters' => '', 'timezone' => empty($timezone) ? $webProperty->getTimeZone() : $timezone, 'currency' => $webProperty->getCurrencyCode(), 'startDate' => $startDate, 'type' => $type];
+                $siteOptions = [
+                    'siteName' => $webProperty->getDisplayName(),
+                    'urls' => [$webProperty->getDisplayName()],
+                    'ecommerce' => 1,
+                    'siteSearch' => 0,
+                    'searchKeywordParameters' => '',
+                    'searchCategoryParameters' => '',
+                    'excludedQueryParameters' => '',
+                    'timezone' => empty($timezone) ? $webProperty->getTimeZone() : $timezone,
+                    'currency' => $webProperty->getCurrencyCode(),
+                    'startDate' => $startDate,
+                    'type' => $type
+                ];
                 if ($type === \Piwik\Plugins\MobileAppMeasurable\Type::ID) {
                     unset($siteOptions['urls']);
                 }
@@ -216,7 +237,22 @@ class ImporterGA4
                     $this->logger->warning('Importing this goal as a manually triggered goal. Metrics for this goal will be available, but tracking will not work for this goal in Matomo.');
                     $goal = $this->goalMapper->mapManualGoal($gaGoal);
                 }
-                $idGoal = Request::processRequest('Goals.addGoal', ['idSite' => $idSite, 'name' => $gaGoal->getEventName(), 'matchAttribute' => $goal['match_attribute'], 'pattern' => $goal['pattern'], 'patternType' => $goal['pattern_type'], 'caseSensitive' => $goal['case_sensitive'], 'revenue' => $goal['revenue'], 'allowMultipleConversionsPerVisit' => $goal['allow_multiple_conversions'], 'description' => $goal['description'], 'useEventValueAsRevenue' => $goal['use_event_value_as_revenue']], $default = []);
+                $idGoal = Request::processRequest(
+                    'Goals.addGoal',
+                    [
+                        'idSite' => $idSite,
+                        'name' => $gaGoal->getEventName(),
+                        'matchAttribute' => $goal['match_attribute'],
+                        'pattern' => $goal['pattern'],
+                        'patternType' => $goal['pattern_type'],
+                        'caseSensitive' => $goal['case_sensitive'],
+                        'revenue' => $goal['revenue'],
+                        'allowMultipleConversionsPerVisit' => $goal['allow_multiple_conversions'],
+                        'description' => $goal['description'],
+                        'useEventValueAsRevenue' => $goal['use_event_value_as_revenue']
+                    ],
+                    $default = []
+                );
                 $this->idMapper->mapEntityId('goal', $gaGoal->id, $idGoal, $idSite);
                 if (!empty($goal['funnel'])) {
                     StaticContainer::get(\Piwik\Plugins\Funnels\Model\FunnelsModel::class)->clearGoalsCache();
@@ -249,7 +285,14 @@ class ImporterGA4
                 continue;
             }
             try {
-                $idDimension = CustomDimensionsAPI::getInstance()->configureNewCustomDimension($idSite, $customDimension['name'], $customDimension['scope'], $customDimension['active'], $customDimension['extractions'], $customDimension['case_sensitive']);
+                $idDimension = CustomDimensionsAPI::getInstance()->configureNewCustomDimension(
+                    $idSite,
+                    $customDimension['name'],
+                    $customDimension['scope'],
+                    $customDimension['active'],
+                    $customDimension['extractions'],
+                    $customDimension['case_sensitive']
+                );
             } catch (\Exception $ex) {
                 if (strpos($ex->getMessage(), 'All Custom Dimensions for website') === 0) {
                     $this->logger->warning("Cannot map custom dimension {$customDimension['name']}: " . $ex->getMessage());

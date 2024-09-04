@@ -139,7 +139,14 @@ class GoogleQueryObjectFactory
         foreach ($orderBys as $entry) {
             $field = $entry['field'];
             if (!in_array($field, $metricsQueried) && !in_array($field, $dimensions)) {
-                $this->logger->error("Unexpected error: trying to order by {field}, but field is not in list of metrics/dimensions being queried: {metrics}/{dims}", ['field' => $field, 'metrics' => implode(', ', $metricsQueried), 'dims' => implode(', ', $dimensions)]);
+                $this->logger->error(
+                    "Unexpected error: trying to order by {field}, but field is not in list of metrics/dimensions being queried: {metrics}/{dims}",
+                    [
+                        'field' => $field,
+                        'metrics' => implode(', ', $metricsQueried),
+                        'dims' => implode(', ', $dimensions)
+                    ]
+                );
             }
         }
     }
