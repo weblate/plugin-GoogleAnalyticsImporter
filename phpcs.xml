@@ -10,9 +10,11 @@
     <exclude-pattern>tests/javascript/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
+    <rule ref="Matomo"></rule>
+
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="400"/>
+            <property name="lineLimit" value="100" />
         </properties>
         <exclude-pattern>tests/*</exclude-pattern>
     </rule>
