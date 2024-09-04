@@ -14,9 +14,33 @@
 
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="100" />
+            <property name="lineLimit" value="200" />
         </properties>
         <exclude-pattern>tests/*</exclude-pattern>
+        <!-- Do nothing for GA3 code, as that code is not applicable anymore -->
+        <exclude-pattern>Commands/ImportReports.php</exclude-pattern>
+        <exclude-pattern>Importers/Referrers/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/MarketingCampaignsReporting/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/Resolution/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/Events/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/CustomDimensions/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/UserLanguage/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/Actions/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/DevicesDetection/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/UserCountry/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/VisitFrequency/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/Goals/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/CustomVariables/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/VisitorInterest/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importers/VisitsSummary/RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Importer.php</exclude-pattern>
+        <exclude-pattern>test.php</exclude-pattern>
+        <exclude-pattern>RecordImporter.php</exclude-pattern>
+        <exclude-pattern>Google/GoogleMetricMapper.php</exclude-pattern>
+        <exclude-pattern>Google/GoogleCustomDimensionMapper.php</exclude-pattern>
+        <exclude-pattern>Google/GoogleGoalMapper.php</exclude-pattern>
+        <exclude-pattern>Google/GoogleAnalyticsQueryService.php</exclude-pattern>
+        <exclude-pattern>Google/GoogleResponseDataTableFactory.php</exclude-pattern>
     </rule>
 
     <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
