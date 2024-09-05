@@ -28,7 +28,6 @@ jobs:
         with:
           php-version: '7.4'
           tools: cs2pr
-
       - name: Install dependencies
         run:
           composer --no-plugins config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true -n;
