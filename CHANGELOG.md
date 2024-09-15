@@ -1,5 +1,11 @@
 ## Changelog
 
+# 5.0.21 - 2024-09-02
+- Fixed import not running continuously for future dates
+
+# 5.0.20
+- Added new events to be tracked by ActivityLog
+
 # 5.0.19
 - Removed option to schedule GA3 imports
 
