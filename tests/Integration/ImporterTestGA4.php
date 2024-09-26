@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration;
 
 use Piwik\Container\StaticContainer;
@@ -14,6 +15,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\ImporterGA4;
 use Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus;
 use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+
 require_once PIWIK_INCLUDE_PATH . '/plugins/GoogleAnalyticsImporter/vendor/autoload.php';
 /**
  * @group GoogleAnalyticsImporter
@@ -26,7 +28,7 @@ class ImporterTestGA4 extends IntegrationTestCase
      * @var ImporterGA4
      */
     private $importer;
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->mockData = [];

@@ -7,10 +7,12 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\Plugins\Referrers\SearchEngine;
 use Piwik\Log\LoggerInterface;
+
 class SearchEngineMapper
 {
     private $sourcesToSearchEngines = [];

@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitFrequency;
 
 use Piwik\Container\StaticContainer;
@@ -14,6 +15,7 @@ use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\Importer;
 use Piwik\Plugins\VisitFrequency\API;
 use Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitsSummary\RecordImporter as VisitsSummaryAPI;
+
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporter
 {
     const PLUGIN_NAME = 'VisitFrequency';

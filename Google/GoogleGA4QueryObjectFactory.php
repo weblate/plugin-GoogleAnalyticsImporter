@@ -6,12 +6,13 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
-use Piwik\Config;
 use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\ImporterGA4;
 use Piwik\Log\LoggerInterface;
+
 class GoogleGA4QueryObjectFactory
 {
     private static $defaultMetricOrderByPriority = [
@@ -115,17 +116,41 @@ class GoogleGA4QueryObjectFactory
         $filterExpressions = [];
         switch ($gaDimensionFilter['filterType']) {
             case 'inList':
-                $filterType = array('field_name' => $gaDimensionFilter['dimension'], 'in_list_filter' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\Filter\InListFilter(['values' => $gaDimensionFilter['filterValue'], 'case_sensitive' => \false]));
+                $filterType = array(
+                    'field_name' => $gaDimensionFilter['dimension'],
+                    'in_list_filter' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\Filter\InListFilter(
+                        [
+                            'values' => $gaDimensionFilter['filterValue'],
+                            'case_sensitive' => \false
+                        ]
+                    ));
                 break;
         }
         if (!empty($filterType)) {
             $filterExpressions[] = new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\FilterExpression(['filter' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\Filter($filterType)]);
         }
         if (!empty($streamIds)) {
-            $filterExpressions[] = new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\FilterExpression(['filter' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\Filter(array('field_name' => 'streamId', 'in_list_filter' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\Filter\InListFilter(['values' => $streamIds, 'case_sensitive' => \false])))]);
+            $filterExpressions[] = new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\FilterExpression(
+                [
+                    'filter' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\Filter(
+                        array(
+                            'field_name' => 'streamId',
+                            'in_list_filter' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\Filter\InListFilter(
+                                ['values' => $streamIds, 'case_sensitive' => \false]
+                            )
+                        )
+                    )
+                ]
+            );
         }
         if (!empty($filterExpressions)) {
-            return new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\FilterExpression(['and_group' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\FilterExpressionList(['expressions' => $filterExpressions])]);
+            return new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\FilterExpression(
+                [
+                    'and_group' => new \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\FilterExpressionList(
+                        ['expressions' => $filterExpressions]
+                    )
+                ]
+            );
         }
         return [];
     }
@@ -158,7 +183,14 @@ class GoogleGA4QueryObjectFactory
         foreach ($orderBys as $entry) {
             $field = $entry['field'];
             if (!in_array($field, $metricsQueried) && !in_array($field, $dimensions)) {
-                $this->logger->error("Unexpected error: trying to order by {field}, but field is not in list of metrics/dimensions being queried: {metrics}/{dims}", ['field' => $field, 'metrics' => implode(', ', $metricsQueried), 'dims' => implode(', ', $dimensions)]);
+                $this->logger->error(
+                    "Unexpected error: trying to order by {field}, but field is not in list of metrics/dimensions being queried: {metrics}/{dims}",
+                    [
+                        'field' => $field,
+                        'metrics' => implode(', ', $metricsQueried),
+                        'dims' => implode(', ', $dimensions)
+                    ]
+                );
             }
         }
     }

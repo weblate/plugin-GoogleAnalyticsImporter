@@ -6,19 +6,21 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\Importers\Actions;
 
 use Piwik\Metrics;
 use Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework\BaseRecordImporterTest;
 use Piwik\Plugins\MobileAppMeasurable\Type;
 use Piwik\Tests\Framework\Fixture;
+
 /**
  * @group GoogleAnalyticsImporter
  * @group GoogleAnalyticsImporter_Integration
  */
 class RecordImporterTest extends BaseRecordImporterTest
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         Fixture::createWebsite('2012-02-02 03:04:04', 1, 'mobile app', \false, 0, null, null, null, Type::ID);

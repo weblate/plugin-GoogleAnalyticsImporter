@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Commands;
 
 use Piwik\Common;
@@ -14,6 +15,7 @@ use Piwik\Development;
 use Piwik\Http;
 use Piwik\Plugin\ConsoleCommand;
 use Piwik\Log\LoggerInterface;
+
 class GenerateGaTestData extends ConsoleCommand
 {
     private $visitorIdSeeds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
@@ -137,7 +139,7 @@ class GenerateGaTestData extends ConsoleCommand
     {
         return Development::isEnabled();
     }
-    protected function doExecute() : int
+    protected function doExecute(): int
     {
         $input = $this->getInput();
         $output = $this->getOutput();

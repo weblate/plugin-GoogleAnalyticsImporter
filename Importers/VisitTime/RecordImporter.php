@@ -6,12 +6,14 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitTime;
 
 use Piwik\Common;
 use Piwik\DataTable;
 use Piwik\Date;
 use Piwik\Plugins\VisitTime\Archiver;
+
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporter
 {
     const PLUGIN_NAME = 'VisitTime';

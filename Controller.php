@@ -7,22 +7,18 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Common;
 use Piwik\Container\StaticContainer;
 use Piwik\DataTable\Renderer\Json;
 use Piwik\Date;
-use Piwik\Http;
 use Piwik\Nonce;
 use Piwik\Notification;
 use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\ConnectAccounts\ConnectAccounts;
-use Piwik\Plugins\ConnectAccounts\helpers\ConnectHelper;
 use Piwik\Plugins\ConnectAccounts\Strategy\Google\GoogleConnect;
 use Piwik\Plugins\GoogleAnalyticsImporter\Commands\ImportGA4Reports;
-use Piwik\Plugins\GoogleAnalyticsImporter\Commands\ImportReports;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\Authorization;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\AuthorizationGA4;
 use Piwik\Plugins\GoogleAnalyticsImporter\Input\EndDate;
@@ -34,9 +30,10 @@ use Piwik\SettingsPiwik;
 use Piwik\Url;
 use Piwik\Log\LoggerInterface;
 use Piwik\Plugins\SitesManager\SitesManager;
+
 class Controller extends \Piwik\Plugin\ControllerAdmin
 {
-    const OAUTH_STATE_NONCE_NAME = 'GoogleAnalyticsImporter.oauthStateNonce';
+    public const OAUTH_STATE_NONCE_NAME = 'GoogleAnalyticsImporter.oauthStateNonce';
     public function index($errorMessage = \false)
     {
         Piwik::checkUserHasSuperUserAccess();
@@ -105,7 +102,69 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         }
         $configureConnectionProps = \Piwik\Plugins\GoogleAnalyticsImporter\GoogleAnalyticsImporter::getConfigureConnectProps($nonce);
         $isClientConfigurable = StaticContainer::get('GoogleAnalyticsImporter.isClientConfigurable');
-        return $this->renderTemplate('index', ['isClientConfigurable' => $isClientConfigurable, 'isConfigured' => $authorization->hasAccessToken(), 'auth_nonce' => Nonce::getNonce('gaimport.auth', 1200), 'hasClientConfiguration' => $hasClientConfiguration, 'nonce' => $nonce, 'statuses' => $statuses, 'stopImportNonce' => $stopImportNonce, 'startImportNonce' => $startImportNonce, 'changeImportEndDateNonce' => $changeImportEndDateNonce, 'resumeImportNonce' => $resumeImportNonce, 'scheduleReImportNonce' => $scheduleReImportNonce, 'maxEndDateDesc' => $maxEndDateDesc, 'importOptionsUA' => array('ua' => Piwik::translate('GoogleAnalyticsImporter_SelectImporterUATitle')), 'importOptionsGA4' => ['ga4' => Piwik::translate('GoogleAnalyticsImporter_SelectImporterGA4Title')], 'extraCustomDimensionsField' => ['field1' => ['key' => 'gaDimension', 'title' => Piwik::translate('GoogleAnalyticsImporter_GADimension'), 'uiControl' => 'text', 'availableValues' => null], 'field2' => ['key' => 'dimensionScope', 'title' => Piwik::translate('GoogleAnalyticsImporter_DimensionScope'), 'uiControl' => 'select', 'availableValues' => ['visit' => Piwik::translate('General_Visit'), 'action' => Piwik::translate('General_Action')]]], 'extraCustomDimensionsFieldGA4' => ['field1' => ['key' => 'ga4Dimension', 'title' => Piwik::translate('GoogleAnalyticsImporter_GA4Dimension'), 'uiControl' => 'text', 'availableValues' => null], 'field2' => ['key' => 'dimensionScope', 'title' => Piwik::translate('GoogleAnalyticsImporter_DimensionScope'), 'uiControl' => 'select', 'availableValues' => ['visit' => Piwik::translate('General_Visit'), 'action' => Piwik::translate('General_Action')]]], 'streamIdsFieldGA4' => ['field1' => ['key' => 'streamId', 'title' => Piwik::translate('GoogleAnalyticsImporter_StreamId'), 'uiControl' => 'text', 'availableValues' => null]], 'extensions' => self::getComponentExtensions(), 'configureConnectionProps' => $configureConnectionProps]);
+        return $this->renderTemplate(
+            'index',
+            [
+                'isClientConfigurable' => $isClientConfigurable,
+                'isConfigured' => $authorization->hasAccessToken(),
+                'auth_nonce' => Nonce::getNonce('gaimport.auth', 1200),
+                'hasClientConfiguration' => $hasClientConfiguration,
+                'nonce' => $nonce,
+                'statuses' => $statuses,
+                'stopImportNonce' => $stopImportNonce,
+                'startImportNonce' => $startImportNonce,
+                'changeImportEndDateNonce' => $changeImportEndDateNonce,
+                'resumeImportNonce' => $resumeImportNonce,
+                'scheduleReImportNonce' => $scheduleReImportNonce,
+                'maxEndDateDesc' => $maxEndDateDesc,
+                'importOptionsUA' => array(
+                    'ua' => Piwik::translate('GoogleAnalyticsImporter_SelectImporterUATitle')),
+                'importOptionsGA4' => [
+                    'ga4' => Piwik::translate('GoogleAnalyticsImporter_SelectImporterGA4Title')],
+                'extraCustomDimensionsField' => [
+                    'field1' => [
+                        'key' => 'gaDimension',
+                        'title' => Piwik::translate('GoogleAnalyticsImporter_GADimension'),
+                        'uiControl' => 'text',
+                        'availableValues' => null
+                    ],
+                    'field2' => [
+                        'key' => 'dimensionScope',
+                        'title' => Piwik::translate('GoogleAnalyticsImporter_DimensionScope'),
+                        'uiControl' => 'select',
+                        'availableValues' => [
+                            'visit' => Piwik::translate('General_Visit'),
+                            'action' => Piwik::translate('General_Action')]
+                    ]
+                ],
+                'extraCustomDimensionsFieldGA4' => [
+                    'field1' => [
+                        'key' => 'ga4Dimension',
+                        'title' => Piwik::translate('GoogleAnalyticsImporter_GA4Dimension'),
+                        'uiControl' => 'text',
+                        'availableValues' => null
+                    ],
+                    'field2' => [
+                        'key' => 'dimensionScope',
+                        'title' => Piwik::translate('GoogleAnalyticsImporter_DimensionScope'),
+                        'uiControl' => 'select',
+                        'availableValues' => [
+                            'visit' => Piwik::translate('General_Visit'),
+                            'action' => Piwik::translate('General_Action')]
+                    ]
+                ],
+                'streamIdsFieldGA4' => [
+                    'field1' => [
+                        'key' => 'streamId',
+                        'title' => Piwik::translate('GoogleAnalyticsImporter_StreamId'),
+                        'uiControl' => 'text',
+                        'availableValues' => null
+                    ]
+                ],
+                'extensions' => self::getComponentExtensions(),
+                'configureConnectionProps' => $configureConnectionProps
+            ]
+        );
     }
     public function forwardToAuth()
     {
@@ -457,10 +516,11 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
      * @return array Map of component extensions. Like [ [ 'plugin' => 'PluginName', 'component' => 'ComponentName' ] ]
      * See {@link https://developer.matomo.org/guides/in-depth-vue#allowing-plugins-to-add-content-to-your-vue-components the developer documentation} for more information.
      */
-    public static function getComponentExtensions($isNoDataPage = \false) : array
+    public static function getComponentExtensions($isNoDataPage = \false): array
     {
         $componentExtensions = [];
         Piwik::postEvent('GoogleAnalyticsImporter.getGoogleConfigComponentExtensions', [&$componentExtensions, $isNoDataPage]);
+
         return $componentExtensions;
     }
     private function getStreamIdsFromRequest()

@@ -6,16 +6,17 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\UserCountry;
 
 use Piwik\Common;
 use Piwik\DataTable;
 use Piwik\Date;
 use Piwik\Plugins\UserCountry\Archiver;
-use Piwik\Plugins\UserCountry\LocationProvider;
+
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'UserCountry';
+    public const PLUGIN_NAME = 'UserCountry';
     public function importRecords(Date $day)
     {
         $this->queryDimension($day, 'countryId', Archiver::COUNTRY_RECORD_NAME);
@@ -52,7 +53,7 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
                         // GA returns region as COUNTRY-REGION, we only want the last part here
                         $regionParts = explode('-', $region);
                         $region = end($regionParts);
-            
+
                         $locationRegion = $region . Archiver::LOCATION_SEPARATOR . $country;
                         $locationCity = $city . Archiver::LOCATION_SEPARATOR . $locationRegion;
                          */
@@ -65,12 +66,12 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
                         ) {
                             $lat = round($lat, LocationProvider::GEOGRAPHIC_COORD_PRECISION);
                             $long = round($long, LocationProvider::GEOGRAPHIC_COORD_PRECISION);
-            
+
                             // set latitude + longitude metadata
                             $topLevelRowCity->setMetadata('lat', $lat);
                             $topLevelRowCity->setMetadata('long', $long);
                         }
-            
+
                         $this->addRowToTable($regions, $row, $locationRegion);
                          */
         }

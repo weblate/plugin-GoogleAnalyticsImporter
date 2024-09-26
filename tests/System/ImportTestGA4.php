@@ -6,11 +6,13 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\System;
 
 use Piwik\Plugins\GoogleAnalyticsImporter\tests\Fixtures\ImportedFromGoogleGA4;
 use Piwik\Tests\Framework\TestCase\SystemTestCase;
 use Piwik\Version;
+
 // TODO: in-table segments should be disabled for these imported reports (would need to mark records as imported and delete segment metadata in hooks)
 /**
  * @group GoogleAnalyticsImporter

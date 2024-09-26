@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -147,7 +148,8 @@ EOF;
                 return $content;
             }
 
-            if ($filePath === __DIR__ . '/vendor/google/apiclient/src/aliases.php'
+            if (
+                $filePath === __DIR__ . '/vendor/google/apiclient/src/aliases.php'
                 || $filePath === __DIR__ . '/vendor/google/apiclient-services/autoload.php'
             ) {
                 $content = preg_replace_callback('/([\'"])Google_/', function ($matches) {
@@ -156,7 +158,18 @@ EOF;
             }
 
             if ($filePath === __DIR__ . '/vendor/google/apiclient/src/Client.php') {
-                $content = str_replace(['Monolog\Handler\StreamHandler', 'Monolog\Handler\SyslogHandler', 'Monolog\Logger'], ['\Piwik\Plugins\Monolog\Handler\FileHandler', '\Piwik\Plugins\GoogleAnalyticsImporter\Monolog\Handler\GASystemLogHandler', '\Piwik\Log\Logger'], $content);
+                $content = str_replace(
+                    [
+                        'Monolog\Handler\StreamHandler',
+                        'Monolog\Handler\SyslogHandler', 'Monolog\Logger'
+                    ],
+                    [
+                        '\Piwik\Plugins\Monolog\Handler\FileHandler',
+                        '\Piwik\Plugins\GoogleAnalyticsImporter\Monolog\Handler\GASystemLogHandler',
+                        '\Piwik\Log\Logger'
+                    ],
+                    $content
+                );
             }
 
             if ($filePath === __DIR__ . '/vendor/google/apiclient/src/aliases.php') {
@@ -214,9 +227,14 @@ EOF;
 
             // Fix the string reference of a scoped dependency in the Math lib
             $escapedPrefix = str_replace('\\', '\\\\', $prefix);
-            if ($filePath === __DIR__ . '/vendor/phpseclib/phpseclib/phpseclib/Math/BigInteger.php' || $filePath === __DIR__ . '/vendor/phpseclib/phpseclib/phpseclib/Math/BigInteger/Engines/Engine.php') {
-                $content = str_replace('phpseclib3\\\\Math\\\\BigInteger\\\\Engines\\\\',
-                    "{$escapedPrefix}\\\\phpseclib3\\\\Math\\\\BigInteger\\\\Engines\\\\", $content);
+            if (
+                $filePath === __DIR__ . '/vendor/phpseclib/phpseclib/phpseclib/Math/BigInteger.php' || $filePath === __DIR__ . '/vendor/phpseclib/phpseclib/phpseclib/Math/BigInteger/Engines/Engine.php'
+            ) {
+                $content = str_replace(
+                    'phpseclib3\\\\Math\\\\BigInteger\\\\Engines\\\\',
+                    "{$escapedPrefix}\\\\phpseclib3\\\\Math\\\\BigInteger\\\\Engines\\\\",
+                    $content
+                );
             }
 
             // Remove the newly added namespace for the bcmath functions

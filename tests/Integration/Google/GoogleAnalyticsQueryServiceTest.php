@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration\Google;
 
 use Piwik\Container\StaticContainer;
@@ -17,6 +18,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleQueryObjectFactory;
 use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
 use Piwik\Log\LoggerInterface;
+
 class GoogleAnalyticsQueryServiceTest extends IntegrationTestCase
 {
     public function getTestDataForGaErrorTest()

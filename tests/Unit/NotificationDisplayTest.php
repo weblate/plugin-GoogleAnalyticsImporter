@@ -6,11 +6,12 @@
  * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Unit;
 
-use Piwik\Common;
 use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\GoogleAnalyticsImporter;
+
 /**
  * @group GoogleAnalyticsImporter
  * @group NotificationDisplayTest
@@ -18,11 +19,11 @@ use Piwik\Plugins\GoogleAnalyticsImporter\GoogleAnalyticsImporter;
  */
 class NotificationDisplayTest extends \PHPUnit\Framework\TestCase
 {
-    public function setUp() : void
+    public function setUp(): void
     {
         // set up here if needed
     }
-    public function tearDown() : void
+    public function tearDown(): void
     {
         // tear down here if needed
     }

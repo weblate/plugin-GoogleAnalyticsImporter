@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\CustomDimensions;
 
 use Piwik\Common;
@@ -24,9 +25,10 @@ use Piwik\Plugins\GoogleAnalyticsImporter\ImportStatus;
 use Piwik\Plugins\MobileAppMeasurable\Type;
 use Piwik\Site;
 use Piwik\Log\LoggerInterface;
+
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'CustomDimensions';
+    public const PLUGIN_NAME = 'CustomDimensions';
     private $maximumRowsInDataTableLevelZero;
     private $maximumRowsInSubDataTable;
     private $isMobileApp;
@@ -121,27 +123,27 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
                         $exitPageMetrics = [
                             Metrics::INDEX_PAGE_EXIT_NB_VISITS,
                         ];
-            
+
                         $table = $gaQuery->query($day, $dimensions = [$gaDimension], $exitPageMetrics, [
                             'orderBys' => [
             //                    ['field' => 'ga:exits', 'order' => 'descending'],  Not available in GA4
                                 ['field' => $gaDimension, 'order' => 'ascending'],
                             ],
                         ]);
-            
+
                         foreach ($table->getRows() as $row) {
                             $label = $row->getMetadata($gaDimension);
                             if (empty($label)) {
                                 $label = parent::NOT_SET_IN_GA_LABEL;
                             }
-            
+
                             $row->deleteMetadata();
                             $tableRow = $record->getRowFromLabel($label);
                             if (!empty($tableRow)) {
                                 $tableRow->sumRow($row);
                             }
                         }
-            
+
                         Common::destroy($table);
                          */
             $entryPageMetrics = [

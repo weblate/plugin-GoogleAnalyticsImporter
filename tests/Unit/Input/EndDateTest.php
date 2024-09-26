@@ -7,11 +7,13 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Unit\Google;
 
 use PHPUnit\Framework\TestCase;
 use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\Input\EndDate;
+
 class EndDateTest extends TestCase
 {
     public function test_getMaxEndDate_withConfigSectionButNoValue()
@@ -80,7 +82,7 @@ class EndDateTest extends TestCase
     private function getMockConfig(array $gaConfig)
     {
         $mock = $this->getMockBuilder(\Piwik\Config::class)->disableOriginalConstructor()->onlyMethods(['__get'])->getMock();
-        $mock->method('__get')->willReturnCallback(function ($section) use($gaConfig) {
+        $mock->method('__get')->willReturnCallback(function ($section) use ($gaConfig) {
             if ($section != 'GoogleAnalyticsImporter') {
                 return [];
             }

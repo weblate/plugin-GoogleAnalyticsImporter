@@ -6,11 +6,13 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\Importer;
 use Piwik\Log\LoggerInterface;
+
 class GoogleQueryObjectFactory
 {
     private static $defaultMetricOrderByPriority = ['ga:uniquePageviews', 'ga:uniqueScreenviews', 'ga:pageviews', 'ga:screenviews', 'ga:sessions', 'ga:goalCompletionsAll'];
@@ -137,7 +139,14 @@ class GoogleQueryObjectFactory
         foreach ($orderBys as $entry) {
             $field = $entry['field'];
             if (!in_array($field, $metricsQueried) && !in_array($field, $dimensions)) {
-                $this->logger->error("Unexpected error: trying to order by {field}, but field is not in list of metrics/dimensions being queried: {metrics}/{dims}", ['field' => $field, 'metrics' => implode(', ', $metricsQueried), 'dims' => implode(', ', $dimensions)]);
+                $this->logger->error(
+                    "Unexpected error: trying to order by {field}, but field is not in list of metrics/dimensions being queried: {metrics}/{dims}",
+                    [
+                        'field' => $field,
+                        'metrics' => implode(', ', $metricsQueried),
+                        'dims' => implode(', ', $dimensions)
+                    ]
+                );
             }
         }
     }

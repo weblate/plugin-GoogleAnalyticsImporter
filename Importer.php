@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google_Service_Analytics_Goal;
@@ -34,7 +35,6 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGoalMapper;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleQueryObjectFactory;
 use Piwik\Plugins\GoogleAnalyticsImporter\Input\EndDate;
 use Piwik\Plugins\GoogleAnalyticsImporter\Input\MaxEndDateReached;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
 use Piwik\Plugins\Goals\API as GoalsAPI;
 use Piwik\Plugins\CustomDimensions\API as CustomDimensionsAPI;
 use Piwik\Plugins\TagManager\TagManager;
@@ -44,10 +44,11 @@ use Piwik\SettingsPiwik;
 use Piwik\SettingsServer;
 use Piwik\Site;
 use Piwik\Log\LoggerInterface;
+
 class Importer
 {
-    const IS_IMPORTED_FROM_GA_NUMERIC = 'GoogleAnalyticsImporter_isImportedFromGa';
-    const PAGE_SIZE = 100000;
+    public const IS_IMPORTED_FROM_GA_NUMERIC = 'GoogleAnalyticsImporter_isImportedFromGa';
+    public const PAGE_SIZE = 100000;
     /**
      * @var ReportsProvider
      */
@@ -323,7 +324,7 @@ class Importer
             }
             $this->importStatus->finishImportIfNothingLeft($idSite);
             unset($recordImporters);
-        } catch (DailyRateLimitReached|CloudApiQuotaExceeded $ex) {
+        } catch (DailyRateLimitReached | CloudApiQuotaExceeded $ex) {
             if ($ex instanceof CloudApiQuotaExceeded) {
                 $this->apiQuotaHelper->trackEvent('Internal Quota Exception Reached', 'Google_Analytics_Importer');
                 $this->importStatus->cloudRateLimitReached($idSite, $ex->getMessage());
