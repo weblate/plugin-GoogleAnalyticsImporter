@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\Goals;
 
 use Piwik\Common;
@@ -21,6 +22,7 @@ use Piwik\Plugins\VisitFrequency\API as VisitFrequencyAPI;
 use Piwik\Site;
 use Piwik\Tracker\GoalManager;
 use Piwik\Log\LoggerInterface;
+
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporter
 {
     const PLUGIN_NAME = 'Goals';

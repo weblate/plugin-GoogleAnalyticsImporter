@@ -6,16 +6,18 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Concurrency\Lock;
 use Piwik\Concurrency\LockBackend\MySqlLockBackend;
 use Piwik\Config;
+
 class ImportLock extends Lock
 {
-    const LOCK_TTL = 300;
+    public const LOCK_TTL = 300;
     // lock will expire 5 minutes after inactivity
-    const IMPORT_LOCK_NAME = 'GoogleAnalyticsImport_importLock';
+    public const IMPORT_LOCK_NAME = 'GoogleAnalyticsImport_importLock';
     private $configuredLockTtl;
     public function __construct(Config $config)
     {

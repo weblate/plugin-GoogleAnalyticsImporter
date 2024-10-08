@@ -6,11 +6,10 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Integration;
 
 use Piwik\CliMulti\CliPhp;
-use Piwik\Config;
-use Piwik\Config\GeneralConfig;
 use Piwik\Container\StaticContainer;
 use Piwik\Option;
 use Piwik\Plugins\GoogleAnalyticsImporter\Commands\ImportReports;
@@ -19,7 +18,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Tasks;
 use Piwik\SettingsPiwik;
 use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Version;
+
 class TasksWithMockExec extends Tasks
 {
     public static $commandsRun = [];
@@ -42,7 +41,7 @@ class TasksTest extends IntegrationTestCase
      * @var string
      */
     private $tmpPath;
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->tmpPath = StaticContainer::get('path.tmp');

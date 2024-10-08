@@ -6,12 +6,14 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\Plugins\GoogleAnalyticsImporter\CannotImportGoalException;
 use Piwik\Plugins\SitesManager\API;
 use Piwik\Log\LoggerInterface;
 use Piwik\Url;
+
 class GoogleGoalMapper
 {
     /**

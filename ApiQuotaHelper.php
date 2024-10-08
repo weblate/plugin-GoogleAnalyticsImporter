@@ -6,6 +6,7 @@
  * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 /**
@@ -17,7 +18,7 @@ class ApiQuotaHelper
      * Calculate the daily maximum api quota available for the instance
      * @return int
      */
-    public function getMaxDailyApiQuota() : int
+    public function getMaxDailyApiQuota(): int
     {
         //Local installation. No limitations from google applicable
         return -1;

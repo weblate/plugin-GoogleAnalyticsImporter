@@ -6,11 +6,12 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework;
 
 class MockResponseBuilderGA4
 {
-    const PATH_TO_CAPTURED_DATA_FILE = '/plugins/GoogleAnalyticsImporter/tests/resources/capturedresponses-ga4.log';
+    public const PATH_TO_CAPTURED_DATA_FILE = '/plugins/GoogleAnalyticsImporter/tests/resources/capturedresponses-ga4.log';
     public static $responses = [];
     public static function populateMockResponse()
     {

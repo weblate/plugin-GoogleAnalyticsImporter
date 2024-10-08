@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\ArchiveProcessor\PluginsArchiver;
@@ -15,10 +16,11 @@ use Piwik\Container\StaticContainer;
 use Piwik\Option;
 use Piwik\Piwik;
 use Piwik\Url;
+
 class Authorization
 {
-    const ACCESS_TOKEN_OPTION_NAME = 'GoogleAnalyticsImporter.oauthAccessToken';
-    const CLIENT_CONFIG_OPTION_NAME = 'GoogleAnalyticsImporter.clientConfiguration';
+    public const ACCESS_TOKEN_OPTION_NAME = 'GoogleAnalyticsImporter.oauthAccessToken';
+    public const CLIENT_CONFIG_OPTION_NAME = 'GoogleAnalyticsImporter.clientConfiguration';
     public function hasAccessToken()
     {
         $value = $this->getAccessToken();

@@ -6,15 +6,19 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework;
 
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\GapicClientTrait;
+
 require_once PIWIK_INCLUDE_PATH . '/plugins/GoogleAnalyticsImporter/vendor/autoload.php';
 class MockResponseClientGA4 extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\BetaAnalyticsDataClient
 {
+    use GapicClientTrait;
+
     public static $isForSystemTest = \false;
     private $mockResponses = [];
-    use GapicClientTrait;
+
     public function __construct(array $options = [])
     {
         $defaultOptions = $this->getDefaultOptions();

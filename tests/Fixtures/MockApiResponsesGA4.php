@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Fixtures;
 
 use Piwik\Option;
@@ -13,6 +14,7 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Google\AuthorizationGA4;
 use Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework\MockResponseClientGA4;
 use Piwik\Plugins\GoogleAnalyticsImporter\tests\Framework\MockResponseAdminServiceClientGA4;
 use Piwik\Tests\Framework\Fixture;
+
 class MockApiResponsesGA4 extends Fixture
 {
     private $createSite;
@@ -20,7 +22,7 @@ class MockApiResponsesGA4 extends Fixture
     {
         $this->createSite = $createSite;
     }
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         if ($this->createSite) {

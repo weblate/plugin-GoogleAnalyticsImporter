@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Matomo - free/libre analytics platform
  *
@@ -23,4 +24,3 @@ if (class_exists('Piwik\Plugins\Monolog\Handler\SyslogHandler')) {
     {
     }
 }
-

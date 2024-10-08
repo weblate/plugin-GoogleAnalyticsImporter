@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\UserCountry;
 
 use Piwik\Common;
@@ -13,6 +14,7 @@ use Piwik\DataTable;
 use Piwik\Date;
 use Piwik\Plugins\UserCountry\Archiver;
 use Piwik\Plugins\UserCountry\LocationProvider;
+
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporter
 {
     const PLUGIN_NAME = 'UserCountry';

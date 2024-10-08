@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\CustomVariables;
 
 use Piwik\Common;
@@ -20,6 +21,7 @@ use Piwik\Plugins\CustomVariables\Model;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsQueryService;
 use Piwik\Plugins\GoogleAnalyticsImporter\ImportConfiguration;
 use Piwik\Log\LoggerInterface;
+
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporter
 {
     const PLUGIN_NAME = 'CustomVariables';

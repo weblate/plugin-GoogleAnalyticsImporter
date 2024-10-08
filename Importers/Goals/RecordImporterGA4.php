@@ -7,24 +7,22 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\Goals;
 
 use Piwik\Common;
-use Piwik\Container\StaticContainer;
 use Piwik\DataTable;
 use Piwik\Date;
 use Piwik\Metrics;
 use Piwik\Plugins\Goals\Archiver;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsGA4QueryService;
-use Piwik\Plugins\GoogleAnalyticsImporter\Importer;
-use Piwik\Plugins\GoogleAnalyticsImporter\ImporterGA4;
-use Piwik\Plugins\VisitFrequency\API as VisitFrequencyAPI;
 use Piwik\Site;
 use Piwik\Tracker\GoalManager;
 use Piwik\Log\LoggerInterface;
+
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'Goals';
+    public const PLUGIN_NAME = 'Goals';
     private $itemRecords;
     private $segmentToApply;
     public function __construct(GoogleAnalyticsGA4QueryService $gaQuery, $idSite, LoggerInterface $logger, $segmentToApply = null)
@@ -56,9 +54,9 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
                         'segmentId' => 'gaid::-3',
                     ],
                 ];
-        
+
                 $site = new Site($this->getIdSite());
-        
+
                 $importer = StaticContainer::get(ImporterGA4::class);
                 foreach ($segments as $segment => $gaSegment) {
                     $childRecordImporter = new RecordImporter($this->getGaClient(), $this->getIdSite(), $this->getLogger(), $gaSegment);
@@ -91,7 +89,13 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
         Common::destroy($table);
         $table = $gaQuery->query($day, $dimensions = [], [Metrics::INDEX_NB_VISITS_CONVERTED, Metrics::INDEX_NB_CONVERSIONS, Metrics::INDEX_REVENUE]);
         if ($table->getFirstRow()) {
-            $this->insertNumericRecords([Archiver::getRecordName('nb_conversions') => $table->getFirstRow()->getColumn(Metrics::INDEX_NB_CONVERSIONS), Archiver::getRecordName('nb_visits_converted') => $table->getFirstRow()->getColumn(Metrics::INDEX_NB_VISITS_CONVERTED), Archiver::getRecordName('revenue') => $table->getFirstRow()->getColumn(Metrics::INDEX_REVENUE)]);
+            $this->insertNumericRecords(
+                [
+                    Archiver::getRecordName('nb_conversions') => $table->getFirstRow()->getColumn(Metrics::INDEX_NB_CONVERSIONS),
+                    Archiver::getRecordName('nb_visits_converted') => $table->getFirstRow()->getColumn(Metrics::INDEX_NB_VISITS_CONVERTED),
+                    Archiver::getRecordName('revenue') => $table->getFirstRow()->getColumn(Metrics::INDEX_REVENUE)
+                ]
+            );
         }
         Common::destroy($table);
         $this->insertNumericRecords($numericRecords);

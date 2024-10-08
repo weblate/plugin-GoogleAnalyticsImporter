@@ -6,11 +6,13 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\Plugins\CustomDimensions\Dimension\Name;
 use Piwik\Plugins\GoogleAnalyticsImporter\CannotImportCustomDimensionException;
 use Piwik\Plugins\GoogleAnalyticsImporter\OutOfCustomDimensionsException;
+
 class GoogleCustomDimensionMapper
 {
     public function map(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Service\Analytics\CustomDimension $gaCustomDimension)

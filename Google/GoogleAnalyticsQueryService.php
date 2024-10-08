@@ -7,25 +7,26 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Google;
 
 use Piwik\Common;
 use Piwik\Container\StaticContainer;
 use Piwik\Date;
 use Piwik\Db;
-use Piwik\Exception\Exception;
 use Piwik\Option;
 use Piwik\Piwik;
 use Piwik\Site;
 use Piwik\Log\LoggerInterface;
+
 class GoogleAnalyticsQueryService
 {
-    const DEFAULT_MAX_ATTEMPTS = 30;
-    const MAX_BACKOFF_TIME = 60;
-    const PING_MYSQL_EVERY = 25;
-    const DEFAULT_MIN_BACKOFF_TIME = 2;
+    public const DEFAULT_MAX_ATTEMPTS = 30;
+    public const MAX_BACKOFF_TIME = 60;
+    public const PING_MYSQL_EVERY = 25;
+    public const DEFAULT_MIN_BACKOFF_TIME = 2;
     // start at 2s since GA seems to have trouble w/ the 10 requests per 100s limit w/ 1
-    const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt_';
+    public const DELAY_OPTION_NAME = 'GoogleAnalyticsImporter_nextAvailableAt_';
     private static $problematicMetrics = ['ga:users', 'ga:hits'];
     /**
      * @var int

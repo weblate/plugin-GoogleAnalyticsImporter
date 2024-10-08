@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Config as PiwikConfig;
@@ -15,10 +16,11 @@ use Piwik\Date;
 use Piwik\Metrics;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsQueryService;
 use Piwik\Log\LoggerInterface;
+
 abstract class RecordImporter
 {
-    const IS_IMPORTED_FROM_GOOGLE_METADATA_NAME = 'is_imported_from_google';
-    const NOT_SET_IN_GA_LABEL = '__not_set_in_google_analytics__';
+    public const IS_IMPORTED_FROM_GOOGLE_METADATA_NAME = 'is_imported_from_google';
+    public const NOT_SET_IN_GA_LABEL = '__not_set_in_google_analytics__';
     /**
      * @var GoogleAnalyticsQueryService
      */
@@ -51,7 +53,7 @@ abstract class RecordImporter
     {
         return \true;
     }
-    public abstract function importRecords(Date $day);
+    abstract public function importRecords(Date $day);
     public function setRecordInserter(\Piwik\Plugins\GoogleAnalyticsImporter\RecordInserter $recordInserter)
     {
         $this->recordInserter = $recordInserter;

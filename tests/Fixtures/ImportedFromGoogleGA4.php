@@ -6,6 +6,7 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Fixtures;
 
 use Piwik\Archive\ArchiveInvalidator;
@@ -32,6 +33,7 @@ use Piwik\Tests\Framework\Fixture;
 use Piwik\Tests\Framework\TestCase\SystemTestCase;
 use Piwik\Timer;
 use Symfony\Bridge\Monolog\Handler\ConsoleHandler;
+
 class ImportedFromGoogleGA4 extends Fixture
 {
     public $idSite = 1;
@@ -51,7 +53,7 @@ class ImportedFromGoogleGA4 extends Fixture
         $this->extraPluginsToLoad = ['Funnels', 'MarketingCampaignsReporting'];
         $this->isCapturingResponses = getenv('MATOMO_TEST_CAPTURE_GA4_RESPONSES') == 1;
     }
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         if (SystemTestCase::isCIEnvironment()) {

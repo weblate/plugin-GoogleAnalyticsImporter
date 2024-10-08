@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\CustomVariables;
 
 use Piwik\Common;
@@ -22,9 +23,10 @@ use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsGA4QueryService;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleGA4ResponseDataTableFactory;
 use Piwik\Plugins\GoogleAnalyticsImporter\ImportConfiguration;
 use Piwik\Log\LoggerInterface;
+
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'CustomVariables';
+    public const PLUGIN_NAME = 'CustomVariables';
     protected $maximumRowsInDataTableLevelZero;
     protected $maximumRowsInSubDataTable;
     /**
@@ -69,15 +71,15 @@ class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImp
                 $table = $gaQuery->query($day, $dimensions = [$keyField, $valueField], $this->getVisitMetrics());
                 $this->processCustomVarQuery($record, $table, Model::SCOPE_VISIT, $keyField, $valueField);
                 Common::destroy($table);
-        
+
                 $table = $gaQuery->query($day, $dimensions = [$keyField, $valueField], $this->getActionMetrics());
                 $this->processCustomVarQuery($record, $table, Model::SCOPE_PAGE, $keyField, $valueField);
                 Common::destroy($table);
-        
+
                 $table = $gaQuery->query($day, $dimensions = [$keyField, $valueField], [Metrics::INDEX_GOALS]);
                 $this->processCustomVarQuery($record, $table, Model::SCOPE_CONVERSION, $keyField, $valueField);
                 Common::destroy($table);
-        
+
                  */
     }
     private function processCustomVarQuery(DataTable $record, DataTable $table, $scope, $keyField, $valueField)

@@ -6,12 +6,14 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\tests\Unit\Google;
 
 use PHPUnit\Framework\TestCase;
 use Piwik\Date;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleQueryObjectFactory;
 use Piwik\Log\NullLogger;
+
 require_once PIWIK_INCLUDE_PATH . '/plugins/GoogleAnalyticsImporter/vendor/autoload.php';
 /**
  * @group GoogleAnalyticsImporter
@@ -23,7 +25,7 @@ class GoogleQueryObjectFactoryTest extends TestCase
      * @var GoogleQueryObjectFactory
      */
     private $instance;
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->instance = new GoogleQueryObjectFactory(new NullLogger());

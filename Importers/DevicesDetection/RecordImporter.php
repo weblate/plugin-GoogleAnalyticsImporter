@@ -7,6 +7,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\DevicesDetection;
 
 use DeviceDetector\Parser\Client\Browser;
@@ -21,9 +22,10 @@ use Piwik\Plugins\DevicesDetection\Archiver;
 use Piwik\Plugins\GoogleAnalyticsImporter\Google\GoogleAnalyticsQueryService;
 use Piwik\Log\LoggerInterface;
 use DeviceDetector\Parser\Device\AbstractDeviceParser as DeviceParser;
+
 class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporter
 {
-    const PLUGIN_NAME = 'DevicesDetection';
+    public const PLUGIN_NAME = 'DevicesDetection';
     /**
      * @var array
      */
@@ -44,6 +46,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
      * @var Transient
      */
     private $cache;
+
     public function __construct(GoogleAnalyticsQueryService $gaQuery, $idSite, LoggerInterface $logger)
     {
         parent::__construct($gaQuery, $idSite, $logger);
@@ -53,6 +56,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         $this->browserMap = $this->getBrowserMap();
         $this->browserEngineMap = $this->getBrowserEngineMap();
     }
+
     public function importRecords(Date $day)
     {
         $this->buildDeviceTypeRecord($day);
@@ -61,18 +65,22 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         $this->buildDeviceOsRecords($day);
         $this->buildBrowserRecords($day);
     }
+
     private function buildDeviceTypeRecord(Date $day)
     {
         $this->buildRecord($day, 'ga:deviceCategory', Archiver::DEVICE_TYPE_RECORD_NAME, [$this, 'mapCategory']);
     }
+
     private function buildDeviceBrandsRecord(Date $day)
     {
         $this->buildRecord($day, 'ga:mobileDeviceBranding', Archiver::DEVICE_BRAND_RECORD_NAME, [$this, 'mapBrand']);
     }
+
     private function buildDeviceModelsRecord(Date $day)
     {
         $this->buildRecord($day, 'ga:mobileDeviceModel', Archiver::DEVICE_MODEL_RECORD_NAME, [$this, 'mapModel']);
     }
+
     private function buildDeviceOsRecords(Date $day)
     {
         $this->buildRecord($day, 'ga:operatingSystem', Archiver::OS_RECORD_NAME, [$this, 'mapOs']);
@@ -96,6 +104,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         $this->insertRecord(Archiver::OS_VERSION_RECORD_NAME, $operatingSystemVersions, $this->getStandardMaximumRows(), $this->getStandardMaximumRows());
         Common::destroy($operatingSystemVersions);
     }
+
     private function buildBrowserRecords(Date $day)
     {
         $gaQuery = $this->getGaQuery();
@@ -125,6 +134,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         $this->insertRecord(Archiver::BROWSER_VERSION_RECORD_NAME, $browserVersions, $this->getStandardMaximumRows(), $this->getStandardMaximumRows());
         Common::destroy($browserVersions);
     }
+
     private function buildRecord(Date $day, $dimension, $recordName, callable $mapper)
     {
         $gaQuery = $this->getGaQuery();
@@ -147,6 +157,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         $this->insertRecord($recordName, $record, $this->getStandardMaximumRows(), $this->getStandardMaximumRows());
         Common::destroy($record);
     }
+
     protected function mapCategory($category)
     {
         switch ($category) {
@@ -161,18 +172,22 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
                 return 'xx';
         }
     }
+
     protected function mapBrand($brand)
     {
         return $this->getValueFromValueMapping($this->deviceBrandMap, $brand, 'device brand');
     }
+
     protected function mapModel($model)
     {
         return $model;
     }
+
     protected function mapOs($os)
     {
         return $this->getValueFromValueMapping($this->operatingSystemMap, $os, 'operating system');
     }
+
     protected function mapBrowser($browser)
     {
         if (is_numeric($browser)) {
@@ -181,18 +196,22 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         }
         return $this->getValueFromValueMapping($this->browserMap, $browser, 'browser');
     }
+
     private function mapBrowserEngine($browser)
     {
         return $this->getValueFromValueMapping($this->browserEngineMap, $browser, null);
     }
+
     protected function mapOsVersion($osVersion)
     {
         return $osVersion;
     }
+
     protected function mapBrowserVersion($browserVersion)
     {
         return $browserVersion;
     }
+
     private function buildValueMapping($deviceParserValues)
     {
         $map = [];
@@ -204,6 +223,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         }
         return $map;
     }
+
     private function getValueFromValueMapping(array $valueMapping, $value, $valueType = null)
     {
         $cleanValue = trim(strtolower($value));
@@ -219,6 +239,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         }
         return $value;
     }
+
     private function getDeviceBrandMap()
     {
         $cacheKey = 'GoogleAnalyticsImporter.DevicesDetection.deviceBrandMap';
@@ -246,6 +267,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         }
         return $result;
     }
+
     private function getOperatingSystemMap()
     {
         $cacheKey = 'GoogleAnalyticsImporter.DevicesDetection.operatingSystemMap';
@@ -265,6 +287,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         }
         return $result;
     }
+
     private function getBrowserMap()
     {
         $cacheKey = 'GoogleAnalyticsImporter.DevicesDetection.browserMap';
@@ -297,6 +320,7 @@ class RecordImporter extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImport
         }
         return $result;
     }
+
     private function getBrowserEngineMap()
     {
         $cacheKey = 'GoogleAnalyticsImporter.DevicesDetection.browserEngineMap';

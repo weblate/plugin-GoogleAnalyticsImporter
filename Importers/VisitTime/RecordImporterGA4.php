@@ -6,15 +6,17 @@
  * @link http://piwik.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitTime;
 
 use Piwik\Common;
 use Piwik\DataTable;
 use Piwik\Date;
 use Piwik\Plugins\VisitTime\Archiver;
+
 class RecordImporterGA4 extends \Piwik\Plugins\GoogleAnalyticsImporter\RecordImporterGA4
 {
-    const PLUGIN_NAME = 'VisitTime';
+    public const PLUGIN_NAME = 'VisitTime';
     public function importRecords(Date $day)
     {
         $this->queryDimension($day, 'hour', Archiver::SERVER_TIME_RECORD_NAME);

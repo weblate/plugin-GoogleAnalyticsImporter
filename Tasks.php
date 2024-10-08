@@ -6,11 +6,11 @@
  * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
+
 namespace Piwik\Plugins\GoogleAnalyticsImporter;
 
 use Piwik\Exception\DI\NotFoundException;
 use Piwik\CliMulti\CliPhp;
-use Piwik\Config;
 use Piwik\Container\StaticContainer;
 use Piwik\Date;
 use Piwik\SettingsPiwik;
@@ -18,10 +18,11 @@ use Piwik\SettingsServer;
 use Piwik\Site;
 use Piwik\Log\LoggerInterface;
 use Piwik\Plugins\GoogleAnalyticsImporter\Diagnostic\RequiredExecutablesCheck;
+
 class Tasks extends \Piwik\Plugin\Tasks
 {
-    const DATE_FINISHED_ENV_VAR = 'MATOMO_GOOGLE_IMPORT_END_DATE_TO_ARCHIVE';
-    const SECONDS_IN_YEAR = 31557600;
+    public const DATE_FINISHED_ENV_VAR = 'MATOMO_GOOGLE_IMPORT_END_DATE_TO_ARCHIVE';
+    public const SECONDS_IN_YEAR = 31557600;
     // 60 * 60 * 24 * 365.25
     public function schedule()
     {
