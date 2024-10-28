@@ -31,6 +31,8 @@ abstract class BaseRecordImporterTest extends IntegrationTestCase
     {
         parent::setUp();
         Fixture::createWebsite('2010-02-01 00:00:00');
+        // Ensure plugin is activated, otherwise adding a site with this type will fail
+        \Piwik\Plugin\Manager::getInstance()->activatePlugin('MobileAppMeasurable');
     }
     abstract public function getTestDir();
     abstract public function getTestedPluginName();
