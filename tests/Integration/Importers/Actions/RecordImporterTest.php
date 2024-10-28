@@ -23,6 +23,8 @@ class RecordImporterTest extends BaseRecordImporterTest
     public function setUp(): void
     {
         parent::setUp();
+        // Ensure plugin is activated, otherwise adding a site with this type will fail
+        \Piwik\Plugin\Manager::getInstance()->activatePlugin('MobileAppMeasurable');
         Fixture::createWebsite('2012-02-02 03:04:04', 1, 'mobile app', \false, 0, null, null, null, Type::ID);
     }
     public function getTestDir()
