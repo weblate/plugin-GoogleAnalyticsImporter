@@ -50,6 +50,7 @@
         "GAImportNoDataScreenStep04": "Navegue até a %1$spágina de administração de importação do Google Analytics%2$s. %3$sSaiba mais%4$s.",
         "GAImportNoDataScreenStep05": "Selecione o tipo de importação.",
         "GAImportNoDataScreenStep06": "Preencha o formulário Agendar uma Importação.",
+        "GAImportNoDataScreenStep06GA4": "Preencha o formulário Agendar uma importação para Google Analytics 4 (GA4).",
         "GAImportNoDataScreenStep07": "Clique em \"%1$s\".",
         "GAImportNoDataScreenStep07Note": "%1$sObservação:%2$s Depois de clicar em \"%3$s\", o Matomo criará automaticamente um novo site do Matomo para cada propriedade selecionada.",
         "GAImportNoDataScreenStep08": "A importação de dados leva tempo, %1$sclique aqui para monitorar o status da importação de dados%2$s.",
