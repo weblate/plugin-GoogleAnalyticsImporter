@@ -50,6 +50,7 @@
         "GAImportNoDataScreenStep04": "Kaloni te %1$sfaqja e përgjegjësit për Google Analytics Import%2$s. %3$sMësoni më tepër%4$s.",
         "GAImportNoDataScreenStep05": "Përzgjidhni lloj Importimi.",
         "GAImportNoDataScreenStep06": "Plotësoni formularin Planifikoni një Importim.",
+        "GAImportNoDataScreenStep06GA4": "Plotësoni formularin “Vini në plan një Importim për Google Analytics 4 (GA4)”.",
         "GAImportNoDataScreenStep07": "Klikoni mbi “%1$s”.",
         "GAImportNoDataScreenStep07Note": "%1$sShënim:%2$s Pasi të klikoni “%3$s”, Matomo-ja do të krijojë automatikisht një sajt të ri Matomo për çdo veti të përzgjedhur.",
         "GAImportNoDataScreenStep08": "Importimi i të dhënave ha kohë, %1$sklikoni këtu, që të vëzhgoni gjendjen e importimit të të dhënave tuaja%2$s.",
