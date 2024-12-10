@@ -208,7 +208,6 @@ class GoogleAnalyticsImporter extends \Piwik\Plugin
         $translationKeys[] = 'GoogleAnalyticsImporter_OauthFailedMessage';
         $translationKeys[] = 'GoogleAnalyticsImporter_ConfigureImportNotificationMessage';
         $translationKeys[] = 'GoogleAnalyticsImporter_ConfigureTheImporterHelp';
-        $translationKeys[] = 'GoogleAnalyticsImporter_ConfigureTheImporterHelpNewDate';
         $translationKeys[] = 'GoogleAnalyticsImporter_ConfigureTheImporterLabel1';
         $translationKeys[] = 'GoogleAnalyticsImporter_ConfigureTheImporterLabel2';
         $translationKeys[] = 'GoogleAnalyticsImporter_ConfigureTheImporterLabel3';
@@ -446,14 +445,16 @@ class GoogleAnalyticsImporter extends \Piwik\Plugin
             $jwt = ConnectHelper::buildOAuthStateJwt(SettingsPiwik::getPiwikInstanceId(), ConnectAccounts::INITIATED_BY_GA);
         }
         $googleAuthUrl = '';
+        $additionalHelpText = '';
         if ($isConnectAccountsActivated) {
             $googleAuthUrl = $authBaseUrl . Http::buildQuery(['module' => 'ConnectAccounts', 'action' => 'initiateOauth', 'state' => $jwt, 'strategy' => GoogleConnect::getStrategyName()]);
+            $additionalHelpText = Piwik::translate('GoogleAnalyticsImporter_NoteImportNotCountedAsHit', ['<strong>', '</strong>']);
         }
         $idSite = Request::fromRequest()->getIntegerParameter('idSite', 0);
         // If for some reason the idSite query parameter isn't set, look up the default site ID
         if ($idSite < 1) {
             $idSite = StaticContainer::get(UserPreferences::class)->getDefaultWebsiteId();
         }
-        return ['isConnectAccountsActivated' => $isConnectAccountsActivated, 'primaryText' => Piwik::translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel1'), 'radioOptions' => !$isConnectAccountsActivated ? [] : ['connectAccounts' => Piwik::translate('ConnectAccounts_OptionQuickConnectWithGa'), 'manual' => Piwik::translate('ConnectAccounts_OptionAdvancedConnectWithGa')], 'googleAuthUrl' => $googleAuthUrl, 'manualConfigText' => Piwik::translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel2') . '<br />' . Piwik::translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel3', ['<a href="' . Url::addCampaignParametersToMatomoLink('https://matomo.org/faq/general/set-up-google-analytics-import/') . '" rel="noreferrer noopener" target="_blank">', '</a>']), 'manualConfigNonce' => $nonce, 'manualActionUrl' => Url::getCurrentUrlWithoutQueryString() . '?' . Http::buildQuery(['module' => 'GoogleAnalyticsImporter', 'action' => 'configureClient', 'idSite' => $idSite]), 'connectAccountsUrl' => $googleAuthUrl, 'connectAccountsBtnText' => Piwik::translate('ConnectAccounts_ConnectWithGoogleText'), 'additionalHelpText' => Piwik::translate('GoogleAnalyticsImporter_ConfigureTheImporterHelpNewDate', ['<strong>', '</strong>'])];
+        return ['isConnectAccountsActivated' => $isConnectAccountsActivated, 'primaryText' => Piwik::translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel1'), 'radioOptions' => !$isConnectAccountsActivated ? [] : ['connectAccounts' => Piwik::translate('ConnectAccounts_OptionQuickConnectWithGa'), 'manual' => Piwik::translate('ConnectAccounts_OptionAdvancedConnectWithGa')], 'googleAuthUrl' => $googleAuthUrl, 'manualConfigText' => Piwik::translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel2') . '<br />' . Piwik::translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel3', ['<a href="' . Url::addCampaignParametersToMatomoLink('https://matomo.org/faq/general/set-up-google-analytics-import/') . '" rel="noreferrer noopener" target="_blank">', '</a>']), 'manualConfigNonce' => $nonce, 'manualActionUrl' => Url::getCurrentUrlWithoutQueryString() . '?' . Http::buildQuery(['module' => 'GoogleAnalyticsImporter', 'action' => 'configureClient', 'idSite' => $idSite]), 'connectAccountsUrl' => $googleAuthUrl, 'connectAccountsBtnText' => Piwik::translate('ConnectAccounts_ConnectWithGoogleText'), 'additionalHelpText' => $additionalHelpText];
     }
 }
