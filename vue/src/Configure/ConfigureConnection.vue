@@ -9,7 +9,7 @@
     <div class="col s12 m12">
       <p>{{ translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel1') }}</p>
       <p>
-        {{ translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel2') }}<br />
+        {{ translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel2') }}&nbsp;
         <span v-html="$sanitize(setupGoogleAnalyticsImportFaq)"></span>
       </p>
     </div>
