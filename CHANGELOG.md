@@ -1,5 +1,8 @@
 ## Changelog
 
+# 5.0.22 - 2024-12-16
+- Removed GA3 sunset note and added no hits note for Cloud
+
 # 5.0.21 - 2024-09-02
 - Fixed import not running continuously for future dates
 
