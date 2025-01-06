@@ -56,7 +56,7 @@ class ExpandedDataSet extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
     /**
      * Immutable. A logical expression of ExpandedDataSet filters applied to
      * dimension included in the ExpandedDataSet. This filter is used to reduce
-     * the number of rows and thus the change of encountering `other row`.
+     * the number of rows and thus the chance of encountering `other` row.
      *
      * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ExpandedDataSetFilterExpression dimension_filter_expression = 6 [(.google.api.field_behavior) = IMMUTABLE];</code>
      */
@@ -96,7 +96,7 @@ class ExpandedDataSet extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      *     @type \Google\Analytics\Admin\V1alpha\ExpandedDataSetFilterExpression $dimension_filter_expression
      *           Immutable. A logical expression of ExpandedDataSet filters applied to
      *           dimension included in the ExpandedDataSet. This filter is used to reduce
-     *           the number of rows and thus the change of encountering `other row`.
+     *           the number of rows and thus the chance of encountering `other` row.
      *     @type \Google\Protobuf\Timestamp $data_collection_start_time
      *           Output only. Time when expanded data set began (or will begin) collecing
      *           data.
@@ -243,7 +243,7 @@ class ExpandedDataSet extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
     /**
      * Immutable. A logical expression of ExpandedDataSet filters applied to
      * dimension included in the ExpandedDataSet. This filter is used to reduce
-     * the number of rows and thus the change of encountering `other row`.
+     * the number of rows and thus the chance of encountering `other` row.
      *
      * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ExpandedDataSetFilterExpression dimension_filter_expression = 6 [(.google.api.field_behavior) = IMMUTABLE];</code>
      * @return \Google\Analytics\Admin\V1alpha\ExpandedDataSetFilterExpression|null
@@ -263,7 +263,7 @@ class ExpandedDataSet extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
     /**
      * Immutable. A logical expression of ExpandedDataSet filters applied to
      * dimension included in the ExpandedDataSet. This filter is used to reduce
-     * the number of rows and thus the change of encountering `other row`.
+     * the number of rows and thus the chance of encountering `other` row.
      *
      * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ExpandedDataSetFilterExpression dimension_filter_expression = 6 [(.google.api.field_behavior) = IMMUTABLE];</code>
      * @param \Google\Analytics\Admin\V1alpha\ExpandedDataSetFilterExpression $var

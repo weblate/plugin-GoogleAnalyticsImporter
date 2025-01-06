@@ -17,24 +17,14 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * Name of the quota limit. The name is used to refer to the limit when
-     * overriding the default limit on per-consumer basis.
-     * For group-based quota limits, the name must be unique within the quota
-     * group. If a name is not provided, it will be generated from the limit_by
-     * and duration fields.
-     * For metric-based quota limits, the name must be provided, and it must be
-     * unique within the service. The name can only include alphanumeric
-     * characters as well as '-'.
+     * Name of the quota limit.
+     * The name must be provided, and it must be unique within the service. The
+     * name can only include alphanumeric characters as well as '-'.
      * The maximum length of the limit name is 64 characters.
-     * The name of a limit is used as a unique identifier for this limit.
-     * Therefore, once a limit has been put into use, its name should be
-     * immutable. You can use the display_name field to provide a user-friendly
-     * name for the limit. The display name can be evolved over time without
-     * affecting the identity of the limit.
      *
      * Generated from protobuf field <code>string name = 6;</code>
      */
-    private $name = '';
+    protected $name = '';
     /**
      * Optional. User-visible, extended description for this quota limit.
      * Should be used only when more context is needed to understand this limit
@@ -42,7 +32,7 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *
      * Generated from protobuf field <code>string description = 2;</code>
      */
-    private $description = '';
+    protected $description = '';
     /**
      * Default number of tokens that can be consumed during the specified
      * duration. This is the number of tokens assigned when a client
@@ -55,7 +45,7 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *
      * Generated from protobuf field <code>int64 default_limit = 3;</code>
      */
-    private $default_limit = 0;
+    protected $default_limit = 0;
     /**
      * Maximum number of tokens that can be consumed during the specified
      * duration. Client application developers can override the default limit up
@@ -67,7 +57,7 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *
      * Generated from protobuf field <code>int64 max_limit = 4;</code>
      */
-    private $max_limit = 0;
+    protected $max_limit = 0;
     /**
      * Free tier value displayed in the Developers Console for this limit.
      * The free tier is the number of tokens that will be subtracted from the
@@ -79,84 +69,38 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *
      * Generated from protobuf field <code>int64 free_tier = 7;</code>
      */
-    private $free_tier = 0;
+    protected $free_tier = 0;
     /**
-     * Duration of this limit in textual notation. Example: "100s", "24h", "1d".
-     * For duration longer than a day, only multiple of days is supported. We
-     * support only "100s" and "1d" for now. Additional support will be added in
-     * the future. "0" indicates indefinite duration.
+     * Duration of this limit in textual notation. Must be "100s" or "1d".
      * Used by group-based quotas only.
      *
      * Generated from protobuf field <code>string duration = 5;</code>
      */
-    private $duration = '';
+    protected $duration = '';
     /**
      * The name of the metric this quota limit applies to. The quota limits with
      * the same metric will be checked together during runtime. The metric must be
      * defined within the service config.
-     * Used by metric-based quotas only.
      *
      * Generated from protobuf field <code>string metric = 8;</code>
      */
-    private $metric = '';
+    protected $metric = '';
     /**
      * Specify the unit of the quota limit. It uses the same syntax as
      * [Metric.unit][]. The supported unit kinds are determined by the quota
      * backend system.
-     * The [Google Service Control](https://cloud.google.com/service-control)
-     * supports the following unit components:
-     * * One of the time intevals:
-     *   * "/min"  for quota every minute.
-     *   * "/d"  for quota every 24 hours, starting 00:00 US Pacific Time.
-     *   * Otherwise the quota won't be reset by time, such as storage limit.
-     * * One and only one of the granted containers:
-     *   * "/{organization}" quota for an organization.
-     *   * "/{project}" quota for a project.
-     *   * "/{folder}" quota for a folder.
-     *   * "/{resource}" quota for a universal resource.
-     * * Zero or more quota segmentation dimension. Not all combos are valid.
-     *   * "/{region}" quota for every region. Not to be used with time intervals.
-     *   * Otherwise the resources granted on the target is not segmented.
-     *   * "/{zone}" quota for every zone. Not to be used with time intervals.
-     *   * Otherwise the resources granted on the target is not segmented.
-     *   * "/{resource}" quota for a resource associated with a project or org.
      * Here are some examples:
      * * "1/min/{project}" for quota per minute per project.
-     * * "1/min/{user}" for quota per minute per user.
-     * * "1/min/{organization}" for quota per minute per organization.
      * Note: the order of unit components is insignificant.
      * The "1" at the beginning is required to follow the metric unit syntax.
-     * Used by metric-based quotas only.
      *
      * Generated from protobuf field <code>string unit = 9;</code>
      */
-    private $unit = '';
+    protected $unit = '';
     /**
-     * Tiered limit values. Also allows for regional or zone overrides for these
-     * values if "/{region}" or "/{zone}" is specified in the unit field.
-     * Currently supported tiers from low to high:
-     * VERY_LOW, LOW, STANDARD, HIGH, VERY_HIGH
-     * To apply different limit values for users according to their tiers, specify
-     * the values for the tiers you want to differentiate. For example:
-     * {LOW:100, STANDARD:500, HIGH:1000, VERY_HIGH:5000}
-     * The limit value for each tier is optional except for the tier STANDARD.
-     * The limit value for an unspecified tier falls to the value of its next
-     * tier towards tier STANDARD. For the above example, the limit value for tier
-     * STANDARD is 500.
-     * To apply the same limit value for all users, just specify limit value for
-     * tier STANDARD. For example: {STANDARD:500}.
-     * To apply a regional overide for a tier, add a map entry with key
-     * "<TIER>/<region>", where <region> is a region name. Similarly, for a zone
-     * override, add a map entry with key "<TIER>/{zone}".
-     * Further, a wildcard can be used at the end of a zone name in order to
-     * specify zone level overrides. For example:
-     * LOW: 10, STANDARD: 50, HIGH: 100,
-     * LOW/us-central1: 20, STANDARD/us-central1: 60, HIGH/us-central1: 200,
-     * LOW/us-central1-*: 10, STANDARD/us-central1-*: 20, HIGH/us-central1-*: 80
-     * The regional overrides tier set for each region must be the same as
-     * the tier set for default limit values. Same rule applies for zone overrides
-     * tier as well.
-     * Used by metric-based quotas only.
+     * Tiered limit values. You must specify this as a key:value pair, with an
+     * integer value that is the maximum number of requests allowed for the
+     * specified unit. Currently only STANDARD is supported.
      *
      * Generated from protobuf field <code>map<string, int64> values = 10;</code>
      */
@@ -169,7 +113,7 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *
      * Generated from protobuf field <code>string display_name = 12;</code>
      */
-    private $display_name = '';
+    protected $display_name = '';
     /**
      * Constructor.
      *
@@ -177,20 +121,10 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *     Optional. Data for populating the Message object.
      *
      *     @type string $name
-     *           Name of the quota limit. The name is used to refer to the limit when
-     *           overriding the default limit on per-consumer basis.
-     *           For group-based quota limits, the name must be unique within the quota
-     *           group. If a name is not provided, it will be generated from the limit_by
-     *           and duration fields.
-     *           For metric-based quota limits, the name must be provided, and it must be
-     *           unique within the service. The name can only include alphanumeric
-     *           characters as well as '-'.
+     *           Name of the quota limit.
+     *           The name must be provided, and it must be unique within the service. The
+     *           name can only include alphanumeric characters as well as '-'.
      *           The maximum length of the limit name is 64 characters.
-     *           The name of a limit is used as a unique identifier for this limit.
-     *           Therefore, once a limit has been put into use, its name should be
-     *           immutable. You can use the display_name field to provide a user-friendly
-     *           name for the limit. The display name can be evolved over time without
-     *           affecting the identity of the limit.
      *     @type string $description
      *           Optional. User-visible, extended description for this quota limit.
      *           Should be used only when more context is needed to understand this limit
@@ -221,70 +155,24 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      *           defaults to 0, indicating that there is no free tier for this service.
      *           Used by group-based quotas only.
      *     @type string $duration
-     *           Duration of this limit in textual notation. Example: "100s", "24h", "1d".
-     *           For duration longer than a day, only multiple of days is supported. We
-     *           support only "100s" and "1d" for now. Additional support will be added in
-     *           the future. "0" indicates indefinite duration.
+     *           Duration of this limit in textual notation. Must be "100s" or "1d".
      *           Used by group-based quotas only.
      *     @type string $metric
      *           The name of the metric this quota limit applies to. The quota limits with
      *           the same metric will be checked together during runtime. The metric must be
      *           defined within the service config.
-     *           Used by metric-based quotas only.
      *     @type string $unit
      *           Specify the unit of the quota limit. It uses the same syntax as
      *           [Metric.unit][]. The supported unit kinds are determined by the quota
      *           backend system.
-     *           The [Google Service Control](https://cloud.google.com/service-control)
-     *           supports the following unit components:
-     *           * One of the time intevals:
-     *             * "/min"  for quota every minute.
-     *             * "/d"  for quota every 24 hours, starting 00:00 US Pacific Time.
-     *             * Otherwise the quota won't be reset by time, such as storage limit.
-     *           * One and only one of the granted containers:
-     *             * "/{organization}" quota for an organization.
-     *             * "/{project}" quota for a project.
-     *             * "/{folder}" quota for a folder.
-     *             * "/{resource}" quota for a universal resource.
-     *           * Zero or more quota segmentation dimension. Not all combos are valid.
-     *             * "/{region}" quota for every region. Not to be used with time intervals.
-     *             * Otherwise the resources granted on the target is not segmented.
-     *             * "/{zone}" quota for every zone. Not to be used with time intervals.
-     *             * Otherwise the resources granted on the target is not segmented.
-     *             * "/{resource}" quota for a resource associated with a project or org.
      *           Here are some examples:
      *           * "1/min/{project}" for quota per minute per project.
-     *           * "1/min/{user}" for quota per minute per user.
-     *           * "1/min/{organization}" for quota per minute per organization.
      *           Note: the order of unit components is insignificant.
      *           The "1" at the beginning is required to follow the metric unit syntax.
-     *           Used by metric-based quotas only.
      *     @type array|\Google\Protobuf\Internal\MapField $values
-     *           Tiered limit values. Also allows for regional or zone overrides for these
-     *           values if "/{region}" or "/{zone}" is specified in the unit field.
-     *           Currently supported tiers from low to high:
-     *           VERY_LOW, LOW, STANDARD, HIGH, VERY_HIGH
-     *           To apply different limit values for users according to their tiers, specify
-     *           the values for the tiers you want to differentiate. For example:
-     *           {LOW:100, STANDARD:500, HIGH:1000, VERY_HIGH:5000}
-     *           The limit value for each tier is optional except for the tier STANDARD.
-     *           The limit value for an unspecified tier falls to the value of its next
-     *           tier towards tier STANDARD. For the above example, the limit value for tier
-     *           STANDARD is 500.
-     *           To apply the same limit value for all users, just specify limit value for
-     *           tier STANDARD. For example: {STANDARD:500}.
-     *           To apply a regional overide for a tier, add a map entry with key
-     *           "<TIER>/<region>", where <region> is a region name. Similarly, for a zone
-     *           override, add a map entry with key "<TIER>/{zone}".
-     *           Further, a wildcard can be used at the end of a zone name in order to
-     *           specify zone level overrides. For example:
-     *           LOW: 10, STANDARD: 50, HIGH: 100,
-     *           LOW/us-central1: 20, STANDARD/us-central1: 60, HIGH/us-central1: 200,
-     *           LOW/us-central1-*: 10, STANDARD/us-central1-*: 20, HIGH/us-central1-*: 80
-     *           The regional overrides tier set for each region must be the same as
-     *           the tier set for default limit values. Same rule applies for zone overrides
-     *           tier as well.
-     *           Used by metric-based quotas only.
+     *           Tiered limit values. You must specify this as a key:value pair, with an
+     *           integer value that is the maximum number of requests allowed for the
+     *           specified unit. Currently only STANDARD is supported.
      *     @type string $display_name
      *           User-visible display name for this limit.
      *           Optional. If not set, the UI will provide a default display name based on
@@ -298,20 +186,10 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
         parent::__construct($data);
     }
     /**
-     * Name of the quota limit. The name is used to refer to the limit when
-     * overriding the default limit on per-consumer basis.
-     * For group-based quota limits, the name must be unique within the quota
-     * group. If a name is not provided, it will be generated from the limit_by
-     * and duration fields.
-     * For metric-based quota limits, the name must be provided, and it must be
-     * unique within the service. The name can only include alphanumeric
-     * characters as well as '-'.
+     * Name of the quota limit.
+     * The name must be provided, and it must be unique within the service. The
+     * name can only include alphanumeric characters as well as '-'.
      * The maximum length of the limit name is 64 characters.
-     * The name of a limit is used as a unique identifier for this limit.
-     * Therefore, once a limit has been put into use, its name should be
-     * immutable. You can use the display_name field to provide a user-friendly
-     * name for the limit. The display name can be evolved over time without
-     * affecting the identity of the limit.
      *
      * Generated from protobuf field <code>string name = 6;</code>
      * @return string
@@ -321,20 +199,10 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
         return $this->name;
     }
     /**
-     * Name of the quota limit. The name is used to refer to the limit when
-     * overriding the default limit on per-consumer basis.
-     * For group-based quota limits, the name must be unique within the quota
-     * group. If a name is not provided, it will be generated from the limit_by
-     * and duration fields.
-     * For metric-based quota limits, the name must be provided, and it must be
-     * unique within the service. The name can only include alphanumeric
-     * characters as well as '-'.
+     * Name of the quota limit.
+     * The name must be provided, and it must be unique within the service. The
+     * name can only include alphanumeric characters as well as '-'.
      * The maximum length of the limit name is 64 characters.
-     * The name of a limit is used as a unique identifier for this limit.
-     * Therefore, once a limit has been put into use, its name should be
-     * immutable. You can use the display_name field to provide a user-friendly
-     * name for the limit. The display name can be evolved over time without
-     * affecting the identity of the limit.
      *
      * Generated from protobuf field <code>string name = 6;</code>
      * @param string $var
@@ -481,10 +349,7 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
         return $this;
     }
     /**
-     * Duration of this limit in textual notation. Example: "100s", "24h", "1d".
-     * For duration longer than a day, only multiple of days is supported. We
-     * support only "100s" and "1d" for now. Additional support will be added in
-     * the future. "0" indicates indefinite duration.
+     * Duration of this limit in textual notation. Must be "100s" or "1d".
      * Used by group-based quotas only.
      *
      * Generated from protobuf field <code>string duration = 5;</code>
@@ -495,10 +360,7 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
         return $this->duration;
     }
     /**
-     * Duration of this limit in textual notation. Example: "100s", "24h", "1d".
-     * For duration longer than a day, only multiple of days is supported. We
-     * support only "100s" and "1d" for now. Additional support will be added in
-     * the future. "0" indicates indefinite duration.
+     * Duration of this limit in textual notation. Must be "100s" or "1d".
      * Used by group-based quotas only.
      *
      * Generated from protobuf field <code>string duration = 5;</code>
@@ -515,7 +377,6 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      * The name of the metric this quota limit applies to. The quota limits with
      * the same metric will be checked together during runtime. The metric must be
      * defined within the service config.
-     * Used by metric-based quotas only.
      *
      * Generated from protobuf field <code>string metric = 8;</code>
      * @return string
@@ -528,7 +389,6 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      * The name of the metric this quota limit applies to. The quota limits with
      * the same metric will be checked together during runtime. The metric must be
      * defined within the service config.
-     * Used by metric-based quotas only.
      *
      * Generated from protobuf field <code>string metric = 8;</code>
      * @param string $var
@@ -544,30 +404,10 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      * Specify the unit of the quota limit. It uses the same syntax as
      * [Metric.unit][]. The supported unit kinds are determined by the quota
      * backend system.
-     * The [Google Service Control](https://cloud.google.com/service-control)
-     * supports the following unit components:
-     * * One of the time intevals:
-     *   * "/min"  for quota every minute.
-     *   * "/d"  for quota every 24 hours, starting 00:00 US Pacific Time.
-     *   * Otherwise the quota won't be reset by time, such as storage limit.
-     * * One and only one of the granted containers:
-     *   * "/{organization}" quota for an organization.
-     *   * "/{project}" quota for a project.
-     *   * "/{folder}" quota for a folder.
-     *   * "/{resource}" quota for a universal resource.
-     * * Zero or more quota segmentation dimension. Not all combos are valid.
-     *   * "/{region}" quota for every region. Not to be used with time intervals.
-     *   * Otherwise the resources granted on the target is not segmented.
-     *   * "/{zone}" quota for every zone. Not to be used with time intervals.
-     *   * Otherwise the resources granted on the target is not segmented.
-     *   * "/{resource}" quota for a resource associated with a project or org.
      * Here are some examples:
      * * "1/min/{project}" for quota per minute per project.
-     * * "1/min/{user}" for quota per minute per user.
-     * * "1/min/{organization}" for quota per minute per organization.
      * Note: the order of unit components is insignificant.
      * The "1" at the beginning is required to follow the metric unit syntax.
-     * Used by metric-based quotas only.
      *
      * Generated from protobuf field <code>string unit = 9;</code>
      * @return string
@@ -580,30 +420,10 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
      * Specify the unit of the quota limit. It uses the same syntax as
      * [Metric.unit][]. The supported unit kinds are determined by the quota
      * backend system.
-     * The [Google Service Control](https://cloud.google.com/service-control)
-     * supports the following unit components:
-     * * One of the time intevals:
-     *   * "/min"  for quota every minute.
-     *   * "/d"  for quota every 24 hours, starting 00:00 US Pacific Time.
-     *   * Otherwise the quota won't be reset by time, such as storage limit.
-     * * One and only one of the granted containers:
-     *   * "/{organization}" quota for an organization.
-     *   * "/{project}" quota for a project.
-     *   * "/{folder}" quota for a folder.
-     *   * "/{resource}" quota for a universal resource.
-     * * Zero or more quota segmentation dimension. Not all combos are valid.
-     *   * "/{region}" quota for every region. Not to be used with time intervals.
-     *   * Otherwise the resources granted on the target is not segmented.
-     *   * "/{zone}" quota for every zone. Not to be used with time intervals.
-     *   * Otherwise the resources granted on the target is not segmented.
-     *   * "/{resource}" quota for a resource associated with a project or org.
      * Here are some examples:
      * * "1/min/{project}" for quota per minute per project.
-     * * "1/min/{user}" for quota per minute per user.
-     * * "1/min/{organization}" for quota per minute per organization.
      * Note: the order of unit components is insignificant.
      * The "1" at the beginning is required to follow the metric unit syntax.
-     * Used by metric-based quotas only.
      *
      * Generated from protobuf field <code>string unit = 9;</code>
      * @param string $var
@@ -616,31 +436,9 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
         return $this;
     }
     /**
-     * Tiered limit values. Also allows for regional or zone overrides for these
-     * values if "/{region}" or "/{zone}" is specified in the unit field.
-     * Currently supported tiers from low to high:
-     * VERY_LOW, LOW, STANDARD, HIGH, VERY_HIGH
-     * To apply different limit values for users according to their tiers, specify
-     * the values for the tiers you want to differentiate. For example:
-     * {LOW:100, STANDARD:500, HIGH:1000, VERY_HIGH:5000}
-     * The limit value for each tier is optional except for the tier STANDARD.
-     * The limit value for an unspecified tier falls to the value of its next
-     * tier towards tier STANDARD. For the above example, the limit value for tier
-     * STANDARD is 500.
-     * To apply the same limit value for all users, just specify limit value for
-     * tier STANDARD. For example: {STANDARD:500}.
-     * To apply a regional overide for a tier, add a map entry with key
-     * "<TIER>/<region>", where <region> is a region name. Similarly, for a zone
-     * override, add a map entry with key "<TIER>/{zone}".
-     * Further, a wildcard can be used at the end of a zone name in order to
-     * specify zone level overrides. For example:
-     * LOW: 10, STANDARD: 50, HIGH: 100,
-     * LOW/us-central1: 20, STANDARD/us-central1: 60, HIGH/us-central1: 200,
-     * LOW/us-central1-*: 10, STANDARD/us-central1-*: 20, HIGH/us-central1-*: 80
-     * The regional overrides tier set for each region must be the same as
-     * the tier set for default limit values. Same rule applies for zone overrides
-     * tier as well.
-     * Used by metric-based quotas only.
+     * Tiered limit values. You must specify this as a key:value pair, with an
+     * integer value that is the maximum number of requests allowed for the
+     * specified unit. Currently only STANDARD is supported.
      *
      * Generated from protobuf field <code>map<string, int64> values = 10;</code>
      * @return \Google\Protobuf\Internal\MapField
@@ -650,31 +448,9 @@ class QuotaLimit extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pro
         return $this->values;
     }
     /**
-     * Tiered limit values. Also allows for regional or zone overrides for these
-     * values if "/{region}" or "/{zone}" is specified in the unit field.
-     * Currently supported tiers from low to high:
-     * VERY_LOW, LOW, STANDARD, HIGH, VERY_HIGH
-     * To apply different limit values for users according to their tiers, specify
-     * the values for the tiers you want to differentiate. For example:
-     * {LOW:100, STANDARD:500, HIGH:1000, VERY_HIGH:5000}
-     * The limit value for each tier is optional except for the tier STANDARD.
-     * The limit value for an unspecified tier falls to the value of its next
-     * tier towards tier STANDARD. For the above example, the limit value for tier
-     * STANDARD is 500.
-     * To apply the same limit value for all users, just specify limit value for
-     * tier STANDARD. For example: {STANDARD:500}.
-     * To apply a regional overide for a tier, add a map entry with key
-     * "<TIER>/<region>", where <region> is a region name. Similarly, for a zone
-     * override, add a map entry with key "<TIER>/{zone}".
-     * Further, a wildcard can be used at the end of a zone name in order to
-     * specify zone level overrides. For example:
-     * LOW: 10, STANDARD: 50, HIGH: 100,
-     * LOW/us-central1: 20, STANDARD/us-central1: 60, HIGH/us-central1: 200,
-     * LOW/us-central1-*: 10, STANDARD/us-central1-*: 20, HIGH/us-central1-*: 80
-     * The regional overrides tier set for each region must be the same as
-     * the tier set for default limit values. Same rule applies for zone overrides
-     * tier as well.
-     * Used by metric-based quotas only.
+     * Tiered limit values. You must specify this as a key:value pair, with an
+     * integer value that is the maximum number of requests allowed for the
+     * specified unit. Currently only STANDARD is supported.
      *
      * Generated from protobuf field <code>map<string, int64> values = 10;</code>
      * @param array|\Google\Protobuf\Internal\MapField $var

@@ -21,6 +21,17 @@ class UpdateAccessBindingRequest extends \Matomo\Dependencies\GoogleAnalyticsImp
      */
     private $access_binding = null;
     /**
+     * @param \Google\Analytics\Admin\V1alpha\AccessBinding $accessBinding Required. The access binding to update.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\UpdateAccessBindingRequest
+     *
+     * @experimental
+     */
+    public static function build(\Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\AccessBinding $accessBinding) : self
+    {
+        return (new self())->setAccessBinding($accessBinding);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

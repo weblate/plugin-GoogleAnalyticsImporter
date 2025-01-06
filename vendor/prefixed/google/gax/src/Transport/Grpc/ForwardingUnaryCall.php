@@ -32,6 +32,7 @@
  */
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Transport\Grpc;
 
+use Matomo\Dependencies\GoogleAnalyticsImporter\Grpc\UnaryCall;
 /**
  * Class ForwardingUnaryCall wraps a \Grpc\UnaryCall.
  *
@@ -39,9 +40,7 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Transport\G
  */
 class ForwardingUnaryCall extends ForwardingCall
 {
-    /**
-     * @var \Grpc\UnaryCall
-     */
+    /** @var UnaryCall */
     protected $innerCall;
     /**
      * Wait for the server to respond with data and a status.

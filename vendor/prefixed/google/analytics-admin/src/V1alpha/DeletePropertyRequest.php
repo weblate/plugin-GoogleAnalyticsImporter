@@ -23,6 +23,20 @@ class DeletePropertyRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter
      */
     private $name = '';
     /**
+     * @param string $name Required. The name of the Property to soft-delete.
+     *                     Format: properties/{property_id}
+     *                     Example: "properties/1000"
+     *                     Please see {@see AnalyticsAdminServiceClient::propertyName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\DeletePropertyRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

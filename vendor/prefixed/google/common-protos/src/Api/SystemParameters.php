@@ -51,7 +51,7 @@ class SystemParameters extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Api\SystemParameterRule[]|\Google\Protobuf\Internal\RepeatedField $rules
+     *     @type array<\Google\Api\SystemParameterRule>|\Google\Protobuf\Internal\RepeatedField $rules
      *           Define system parameters.
      *           The parameters defined here will override the default parameters
      *           implemented by the system. If this field is missing from the service
@@ -137,7 +137,7 @@ class SystemParameters extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * **NOTE:** All service configuration rules follow "last one wins" order.
      *
      * Generated from protobuf field <code>repeated .google.api.SystemParameterRule rules = 1;</code>
-     * @param \Google\Api\SystemParameterRule[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\SystemParameterRule>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRules($var)

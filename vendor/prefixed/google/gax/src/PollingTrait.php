@@ -32,6 +32,9 @@
  */
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore;
 
+/**
+ * @internal
+ */
 trait PollingTrait
 {
     /**
@@ -63,7 +66,7 @@ trait PollingTrait
             if ($pollCallable()) {
                 return \true;
             }
-            $currentPollDelayMillis = min([$currentPollDelayMillis * $pollDelayMultiplier, $maxPollDelayMillis]);
+            $currentPollDelayMillis = (int) min([$currentPollDelayMillis * $pollDelayMultiplier, $maxPollDelayMillis]);
         }
     }
     /**
@@ -80,7 +83,7 @@ trait PollingTrait
      *
      * @param int $millis
      */
-    protected function sleepMillis($millis)
+    protected function sleepMillis(int $millis)
     {
         usleep($millis * 1000);
     }

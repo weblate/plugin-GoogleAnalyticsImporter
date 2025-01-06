@@ -282,6 +282,13 @@ class OAuth2 implements FetchAuthTokenInterface
      */
     private $issuedTokenType;
     /**
+     * From STS response.
+     * An identifier for the representation of the issued security token.
+     *
+     * @var array<mixed>
+     */
+    private $additionalOptions;
+    /**
      * Create a new OAuthCredentials.
      *
      * The configuration array accepts various options
@@ -373,7 +380,7 @@ class OAuth2 implements FetchAuthTokenInterface
      */
     public function __construct(array $config)
     {
-        $opts = array_merge(['expiry' => self::DEFAULT_EXPIRY_SECONDS, 'extensionParams' => [], 'authorizationUri' => null, 'redirectUri' => null, 'tokenCredentialUri' => null, 'state' => null, 'username' => null, 'password' => null, 'clientId' => null, 'clientSecret' => null, 'issuer' => null, 'sub' => null, 'audience' => null, 'signingKey' => null, 'signingKeyId' => null, 'signingAlgorithm' => null, 'scope' => null, 'additionalClaims' => [], 'codeVerifier' => null, 'resource' => null, 'subjectTokenFetcher' => null, 'subjectTokenType' => null, 'actorToken' => null, 'actorTokenType' => null], $config);
+        $opts = array_merge(['expiry' => self::DEFAULT_EXPIRY_SECONDS, 'extensionParams' => [], 'authorizationUri' => null, 'redirectUri' => null, 'tokenCredentialUri' => null, 'state' => null, 'username' => null, 'password' => null, 'clientId' => null, 'clientSecret' => null, 'issuer' => null, 'sub' => null, 'audience' => null, 'signingKey' => null, 'signingKeyId' => null, 'signingAlgorithm' => null, 'scope' => null, 'additionalClaims' => [], 'codeVerifier' => null, 'resource' => null, 'subjectTokenFetcher' => null, 'subjectTokenType' => null, 'actorToken' => null, 'actorTokenType' => null, 'additionalOptions' => []], $config);
         $this->setAuthorizationUri($opts['authorizationUri']);
         $this->setRedirectUri($opts['redirectUri']);
         $this->setTokenCredentialUri($opts['tokenCredentialUri']);
@@ -399,6 +406,7 @@ class OAuth2 implements FetchAuthTokenInterface
         $this->subjectTokenType = $opts['subjectTokenType'];
         $this->actorToken = $opts['actorToken'];
         $this->actorTokenType = $opts['actorTokenType'];
+        $this->additionalOptions = $opts['additionalOptions'];
         $this->updateToken($opts);
     }
     /**
@@ -482,9 +490,11 @@ class OAuth2 implements FetchAuthTokenInterface
      * Generates a request for token credentials.
      *
      * @param callable $httpHandler callback which delivers psr7 request
+     * @param array<mixed> $headers [optional] Additional headers to pass to
+     *        the token endpoint request.
      * @return RequestInterface the authorization Url.
      */
-    public function generateCredentialsRequest(callable $httpHandler = null)
+    public function generateCredentialsRequest(callable $httpHandler = null, $headers = [])
     {
         $uri = $this->getTokenCredentialUri();
         if (is_null($uri)) {
@@ -518,6 +528,9 @@ class OAuth2 implements FetchAuthTokenInterface
                 $params['subject_token'] = $token;
                 $params['subject_token_type'] = $this->subjectTokenType;
                 $params += array_filter(['resource' => $this->resource, 'audience' => $this->audience, 'scope' => $this->getScope(), 'requested_token_type' => self::STS_REQUESTED_TOKEN_TYPE, 'actor_token' => $this->actorToken, 'actor_token_type' => $this->actorTokenType]);
+                if ($this->additionalOptions) {
+                    $params['options'] = json_encode($this->additionalOptions);
+                }
                 break;
             default:
                 if (!is_null($this->getRedirectUri())) {
@@ -531,21 +544,23 @@ class OAuth2 implements FetchAuthTokenInterface
                 }
                 $params = array_merge($params, $this->getExtensionParams());
         }
-        $headers = ['Cache-Control' => 'no-store', 'Content-Type' => 'application/x-www-form-urlencoded'];
+        $headers = ['Cache-Control' => 'no-store', 'Content-Type' => 'application/x-www-form-urlencoded'] + $headers;
         return new Request('POST', $uri, $headers, Query::build($params));
     }
     /**
      * Fetches the auth tokens based on the current state.
      *
      * @param callable $httpHandler callback which delivers psr7 request
+     * @param array<mixed> $headers [optional] If present, add these headers to the token
+     *        endpoint request.
      * @return array<mixed> the response
      */
-    public function fetchAuthToken(callable $httpHandler = null)
+    public function fetchAuthToken(callable $httpHandler = null, $headers = [])
     {
         if (is_null($httpHandler)) {
             $httpHandler = HttpHandlerFactory::build(HttpClientCache::getHttpClient());
         }
-        $response = $httpHandler($this->generateCredentialsRequest($httpHandler));
+        $response = $httpHandler($this->generateCredentialsRequest($httpHandler, $headers));
         $credentials = $this->parseTokenResponse($response);
         $this->updateToken($credentials);
         if (isset($credentials['scope'])) {
@@ -554,6 +569,8 @@ class OAuth2 implements FetchAuthTokenInterface
         return $credentials;
     }
     /**
+     * @deprecated
+     *
      * Obtains a key that can used to cache the results of #fetchAuthToken.
      *
      * The key is derived from the scopes.
@@ -570,6 +587,15 @@ class OAuth2 implements FetchAuthTokenInterface
         }
         // If scope has not set, return null to indicate no caching.
         return null;
+    }
+    /**
+     * Gets this instance's SubjectTokenFetcher
+     *
+     * @return null|ExternalAccountCredentialSourceInterface
+     */
+    public function getSubjectTokenFetcher() : ?ExternalAccountCredentialSourceInterface
+    {
+        return $this->subjectTokenFetcher;
     }
     /**
      * Parses the fetched tokens.
@@ -827,6 +853,15 @@ class OAuth2 implements FetchAuthTokenInterface
             return $this->scope;
         }
         return implode(' ', $this->scope);
+    }
+    /**
+     * Gets the subject token type
+     *
+     * @return ?string
+     */
+    public function getSubjectTokenType() : ?string
+    {
+        return $this->subjectTokenType;
     }
     /**
      * Sets the scope of the access request, expressed either as an Array or as

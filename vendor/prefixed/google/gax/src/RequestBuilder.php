@@ -55,7 +55,7 @@ class RequestBuilder
      * @param string $restConfigPath
      * @throws ValidationException
      */
-    public function __construct($baseUri, $restConfigPath)
+    public function __construct(string $baseUri, string $restConfigPath)
     {
         self::validateFileExists($restConfigPath);
         $this->baseUri = $baseUri;
@@ -65,7 +65,7 @@ class RequestBuilder
      * @param string $path
      * @return bool
      */
-    public function pathExists($path)
+    public function pathExists(string $path)
     {
         list($interface, $method) = explode('/', $path);
         return isset($this->restConfig['interfaces'][$interface][$method]);
@@ -77,7 +77,7 @@ class RequestBuilder
      * @return RequestInterface
      * @throws ValidationException
      */
-    public function build($path, Message $message, array $headers = [])
+    public function build(string $path, Message $message, array $headers = [])
     {
         list($interface, $method) = explode('/', $path);
         if (!isset($this->restConfig['interfaces'][$interface][$method])) {
@@ -113,7 +113,7 @@ class RequestBuilder
      * @param array $config
      * @return array[] An array of configs
      */
-    private function getConfigsForUriTemplates($config)
+    private function getConfigsForUriTemplates(array $config)
     {
         $configs = [$config];
         if ($config['additionalBindings']) {
@@ -128,7 +128,7 @@ class RequestBuilder
      * @param array $config
      * @return array Tuple [$body, $queryParams]
      */
-    private function constructBodyAndQueryParameters(Message $message, $config)
+    private function constructBodyAndQueryParameters(Message $message, array $config)
     {
         $messageDataJson = $message->serializeToJsonString();
         if ($config['body'] === '*') {
@@ -164,7 +164,20 @@ class RequestBuilder
                 $requiredQueryParam = Serializer::toCamelCase($requiredQueryParam);
                 if (!array_key_exists($requiredQueryParam, $queryParams)) {
                     $getter = Serializer::getGetter($requiredQueryParam);
-                    $queryParams[$requiredQueryParam] = $message->{$getter}();
+                    $queryParamValue = $message->{$getter}();
+                    if ($queryParamValue instanceof Message) {
+                        // Decode message for the query parameter.
+                        $queryParamValue = json_decode($queryParamValue->serializeToJsonString(), \true);
+                    }
+                    if (is_array($queryParamValue)) {
+                        // If the message has properties, add them as nested querystring values.
+                        // NOTE: This only supports nesting at one level of depth.
+                        foreach ($queryParamValue as $key => $value) {
+                            $queryParams[$requiredQueryParam . '.' . $key] = $value;
+                        }
+                    } else {
+                        $queryParams[$requiredQueryParam] = $queryParamValue;
+                    }
                 }
             }
         }
@@ -196,7 +209,7 @@ class RequestBuilder
      * @return null|string
      * @throws ValidationException
      */
-    private function tryRenderPathTemplate($uriTemplate, array $bindings)
+    private function tryRenderPathTemplate(string $uriTemplate, array $bindings)
     {
         $template = new AbsoluteResourceTemplate($uriTemplate);
         try {
@@ -210,7 +223,7 @@ class RequestBuilder
      * @param array $queryParams
      * @return UriInterface
      */
-    private function buildUri($path, $queryParams)
+    private function buildUri(string $path, array $queryParams)
     {
         $uri = Utils::uriFor(sprintf('https://%s%s', $this->baseUri, $path));
         if ($queryParams) {

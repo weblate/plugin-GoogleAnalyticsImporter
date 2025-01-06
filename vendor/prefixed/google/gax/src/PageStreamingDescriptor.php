@@ -51,7 +51,7 @@ class PageStreamingDescriptor
      *     @type string $requestPageSizeGetMethod the get method for the page size in the request object.
      * }
      */
-    public function __construct($descriptor)
+    public function __construct(array $descriptor)
     {
         self::validate($descriptor);
         $this->descriptor = $descriptor;
@@ -69,7 +69,7 @@ class PageStreamingDescriptor
      * }
      * @return PageStreamingDescriptor
      */
-    public static function createFromFields($fields)
+    public static function createFromFields(array $fields)
     {
         $requestPageToken = $fields['requestPageTokenField'];
         $responsePageToken = $fields['responsePageTokenField'];
@@ -82,11 +82,11 @@ class PageStreamingDescriptor
         }
         return new PageStreamingDescriptor($descriptor);
     }
-    private static function getMethod($field)
+    private static function getMethod(string $field)
     {
         return 'get' . ucfirst($field);
     }
-    private static function setMethod($field)
+    private static function setMethod(string $field)
     {
         return 'set' . ucfirst($field);
     }
@@ -139,7 +139,7 @@ class PageStreamingDescriptor
     {
         return $this->descriptor['requestPageSizeSetMethod'];
     }
-    private static function validate($descriptor)
+    private static function validate(array $descriptor)
     {
         $requiredFields = ['requestPageTokenGetMethod', 'requestPageTokenSetMethod', 'responsePageTokenGetMethod', 'resourcesGetMethod'];
         foreach ($requiredFields as $field) {

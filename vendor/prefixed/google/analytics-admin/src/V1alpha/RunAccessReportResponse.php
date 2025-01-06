@@ -49,7 +49,8 @@ class RunAccessReportResponse extends \Matomo\Dependencies\GoogleAnalyticsImport
      */
     private $row_count = 0;
     /**
-     * The quota state for this Analytics property including this request.
+     * The quota state for this Analytics property including this request. This
+     * field doesn't work with account-level requests.
      *
      * Generated from protobuf field <code>.google.analytics.admin.v1alpha.AccessQuota quota = 5;</code>
      */
@@ -79,7 +80,8 @@ class RunAccessReportResponse extends \Matomo\Dependencies\GoogleAnalyticsImport
      *           To learn more about this pagination parameter, see
      *           [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
      *     @type \Google\Analytics\Admin\V1alpha\AccessQuota $quota
-     *           The quota state for this Analytics property including this request.
+     *           The quota state for this Analytics property including this request. This
+     *           field doesn't work with account-level requests.
      * }
      */
     public function __construct($data = NULL)
@@ -200,7 +202,8 @@ class RunAccessReportResponse extends \Matomo\Dependencies\GoogleAnalyticsImport
         return $this;
     }
     /**
-     * The quota state for this Analytics property including this request.
+     * The quota state for this Analytics property including this request. This
+     * field doesn't work with account-level requests.
      *
      * Generated from protobuf field <code>.google.analytics.admin.v1alpha.AccessQuota quota = 5;</code>
      * @return \Google\Analytics\Admin\V1alpha\AccessQuota|null
@@ -218,7 +221,8 @@ class RunAccessReportResponse extends \Matomo\Dependencies\GoogleAnalyticsImport
         unset($this->quota);
     }
     /**
-     * The quota state for this Analytics property including this request.
+     * The quota state for this Analytics property including this request. This
+     * field doesn't work with account-level requests.
      *
      * Generated from protobuf field <code>.google.analytics.admin.v1alpha.AccessQuota quota = 5;</code>
      * @param \Google\Analytics\Admin\V1alpha\AccessQuota $var

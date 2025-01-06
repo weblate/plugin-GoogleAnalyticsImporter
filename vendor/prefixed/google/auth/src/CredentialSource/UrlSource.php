@@ -80,4 +80,15 @@ class UrlSource implements ExternalAccountCredentialSourceInterface
         }
         return $body;
     }
+    /**
+     * Get the cache key for the credentials.
+     * The format for the cache key is:
+     * URL
+     *
+     * @return ?string
+     */
+    public function getCacheKey() : ?string
+    {
+        return $this->url;
+    }
 }

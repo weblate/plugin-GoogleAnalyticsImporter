@@ -32,7 +32,7 @@ class ListOperationsResponse extends \Matomo\Dependencies\GoogleAnalyticsImporte
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\LongRunning\Operation[]|\Google\Protobuf\Internal\RepeatedField $operations
+     *     @type array<\Google\LongRunning\Operation>|\Google\Protobuf\Internal\RepeatedField $operations
      *           A list of operations that matches the specified filter in the request.
      *     @type string $next_page_token
      *           The standard List next-page token.
@@ -57,7 +57,7 @@ class ListOperationsResponse extends \Matomo\Dependencies\GoogleAnalyticsImporte
      * A list of operations that matches the specified filter in the request.
      *
      * Generated from protobuf field <code>repeated .google.longrunning.Operation operations = 1;</code>
-     * @param \Google\LongRunning\Operation[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\LongRunning\Operation>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setOperations($var)

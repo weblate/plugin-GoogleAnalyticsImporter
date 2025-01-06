@@ -20,13 +20,13 @@ class AuthorizationGA4
     public function getClient()
     {
         $klass = StaticContainer::get('GoogleAnalyticsImporter.googleAnalyticsDataClientClass');
-        $client = new $klass(['credentials' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build(['keyFile' => $this->getClientConfiguration()])]);
+        $client = new $klass($this->getClientClassArguments());
         return $client;
     }
     public function getAdminClient()
     {
         $klass = StaticContainer::get('GoogleAnalyticsImporter.googleAnalyticsAdminServiceClientClass');
-        $adminClient = new $klass(['credentials' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build(['keyFile' => $this->getClientConfiguration()])]);
+        $adminClient = new $klass($this->getClientClassArguments());
         return $adminClient;
     }
     public function getClientConfiguration()
@@ -39,5 +39,26 @@ class AuthorizationGA4
             throw new \Exception(Piwik::translate('GoogleAnalyticsImporter_MissingClientConfiguration'));
         }
         return $clientConfig;
+    }
+
+    protected function getClientClassArguments(): array
+    {
+        $arguments = [
+            'keyFile' => $this->getClientConfiguration()
+        ];
+
+        $proxyHttpClient = StaticContainer::get('GoogleAnalyticsImporter.proxyHttpClient');
+        if ($proxyHttpClient) {
+            $proxyHttpHandler = \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\HttpHandler\HttpHandlerFactory::build($proxyHttpClient);
+            $arguments['credentialsConfig'] = ['authHttpHandler' => $proxyHttpHandler, 'keyFile' => $arguments['keyFile']];
+            $arguments['transport'] = 'rest';
+            $arguments['transportConfig'] = ['rest' => ['httpHandler' => [$proxyHttpHandler, 'async']]];
+
+            return $arguments;
+        }
+
+        $credentialWrapper =  \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\CredentialsWrapper::build($arguments);
+
+        return ['credentials' => $credentialWrapper];
     }
 }

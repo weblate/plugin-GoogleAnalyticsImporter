@@ -32,6 +32,7 @@
  */
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Transport\Grpc;
 
+use Matomo\Dependencies\GoogleAnalyticsImporter\Grpc\ServerStreamingCall;
 /**
  * Class ForwardingServerStreamingCall wraps a \Grpc\ServerStreamingCall.
  *
@@ -39,9 +40,7 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Transport\G
  */
 class ForwardingServerStreamingCall extends ForwardingCall
 {
-    /**
-     * @var \Grpc\ServerStreamingCall
-     */
+    /** @var ServerStreamingCall */
     protected $innerCall;
     /**
      * @return mixed An iterator of response values

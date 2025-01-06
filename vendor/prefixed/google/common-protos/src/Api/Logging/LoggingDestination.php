@@ -17,16 +17,17 @@ class LoggingDestination extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
 {
     /**
      * The monitored resource type. The type must be defined in the
-     * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+     * [Service.monitored_resources][google.api.Service.monitored_resources]
+     * section.
      *
      * Generated from protobuf field <code>string monitored_resource = 3;</code>
      */
-    private $monitored_resource = '';
+    protected $monitored_resource = '';
     /**
      * Names of the logs to be sent to this destination. Each name must
-     * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
-     * not a domain scoped name, it will be automatically prefixed with
-     * the service name followed by "/".
+     * be defined in the [Service.logs][google.api.Service.logs] section. If the
+     * log name is not a domain scoped name, it will be automatically prefixed
+     * with the service name followed by "/".
      *
      * Generated from protobuf field <code>repeated string logs = 1;</code>
      */
@@ -39,12 +40,13 @@ class LoggingDestination extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
      *
      *     @type string $monitored_resource
      *           The monitored resource type. The type must be defined in the
-     *           [Service.monitored_resources][google.api.Service.monitored_resources] section.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $logs
+     *           [Service.monitored_resources][google.api.Service.monitored_resources]
+     *           section.
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $logs
      *           Names of the logs to be sent to this destination. Each name must
-     *           be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
-     *           not a domain scoped name, it will be automatically prefixed with
-     *           the service name followed by "/".
+     *           be defined in the [Service.logs][google.api.Service.logs] section. If the
+     *           log name is not a domain scoped name, it will be automatically prefixed
+     *           with the service name followed by "/".
      * }
      */
     public function __construct($data = NULL)
@@ -54,7 +56,8 @@ class LoggingDestination extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * The monitored resource type. The type must be defined in the
-     * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+     * [Service.monitored_resources][google.api.Service.monitored_resources]
+     * section.
      *
      * Generated from protobuf field <code>string monitored_resource = 3;</code>
      * @return string
@@ -65,7 +68,8 @@ class LoggingDestination extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * The monitored resource type. The type must be defined in the
-     * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+     * [Service.monitored_resources][google.api.Service.monitored_resources]
+     * section.
      *
      * Generated from protobuf field <code>string monitored_resource = 3;</code>
      * @param string $var
@@ -79,9 +83,9 @@ class LoggingDestination extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * Names of the logs to be sent to this destination. Each name must
-     * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
-     * not a domain scoped name, it will be automatically prefixed with
-     * the service name followed by "/".
+     * be defined in the [Service.logs][google.api.Service.logs] section. If the
+     * log name is not a domain scoped name, it will be automatically prefixed
+     * with the service name followed by "/".
      *
      * Generated from protobuf field <code>repeated string logs = 1;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -92,12 +96,12 @@ class LoggingDestination extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
     }
     /**
      * Names of the logs to be sent to this destination. Each name must
-     * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
-     * not a domain scoped name, it will be automatically prefixed with
-     * the service name followed by "/".
+     * be defined in the [Service.logs][google.api.Service.logs] section. If the
+     * log name is not a domain scoped name, it will be automatically prefixed
+     * with the service name followed by "/".
      *
      * Generated from protobuf field <code>repeated string logs = 1;</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setLogs($var)
@@ -107,5 +111,3 @@ class LoggingDestination extends \Matomo\Dependencies\GoogleAnalyticsImporter\Go
         return $this;
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(LoggingDestination::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\Logging_LoggingDestination::class);

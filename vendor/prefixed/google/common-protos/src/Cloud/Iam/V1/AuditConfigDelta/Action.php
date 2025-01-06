@@ -47,5 +47,3 @@ class Action
         return constant($const);
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(Action::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Cloud\Iam\V1\AuditConfigDelta_Action::class);

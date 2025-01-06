@@ -297,7 +297,7 @@ class RoutingRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Api\RoutingParameter[]|\Google\Protobuf\Internal\RepeatedField $routing_parameters
+     *     @type array<\Google\Api\RoutingParameter>|\Google\Protobuf\Internal\RepeatedField $routing_parameters
      *           A collection of Routing Parameter specifications.
      *           **NOTE:** If multiple Routing Parameters describe the same key
      *           (via the `path_template` field or via the `field` field when
@@ -335,7 +335,7 @@ class RoutingRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
      * See the examples for more details.
      *
      * Generated from protobuf field <code>repeated .google.api.RoutingParameter routing_parameters = 2;</code>
-     * @param \Google\Api\RoutingParameter[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\RoutingParameter>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRoutingParameters($var)

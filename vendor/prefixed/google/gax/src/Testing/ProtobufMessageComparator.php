@@ -21,6 +21,9 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 use SebastianBergmann\Comparator\Comparator;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\Exporter\Exporter;
+/**
+ * @internal
+ */
 class ProtobufMessageComparator extends Comparator
 {
     /** @var Exporter */

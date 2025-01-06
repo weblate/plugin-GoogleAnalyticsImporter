@@ -8,6 +8,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 use Matomo\Dependencies\GoogleAnalyticsImporter\GPBMetadata\ApiCore\Testing\Mocks;
 /**
  * Generated from protobuf message <code>google.apicore.testing.MockRequest</code>
+ *
+ * @internal
  */
 class MockRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {

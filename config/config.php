@@ -15,13 +15,34 @@ return [
     'GoogleAnalyticsImporter.logToSingleFile' => \false,
     'GoogleAnalyticsImporter.isClientConfigurable' => \true,
     'log.processors' => \Piwik\DI::decorate(function ($previous, Container $container) {
-        $idSite = (int)\getenv('MATOMO_GA_IMPORTER_LOG_TO_SINGLE_FILE');
+        $idSite = (int) \getenv('MATOMO_GA_IMPORTER_LOG_TO_SINGLE_FILE');
         if (!empty($idSite)) {
             $previous[] = new \Piwik\Plugins\GoogleAnalyticsImporter\Logger\LogToSingleFileProcessor($idSite);
         }
         return $previous;
     }),
-    'GoogleAnalyticsImporter.googleClientClass' => 'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Client', 'GoogleAnalyticsImporter.googleClient' => function (Container $c) {
+    'GoogleAnalyticsImporter.googleClientClass' => 'Matomo\\Dependencies\\GoogleAnalyticsImporter\\Google\\Client',
+    'GoogleAnalyticsImporter.proxyHttpClient' => function (Container $c) {
+        $proxyHost = Config::getInstance()->proxy['host'];
+        if ($proxyHost) {
+            $proxyPort     = Config::getInstance()->proxy['port'];
+            $proxyUser     = Config::getInstance()->proxy['username'];
+            $proxyPassword = Config::getInstance()->proxy['password'];
+
+            if ($proxyUser) {
+                $proxy = sprintf('http://%s:%s@%s:%s', $proxyUser, $proxyPassword, $proxyHost, $proxyPort);
+            } else {
+                $proxy = sprintf('http://%s:%s', $proxyHost, $proxyPort);
+            }
+            return new \Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Client([
+                'proxy'      => $proxy,
+                'exceptions' => false,
+                'base_uri'   => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Client::API_BASE_PATH
+            ]);
+        }
+        return null;
+    },
+    'GoogleAnalyticsImporter.googleClient' => function (Container $c) {
         $klass = $c->get('GoogleAnalyticsImporter.googleClientClass');
         /** @var \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Client $googleClient */
         $googleClient = new $klass();
@@ -32,22 +53,9 @@ return [
         $redirectUrl = Url::getCurrentUrlWithoutQueryString() . '?module=GoogleAnalyticsImporter&action=processAuthCode';
         $googleClient->setRedirectUri($redirectUrl);
 
-        $proxyHost = Config::getInstance()->proxy['host'];
-
-        if ($proxyHost) {
-            $proxyPort = Config::getInstance()->proxy['port'];
-            $proxyUser = Config::getInstance()->proxy['username'];
-            $proxyPassword = Config::getInstance()->proxy['password'];
-
-            if ($proxyUser) {
-                $proxy = sprintf('http://%s:%s@%s:%s', $proxyUser, $proxyPassword, $proxyHost, $proxyPort);
-            } else {
-                $proxy = sprintf('http://%s:%s', $proxyHost, $proxyPort);
-            }
-            $httpClient = new \Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Client(
-                ['proxy' => $proxy, 'exceptions' => false, 'base_uri' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Client::API_BASE_PATH]
-            );
-            $googleClient->setHttpClient($httpClient);
+        $proxyHttpClient = $c->get('GoogleAnalyticsImporter.proxyHttpClient');
+        if ($proxyHttpClient) {
+            $googleClient->setHttpClient($proxyHttpClient);
         }
         return $googleClient;
     },
@@ -70,7 +78,8 @@ return [
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\UserLanguage\RecordImporter::class,
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitorInterest\RecordImporter::class,
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitTime\RecordImporter::class,
-        \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitFrequency\RecordImporter::class,],
+        \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitFrequency\RecordImporter::class,
+    ],
     'GoogleAnalyticsGA4Importer.clientConfiguration' => function (Container $c) {
         $config = @\json_decode(Option::get(AuthorizationGA4::CLIENT_CONFIG_OPTION_NAME), \true);
         $accessToken = @\json_decode(Option::get(AuthorizationGA4::ACCESS_TOKEN_OPTION_NAME), \true);
@@ -82,7 +91,8 @@ return [
         ];
     },
     'GoogleAnalyticsGA4Importer.recordImporters' => [
-        \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitsSummary\RecordImporterGA4::class, // must be first
+        \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitsSummary\RecordImporterGA4::class,
+        // must be first
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\MarketingCampaignsReporting\RecordImporterGA4::class,
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\Referrers\RecordImporterGA4::class,
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\Actions\RecordImporterGA4::class,
@@ -97,9 +107,10 @@ return [
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitorInterest\RecordImporterGA4::class,
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitTime\RecordImporterGA4::class,
         \Piwik\Plugins\GoogleAnalyticsImporter\Importers\VisitFrequency\RecordImporterGA4::class,
-        ],
+    ],
     'diagnostics.optional' => \Piwik\DI::add([
-                                                    \Piwik\DI::get(\Piwik\Plugins\GoogleAnalyticsImporter\Diagnostic\RequiredFunctionsCheck::class),
-                                                 \Piwik\DI::get(\Piwik\Plugins\GoogleAnalyticsImporter\Diagnostic\RequiredExecutablesCheck::class)
-                                             ]),
-    '\\Piwik\\Plugins\\GoogleAnalyticsImporter\\ApiQuotaHelper' => \Piwik\DI::create('\\Piwik\\Plugins\\GoogleAnalyticsImporter\\ApiQuotaHelper')];
+        \Piwik\DI::get(\Piwik\Plugins\GoogleAnalyticsImporter\Diagnostic\RequiredFunctionsCheck::class),
+        \Piwik\DI::get(\Piwik\Plugins\GoogleAnalyticsImporter\Diagnostic\RequiredExecutablesCheck::class)
+    ]),
+    '\\Piwik\\Plugins\\GoogleAnalyticsImporter\\ApiQuotaHelper' => \Piwik\DI::create('\\Piwik\\Plugins\\GoogleAnalyticsImporter\\ApiQuotaHelper')
+];

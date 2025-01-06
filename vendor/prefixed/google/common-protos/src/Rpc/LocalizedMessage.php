@@ -17,7 +17,7 @@ class LocalizedMessage extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
 {
     /**
      * The locale used following the specification defined at
-     * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
+     * https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
      * Examples are: "en-US", "fr-CH", "es-MX"
      *
      * Generated from protobuf field <code>string locale = 1;</code>
@@ -37,7 +37,7 @@ class LocalizedMessage extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *
      *     @type string $locale
      *           The locale used following the specification defined at
-     *           http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
+     *           https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
      *           Examples are: "en-US", "fr-CH", "es-MX"
      *     @type string $message
      *           The localized error message in the above locale.
@@ -50,7 +50,7 @@ class LocalizedMessage extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     }
     /**
      * The locale used following the specification defined at
-     * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
+     * https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
      * Examples are: "en-US", "fr-CH", "es-MX"
      *
      * Generated from protobuf field <code>string locale = 1;</code>
@@ -62,7 +62,7 @@ class LocalizedMessage extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     }
     /**
      * The locale used following the specification defined at
-     * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
+     * https://www.rfc-editor.org/rfc/bcp/bcp47.txt.
      * Examples are: "en-US", "fr-CH", "es-MX"
      *
      * Generated from protobuf field <code>string locale = 1;</code>

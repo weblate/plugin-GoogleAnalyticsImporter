@@ -40,19 +40,32 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\GuzzleHttp\Promise\PromiseInterf
 /**
  * Middleware that adds retry functionality.
  */
-class RetryMiddleware
+class RetryMiddleware implements MiddlewareInterface
 {
     /** @var callable */
     private $nextHandler;
-    /** @var RetrySettings */
+    /**
+     * @var \Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\RetrySettings
+     */
     private $retrySettings;
-    /** @var float|null */
+    /**
+     * @var float|null
+     */
     private $deadlineMs;
-    public function __construct(callable $nextHandler, RetrySettings $retrySettings, $deadlineMs = null)
+    /*
+     * The number of retries that have already been attempted.
+     * The original API call will have $retryAttempts set to 0.
+     */
+    /**
+     * @var int
+     */
+    private $retryAttempts;
+    public function __construct(callable $nextHandler, RetrySettings $retrySettings, $deadlineMs = null, $retryAttempts = 0)
     {
         $this->nextHandler = $nextHandler;
         $this->retrySettings = $retrySettings;
         $this->deadlineMs = $deadlineMs;
+        $this->retryAttempts = $retryAttempts;
     }
     /**
      * @param Call $call
@@ -76,12 +89,19 @@ class RetryMiddleware
             return $nextHandler($call, $options);
         }
         return $nextHandler($call, $options)->then(null, function ($e) use($call, $options) {
-            if (!$e instanceof ApiException) {
+            $retryFunction = $this->getRetryFunction();
+            // If the number of retries has surpassed the max allowed retries
+            // then throw the exception as we normally would.
+            // If the maxRetries is set to 0, then we don't check this condition.
+            if (0 !== $this->retrySettings->getMaxRetries() && $this->retryAttempts >= $this->retrySettings->getMaxRetries()) {
                 throw $e;
             }
-            if (!in_array($e->getStatus(), $this->retrySettings->getRetryableCodes())) {
+            // If the retry function returns false then throw the
+            // exception as we normally would.
+            if (!$retryFunction($e, $options)) {
                 throw $e;
             }
+            // Retry function returned true, so we attempt another retry
             return $this->retry($call, $options, $e->getStatus());
         });
     }
@@ -93,7 +113,7 @@ class RetryMiddleware
      * @return PromiseInterface
      * @throws ApiException
      */
-    private function retry(Call $call, array $options, $status)
+    private function retry(Call $call, array $options, string $status)
     {
         $delayMult = $this->retrySettings->getRetryDelayMultiplier();
         $maxDelayMs = $this->retrySettings->getMaxRetryDelayMillis();
@@ -108,8 +128,8 @@ class RetryMiddleware
             throw new ApiException('Retry total timeout exceeded.', \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\Code::DEADLINE_EXCEEDED, ApiStatus::DEADLINE_EXCEEDED);
         }
         $delayMs = min($delayMs * $delayMult, $maxDelayMs);
-        $timeoutMs = min($timeoutMs * $timeoutMult, $maxTimeoutMs, $deadlineMs - $this->getCurrentTimeMs());
-        $nextHandler = new RetryMiddleware($this->nextHandler, $this->retrySettings->with(['initialRetryDelayMillis' => $delayMs]), $deadlineMs);
+        $timeoutMs = (int) min($timeoutMs * $timeoutMult, $maxTimeoutMs, $deadlineMs - $this->getCurrentTimeMs());
+        $nextHandler = new RetryMiddleware($this->nextHandler, $this->retrySettings->with(['initialRetryDelayMillis' => $delayMs]), $deadlineMs, $this->retryAttempts + 1);
         // Set the timeout for the call
         $options['timeoutMillis'] = $timeoutMs;
         return $nextHandler($call, $options);
@@ -117,5 +137,23 @@ class RetryMiddleware
     protected function getCurrentTimeMs()
     {
         return microtime(\true) * 1000.0;
+    }
+    /**
+     * This is the default retry behaviour.
+     */
+    private function getRetryFunction()
+    {
+        return $this->retrySettings->getRetryFunction() ?? function (\Throwable $e, array $options) : bool {
+            // This is the default retry behaviour, i.e. we don't retry an ApiException
+            // and for other exception types, we only retry when the error code is in
+            // the list of retryable error codes.
+            if (!$e instanceof ApiException) {
+                return \false;
+            }
+            if (!in_array($e->getStatus(), $this->retrySettings->getRetryableCodes())) {
+                return \false;
+            }
+            return \true;
+        };
     }
 }

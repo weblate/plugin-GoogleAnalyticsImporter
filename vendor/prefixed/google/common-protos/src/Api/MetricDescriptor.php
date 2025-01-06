@@ -21,11 +21,11 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *
      * Generated from protobuf field <code>string name = 1;</code>
      */
-    private $name = '';
+    protected $name = '';
     /**
      * The metric type, including its DNS name prefix. The type is not
-     * URL-encoded.  All user-defined metric types have the DNS name
-     * `custom.googleapis.com` or `external.googleapis.com`.  Metric types should
+     * URL-encoded. All user-defined metric types have the DNS name
+     * `custom.googleapis.com` or `external.googleapis.com`. Metric types should
      * use a natural hierarchical grouping. For example:
      *     "custom.googleapis.com/invoice/paid/amount"
      *     "external.googleapis.com/prometheus/up"
@@ -33,7 +33,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *
      * Generated from protobuf field <code>string type = 8;</code>
      */
-    private $type = '';
+    protected $type = '';
     /**
      * The set of labels that can be used to describe a specific
      * instance of this metric type. For example, the
@@ -51,33 +51,33 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *
      * Generated from protobuf field <code>.google.api.MetricDescriptor.MetricKind metric_kind = 3;</code>
      */
-    private $metric_kind = 0;
+    protected $metric_kind = 0;
     /**
      * Whether the measurement is an integer, a floating-point number, etc.
      * Some combinations of `metric_kind` and `value_type` might not be supported.
      *
      * Generated from protobuf field <code>.google.api.MetricDescriptor.ValueType value_type = 4;</code>
      */
-    private $value_type = 0;
+    protected $value_type = 0;
     /**
      * The units in which the metric value is reported. It is only applicable
      * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
      * defines the representation of the stored metric values.
-     * Different systems may scale the values to be more easily displayed (so a
-     * value of `0.02KBy` _might_ be displayed as `20By`, and a value of
-     * `3523KBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
-     * `KBy`, then the value of the metric is always in thousands of bytes, no
-     * matter how it may be displayed..
+     * Different systems might scale the values to be more easily displayed (so a
+     * value of `0.02kBy` _might_ be displayed as `20By`, and a value of
+     * `3523kBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
+     * `kBy`, then the value of the metric is always in thousands of bytes, no
+     * matter how it might be displayed.
      * If you want a custom metric to record the exact number of CPU-seconds used
      * by a job, you can create an `INT64 CUMULATIVE` metric whose `unit` is
      * `s{CPU}` (or equivalently `1s{CPU}` or just `s`). If the job uses 12,005
      * CPU-seconds, then the value is written as `12005`.
-     * Alternatively, if you want a custome metric to record data in a more
+     * Alternatively, if you want a custom metric to record data in a more
      * granular way, you can create a `DOUBLE CUMULATIVE` metric whose `unit` is
      * `ks{CPU}`, and then write the value `12.005` (which is `12005/1000`),
      * or use `Kis{CPU}` and write `11.723` (which is `12005/1024`).
      * The supported units are a subset of [The Unified Code for Units of
-     * Measure](http://unitsofmeasure.org/ucum.html) standard:
+     * Measure](https://unitsofmeasure.org/ucum.html) standard:
      * **Basic units (UNIT)**
      * * `bit`   bit
      * * `By`    byte
@@ -85,6 +85,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * * `min`   minute
      * * `h`     hour
      * * `d`     day
+     * * `1`     dimensionless
      * **Prefixes (PREFIX)**
      * * `k`     kilo    (10^3)
      * * `M`     mega    (10^6)
@@ -145,13 +146,13 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *
      * Generated from protobuf field <code>string unit = 5;</code>
      */
-    private $unit = '';
+    protected $unit = '';
     /**
      * A detailed description of the metric, which can be used in documentation.
      *
      * Generated from protobuf field <code>string description = 6;</code>
      */
-    private $description = '';
+    protected $description = '';
     /**
      * A concise name for the metric, which can be displayed in user interfaces.
      * Use sentence case without an ending period, for example "Request count".
@@ -160,19 +161,30 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *
      * Generated from protobuf field <code>string display_name = 7;</code>
      */
-    private $display_name = '';
+    protected $display_name = '';
     /**
      * Optional. Metadata which can be used to guide usage of the metric.
      *
      * Generated from protobuf field <code>.google.api.MetricDescriptor.MetricDescriptorMetadata metadata = 10;</code>
      */
-    private $metadata = null;
+    protected $metadata = null;
     /**
      * Optional. The launch stage of the metric definition.
      *
      * Generated from protobuf field <code>.google.api.LaunchStage launch_stage = 12;</code>
      */
-    private $launch_stage = 0;
+    protected $launch_stage = 0;
+    /**
+     * Read-only. If present, then a [time
+     * series][google.monitoring.v3.TimeSeries], which is identified partially by
+     * a metric type and a
+     * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor], that
+     * is associated with this metric type can only be associated with one of the
+     * monitored resource types listed here.
+     *
+     * Generated from protobuf field <code>repeated string monitored_resource_types = 13;</code>
+     */
+    private $monitored_resource_types;
     /**
      * Constructor.
      *
@@ -183,13 +195,13 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *           The resource name of the metric descriptor.
      *     @type string $type
      *           The metric type, including its DNS name prefix. The type is not
-     *           URL-encoded.  All user-defined metric types have the DNS name
-     *           `custom.googleapis.com` or `external.googleapis.com`.  Metric types should
+     *           URL-encoded. All user-defined metric types have the DNS name
+     *           `custom.googleapis.com` or `external.googleapis.com`. Metric types should
      *           use a natural hierarchical grouping. For example:
      *               "custom.googleapis.com/invoice/paid/amount"
      *               "external.googleapis.com/prometheus/up"
      *               "appengine.googleapis.com/http/server/response_latencies"
-     *     @type \Google\Api\LabelDescriptor[]|\Google\Protobuf\Internal\RepeatedField $labels
+     *     @type array<\Google\Api\LabelDescriptor>|\Google\Protobuf\Internal\RepeatedField $labels
      *           The set of labels that can be used to describe a specific
      *           instance of this metric type. For example, the
      *           `appengine.googleapis.com/http/server/response_latencies` metric
@@ -206,21 +218,21 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *           The units in which the metric value is reported. It is only applicable
      *           if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
      *           defines the representation of the stored metric values.
-     *           Different systems may scale the values to be more easily displayed (so a
-     *           value of `0.02KBy` _might_ be displayed as `20By`, and a value of
-     *           `3523KBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
-     *           `KBy`, then the value of the metric is always in thousands of bytes, no
-     *           matter how it may be displayed..
+     *           Different systems might scale the values to be more easily displayed (so a
+     *           value of `0.02kBy` _might_ be displayed as `20By`, and a value of
+     *           `3523kBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
+     *           `kBy`, then the value of the metric is always in thousands of bytes, no
+     *           matter how it might be displayed.
      *           If you want a custom metric to record the exact number of CPU-seconds used
      *           by a job, you can create an `INT64 CUMULATIVE` metric whose `unit` is
      *           `s{CPU}` (or equivalently `1s{CPU}` or just `s`). If the job uses 12,005
      *           CPU-seconds, then the value is written as `12005`.
-     *           Alternatively, if you want a custome metric to record data in a more
+     *           Alternatively, if you want a custom metric to record data in a more
      *           granular way, you can create a `DOUBLE CUMULATIVE` metric whose `unit` is
      *           `ks{CPU}`, and then write the value `12.005` (which is `12005/1000`),
      *           or use `Kis{CPU}` and write `11.723` (which is `12005/1024`).
      *           The supported units are a subset of [The Unified Code for Units of
-     *           Measure](http://unitsofmeasure.org/ucum.html) standard:
+     *           Measure](https://unitsofmeasure.org/ucum.html) standard:
      *           **Basic units (UNIT)**
      *           * `bit`   bit
      *           * `By`    byte
@@ -228,6 +240,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *           * `min`   minute
      *           * `h`     hour
      *           * `d`     day
+     *           * `1`     dimensionless
      *           **Prefixes (PREFIX)**
      *           * `k`     kilo    (10^3)
      *           * `M`     mega    (10^6)
@@ -296,6 +309,13 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *           Optional. Metadata which can be used to guide usage of the metric.
      *     @type int $launch_stage
      *           Optional. The launch stage of the metric definition.
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $monitored_resource_types
+     *           Read-only. If present, then a [time
+     *           series][google.monitoring.v3.TimeSeries], which is identified partially by
+     *           a metric type and a
+     *           [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor], that
+     *           is associated with this metric type can only be associated with one of the
+     *           monitored resource types listed here.
      * }
      */
     public function __construct($data = NULL)
@@ -328,8 +348,8 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     }
     /**
      * The metric type, including its DNS name prefix. The type is not
-     * URL-encoded.  All user-defined metric types have the DNS name
-     * `custom.googleapis.com` or `external.googleapis.com`.  Metric types should
+     * URL-encoded. All user-defined metric types have the DNS name
+     * `custom.googleapis.com` or `external.googleapis.com`. Metric types should
      * use a natural hierarchical grouping. For example:
      *     "custom.googleapis.com/invoice/paid/amount"
      *     "external.googleapis.com/prometheus/up"
@@ -344,8 +364,8 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     }
     /**
      * The metric type, including its DNS name prefix. The type is not
-     * URL-encoded.  All user-defined metric types have the DNS name
-     * `custom.googleapis.com` or `external.googleapis.com`.  Metric types should
+     * URL-encoded. All user-defined metric types have the DNS name
+     * `custom.googleapis.com` or `external.googleapis.com`. Metric types should
      * use a natural hierarchical grouping. For example:
      *     "custom.googleapis.com/invoice/paid/amount"
      *     "external.googleapis.com/prometheus/up"
@@ -385,7 +405,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * for responses that failed.
      *
      * Generated from protobuf field <code>repeated .google.api.LabelDescriptor labels = 2;</code>
-     * @param \Google\Api\LabelDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\LabelDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setLabels($var)
@@ -415,7 +435,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      */
     public function setMetricKind($var)
     {
-        GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor_MetricKind::class);
+        GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor\MetricKind::class);
         $this->metric_kind = $var;
         return $this;
     }
@@ -440,7 +460,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      */
     public function setValueType($var)
     {
-        GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor_ValueType::class);
+        GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor\ValueType::class);
         $this->value_type = $var;
         return $this;
     }
@@ -448,21 +468,21 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * The units in which the metric value is reported. It is only applicable
      * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
      * defines the representation of the stored metric values.
-     * Different systems may scale the values to be more easily displayed (so a
-     * value of `0.02KBy` _might_ be displayed as `20By`, and a value of
-     * `3523KBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
-     * `KBy`, then the value of the metric is always in thousands of bytes, no
-     * matter how it may be displayed..
+     * Different systems might scale the values to be more easily displayed (so a
+     * value of `0.02kBy` _might_ be displayed as `20By`, and a value of
+     * `3523kBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
+     * `kBy`, then the value of the metric is always in thousands of bytes, no
+     * matter how it might be displayed.
      * If you want a custom metric to record the exact number of CPU-seconds used
      * by a job, you can create an `INT64 CUMULATIVE` metric whose `unit` is
      * `s{CPU}` (or equivalently `1s{CPU}` or just `s`). If the job uses 12,005
      * CPU-seconds, then the value is written as `12005`.
-     * Alternatively, if you want a custome metric to record data in a more
+     * Alternatively, if you want a custom metric to record data in a more
      * granular way, you can create a `DOUBLE CUMULATIVE` metric whose `unit` is
      * `ks{CPU}`, and then write the value `12.005` (which is `12005/1000`),
      * or use `Kis{CPU}` and write `11.723` (which is `12005/1024`).
      * The supported units are a subset of [The Unified Code for Units of
-     * Measure](http://unitsofmeasure.org/ucum.html) standard:
+     * Measure](https://unitsofmeasure.org/ucum.html) standard:
      * **Basic units (UNIT)**
      * * `bit`   bit
      * * `By`    byte
@@ -470,6 +490,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * * `min`   minute
      * * `h`     hour
      * * `d`     day
+     * * `1`     dimensionless
      * **Prefixes (PREFIX)**
      * * `k`     kilo    (10^3)
      * * `M`     mega    (10^6)
@@ -539,21 +560,21 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * The units in which the metric value is reported. It is only applicable
      * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
      * defines the representation of the stored metric values.
-     * Different systems may scale the values to be more easily displayed (so a
-     * value of `0.02KBy` _might_ be displayed as `20By`, and a value of
-     * `3523KBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
-     * `KBy`, then the value of the metric is always in thousands of bytes, no
-     * matter how it may be displayed..
+     * Different systems might scale the values to be more easily displayed (so a
+     * value of `0.02kBy` _might_ be displayed as `20By`, and a value of
+     * `3523kBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
+     * `kBy`, then the value of the metric is always in thousands of bytes, no
+     * matter how it might be displayed.
      * If you want a custom metric to record the exact number of CPU-seconds used
      * by a job, you can create an `INT64 CUMULATIVE` metric whose `unit` is
      * `s{CPU}` (or equivalently `1s{CPU}` or just `s`). If the job uses 12,005
      * CPU-seconds, then the value is written as `12005`.
-     * Alternatively, if you want a custome metric to record data in a more
+     * Alternatively, if you want a custom metric to record data in a more
      * granular way, you can create a `DOUBLE CUMULATIVE` metric whose `unit` is
      * `ks{CPU}`, and then write the value `12.005` (which is `12005/1000`),
      * or use `Kis{CPU}` and write `11.723` (which is `12005/1024`).
      * The supported units are a subset of [The Unified Code for Units of
-     * Measure](http://unitsofmeasure.org/ucum.html) standard:
+     * Measure](https://unitsofmeasure.org/ucum.html) standard:
      * **Basic units (UNIT)**
      * * `bit`   bit
      * * `By`    byte
@@ -561,6 +582,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * * `min`   minute
      * * `h`     hour
      * * `d`     day
+     * * `1`     dimensionless
      * **Prefixes (PREFIX)**
      * * `k`     kilo    (10^3)
      * * `M`     mega    (10^6)
@@ -685,11 +707,19 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * Optional. Metadata which can be used to guide usage of the metric.
      *
      * Generated from protobuf field <code>.google.api.MetricDescriptor.MetricDescriptorMetadata metadata = 10;</code>
-     * @return \Google\Api\MetricDescriptor\MetricDescriptorMetadata
+     * @return \Google\Api\MetricDescriptor\MetricDescriptorMetadata|null
      */
     public function getMetadata()
     {
         return $this->metadata;
+    }
+    public function hasMetadata()
+    {
+        return isset($this->metadata);
+    }
+    public function clearMetadata()
+    {
+        unset($this->metadata);
     }
     /**
      * Optional. Metadata which can be used to guide usage of the metric.
@@ -700,7 +730,7 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      */
     public function setMetadata($var)
     {
-        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor_MetricDescriptorMetadata::class);
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor\MetricDescriptorMetadata::class);
         $this->metadata = $var;
         return $this;
     }
@@ -725,6 +755,39 @@ class MetricDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     {
         GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\LaunchStage::class);
         $this->launch_stage = $var;
+        return $this;
+    }
+    /**
+     * Read-only. If present, then a [time
+     * series][google.monitoring.v3.TimeSeries], which is identified partially by
+     * a metric type and a
+     * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor], that
+     * is associated with this metric type can only be associated with one of the
+     * monitored resource types listed here.
+     *
+     * Generated from protobuf field <code>repeated string monitored_resource_types = 13;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getMonitoredResourceTypes()
+    {
+        return $this->monitored_resource_types;
+    }
+    /**
+     * Read-only. If present, then a [time
+     * series][google.monitoring.v3.TimeSeries], which is identified partially by
+     * a metric type and a
+     * [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor], that
+     * is associated with this metric type can only be associated with one of the
+     * monitored resource types listed here.
+     *
+     * Generated from protobuf field <code>repeated string monitored_resource_types = 13;</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setMonitoredResourceTypes($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType::STRING);
+        $this->monitored_resource_types = $arr;
         return $this;
     }
 }

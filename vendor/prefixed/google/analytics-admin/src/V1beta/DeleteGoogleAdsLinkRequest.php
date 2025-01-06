@@ -21,6 +21,18 @@ class DeleteGoogleAdsLinkRequest extends \Matomo\Dependencies\GoogleAnalyticsImp
      */
     private $name = '';
     /**
+     * @param string $name Required. Example format: properties/1234/googleAdsLinks/5678
+     *                     Please see {@see AnalyticsAdminServiceClient::googleAdsLinkName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1beta\DeleteGoogleAdsLinkRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

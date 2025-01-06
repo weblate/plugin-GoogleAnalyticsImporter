@@ -21,7 +21,7 @@ class Advice extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
      *
      * Generated from protobuf field <code>string description = 2;</code>
      */
-    private $description = '';
+    protected $description = '';
     /**
      * Constructor.
      *

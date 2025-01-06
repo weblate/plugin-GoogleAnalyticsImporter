@@ -15,12 +15,25 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class GetExpandedDataSetRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * Required. The name of the Audience to get.
+     * Required. The name of the ExpandedDataSet to get.
      * Example format: properties/1234/expandedDataSets/5678
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = {</code>
      */
     private $name = '';
+    /**
+     * @param string $name Required. The name of the ExpandedDataSet to get.
+     *                     Example format: properties/1234/expandedDataSets/5678
+     *                     Please see {@see AnalyticsAdminServiceClient::expandedDataSetName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\GetExpandedDataSetRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
     /**
      * Constructor.
      *
@@ -28,7 +41,7 @@ class GetExpandedDataSetRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
      *     Optional. Data for populating the Message object.
      *
      *     @type string $name
-     *           Required. The name of the Audience to get.
+     *           Required. The name of the ExpandedDataSet to get.
      *           Example format: properties/1234/expandedDataSets/5678
      * }
      */
@@ -38,7 +51,7 @@ class GetExpandedDataSetRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
         parent::__construct($data);
     }
     /**
-     * Required. The name of the Audience to get.
+     * Required. The name of the ExpandedDataSet to get.
      * Example format: properties/1234/expandedDataSets/5678
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = {</code>
@@ -49,7 +62,7 @@ class GetExpandedDataSetRequest extends \Matomo\Dependencies\GoogleAnalyticsImpo
         return $this->name;
     }
     /**
-     * Required. The name of the Audience to get.
+     * Required. The name of the ExpandedDataSet to get.
      * Example format: properties/1234/expandedDataSets/5678
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = {</code>

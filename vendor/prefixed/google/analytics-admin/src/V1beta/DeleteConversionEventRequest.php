@@ -23,6 +23,20 @@ class DeleteConversionEventRequest extends \Matomo\Dependencies\GoogleAnalyticsI
      */
     private $name = '';
     /**
+     * @param string $name Required. The resource name of the conversion event to delete.
+     *                     Format: properties/{property}/conversionEvents/{conversion_event}
+     *                     Example: "properties/123/conversionEvents/456"
+     *                     Please see {@see AnalyticsAdminServiceClient::conversionEventName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1beta\DeleteConversionEventRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

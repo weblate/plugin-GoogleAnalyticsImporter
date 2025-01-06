@@ -15,9 +15,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class MeasurementProtocolSecret extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * Output only. Resource name of this secret. This secret may be a child of any type of
-     * stream.
-     * Format:
+     * Output only. Resource name of this secret. This secret may be a child of
+     * any type of stream. Format:
      * properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets/{measurementProtocolSecret}
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -30,8 +29,8 @@ class MeasurementProtocolSecret extends \Matomo\Dependencies\GoogleAnalyticsImpo
      */
     private $display_name = '';
     /**
-     * Output only. The measurement protocol secret value. Pass this value to the api_secret
-     * field of the Measurement Protocol API when sending hits to this
+     * Output only. The measurement protocol secret value. Pass this value to the
+     * api_secret field of the Measurement Protocol API when sending hits to this
      * secret's parent property.
      *
      * Generated from protobuf field <code>string secret_value = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -44,15 +43,14 @@ class MeasurementProtocolSecret extends \Matomo\Dependencies\GoogleAnalyticsImpo
      *     Optional. Data for populating the Message object.
      *
      *     @type string $name
-     *           Output only. Resource name of this secret. This secret may be a child of any type of
-     *           stream.
-     *           Format:
+     *           Output only. Resource name of this secret. This secret may be a child of
+     *           any type of stream. Format:
      *           properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets/{measurementProtocolSecret}
      *     @type string $display_name
      *           Required. Human-readable display name for this secret.
      *     @type string $secret_value
-     *           Output only. The measurement protocol secret value. Pass this value to the api_secret
-     *           field of the Measurement Protocol API when sending hits to this
+     *           Output only. The measurement protocol secret value. Pass this value to the
+     *           api_secret field of the Measurement Protocol API when sending hits to this
      *           secret's parent property.
      * }
      */
@@ -62,9 +60,8 @@ class MeasurementProtocolSecret extends \Matomo\Dependencies\GoogleAnalyticsImpo
         parent::__construct($data);
     }
     /**
-     * Output only. Resource name of this secret. This secret may be a child of any type of
-     * stream.
-     * Format:
+     * Output only. Resource name of this secret. This secret may be a child of
+     * any type of stream. Format:
      * properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets/{measurementProtocolSecret}
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -75,9 +72,8 @@ class MeasurementProtocolSecret extends \Matomo\Dependencies\GoogleAnalyticsImpo
         return $this->name;
     }
     /**
-     * Output only. Resource name of this secret. This secret may be a child of any type of
-     * stream.
-     * Format:
+     * Output only. Resource name of this secret. This secret may be a child of
+     * any type of stream. Format:
      * properties/{property}/dataStreams/{dataStream}/measurementProtocolSecrets/{measurementProtocolSecret}
      *
      * Generated from protobuf field <code>string name = 1 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -114,8 +110,8 @@ class MeasurementProtocolSecret extends \Matomo\Dependencies\GoogleAnalyticsImpo
         return $this;
     }
     /**
-     * Output only. The measurement protocol secret value. Pass this value to the api_secret
-     * field of the Measurement Protocol API when sending hits to this
+     * Output only. The measurement protocol secret value. Pass this value to the
+     * api_secret field of the Measurement Protocol API when sending hits to this
      * secret's parent property.
      *
      * Generated from protobuf field <code>string secret_value = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -126,8 +122,8 @@ class MeasurementProtocolSecret extends \Matomo\Dependencies\GoogleAnalyticsImpo
         return $this->secret_value;
     }
     /**
-     * Output only. The measurement protocol secret value. Pass this value to the api_secret
-     * field of the Measurement Protocol API when sending hits to this
+     * Output only. The measurement protocol secret value. Pass this value to the
+     * api_secret field of the Measurement Protocol API when sending hits to this
      * secret's parent property.
      *
      * Generated from protobuf field <code>string secret_value = 3 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>

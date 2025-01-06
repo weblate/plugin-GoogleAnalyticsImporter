@@ -29,6 +29,21 @@ class CreateAccessBindingRequest extends \Matomo\Dependencies\GoogleAnalyticsImp
      */
     private $access_binding = null;
     /**
+     * @param string                                        $parent        Required. Formats:
+     *                                                                     - accounts/{account}
+     *                                                                     - properties/{property}
+     *                                                                     Please see {@see AnalyticsAdminServiceClient::accountName()} for help formatting this field.
+     * @param \Google\Analytics\Admin\V1alpha\AccessBinding $accessBinding Required. The access binding to create.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\CreateAccessBindingRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\AccessBinding $accessBinding) : self
+    {
+        return (new self())->setParent($parent)->setAccessBinding($accessBinding);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

@@ -119,5 +119,3 @@ class Violation extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Prot
         return $this;
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(Violation::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\QuotaFailure_Violation::class);

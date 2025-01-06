@@ -41,6 +41,20 @@ class ListBigQueryLinksRequest extends \Matomo\Dependencies\GoogleAnalyticsImpor
      */
     private $page_token = '';
     /**
+     * @param string $parent Required. The name of the property to list BigQuery links under.
+     *                       Format: properties/{property_id}
+     *                       Example: properties/1234
+     *                       Please see {@see AnalyticsAdminServiceClient::propertyName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\ListBigQueryLinksRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent) : self
+    {
+        return (new self())->setParent($parent);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

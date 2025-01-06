@@ -15,7 +15,7 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class ListOperationsRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * The name of the operation collection.
+     * The name of the operation's parent resource.
      *
      * Generated from protobuf field <code>string name = 4;</code>
      */
@@ -39,13 +39,25 @@ class ListOperationsRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter
      */
     private $page_token = '';
     /**
+     * @param string $name   The name of the operation's parent resource.
+     * @param string $filter The standard list filter.
+     *
+     * @return \Google\LongRunning\ListOperationsRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name, string $filter) : self
+    {
+        return (new self())->setName($name)->setFilter($filter);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
      *     @type string $name
-     *           The name of the operation collection.
+     *           The name of the operation's parent resource.
      *     @type string $filter
      *           The standard list filter.
      *     @type int $page_size
@@ -60,7 +72,7 @@ class ListOperationsRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter
         parent::__construct($data);
     }
     /**
-     * The name of the operation collection.
+     * The name of the operation's parent resource.
      *
      * Generated from protobuf field <code>string name = 4;</code>
      * @return string
@@ -70,7 +82,7 @@ class ListOperationsRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter
         return $this->name;
     }
     /**
-     * The name of the operation collection.
+     * The name of the operation's parent resource.
      *
      * Generated from protobuf field <code>string name = 4;</code>
      * @param string $var

@@ -17,6 +17,8 @@
  */
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\Credentials;
 
+use COM;
+use com_exception;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\CredentialsLoader;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\GetQuotaProjectInterface;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\HttpHandler\HttpClientCache;
@@ -96,6 +98,19 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
      * The Linux file which contains the product name.
      */
     private const GKE_PRODUCT_NAME_FILE = '/sys/class/dmi/id/product_name';
+    /**
+     * The Windows Registry key path to the product name
+     */
+    private const WINDOWS_REGISTRY_KEY_PATH = 'HKEY_LOCAL_MACHINE\\SYSTEM\\HardwareConfig\\Current\\';
+    /**
+     * The Windows registry key name for the product name
+     */
+    private const WINDOWS_REGISTRY_KEY_NAME = 'SystemProductName';
+    /**
+     * The Name of the product expected from the windows registry
+     */
+    private const PRODUCT_NAME = 'Google';
+    private const CRED_TYPE = 'mds';
     /**
      * Note: the explicit `timeout` and `tries` below is a workaround. The underlying
      * issue is that resolving an unknown host on some networks will take
@@ -289,7 +304,7 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
                 // could lead to false negatives in the event that we are on GCE, but
                 // the metadata resolution was particularly slow. The latter case is
                 // "unlikely".
-                $resp = $httpHandler(new Request('GET', $checkUri, [self::FLAVOR_HEADER => 'Google']), ['timeout' => self::COMPUTE_PING_CONNECTION_TIMEOUT_S]);
+                $resp = $httpHandler(new Request('GET', $checkUri, [self::FLAVOR_HEADER => 'Google', self::$metricMetadataKey => self::getMetricsHeader('', 'mds')]), ['timeout' => self::COMPUTE_PING_CONNECTION_TIMEOUT_S]);
                 return $resp->getHeaderLine(self::FLAVOR_HEADER) == 'Google';
             } catch (ClientException $e) {
             } catch (ServerException $e) {
@@ -297,9 +312,8 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
             } catch (ConnectException $e) {
             }
         }
-        if (\PHP_OS === 'Windows') {
-            // @TODO: implement GCE residency detection on Windows
-            return \false;
+        if (\PHP_OS === 'Windows' || \PHP_OS === 'WINNT') {
+            return self::detectResidencyWindows(self::WINDOWS_REGISTRY_KEY_PATH . self::WINDOWS_REGISTRY_KEY_NAME);
         }
         // Detect GCE residency on Linux
         return self::detectResidencyLinux(self::GKE_PRODUCT_NAME_FILE);
@@ -308,9 +322,27 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
     {
         if (file_exists($productNameFile)) {
             $productName = trim((string) file_get_contents($productNameFile));
-            return 0 === strpos($productName, 'Google');
+            return 0 === strpos($productName, self::PRODUCT_NAME);
         }
         return \false;
+    }
+    private static function detectResidencyWindows(string $registryProductKey) : bool
+    {
+        if (!class_exists(COM::class)) {
+            // the COM extension must be installed and enabled to detect Windows residency
+            // see https://www.php.net/manual/en/book.com.php
+            return \false;
+        }
+        $shell = new COM('WScript.Shell');
+        $productName = null;
+        try {
+            $productName = $shell->regRead($registryProductKey);
+        } catch (com_exception $exception) {
+            // This means that we tried to read a key that doesn't exist on the registry
+            // which might mean that it is a windows instance that is not on GCE
+            return \false;
+        }
+        return 0 === strpos($productName, self::PRODUCT_NAME);
     }
     /**
      * Implements FetchAuthTokenInterface#fetchAuthToken.
@@ -341,7 +373,7 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
             return [];
             // return an empty array with no access token
         }
-        $response = $this->getFromMetadata($httpHandler, $this->tokenUri);
+        $response = $this->getFromMetadata($httpHandler, $this->tokenUri, $this->applyTokenEndpointMetrics([], $this->targetAudience ? 'it' : 'at'));
         if ($this->targetAudience) {
             return $this->lastReceivedToken = ['id_token' => $response];
         }
@@ -354,11 +386,15 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
         return $json;
     }
     /**
+     * Returns the Cache Key for the credential token.
+     * The format for the cache key is:
+     * TokenURI
+     *
      * @return string
      */
     public function getCacheKey()
     {
-        return self::cacheKey;
+        return $this->tokenUri;
     }
     /**
      * @return array<mixed>|null
@@ -460,11 +496,14 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
      *
      * @param callable $httpHandler An HTTP Handler to deliver PSR7 requests.
      * @param string $uri The metadata URI.
+     * @param array<mixed> $headers [optional] If present, add these headers to the token
+     *        endpoint request.
+     *
      * @return string
      */
-    private function getFromMetadata(callable $httpHandler, $uri)
+    private function getFromMetadata(callable $httpHandler, $uri, array $headers = [])
     {
-        $resp = $httpHandler(new Request('GET', $uri, [self::FLAVOR_HEADER => 'Google']));
+        $resp = $httpHandler(new Request('GET', $uri, [self::FLAVOR_HEADER => 'Google'] + $headers));
         return (string) $resp->getBody();
     }
     /**
@@ -489,5 +528,9 @@ class GCECredentials extends CredentialsLoader implements SignBlobInterface, Pro
         $this->hasCheckedOnGce = \true;
         // Set isOnGce
         $this->isOnGce = $isOnGce;
+    }
+    protected function getCredType() : string
+    {
+        return self::CRED_TYPE;
     }
 }

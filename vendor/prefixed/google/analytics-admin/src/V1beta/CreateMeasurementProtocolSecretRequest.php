@@ -28,6 +28,20 @@ class CreateMeasurementProtocolSecretRequest extends \Matomo\Dependencies\Google
      */
     private $measurement_protocol_secret = null;
     /**
+     * @param string                                                   $parent                    Required. The parent resource where this secret will be created.
+     *                                                                                            Format: properties/{property}/dataStreams/{dataStream}
+     *                                                                                            Please see {@see AnalyticsAdminServiceClient::dataStreamName()} for help formatting this field.
+     * @param \Google\Analytics\Admin\V1beta\MeasurementProtocolSecret $measurementProtocolSecret Required. The measurement protocol secret to create.
+     *
+     * @return \Google\Analytics\Admin\V1beta\CreateMeasurementProtocolSecretRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1beta\MeasurementProtocolSecret $measurementProtocolSecret) : self
+    {
+        return (new self())->setParent($parent)->setMeasurementProtocolSecret($measurementProtocolSecret);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

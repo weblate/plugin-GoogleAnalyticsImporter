@@ -22,6 +22,19 @@ class GetDataStreamRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter\
      */
     private $name = '';
     /**
+     * @param string $name Required. The name of the DataStream to get.
+     *                     Example format: properties/1234/dataStreams/5678
+     *                     Please see {@see AnalyticsAdminServiceClient::dataStreamName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\GetDataStreamRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

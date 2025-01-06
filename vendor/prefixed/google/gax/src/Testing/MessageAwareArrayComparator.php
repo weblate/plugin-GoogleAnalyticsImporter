@@ -18,6 +18,9 @@
 namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Testing;
 
 use SebastianBergmann\Comparator\ArrayComparator;
+/**
+ * @internal
+ */
 class MessageAwareArrayComparator extends ArrayComparator
 {
     public function __construct()

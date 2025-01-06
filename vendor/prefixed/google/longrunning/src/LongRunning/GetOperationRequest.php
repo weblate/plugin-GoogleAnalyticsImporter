@@ -21,6 +21,17 @@ class GetOperationRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter\G
      */
     private $name = '';
     /**
+     * @param string $name The name of the operation resource.
+     *
+     * @return \Google\LongRunning\GetOperationRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

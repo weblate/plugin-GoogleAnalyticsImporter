@@ -210,7 +210,7 @@ function partition($client, &$metrics)
     hardAssertIfStatusOk($status);
     hardAssert($session !== null, 'Call completed with a null response');
     $txn_options = new Google\Cloud\Spanner\V1\TransactionOptions();
-    $ro = new Google\Cloud\Spanner\V1\TransactionOptions\ReadOnly();
+    $ro = new Google\Cloud\Spanner\V1\TransactionOptions\PBReadOnly();
     $txn_options->setReadOnly($ro);
     $txn_selector = new Google\Cloud\Spanner\V1\TransactionSelector();
     $txn_selector->setBegin($txn_options);

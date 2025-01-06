@@ -66,10 +66,10 @@ class Row extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\I
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type \Google\Analytics\Data\V1alpha\DimensionValue[]|\Google\Protobuf\Internal\RepeatedField $dimension_values
+     *     @type array<\Google\Analytics\Data\V1alpha\DimensionValue>|\Google\Protobuf\Internal\RepeatedField $dimension_values
      *           List of requested dimension values. In a PivotReport, dimension_values
      *           are only listed for dimensions included in a pivot.
-     *     @type \Google\Analytics\Data\V1alpha\MetricValue[]|\Google\Protobuf\Internal\RepeatedField $metric_values
+     *     @type array<\Google\Analytics\Data\V1alpha\MetricValue>|\Google\Protobuf\Internal\RepeatedField $metric_values
      *           List of requested visible metric values.
      * }
      */
@@ -94,7 +94,7 @@ class Row extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\I
      * are only listed for dimensions included in a pivot.
      *
      * Generated from protobuf field <code>repeated .google.analytics.data.v1alpha.DimensionValue dimension_values = 1;</code>
-     * @param \Google\Analytics\Data\V1alpha\DimensionValue[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Analytics\Data\V1alpha\DimensionValue>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setDimensionValues($var)
@@ -117,7 +117,7 @@ class Row extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\I
      * List of requested visible metric values.
      *
      * Generated from protobuf field <code>repeated .google.analytics.data.v1alpha.MetricValue metric_values = 2;</code>
-     * @param \Google\Analytics\Data\V1alpha\MetricValue[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Analytics\Data\V1alpha\MetricValue>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setMetricValues($var)

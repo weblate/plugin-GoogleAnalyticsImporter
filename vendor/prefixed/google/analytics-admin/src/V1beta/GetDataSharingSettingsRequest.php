@@ -23,6 +23,20 @@ class GetDataSharingSettingsRequest extends \Matomo\Dependencies\GoogleAnalytics
      */
     private $name = '';
     /**
+     * @param string $name Required. The name of the settings to lookup.
+     *                     Format: accounts/{account}/dataSharingSettings
+     *                     Example: "accounts/1000/dataSharingSettings"
+     *                     Please see {@see AnalyticsAdminServiceClient::dataSharingSettingsName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1beta\GetDataSharingSettingsRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

@@ -73,5 +73,3 @@ class ValueType
         return constant($const);
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(ValueType::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Api\MetricDescriptor_ValueType::class);

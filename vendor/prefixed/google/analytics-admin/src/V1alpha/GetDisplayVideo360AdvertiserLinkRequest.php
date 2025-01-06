@@ -22,6 +22,19 @@ class GetDisplayVideo360AdvertiserLinkRequest extends \Matomo\Dependencies\Googl
      */
     private $name = '';
     /**
+     * @param string $name Required. The name of the DisplayVideo360AdvertiserLink to get.
+     *                     Example format: properties/1234/displayVideo360AdvertiserLink/5678
+     *                     Please see {@see AnalyticsAdminServiceClient::displayVideo360AdvertiserLinkName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\GetDisplayVideo360AdvertiserLinkRequest
+     *
+     * @experimental
+     */
+    public static function build(string $name) : self
+    {
+        return (new self())->setName($name);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

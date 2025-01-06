@@ -41,6 +41,9 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Grpc\ServerStreamingCall;
  */
 class ServerStreamingCallWrapper implements ServerStreamingCallInterface
 {
+    /**
+     * @var ServerStreamingCall|GCPServerStreamCall
+     */
     private $stream;
     /**
      * @param ServerStreamingCall|GCPServerStreamCall $stream

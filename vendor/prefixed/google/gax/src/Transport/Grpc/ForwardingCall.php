@@ -40,7 +40,9 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Grpc\AbstractCall;
  */
 abstract class ForwardingCall
 {
-    /** @var AbstractCall */
+    /**
+     * @var AbstractCall|ForwardingCall
+     */
     protected $innerCall;
     /**
      * ForwardingCall constructor.

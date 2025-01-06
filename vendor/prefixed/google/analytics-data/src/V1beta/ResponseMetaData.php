@@ -17,6 +17,15 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     /**
      * If true, indicates some buckets of dimension combinations are rolled into
      * "(other)" row. This can happen for high cardinality reports.
+     * The metadata parameter dataLossFromOtherRow is populated based on the
+     * aggregated data table used in the report. The parameter will be accurately
+     * populated regardless of the filters and limits in the report.
+     * For example, the (other) row could be dropped from the report because the
+     * request contains a filter on sessionSource = google. This parameter will
+     * still be populated if data loss from other row was present in the input
+     * aggregate data used to generate this report.
+     * To learn more, see [About the (other) row and data
+     * sampling](https://support.google.com/analytics/answer/13208658#reports).
      *
      * Generated from protobuf field <code>bool data_loss_from_other_row = 3;</code>
      */
@@ -64,13 +73,23 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * possible for a request to be subject to thresholding thresholding and no
      * data is absent from the report, and this happens when all data is above the
      * thresholds. To learn more, see [Data
-     * thresholds](https://support.google.com/analytics/answer/9383630) and [About
-     * Demographics and
-     * Interests](https://support.google.com/analytics/answer/2799357).
+     * thresholds](https://support.google.com/analytics/answer/9383630).
      *
      * Generated from protobuf field <code>optional bool subject_to_thresholding = 8;</code>
      */
     private $subject_to_thresholding = null;
+    /**
+     * If this report results is
+     * [sampled](https://support.google.com/analytics/answer/13331292), this
+     * describes the percentage of events used in this report. One
+     * `samplingMetadatas` is populated for each date range. Each
+     * `samplingMetadatas` corresponds to a date range in order that date ranges
+     * were specified in the request.
+     * However if the results are not sampled, this field will not be defined.
+     *
+     * Generated from protobuf field <code>repeated .google.analytics.data.v1beta.SamplingMetadata sampling_metadatas = 9;</code>
+     */
+    private $sampling_metadatas;
     /**
      * Constructor.
      *
@@ -80,6 +99,15 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *     @type bool $data_loss_from_other_row
      *           If true, indicates some buckets of dimension combinations are rolled into
      *           "(other)" row. This can happen for high cardinality reports.
+     *           The metadata parameter dataLossFromOtherRow is populated based on the
+     *           aggregated data table used in the report. The parameter will be accurately
+     *           populated regardless of the filters and limits in the report.
+     *           For example, the (other) row could be dropped from the report because the
+     *           request contains a filter on sessionSource = google. This parameter will
+     *           still be populated if data loss from other row was present in the input
+     *           aggregate data used to generate this report.
+     *           To learn more, see [About the (other) row and data
+     *           sampling](https://support.google.com/analytics/answer/13208658#reports).
      *     @type \Google\Analytics\Data\V1beta\ResponseMetaData\SchemaRestrictionResponse $schema_restriction_response
      *           Describes the schema restrictions actively enforced in creating this
      *           report. To learn more, see [Access and data-restriction
@@ -107,9 +135,15 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      *           possible for a request to be subject to thresholding thresholding and no
      *           data is absent from the report, and this happens when all data is above the
      *           thresholds. To learn more, see [Data
-     *           thresholds](https://support.google.com/analytics/answer/9383630) and [About
-     *           Demographics and
-     *           Interests](https://support.google.com/analytics/answer/2799357).
+     *           thresholds](https://support.google.com/analytics/answer/9383630).
+     *     @type array<\Google\Analytics\Data\V1beta\SamplingMetadata>|\Google\Protobuf\Internal\RepeatedField $sampling_metadatas
+     *           If this report results is
+     *           [sampled](https://support.google.com/analytics/answer/13331292), this
+     *           describes the percentage of events used in this report. One
+     *           `samplingMetadatas` is populated for each date range. Each
+     *           `samplingMetadatas` corresponds to a date range in order that date ranges
+     *           were specified in the request.
+     *           However if the results are not sampled, this field will not be defined.
      * }
      */
     public function __construct($data = NULL)
@@ -120,6 +154,15 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     /**
      * If true, indicates some buckets of dimension combinations are rolled into
      * "(other)" row. This can happen for high cardinality reports.
+     * The metadata parameter dataLossFromOtherRow is populated based on the
+     * aggregated data table used in the report. The parameter will be accurately
+     * populated regardless of the filters and limits in the report.
+     * For example, the (other) row could be dropped from the report because the
+     * request contains a filter on sessionSource = google. This parameter will
+     * still be populated if data loss from other row was present in the input
+     * aggregate data used to generate this report.
+     * To learn more, see [About the (other) row and data
+     * sampling](https://support.google.com/analytics/answer/13208658#reports).
      *
      * Generated from protobuf field <code>bool data_loss_from_other_row = 3;</code>
      * @return bool
@@ -131,6 +174,15 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     /**
      * If true, indicates some buckets of dimension combinations are rolled into
      * "(other)" row. This can happen for high cardinality reports.
+     * The metadata parameter dataLossFromOtherRow is populated based on the
+     * aggregated data table used in the report. The parameter will be accurately
+     * populated regardless of the filters and limits in the report.
+     * For example, the (other) row could be dropped from the report because the
+     * request contains a filter on sessionSource = google. This parameter will
+     * still be populated if data loss from other row was present in the input
+     * aggregate data used to generate this report.
+     * To learn more, see [About the (other) row and data
+     * sampling](https://support.google.com/analytics/answer/13208658#reports).
      *
      * Generated from protobuf field <code>bool data_loss_from_other_row = 3;</code>
      * @param bool $var
@@ -298,9 +350,7 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * possible for a request to be subject to thresholding thresholding and no
      * data is absent from the report, and this happens when all data is above the
      * thresholds. To learn more, see [Data
-     * thresholds](https://support.google.com/analytics/answer/9383630) and [About
-     * Demographics and
-     * Interests](https://support.google.com/analytics/answer/2799357).
+     * thresholds](https://support.google.com/analytics/answer/9383630).
      *
      * Generated from protobuf field <code>optional bool subject_to_thresholding = 8;</code>
      * @return bool
@@ -323,9 +373,7 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
      * possible for a request to be subject to thresholding thresholding and no
      * data is absent from the report, and this happens when all data is above the
      * thresholds. To learn more, see [Data
-     * thresholds](https://support.google.com/analytics/answer/9383630) and [About
-     * Demographics and
-     * Interests](https://support.google.com/analytics/answer/2799357).
+     * thresholds](https://support.google.com/analytics/answer/9383630).
      *
      * Generated from protobuf field <code>optional bool subject_to_thresholding = 8;</code>
      * @param bool $var
@@ -335,6 +383,41 @@ class ResponseMetaData extends \Matomo\Dependencies\GoogleAnalyticsImporter\Goog
     {
         GPBUtil::checkBool($var);
         $this->subject_to_thresholding = $var;
+        return $this;
+    }
+    /**
+     * If this report results is
+     * [sampled](https://support.google.com/analytics/answer/13331292), this
+     * describes the percentage of events used in this report. One
+     * `samplingMetadatas` is populated for each date range. Each
+     * `samplingMetadatas` corresponds to a date range in order that date ranges
+     * were specified in the request.
+     * However if the results are not sampled, this field will not be defined.
+     *
+     * Generated from protobuf field <code>repeated .google.analytics.data.v1beta.SamplingMetadata sampling_metadatas = 9;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getSamplingMetadatas()
+    {
+        return $this->sampling_metadatas;
+    }
+    /**
+     * If this report results is
+     * [sampled](https://support.google.com/analytics/answer/13331292), this
+     * describes the percentage of events used in this report. One
+     * `samplingMetadatas` is populated for each date range. Each
+     * `samplingMetadatas` corresponds to a date range in order that date ranges
+     * were specified in the request.
+     * However if the results are not sampled, this field will not be defined.
+     *
+     * Generated from protobuf field <code>repeated .google.analytics.data.v1beta.SamplingMetadata sampling_metadatas = 9;</code>
+     * @param array<\Google\Analytics\Data\V1beta\SamplingMetadata>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setSamplingMetadatas($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType::MESSAGE, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Data\V1beta\SamplingMetadata::class);
+        $this->sampling_metadatas = $arr;
         return $this;
     }
 }

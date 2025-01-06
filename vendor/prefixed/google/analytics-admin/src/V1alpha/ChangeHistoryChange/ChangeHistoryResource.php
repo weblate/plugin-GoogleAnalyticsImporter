@@ -56,8 +56,25 @@ class ChangeHistoryResource extends \Matomo\Dependencies\GoogleAnalyticsImporter
      *           A snapshot of AttributionSettings resource in change history.
      *     @type \Google\Analytics\Admin\V1alpha\ExpandedDataSet $expanded_data_set
      *           A snapshot of an ExpandedDataSet resource in change history.
+     *     @type \Google\Analytics\Admin\V1alpha\ChannelGroup $channel_group
+     *           A snapshot of a ChannelGroup resource in change history.
      *     @type \Google\Analytics\Admin\V1alpha\BigQueryLink $bigquery_link
      *           A snapshot of a BigQuery link resource in change history.
+     *     @type \Google\Analytics\Admin\V1alpha\EnhancedMeasurementSettings $enhanced_measurement_settings
+     *           A snapshot of EnhancedMeasurementSettings resource in change history.
+     *     @type \Google\Analytics\Admin\V1alpha\DataRedactionSettings $data_redaction_settings
+     *           A snapshot of DataRedactionSettings resource in change history.
+     *     @type \Google\Analytics\Admin\V1alpha\SKAdNetworkConversionValueSchema $skadnetwork_conversion_value_schema
+     *           A snapshot of SKAdNetworkConversionValueSchema resource in change
+     *           history.
+     *     @type \Google\Analytics\Admin\V1alpha\AdSenseLink $adsense_link
+     *           A snapshot of an AdSenseLink resource in change history.
+     *     @type \Google\Analytics\Admin\V1alpha\Audience $audience
+     *           A snapshot of an Audience resource in change history.
+     *     @type \Google\Analytics\Admin\V1alpha\EventCreateRule $event_create_rule
+     *           A snapshot of an EventCreateRule resource in change history.
+     *     @type \Google\Analytics\Admin\V1alpha\CalculatedMetric $calculated_metric
+     *           A snapshot of a CalculatedMetric resource in change history.
      * }
      */
     public function __construct($data = NULL)
@@ -502,6 +519,33 @@ class ChangeHistoryResource extends \Matomo\Dependencies\GoogleAnalyticsImporter
         return $this;
     }
     /**
+     * A snapshot of a ChannelGroup resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ChannelGroup channel_group = 22;</code>
+     * @return \Google\Analytics\Admin\V1alpha\ChannelGroup|null
+     */
+    public function getChannelGroup()
+    {
+        return $this->readOneof(22);
+    }
+    public function hasChannelGroup()
+    {
+        return $this->hasOneof(22);
+    }
+    /**
+     * A snapshot of a ChannelGroup resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ChannelGroup channel_group = 22;</code>
+     * @param \Google\Analytics\Admin\V1alpha\ChannelGroup $var
+     * @return $this
+     */
+    public function setChannelGroup($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ChannelGroup::class);
+        $this->writeOneof(22, $var);
+        return $this;
+    }
+    /**
      * A snapshot of a BigQuery link resource in change history.
      *
      * Generated from protobuf field <code>.google.analytics.admin.v1alpha.BigQueryLink bigquery_link = 23;</code>
@@ -526,6 +570,197 @@ class ChangeHistoryResource extends \Matomo\Dependencies\GoogleAnalyticsImporter
     {
         GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\BigQueryLink::class);
         $this->writeOneof(23, $var);
+        return $this;
+    }
+    /**
+     * A snapshot of EnhancedMeasurementSettings resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.EnhancedMeasurementSettings enhanced_measurement_settings = 24;</code>
+     * @return \Google\Analytics\Admin\V1alpha\EnhancedMeasurementSettings|null
+     */
+    public function getEnhancedMeasurementSettings()
+    {
+        return $this->readOneof(24);
+    }
+    public function hasEnhancedMeasurementSettings()
+    {
+        return $this->hasOneof(24);
+    }
+    /**
+     * A snapshot of EnhancedMeasurementSettings resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.EnhancedMeasurementSettings enhanced_measurement_settings = 24;</code>
+     * @param \Google\Analytics\Admin\V1alpha\EnhancedMeasurementSettings $var
+     * @return $this
+     */
+    public function setEnhancedMeasurementSettings($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\EnhancedMeasurementSettings::class);
+        $this->writeOneof(24, $var);
+        return $this;
+    }
+    /**
+     * A snapshot of DataRedactionSettings resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.DataRedactionSettings data_redaction_settings = 25;</code>
+     * @return \Google\Analytics\Admin\V1alpha\DataRedactionSettings|null
+     */
+    public function getDataRedactionSettings()
+    {
+        return $this->readOneof(25);
+    }
+    public function hasDataRedactionSettings()
+    {
+        return $this->hasOneof(25);
+    }
+    /**
+     * A snapshot of DataRedactionSettings resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.DataRedactionSettings data_redaction_settings = 25;</code>
+     * @param \Google\Analytics\Admin\V1alpha\DataRedactionSettings $var
+     * @return $this
+     */
+    public function setDataRedactionSettings($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\DataRedactionSettings::class);
+        $this->writeOneof(25, $var);
+        return $this;
+    }
+    /**
+     * A snapshot of SKAdNetworkConversionValueSchema resource in change
+     * history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema skadnetwork_conversion_value_schema = 26;</code>
+     * @return \Google\Analytics\Admin\V1alpha\SKAdNetworkConversionValueSchema|null
+     */
+    public function getSkadnetworkConversionValueSchema()
+    {
+        return $this->readOneof(26);
+    }
+    public function hasSkadnetworkConversionValueSchema()
+    {
+        return $this->hasOneof(26);
+    }
+    /**
+     * A snapshot of SKAdNetworkConversionValueSchema resource in change
+     * history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema skadnetwork_conversion_value_schema = 26;</code>
+     * @param \Google\Analytics\Admin\V1alpha\SKAdNetworkConversionValueSchema $var
+     * @return $this
+     */
+    public function setSkadnetworkConversionValueSchema($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\SKAdNetworkConversionValueSchema::class);
+        $this->writeOneof(26, $var);
+        return $this;
+    }
+    /**
+     * A snapshot of an AdSenseLink resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.AdSenseLink adsense_link = 27;</code>
+     * @return \Google\Analytics\Admin\V1alpha\AdSenseLink|null
+     */
+    public function getAdsenseLink()
+    {
+        return $this->readOneof(27);
+    }
+    public function hasAdsenseLink()
+    {
+        return $this->hasOneof(27);
+    }
+    /**
+     * A snapshot of an AdSenseLink resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.AdSenseLink adsense_link = 27;</code>
+     * @param \Google\Analytics\Admin\V1alpha\AdSenseLink $var
+     * @return $this
+     */
+    public function setAdsenseLink($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\AdSenseLink::class);
+        $this->writeOneof(27, $var);
+        return $this;
+    }
+    /**
+     * A snapshot of an Audience resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.Audience audience = 28;</code>
+     * @return \Google\Analytics\Admin\V1alpha\Audience|null
+     */
+    public function getAudience()
+    {
+        return $this->readOneof(28);
+    }
+    public function hasAudience()
+    {
+        return $this->hasOneof(28);
+    }
+    /**
+     * A snapshot of an Audience resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.Audience audience = 28;</code>
+     * @param \Google\Analytics\Admin\V1alpha\Audience $var
+     * @return $this
+     */
+    public function setAudience($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\Audience::class);
+        $this->writeOneof(28, $var);
+        return $this;
+    }
+    /**
+     * A snapshot of an EventCreateRule resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.EventCreateRule event_create_rule = 29;</code>
+     * @return \Google\Analytics\Admin\V1alpha\EventCreateRule|null
+     */
+    public function getEventCreateRule()
+    {
+        return $this->readOneof(29);
+    }
+    public function hasEventCreateRule()
+    {
+        return $this->hasOneof(29);
+    }
+    /**
+     * A snapshot of an EventCreateRule resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.EventCreateRule event_create_rule = 29;</code>
+     * @param \Google\Analytics\Admin\V1alpha\EventCreateRule $var
+     * @return $this
+     */
+    public function setEventCreateRule($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\EventCreateRule::class);
+        $this->writeOneof(29, $var);
+        return $this;
+    }
+    /**
+     * A snapshot of a CalculatedMetric resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.CalculatedMetric calculated_metric = 31;</code>
+     * @return \Google\Analytics\Admin\V1alpha\CalculatedMetric|null
+     */
+    public function getCalculatedMetric()
+    {
+        return $this->readOneof(31);
+    }
+    public function hasCalculatedMetric()
+    {
+        return $this->hasOneof(31);
+    }
+    /**
+     * A snapshot of a CalculatedMetric resource in change history.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.CalculatedMetric calculated_metric = 31;</code>
+     * @param \Google\Analytics\Admin\V1alpha\CalculatedMetric $var
+     * @return $this
+     */
+    public function setCalculatedMetric($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\CalculatedMetric::class);
+        $this->writeOneof(31, $var);
         return $this;
     }
     /**

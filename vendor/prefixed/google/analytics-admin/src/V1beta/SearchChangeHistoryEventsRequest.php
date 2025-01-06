@@ -15,7 +15,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil
 class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {
     /**
-     * Required. The account resource for which to return change history resources.
+     * Required. The account resource for which to return change history
+     * resources.
      *
      * Generated from protobuf field <code>string account = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = {</code>
      */
@@ -28,21 +29,22 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
      */
     private $property = '';
     /**
-     * Optional. If set, only return changes if they are for a resource that matches at
-     * least one of these types.
+     * Optional. If set, only return changes if they are for a resource that
+     * matches at least one of these types.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.ChangeHistoryResourceType resource_type = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
     private $resource_type;
     /**
-     * Optional. If set, only return changes that match one or more of these types of
-     * actions.
+     * Optional. If set, only return changes that match one or more of these types
+     * of actions.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.ActionType action = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
     private $action;
     /**
-     * Optional. If set, only return changes if they are made by a user in this list.
+     * Optional. If set, only return changes if they are made by a user in this
+     * list.
      *
      * Generated from protobuf field <code>repeated string actor_email = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
@@ -69,10 +71,11 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
      */
     private $page_size = 0;
     /**
-     * Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-     * Provide this to retrieve the subsequent page. When paginating, all other
-     * parameters provided to `SearchChangeHistoryEvents` must match the call that
-     * provided the page token.
+     * Optional. A page token, received from a previous
+     * `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+     * page. When paginating, all other parameters provided to
+     * `SearchChangeHistoryEvents` must match the call that provided the page
+     * token.
      *
      * Generated from protobuf field <code>string page_token = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
      */
@@ -84,18 +87,20 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
      *     Optional. Data for populating the Message object.
      *
      *     @type string $account
-     *           Required. The account resource for which to return change history resources.
+     *           Required. The account resource for which to return change history
+     *           resources.
      *     @type string $property
      *           Optional. Resource name for a child property. If set, only return changes
      *           made to this property or its child resources.
      *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $resource_type
-     *           Optional. If set, only return changes if they are for a resource that matches at
-     *           least one of these types.
+     *           Optional. If set, only return changes if they are for a resource that
+     *           matches at least one of these types.
      *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $action
-     *           Optional. If set, only return changes that match one or more of these types of
-     *           actions.
+     *           Optional. If set, only return changes that match one or more of these types
+     *           of actions.
      *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $actor_email
-     *           Optional. If set, only return changes if they are made by a user in this list.
+     *           Optional. If set, only return changes if they are made by a user in this
+     *           list.
      *     @type \Google\Protobuf\Timestamp $earliest_change_time
      *           Optional. If set, only return changes made after this time (inclusive).
      *     @type \Google\Protobuf\Timestamp $latest_change_time
@@ -106,10 +111,11 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
      *           pages. If unspecified, at most 50 items will be returned.
      *           The maximum value is 200 (higher values will be coerced to the maximum).
      *     @type string $page_token
-     *           Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-     *           Provide this to retrieve the subsequent page. When paginating, all other
-     *           parameters provided to `SearchChangeHistoryEvents` must match the call that
-     *           provided the page token.
+     *           Optional. A page token, received from a previous
+     *           `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+     *           page. When paginating, all other parameters provided to
+     *           `SearchChangeHistoryEvents` must match the call that provided the page
+     *           token.
      * }
      */
     public function __construct($data = NULL)
@@ -118,7 +124,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         parent::__construct($data);
     }
     /**
-     * Required. The account resource for which to return change history resources.
+     * Required. The account resource for which to return change history
+     * resources.
      *
      * Generated from protobuf field <code>string account = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = {</code>
      * @return string
@@ -128,7 +135,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this->account;
     }
     /**
-     * Required. The account resource for which to return change history resources.
+     * Required. The account resource for which to return change history
+     * resources.
      *
      * Generated from protobuf field <code>string account = 1 [(.google.api.field_behavior) = REQUIRED, (.google.api.resource_reference) = {</code>
      * @param string $var
@@ -166,8 +174,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this;
     }
     /**
-     * Optional. If set, only return changes if they are for a resource that matches at
-     * least one of these types.
+     * Optional. If set, only return changes if they are for a resource that
+     * matches at least one of these types.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.ChangeHistoryResourceType resource_type = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -177,8 +185,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this->resource_type;
     }
     /**
-     * Optional. If set, only return changes if they are for a resource that matches at
-     * least one of these types.
+     * Optional. If set, only return changes if they are for a resource that
+     * matches at least one of these types.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.ChangeHistoryResourceType resource_type = 3 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
@@ -191,8 +199,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this;
     }
     /**
-     * Optional. If set, only return changes that match one or more of these types of
-     * actions.
+     * Optional. If set, only return changes that match one or more of these types
+     * of actions.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.ActionType action = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -202,8 +210,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this->action;
     }
     /**
-     * Optional. If set, only return changes that match one or more of these types of
-     * actions.
+     * Optional. If set, only return changes that match one or more of these types
+     * of actions.
      *
      * Generated from protobuf field <code>repeated .google.analytics.admin.v1beta.ActionType action = 4 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @param array<int>|\Google\Protobuf\Internal\RepeatedField $var
@@ -216,7 +224,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this;
     }
     /**
-     * Optional. If set, only return changes if they are made by a user in this list.
+     * Optional. If set, only return changes if they are made by a user in this
+     * list.
      *
      * Generated from protobuf field <code>repeated string actor_email = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -226,7 +235,8 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this->actor_email;
     }
     /**
-     * Optional. If set, only return changes if they are made by a user in this list.
+     * Optional. If set, only return changes if they are made by a user in this
+     * list.
      *
      * Generated from protobuf field <code>repeated string actor_email = 5 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
@@ -330,10 +340,11 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this;
     }
     /**
-     * Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-     * Provide this to retrieve the subsequent page. When paginating, all other
-     * parameters provided to `SearchChangeHistoryEvents` must match the call that
-     * provided the page token.
+     * Optional. A page token, received from a previous
+     * `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+     * page. When paginating, all other parameters provided to
+     * `SearchChangeHistoryEvents` must match the call that provided the page
+     * token.
      *
      * Generated from protobuf field <code>string page_token = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @return string
@@ -343,10 +354,11 @@ class SearchChangeHistoryEventsRequest extends \Matomo\Dependencies\GoogleAnalyt
         return $this->page_token;
     }
     /**
-     * Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-     * Provide this to retrieve the subsequent page. When paginating, all other
-     * parameters provided to `SearchChangeHistoryEvents` must match the call that
-     * provided the page token.
+     * Optional. A page token, received from a previous
+     * `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+     * page. When paginating, all other parameters provided to
+     * `SearchChangeHistoryEvents` must match the call that provided the page
+     * token.
      *
      * Generated from protobuf field <code>string page_token = 9 [(.google.api.field_behavior) = OPTIONAL];</code>
      * @param string $var

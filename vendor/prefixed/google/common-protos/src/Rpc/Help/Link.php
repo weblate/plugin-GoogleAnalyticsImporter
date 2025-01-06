@@ -90,5 +90,3 @@ class Link extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\
         return $this;
     }
 }
-// Adding a class alias for backwards compatibility with the previous class name.
-class_alias(Link::class, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\Help_Link::class);

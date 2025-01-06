@@ -7,6 +7,8 @@ namespace Matomo\Dependencies\GoogleAnalyticsImporter\Google\ApiCore\Testing;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil;
 /**
  * Generated from protobuf message <code>google.apicore.testing.MockResponse</code>
+ *
+ * @internal
  */
 class MockResponse extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\Message
 {

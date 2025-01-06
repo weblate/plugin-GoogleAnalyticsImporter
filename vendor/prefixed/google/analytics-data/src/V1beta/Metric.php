@@ -19,7 +19,16 @@ class Metric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
     /**
      * The name of the metric. See the [API
      * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics)
-     * for the list of metric names.
+     * for the list of metric names supported by core reporting methods such
+     * as `runReport` and `batchRunReports`. See
+     * [Realtime
+     * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-api-schema#metrics)
+     * for the list of metric names supported by the `runRealtimeReport`
+     * method. See
+     * [Funnel
+     * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/exploration-api-schema#metrics)
+     * for the list of metric names supported by the `runFunnelReport`
+     * method.
      * If `expression` is specified, `name` can be any string that you would like
      * within the allowed character set. For example if `expression` is
      * `screenPageViews/sessions`, you could call that metric's name =
@@ -55,7 +64,16 @@ class Metric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
      *     @type string $name
      *           The name of the metric. See the [API
      *           Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics)
-     *           for the list of metric names.
+     *           for the list of metric names supported by core reporting methods such
+     *           as `runReport` and `batchRunReports`. See
+     *           [Realtime
+     *           Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-api-schema#metrics)
+     *           for the list of metric names supported by the `runRealtimeReport`
+     *           method. See
+     *           [Funnel
+     *           Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/exploration-api-schema#metrics)
+     *           for the list of metric names supported by the `runFunnelReport`
+     *           method.
      *           If `expression` is specified, `name` can be any string that you would like
      *           within the allowed character set. For example if `expression` is
      *           `screenPageViews/sessions`, you could call that metric's name =
@@ -80,7 +98,16 @@ class Metric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
     /**
      * The name of the metric. See the [API
      * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics)
-     * for the list of metric names.
+     * for the list of metric names supported by core reporting methods such
+     * as `runReport` and `batchRunReports`. See
+     * [Realtime
+     * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-api-schema#metrics)
+     * for the list of metric names supported by the `runRealtimeReport`
+     * method. See
+     * [Funnel
+     * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/exploration-api-schema#metrics)
+     * for the list of metric names supported by the `runFunnelReport`
+     * method.
      * If `expression` is specified, `name` can be any string that you would like
      * within the allowed character set. For example if `expression` is
      * `screenPageViews/sessions`, you could call that metric's name =
@@ -99,7 +126,16 @@ class Metric extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
     /**
      * The name of the metric. See the [API
      * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics)
-     * for the list of metric names.
+     * for the list of metric names supported by core reporting methods such
+     * as `runReport` and `batchRunReports`. See
+     * [Realtime
+     * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-api-schema#metrics)
+     * for the list of metric names supported by the `runRealtimeReport`
+     * method. See
+     * [Funnel
+     * Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/exploration-api-schema#metrics)
+     * for the list of metric names supported by the `runFunnelReport`
+     * method.
      * If `expression` is specified, `name` can be any string that you would like
      * within the allowed character set. For example if `expression` is
      * `screenPageViews/sessions`, you could call that metric's name =

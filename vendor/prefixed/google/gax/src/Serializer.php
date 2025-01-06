@@ -46,11 +46,33 @@ class Serializer
     const MAP_KEY_FIELD_NAME = 'key';
     const MAP_VALUE_FIELD_NAME = 'value';
     private static $phpArraySerializer;
+    // Caches for different helper functions
+    /**
+     * @var mixed[]
+     */
+    private static $getterMap = [];
+    /**
+     * @var mixed[]
+     */
+    private static $setterMap = [];
+    /**
+     * @var mixed[]
+     */
+    private static $snakeCaseMap = [];
+    /**
+     * @var mixed[]
+     */
+    private static $camelCaseMap = [];
     private static $metadataKnownTypes = ['google.rpc.retryinfo-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\RetryInfo::class, 'google.rpc.debuginfo-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\DebugInfo::class, 'google.rpc.quotafailure-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\QuotaFailure::class, 'google.rpc.badrequest-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\BadRequest::class, 'google.rpc.requestinfo-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\RequestInfo::class, 'google.rpc.resourceinfo-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\ResourceInfo::class, 'google.rpc.errorinfo-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\ErrorInfo::class, 'google.rpc.help-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\Help::class, 'google.rpc.localizedmessage-bin' => \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Rpc\LocalizedMessage::class];
     private $fieldTransformers;
     private $messageTypeTransformers;
     private $decodeFieldTransformers;
     private $decodeMessageTypeTransformers;
+    // Array of key-value pairs which specify a custom encoding function.
+    // The key is the proto class and the value is the function
+    // which will be used to convert the proto instead of the
+    // encodeMessage method from the Serializer class.
+    private $customEncoders;
     private $descriptorMaps = [];
     /**
      * Serializer constructor.
@@ -60,12 +82,13 @@ class Serializer
      * @param array $decodeFieldTransformers An array mapping field names to transformation functions
      * @param array $decodeMessageTypeTransformers An array mapping message names to transformation functions
      */
-    public function __construct($fieldTransformers = [], $messageTypeTransformers = [], $decodeFieldTransformers = [], $decodeMessageTypeTransformers = [])
+    public function __construct($fieldTransformers = [], $messageTypeTransformers = [], $decodeFieldTransformers = [], $decodeMessageTypeTransformers = [], $customEncoders = [])
     {
         $this->fieldTransformers = $fieldTransformers;
         $this->messageTypeTransformers = $messageTypeTransformers;
         $this->decodeFieldTransformers = $decodeFieldTransformers;
         $this->decodeMessageTypeTransformers = $decodeMessageTypeTransformers;
+        $this->customEncoders = $customEncoders;
     }
     /**
      * Encode protobuf message as a PHP array
@@ -76,6 +99,13 @@ class Serializer
      */
     public function encodeMessage($message)
     {
+        $cls = get_class($message);
+        // If we have supplied a customEncoder for this class type,
+        // then we use that instead of the general encodeMessage definition.
+        if (array_key_exists($cls, $this->customEncoders)) {
+            $func = $this->customEncoders[$cls];
+            return call_user_func($func, $message);
+        }
         // Get message descriptor
         $pool = DescriptorPool::getGeneratedPool();
         $messageType = $pool->getDescriptorByClassName(get_class($message));
@@ -93,7 +123,7 @@ class Serializer
      * @return mixed
      * @throws ValidationException
      */
-    public function decodeMessage($message, $data)
+    public function decodeMessage($message, array $data)
     {
         // Get message descriptor
         $pool = DescriptorPool::getGeneratedPool();
@@ -109,7 +139,7 @@ class Serializer
      * @return string Json representation of $message
      * @throws ValidationException
      */
-    public static function serializeToJson($message)
+    public static function serializeToJson(Message $message)
     {
         return json_encode(self::serializeToPhpArray($message), \JSON_PRETTY_PRINT);
     }
@@ -118,7 +148,7 @@ class Serializer
      * @return array PHP array representation of $message
      * @throws ValidationException
      */
-    public static function serializeToPhpArray($message)
+    public static function serializeToPhpArray(Message $message)
     {
         return self::getPhpArraySerializer()->encodeMessage($message);
     }
@@ -128,9 +158,9 @@ class Serializer
      * @param array $metadata
      * @return array
      */
-    public static function decodeMetadata($metadata)
+    public static function decodeMetadata(array $metadata)
     {
-        if (is_null($metadata) || count($metadata) == 0) {
+        if (count($metadata) == 0) {
             return [];
         }
         $result = [];
@@ -186,7 +216,7 @@ class Serializer
     }
     /**
      * @param FieldDescriptor $field
-     * @param array $data
+     * @param Message|array|string $data
      * @return mixed
      * @throws \Exception
      */
@@ -242,12 +272,13 @@ class Serializer
      * @return array
      * @throws \Exception
      */
-    private function encodeMessageImpl($message, Descriptor $messageType)
+    private function encodeMessageImpl(Message $message, Descriptor $messageType)
     {
         $data = [];
-        $fieldCount = $messageType->getFieldCount();
-        for ($i = 0; $i < $fieldCount; $i++) {
-            $field = $messageType->getField($i);
+        // Call the getDescriptorMaps outside of the loop to save processing.
+        // Use the same set of fields to loop over, instead of using field count.
+        list($fields, $fieldsToOneof) = $this->getDescriptorMaps($messageType);
+        foreach ($fields as $field) {
             $key = $field->getName();
             $getter = $this->getGetter($key);
             $v = $message->{$getter}();
@@ -255,7 +286,6 @@ class Serializer
                 continue;
             }
             // Check and skip unset fields inside oneofs
-            list($_, $fieldsToOneof) = $this->getDescriptorMaps($messageType);
             if (isset($fieldsToOneof[$key])) {
                 $oneofName = $fieldsToOneof[$key];
                 $oneofGetter = $this->getGetter($oneofName);
@@ -321,7 +351,7 @@ class Serializer
      * @return mixed
      * @throws \Exception
      */
-    private function decodeMessageImpl($message, Descriptor $messageType, $data)
+    private function decodeMessageImpl(Message $message, Descriptor $messageType, array $data)
     {
         list($fieldsByName, $_) = $this->getDescriptorMaps($messageType);
         foreach ($data as $key => $v) {
@@ -363,17 +393,23 @@ class Serializer
      * @param string $name
      * @return string Getter function
      */
-    public static function getGetter($name)
+    public static function getGetter(string $name)
     {
-        return 'get' . ucfirst(self::toCamelCase($name));
+        if (!isset(self::$getterMap[$name])) {
+            self::$getterMap[$name] = 'get' . ucfirst(self::toCamelCase($name));
+        }
+        return self::$getterMap[$name];
     }
     /**
      * @param string $name
      * @return string Setter function
      */
-    public static function getSetter($name)
+    public static function getSetter(string $name)
     {
-        return 'set' . ucfirst(self::toCamelCase($name));
+        if (!isset(self::$setterMap[$name])) {
+            self::$setterMap[$name] = 'set' . ucfirst(self::toCamelCase($name));
+        }
+        return self::$setterMap[$name];
     }
     /**
      * Convert string from camelCase to snake_case
@@ -381,9 +417,12 @@ class Serializer
      * @param string $key
      * @return string
      */
-    public static function toSnakeCase($key)
+    public static function toSnakeCase(string $key)
     {
-        return strtolower(preg_replace(['/([a-z\\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $key));
+        if (!isset(self::$snakeCaseMap[$key])) {
+            self::$snakeCaseMap[$key] = strtolower(preg_replace(['/([a-z\\d])([A-Z])/', '/([^_])([A-Z][a-z])/'], '$1_$2', $key));
+        }
+        return self::$snakeCaseMap[$key];
     }
     /**
      * Convert string from snake_case to camelCase
@@ -391,11 +430,14 @@ class Serializer
      * @param string $key
      * @return string
      */
-    public static function toCamelCase($key)
+    public static function toCamelCase(string $key)
     {
-        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $key))));
+        if (!isset(self::$camelCaseMap[$key])) {
+            self::$camelCaseMap[$key] = lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $key))));
+        }
+        return self::$camelCaseMap[$key];
     }
-    private static function hasBinaryHeaderSuffix($key)
+    private static function hasBinaryHeaderSuffix(string $key)
     {
         return substr_compare($key, "-bin", strlen($key) - 4) === 0;
     }

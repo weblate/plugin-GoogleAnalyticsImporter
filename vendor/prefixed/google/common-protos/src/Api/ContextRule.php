@@ -17,23 +17,40 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
 {
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      */
-    private $selector = '';
+    protected $selector = '';
     /**
-     * A list of full type names of requested contexts.
+     * A list of full type names of requested contexts, only the requested context
+     * will be made available to the backend.
      *
      * Generated from protobuf field <code>repeated string requested = 2;</code>
      */
     private $requested;
     /**
-     * A list of full type names of provided contexts.
+     * A list of full type names of provided contexts. It is used to support
+     * propagating HTTP headers and ETags from the response extension.
      *
      * Generated from protobuf field <code>repeated string provided = 3;</code>
      */
     private $provided;
+    /**
+     * A list of full type names or extension IDs of extensions allowed in grpc
+     * side channel from client to backend.
+     *
+     * Generated from protobuf field <code>repeated string allowed_request_extensions = 4;</code>
+     */
+    private $allowed_request_extensions;
+    /**
+     * A list of full type names or extension IDs of extensions allowed in grpc
+     * side channel from backend to client.
+     *
+     * Generated from protobuf field <code>repeated string allowed_response_extensions = 5;</code>
+     */
+    private $allowed_response_extensions;
     /**
      * Constructor.
      *
@@ -42,11 +59,20 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
      *
      *     @type string $selector
      *           Selects the methods to which this rule applies.
-     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $requested
-     *           A list of full type names of requested contexts.
-     *     @type string[]|\Google\Protobuf\Internal\RepeatedField $provided
-     *           A list of full type names of provided contexts.
+     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     *           details.
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $requested
+     *           A list of full type names of requested contexts, only the requested context
+     *           will be made available to the backend.
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $provided
+     *           A list of full type names of provided contexts. It is used to support
+     *           propagating HTTP headers and ETags from the response extension.
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $allowed_request_extensions
+     *           A list of full type names or extension IDs of extensions allowed in grpc
+     *           side channel from client to backend.
+     *     @type array<string>|\Google\Protobuf\Internal\RepeatedField $allowed_response_extensions
+     *           A list of full type names or extension IDs of extensions allowed in grpc
+     *           side channel from backend to client.
      * }
      */
     public function __construct($data = NULL)
@@ -56,7 +82,8 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
     }
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @return string
@@ -67,7 +94,8 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
     }
     /**
      * Selects the methods to which this rule applies.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @param string $var
@@ -80,7 +108,8 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
         return $this;
     }
     /**
-     * A list of full type names of requested contexts.
+     * A list of full type names of requested contexts, only the requested context
+     * will be made available to the backend.
      *
      * Generated from protobuf field <code>repeated string requested = 2;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -90,10 +119,11 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
         return $this->requested;
     }
     /**
-     * A list of full type names of requested contexts.
+     * A list of full type names of requested contexts, only the requested context
+     * will be made available to the backend.
      *
      * Generated from protobuf field <code>repeated string requested = 2;</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setRequested($var)
@@ -103,7 +133,8 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
         return $this;
     }
     /**
-     * A list of full type names of provided contexts.
+     * A list of full type names of provided contexts. It is used to support
+     * propagating HTTP headers and ETags from the response extension.
      *
      * Generated from protobuf field <code>repeated string provided = 3;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -113,16 +144,67 @@ class ContextRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
         return $this->provided;
     }
     /**
-     * A list of full type names of provided contexts.
+     * A list of full type names of provided contexts. It is used to support
+     * propagating HTTP headers and ETags from the response extension.
      *
      * Generated from protobuf field <code>repeated string provided = 3;</code>
-     * @param string[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setProvided($var)
     {
         $arr = GPBUtil::checkRepeatedField($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType::STRING);
         $this->provided = $arr;
+        return $this;
+    }
+    /**
+     * A list of full type names or extension IDs of extensions allowed in grpc
+     * side channel from client to backend.
+     *
+     * Generated from protobuf field <code>repeated string allowed_request_extensions = 4;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAllowedRequestExtensions()
+    {
+        return $this->allowed_request_extensions;
+    }
+    /**
+     * A list of full type names or extension IDs of extensions allowed in grpc
+     * side channel from client to backend.
+     *
+     * Generated from protobuf field <code>repeated string allowed_request_extensions = 4;</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAllowedRequestExtensions($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType::STRING);
+        $this->allowed_request_extensions = $arr;
+        return $this;
+    }
+    /**
+     * A list of full type names or extension IDs of extensions allowed in grpc
+     * side channel from backend to client.
+     *
+     * Generated from protobuf field <code>repeated string allowed_response_extensions = 5;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getAllowedResponseExtensions()
+    {
+        return $this->allowed_response_extensions;
+    }
+    /**
+     * A list of full type names or extension IDs of extensions allowed in grpc
+     * side channel from backend to client.
+     *
+     * Generated from protobuf field <code>repeated string allowed_response_extensions = 5;</code>
+     * @param array<string>|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setAllowedResponseExtensions($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType::STRING);
+        $this->allowed_response_extensions = $arr;
         return $this;
     }
 }

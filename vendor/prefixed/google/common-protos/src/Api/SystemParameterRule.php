@@ -18,11 +18,12 @@ class SystemParameterRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\G
     /**
      * Selects the methods to which this rule applies. Use '*' to indicate all
      * methods in all APIs.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      */
-    private $selector = '';
+    protected $selector = '';
     /**
      * Define parameters. Multiple names may be defined for a parameter.
      * For a given method call, only one of them should be used. If multiple
@@ -42,8 +43,9 @@ class SystemParameterRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\G
      *     @type string $selector
      *           Selects the methods to which this rule applies. Use '*' to indicate all
      *           methods in all APIs.
-     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
-     *     @type \Google\Api\SystemParameter[]|\Google\Protobuf\Internal\RepeatedField $parameters
+     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     *           details.
+     *     @type array<\Google\Api\SystemParameter>|\Google\Protobuf\Internal\RepeatedField $parameters
      *           Define parameters. Multiple names may be defined for a parameter.
      *           For a given method call, only one of them should be used. If multiple
      *           names are used the behavior is implementation-dependent.
@@ -59,7 +61,8 @@ class SystemParameterRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\G
     /**
      * Selects the methods to which this rule applies. Use '*' to indicate all
      * methods in all APIs.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @return string
@@ -71,7 +74,8 @@ class SystemParameterRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\G
     /**
      * Selects the methods to which this rule applies. Use '*' to indicate all
      * methods in all APIs.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @param string $var
@@ -105,7 +109,7 @@ class SystemParameterRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\G
      * parameter-dependent.
      *
      * Generated from protobuf field <code>repeated .google.api.SystemParameter parameters = 2;</code>
-     * @param \Google\Api\SystemParameter[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\SystemParameter>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setParameters($var)

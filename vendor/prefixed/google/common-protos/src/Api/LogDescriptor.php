@@ -28,7 +28,7 @@ class LogDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\
      *
      * Generated from protobuf field <code>string name = 1;</code>
      */
-    private $name = '';
+    protected $name = '';
     /**
      * The set of labels that are available to describe a specific log entry.
      * Runtime requests that contain labels not specified here are
@@ -43,14 +43,14 @@ class LogDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\
      *
      * Generated from protobuf field <code>string description = 3;</code>
      */
-    private $description = '';
+    protected $description = '';
     /**
      * The human-readable name for this log. This information appears on
      * the user interface and should be concise.
      *
      * Generated from protobuf field <code>string display_name = 4;</code>
      */
-    private $display_name = '';
+    protected $display_name = '';
     /**
      * Constructor.
      *
@@ -62,7 +62,7 @@ class LogDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\
      *           include the following characters: upper- and lower-case alphanumeric
      *           characters [A-Za-z0-9], and punctuation characters including
      *           slash, underscore, hyphen, period [/_-.].
-     *     @type \Google\Api\LabelDescriptor[]|\Google\Protobuf\Internal\RepeatedField $labels
+     *     @type array<\Google\Api\LabelDescriptor>|\Google\Protobuf\Internal\RepeatedField $labels
      *           The set of labels that are available to describe a specific log entry.
      *           Runtime requests that contain labels not specified here are
      *           considered invalid.
@@ -126,7 +126,7 @@ class LogDescriptor extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\
      * considered invalid.
      *
      * Generated from protobuf field <code>repeated .google.api.LabelDescriptor labels = 2;</code>
-     * @param \Google\Api\LabelDescriptor[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @param array<\Google\Api\LabelDescriptor>|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setLabels($var)

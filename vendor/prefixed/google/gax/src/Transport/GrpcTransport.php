@@ -75,7 +75,7 @@ class GrpcTransport extends BaseStub implements TransportInterface
      *        extends {@see Grpc\Interceptor}.
      * @throws Exception
      */
-    public function __construct($hostname, $opts, Channel $channel = null, array $interceptors = [])
+    public function __construct(string $hostname, array $opts, Channel $channel = null, array $interceptors = [])
     {
         if ($interceptors) {
             $channel = Interceptor::intercept($channel ?: new Channel($hostname, $opts), $interceptors);
@@ -91,7 +91,8 @@ class GrpcTransport extends BaseStub implements TransportInterface
      * @param array $config {
      *    Config options used to construct the gRPC transport.
      *
-     *    @type array $stubOpts Options used to construct the gRPC stub.
+     *    @type array $stubOpts Options used to construct the gRPC stub (see
+     *          {@link https://grpc.github.io/grpc/core/group__grpc__arg__keys.html}).
      *    @type Channel $channel Grpc channel to be used.
      *    @type Interceptor[]|UnaryInterceptorInterface[] $interceptors *EXPERIMENTAL*
      *          Interceptors used to intercept RPC invocations before a call starts.
@@ -106,7 +107,7 @@ class GrpcTransport extends BaseStub implements TransportInterface
      * @return GrpcTransport
      * @throws ValidationException
      */
-    public static function build($apiEndpoint, array $config = [])
+    public static function build(string $apiEndpoint, array $config = [])
     {
         self::validateGrpcSupport();
         $config += ['stubOpts' => [], 'channel' => null, 'interceptors' => [], 'clientCertSource' => null];
@@ -138,6 +139,7 @@ class GrpcTransport extends BaseStub implements TransportInterface
      */
     public function startBidiStreamingCall(Call $call, array $options)
     {
+        $this->verifyUniverseDomain($options);
         return new BidiStream($this->_bidiRequest('/' . $call->getMethod(), [$call->getDecodeType(), 'decode'], isset($options['headers']) ? $options['headers'] : [], $this->getCallOptions($options)), $call->getDescriptor());
     }
     /**
@@ -145,6 +147,7 @@ class GrpcTransport extends BaseStub implements TransportInterface
      */
     public function startClientStreamingCall(Call $call, array $options)
     {
+        $this->verifyUniverseDomain($options);
         return new ClientStream($this->_clientStreamRequest('/' . $call->getMethod(), [$call->getDecodeType(), 'decode'], isset($options['headers']) ? $options['headers'] : [], $this->getCallOptions($options)), $call->getDescriptor());
     }
     /**
@@ -152,6 +155,7 @@ class GrpcTransport extends BaseStub implements TransportInterface
      */
     public function startServerStreamingCall(Call $call, array $options)
     {
+        $this->verifyUniverseDomain($options);
         $message = $call->getMessage();
         if (!$message) {
             throw new \InvalidArgumentException('A message is required for ServerStreaming calls.');
@@ -165,6 +169,7 @@ class GrpcTransport extends BaseStub implements TransportInterface
      */
     public function startUnaryCall(Call $call, array $options)
     {
+        $this->verifyUniverseDomain($options);
         $unaryCall = $this->_simpleRequest('/' . $call->getMethod(), $call->getMessage(), [$call->getDecodeType(), 'decode'], isset($options['headers']) ? $options['headers'] : [], $this->getCallOptions($options));
         /** @var Promise $promise */
         $promise = new Promise(function () use($unaryCall, $options, &$promise) {
@@ -181,11 +186,17 @@ class GrpcTransport extends BaseStub implements TransportInterface
         }, [$unaryCall, 'cancel']);
         return $promise;
     }
+    private function verifyUniverseDomain(array $options)
+    {
+        if (isset($options['credentialsWrapper'])) {
+            $options['credentialsWrapper']->checkUniverseDomain();
+        }
+    }
     private function getCallOptions(array $options)
     {
-        $callOptions = isset($options['transportOptions']['grpcOptions']) ? $options['transportOptions']['grpcOptions'] : [];
+        $callOptions = $options['transportOptions']['grpcOptions'] ?? [];
         if (isset($options['credentialsWrapper'])) {
-            $audience = isset($options['audience']) ? $options['audience'] : null;
+            $audience = $options['audience'] ?? null;
             $credentialsWrapper = $options['credentialsWrapper'];
             $callOptions['call_credentials_callback'] = $credentialsWrapper->getAuthorizationHeaderCallback($audience);
         }

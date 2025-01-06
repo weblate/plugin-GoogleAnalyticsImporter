@@ -38,6 +38,18 @@ class ListCustomMetricsRequest extends \Matomo\Dependencies\GoogleAnalyticsImpor
      */
     private $page_token = '';
     /**
+     * @param string $parent Required. Example format: properties/1234
+     *                       Please see {@see AnalyticsAdminServiceClient::propertyName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1alpha\ListCustomMetricsRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent) : self
+    {
+        return (new self())->setParent($parent);
+    }
+    /**
      * Constructor.
      *
      * @param array $data {

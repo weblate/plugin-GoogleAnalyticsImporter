@@ -78,7 +78,7 @@ class LogSeverity
      * Generated from protobuf enum <code>EMERGENCY = 800;</code>
      */
     const EMERGENCY = 800;
-    private static $valueToName = [self::PBDEFAULT => 'PBDEFAULT', self::DEBUG => 'DEBUG', self::INFO => 'INFO', self::NOTICE => 'NOTICE', self::WARNING => 'WARNING', self::ERROR => 'ERROR', self::CRITICAL => 'CRITICAL', self::ALERT => 'ALERT', self::EMERGENCY => 'EMERGENCY'];
+    private static $valueToName = [self::PBDEFAULT => 'DEFAULT', self::DEBUG => 'DEBUG', self::INFO => 'INFO', self::NOTICE => 'NOTICE', self::WARNING => 'WARNING', self::ERROR => 'ERROR', self::CRITICAL => 'CRITICAL', self::ALERT => 'ALERT', self::EMERGENCY => 'EMERGENCY'];
     public static function name($value)
     {
         if (!isset(self::$valueToName[$value])) {
@@ -90,7 +90,11 @@ class LogSeverity
     {
         $const = __CLASS__ . '::' . strtoupper($name);
         if (!defined($const)) {
-            throw new UnexpectedValueException(sprintf('Enum %s has no value defined for name %s', __CLASS__, $name));
+            $pbconst = __CLASS__ . '::PB' . strtoupper($name);
+            if (!defined($pbconst)) {
+                throw new UnexpectedValueException(sprintf('Enum %s has no value defined for name %s', __CLASS__, $name));
+            }
+            return constant($pbconst);
         }
         return constant($const);
     }

@@ -34,18 +34,19 @@ class UsageRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Prot
     /**
      * Selects the methods to which this rule applies. Use '*' to indicate all
      * methods in all APIs.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      */
-    private $selector = '';
+    protected $selector = '';
     /**
      * If true, the selected method allows unregistered calls, e.g. calls
      * that don't identify any user or application.
      *
      * Generated from protobuf field <code>bool allow_unregistered_calls = 2;</code>
      */
-    private $allow_unregistered_calls = \false;
+    protected $allow_unregistered_calls = \false;
     /**
      * If true, the selected method should skip service control and the control
      * plane features, such as quota and billing, will not be available.
@@ -54,7 +55,7 @@ class UsageRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Prot
      *
      * Generated from protobuf field <code>bool skip_service_control = 3;</code>
      */
-    private $skip_service_control = \false;
+    protected $skip_service_control = \false;
     /**
      * Constructor.
      *
@@ -64,7 +65,8 @@ class UsageRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Prot
      *     @type string $selector
      *           Selects the methods to which this rule applies. Use '*' to indicate all
      *           methods in all APIs.
-     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     *           Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     *           details.
      *     @type bool $allow_unregistered_calls
      *           If true, the selected method allows unregistered calls, e.g. calls
      *           that don't identify any user or application.
@@ -83,7 +85,8 @@ class UsageRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Prot
     /**
      * Selects the methods to which this rule applies. Use '*' to indicate all
      * methods in all APIs.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @return string
@@ -95,7 +98,8 @@ class UsageRule extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Prot
     /**
      * Selects the methods to which this rule applies. Use '*' to indicate all
      * methods in all APIs.
-     * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+     * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     * details.
      *
      * Generated from protobuf field <code>string selector = 1;</code>
      * @param string $var

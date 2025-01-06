@@ -35,7 +35,7 @@ class ConversionEvent extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      */
     private $create_time = null;
     /**
-     * Output only. If set, this event can currently be deleted via
+     * Output only. If set, this event can currently be deleted with
      * DeleteConversionEvent.
      *
      * Generated from protobuf field <code>bool deletable = 4 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -53,6 +53,20 @@ class ConversionEvent extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      */
     private $custom = \false;
     /**
+     * Optional. The method by which conversions will be counted across multiple
+     * events within a session. If this value is not provided, it will be set to
+     * `ONCE_PER_EVENT`.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod counting_method = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+     */
+    private $counting_method = 0;
+    /**
+     * Optional. Defines a default value/currency for a conversion event.
+     *
+     * Generated from protobuf field <code>optional .google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue default_conversion_value = 7 [(.google.api.field_behavior) = OPTIONAL];</code>
+     */
+    private $default_conversion_value = null;
+    /**
      * Constructor.
      *
      * @param array $data {
@@ -67,7 +81,7 @@ class ConversionEvent extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      *     @type \Google\Protobuf\Timestamp $create_time
      *           Output only. Time when this conversion event was created in the property.
      *     @type bool $deletable
-     *           Output only. If set, this event can currently be deleted via
+     *           Output only. If set, this event can currently be deleted with
      *           DeleteConversionEvent.
      *     @type bool $custom
      *           Output only. If set to true, this conversion event refers to a custom
@@ -76,6 +90,12 @@ class ConversionEvent extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
      *           usually created for you by the GA system, but in some cases can be created
      *           by property admins. Custom events count towards the maximum number of
      *           custom conversion events that may be created per property.
+     *     @type int $counting_method
+     *           Optional. The method by which conversions will be counted across multiple
+     *           events within a session. If this value is not provided, it will be set to
+     *           `ONCE_PER_EVENT`.
+     *     @type \Google\Analytics\Admin\V1alpha\ConversionEvent\DefaultConversionValue $default_conversion_value
+     *           Optional. Defines a default value/currency for a conversion event.
      * }
      */
     public function __construct($data = NULL)
@@ -165,7 +185,7 @@ class ConversionEvent extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this;
     }
     /**
-     * Output only. If set, this event can currently be deleted via
+     * Output only. If set, this event can currently be deleted with
      * DeleteConversionEvent.
      *
      * Generated from protobuf field <code>bool deletable = 4 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -176,7 +196,7 @@ class ConversionEvent extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
         return $this->deletable;
     }
     /**
-     * Output only. If set, this event can currently be deleted via
+     * Output only. If set, this event can currently be deleted with
      * DeleteConversionEvent.
      *
      * Generated from protobuf field <code>bool deletable = 4 [(.google.api.field_behavior) = OUTPUT_ONLY];</code>
@@ -220,6 +240,64 @@ class ConversionEvent extends \Matomo\Dependencies\GoogleAnalyticsImporter\Googl
     {
         GPBUtil::checkBool($var);
         $this->custom = $var;
+        return $this;
+    }
+    /**
+     * Optional. The method by which conversions will be counted across multiple
+     * events within a session. If this value is not provided, it will be set to
+     * `ONCE_PER_EVENT`.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod counting_method = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @return int
+     */
+    public function getCountingMethod()
+    {
+        return $this->counting_method;
+    }
+    /**
+     * Optional. The method by which conversions will be counted across multiple
+     * events within a session. If this value is not provided, it will be set to
+     * `ONCE_PER_EVENT`.
+     *
+     * Generated from protobuf field <code>.google.analytics.admin.v1alpha.ConversionEvent.ConversionCountingMethod counting_method = 6 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setCountingMethod($var)
+    {
+        GPBUtil::checkEnum($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ConversionEvent\ConversionCountingMethod::class);
+        $this->counting_method = $var;
+        return $this;
+    }
+    /**
+     * Optional. Defines a default value/currency for a conversion event.
+     *
+     * Generated from protobuf field <code>optional .google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue default_conversion_value = 7 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @return \Google\Analytics\Admin\V1alpha\ConversionEvent\DefaultConversionValue|null
+     */
+    public function getDefaultConversionValue()
+    {
+        return $this->default_conversion_value;
+    }
+    public function hasDefaultConversionValue()
+    {
+        return isset($this->default_conversion_value);
+    }
+    public function clearDefaultConversionValue()
+    {
+        unset($this->default_conversion_value);
+    }
+    /**
+     * Optional. Defines a default value/currency for a conversion event.
+     *
+     * Generated from protobuf field <code>optional .google.analytics.admin.v1alpha.ConversionEvent.DefaultConversionValue default_conversion_value = 7 [(.google.api.field_behavior) = OPTIONAL];</code>
+     * @param \Google\Analytics\Admin\V1alpha\ConversionEvent\DefaultConversionValue $var
+     * @return $this
+     */
+    public function setDefaultConversionValue($var)
+    {
+        GPBUtil::checkMessage($var, \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Analytics\Admin\V1alpha\ConversionEvent\DefaultConversionValue::class);
+        $this->default_conversion_value = $var;
         return $this;
     }
 }

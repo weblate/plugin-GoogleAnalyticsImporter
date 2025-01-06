@@ -44,7 +44,7 @@ class Pivot extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf
      * pivot. The `limit` parameter is required. A `limit` of 10,000 is common for
      * single pivot requests.
      * The product of the `limit` for each `pivot` in a `RunPivotReportRequest`
-     * must not exceed 100,000. For example, a two pivot request with `limit:
+     * must not exceed 250,000. For example, a two pivot request with `limit:
      * 1000` in each pivot will fail because the product is `1,000,000`.
      *
      * Generated from protobuf field <code>int64 limit = 4;</code>
@@ -81,7 +81,7 @@ class Pivot extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf
      *           pivot. The `limit` parameter is required. A `limit` of 10,000 is common for
      *           single pivot requests.
      *           The product of the `limit` for each `pivot` in a `RunPivotReportRequest`
-     *           must not exceed 100,000. For example, a two pivot request with `limit:
+     *           must not exceed 250,000. For example, a two pivot request with `limit:
      *           1000` in each pivot will fail because the product is `1,000,000`.
      *     @type array<int>|\Google\Protobuf\Internal\RepeatedField $metric_aggregations
      *           Aggregate the metrics by dimensions in this pivot using the specified
@@ -181,7 +181,7 @@ class Pivot extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf
      * pivot. The `limit` parameter is required. A `limit` of 10,000 is common for
      * single pivot requests.
      * The product of the `limit` for each `pivot` in a `RunPivotReportRequest`
-     * must not exceed 100,000. For example, a two pivot request with `limit:
+     * must not exceed 250,000. For example, a two pivot request with `limit:
      * 1000` in each pivot will fail because the product is `1,000,000`.
      *
      * Generated from protobuf field <code>int64 limit = 4;</code>
@@ -196,7 +196,7 @@ class Pivot extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf
      * pivot. The `limit` parameter is required. A `limit` of 10,000 is common for
      * single pivot requests.
      * The product of the `limit` for each `pivot` in a `RunPivotReportRequest`
-     * must not exceed 100,000. For example, a two pivot request with `limit:
+     * must not exceed 250,000. For example, a two pivot request with `limit:
      * 1000` in each pivot will fail because the product is `1,000,000`.
      *
      * Generated from protobuf field <code>int64 limit = 4;</code>

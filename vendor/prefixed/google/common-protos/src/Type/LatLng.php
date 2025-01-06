@@ -8,8 +8,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBType
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\RepeatedField;
 use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobuf\Internal\GPBUtil;
 /**
- * An object representing a latitude/longitude pair. This is expressed as a pair
- * of doubles representing degrees latitude and degrees longitude. Unless
+ * An object that represents a latitude/longitude pair. This is expressed as a
+ * pair of doubles to represent degrees latitude and degrees longitude. Unless
  * specified otherwise, this must conform to the
  * <a href="http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf">WGS84
  * standard</a>. Values must be within normalized ranges.
@@ -23,13 +23,13 @@ class LatLng extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Protobu
      *
      * Generated from protobuf field <code>double latitude = 1;</code>
      */
-    private $latitude = 0.0;
+    protected $latitude = 0.0;
     /**
      * The longitude in degrees. It must be in the range [-180.0, +180.0].
      *
      * Generated from protobuf field <code>double longitude = 2;</code>
      */
-    private $longitude = 0.0;
+    protected $longitude = 0.0;
     /**
      * Constructor.
      *

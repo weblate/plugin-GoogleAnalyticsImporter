@@ -35,7 +35,7 @@ class EnumOptions extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
      * and strips underscored from the fields before comparison in proto3 only.
      * The new behavior takes `json_name` into account and applies to proto2 as
      * well.
-     * TODO(b/261750190) Remove this legacy behavior once downstream teams have
+     * TODO Remove this legacy behavior once downstream teams have
      * had time to migrate.
      *
      * Generated from protobuf field <code>optional bool deprecated_legacy_json_field_conflicts = 6 [deprecated = true];</code>
@@ -67,7 +67,7 @@ class EnumOptions extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
      *           and strips underscored from the fields before comparison in proto3 only.
      *           The new behavior takes `json_name` into account and applies to proto2 as
      *           well.
-     *           TODO(b/261750190) Remove this legacy behavior once downstream teams have
+     *           TODO Remove this legacy behavior once downstream teams have
      *           had time to migrate.
      *     @type array<\Google\Protobuf\Internal\UninterpretedOption>|\Google\Protobuf\Internal\RepeatedField $uninterpreted_option
      *           The parser stores options it doesn't recognize here. See above.
@@ -153,7 +153,7 @@ class EnumOptions extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
      * and strips underscored from the fields before comparison in proto3 only.
      * The new behavior takes `json_name` into account and applies to proto2 as
      * well.
-     * TODO(b/261750190) Remove this legacy behavior once downstream teams have
+     * TODO Remove this legacy behavior once downstream teams have
      * had time to migrate.
      *
      * Generated from protobuf field <code>optional bool deprecated_legacy_json_field_conflicts = 6 [deprecated = true];</code>
@@ -180,7 +180,7 @@ class EnumOptions extends \Matomo\Dependencies\GoogleAnalyticsImporter\Google\Pr
      * and strips underscored from the fields before comparison in proto3 only.
      * The new behavior takes `json_name` into account and applies to proto2 as
      * well.
-     * TODO(b/261750190) Remove this legacy behavior once downstream teams have
+     * TODO Remove this legacy behavior once downstream teams have
      * had time to migrate.
      *
      * Generated from protobuf field <code>optional bool deprecated_legacy_json_field_conflicts = 6 [deprecated = true];</code>

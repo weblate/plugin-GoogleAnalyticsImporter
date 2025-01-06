@@ -39,6 +39,8 @@ use Matomo\Dependencies\GoogleAnalyticsImporter\Google\Auth\HttpHandler\HttpHand
 /**
  * A trait for shared functionality between transports that support only unary RPCs using simple
  * HTTP requests.
+ *
+ * @internal
  */
 trait HttpUnaryTransportTrait
 {
@@ -85,19 +87,20 @@ trait HttpUnaryTransportTrait
      */
     private static function buildCommonHeaders(array $options)
     {
-        $headers = isset($options['headers']) ? $options['headers'] : [];
+        $headers = $options['headers'] ?? [];
         if (!is_array($headers)) {
             throw new \InvalidArgumentException('The "headers" option must be an array');
         }
         // If not already set, add an auth header to the request
         if (!isset($headers['Authorization']) && isset($options['credentialsWrapper'])) {
             $credentialsWrapper = $options['credentialsWrapper'];
-            $audience = isset($options['audience']) ? $options['audience'] : null;
+            $audience = $options['audience'] ?? null;
             $callback = $credentialsWrapper->getAuthorizationHeaderCallback($audience);
             // Prevent unexpected behavior, as the authorization header callback
             // uses lowercase "authorization"
             unset($headers['authorization']);
-            $authHeaders = $callback();
+            // Mitigate scenario where InsecureCredentialsWrapper returns null.
+            $authHeaders = empty($callback) ? [] : $callback();
             if (!is_array($authHeaders)) {
                 throw new \UnexpectedValueException('Expected array response from authorization header callback');
             }

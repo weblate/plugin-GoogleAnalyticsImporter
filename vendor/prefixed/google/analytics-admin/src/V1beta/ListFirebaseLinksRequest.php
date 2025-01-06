@@ -33,12 +33,25 @@ class ListFirebaseLinksRequest extends \Matomo\Dependencies\GoogleAnalyticsImpor
     /**
      * A page token, received from a previous `ListFirebaseLinks` call.
      * Provide this to retrieve the subsequent page.
-     * When paginating, all other parameters provided to `ListProperties` must
+     * When paginating, all other parameters provided to `ListFirebaseLinks` must
      * match the call that provided the page token.
      *
      * Generated from protobuf field <code>string page_token = 3;</code>
      */
     private $page_token = '';
+    /**
+     * @param string $parent Required. Format: properties/{property_id}
+     *                       Example: properties/1234
+     *                       Please see {@see AnalyticsAdminServiceClient::propertyName()} for help formatting this field.
+     *
+     * @return \Google\Analytics\Admin\V1beta\ListFirebaseLinksRequest
+     *
+     * @experimental
+     */
+    public static function build(string $parent) : self
+    {
+        return (new self())->setParent($parent);
+    }
     /**
      * Constructor.
      *
@@ -56,7 +69,7 @@ class ListFirebaseLinksRequest extends \Matomo\Dependencies\GoogleAnalyticsImpor
      *     @type string $page_token
      *           A page token, received from a previous `ListFirebaseLinks` call.
      *           Provide this to retrieve the subsequent page.
-     *           When paginating, all other parameters provided to `ListProperties` must
+     *           When paginating, all other parameters provided to `ListFirebaseLinks` must
      *           match the call that provided the page token.
      * }
      */
@@ -122,7 +135,7 @@ class ListFirebaseLinksRequest extends \Matomo\Dependencies\GoogleAnalyticsImpor
     /**
      * A page token, received from a previous `ListFirebaseLinks` call.
      * Provide this to retrieve the subsequent page.
-     * When paginating, all other parameters provided to `ListProperties` must
+     * When paginating, all other parameters provided to `ListFirebaseLinks` must
      * match the call that provided the page token.
      *
      * Generated from protobuf field <code>string page_token = 3;</code>
@@ -135,7 +148,7 @@ class ListFirebaseLinksRequest extends \Matomo\Dependencies\GoogleAnalyticsImpor
     /**
      * A page token, received from a previous `ListFirebaseLinks` call.
      * Provide this to retrieve the subsequent page.
-     * When paginating, all other parameters provided to `ListProperties` must
+     * When paginating, all other parameters provided to `ListFirebaseLinks` must
      * match the call that provided the page token.
      *
      * Generated from protobuf field <code>string page_token = 3;</code>
