@@ -6,20 +6,12 @@
 
 <template>
   <div class="form-group row" v-if="!isNoDataPage">
-    <div class="col s12 m6">
+    <div class="col s12 m12">
       <p>{{ translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel1') }}</p>
       <p>
-        {{ translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel2') }}<br />
+        {{ translate('GoogleAnalyticsImporter_ConfigureTheImporterLabel2') }}&nbsp;
         <span v-html="$sanitize(setupGoogleAnalyticsImportFaq)"></span>
       </p>
-    </div>
-    <div class="col s12 m6">
-      <div class="form-help"
-           v-html="$sanitize(translate(
-             'GoogleAnalyticsImporter_ConfigureTheImporterHelpNewDate',
-             '<strong>',
-             '</strong>'))">
-      </div>
     </div>
   </div>
   <li v-if="isNoDataPage" v-html="$sanitize(getAdvanceConnectStep01Text)"></li>

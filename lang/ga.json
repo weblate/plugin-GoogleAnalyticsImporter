@@ -95,6 +95,7 @@
         "NohupExecutableMissing": "Ní féidir le Matomo an inrite nohup a aimsiú. Úsáideann an Iompórtálaí Google Analytics nohup chun an próiseas iompórtála a fhorghníomhú ionas go leanfaidh sé ar aghaidh leis féin tar éis deireadh a chur le hiarratas gréasáin. Ní mór an inrite seo a bheith i láthair agus inrochtana ó PHP chun go bhfeidhmeoidh an t-allmhaireoir.",
         "None": "Ceann ar bith",
         "NotSetInGA": "Níl sé socraithe in Google Analytics",
+        "NoteImportNotCountedAsHit": "%1$sNóta: %2$s Ní áirítear sonraí a iompórtáladh trí Iompórtáil Google Analytics i dtreo do chuóta amais.",
         "OauthFailedMessage": "Thángamar ar shaincheist le linn an phróisis údaraithe chun do thuarascálacha CLG a iompórtáil. Chun triail eile a bhaint as, cliceáil ar an gcnaipe thíos. Má leanann an fhadhb ar aghaidh, téigh i dteagmháil lenár bhfoireann tacaíochta chun cúnamh a fháil. Cabhróidh siad leat an cheist a réiteach agus do shonraí stairiúla CLG a iompórtáil.",
         "Optional": "Roghnach",
         "PendingGAImportReportNotificationNoData": "Táimid fós ag iompórtáil ó Google Analytics ach ba chóir duit a bheith in ann do chuid sonraí is déanaí a fheiceáil. Beidh tú in ann do chuid sonraí go léir a fheiceáil laistigh de chúpla lá.",
