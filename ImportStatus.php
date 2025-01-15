@@ -269,7 +269,7 @@ class ImportStatus
         }
         if (!empty($status['ga'])) {
             if (!empty($status['isGA4'])) {
-                $status['gaInfoPretty'] = 'Import Type: GA4' . "\n" . 'Property: ' . $status['ga']['property'] . "\nAccount: " . $status['ga']['account'];
+                $status['gaInfoPretty'] = 'Import Type: GA4' . "\n" . 'Property: ' . str_replace('properties/', '', $status['ga']['property']) . "\nAccount: " . str_replace('accounts/', '', $status['ga']['account']);
                 if (!empty($status['streamIds'])) {
                     $status['gaInfoPretty'] .= "\nStreamIds: " . implode(', ', $status['streamIds']);
                 }
@@ -287,6 +287,36 @@ class ImportStatus
         ) {
             $status['status'] = self::STATUS_KILLED;
         }
+        $status['statusName'] = ucwords($status['status']);
+        $status['statusDescription'] = '';
+        $status['errorDescription'] = '';
+        $statuesToPretty = [
+            self::STATUS_ERRORED => Piwik::translate('GoogleAnalyticsImporter_StatusErroredDescription', ['<a href="https://forum.matomo.org/" target="_blank" rel="noreferrer noopener">', '</a>']),
+            self::STATUS_RATE_LIMITED => Piwik::translate('GoogleAnalyticsImporter_StatusRateLimitedDescription'),
+            self::STATUS_FUTURE_DATE_IMPORT_PENDING => Piwik::translate('GoogleAnalyticsImporter_StatusFutureDateImportPendingDescription'),
+            self::STATUS_RATE_LIMITED_HOURLY => Piwik::translate('GoogleAnalyticsImporter_StatusRateLimitedHourlyDescription'),
+            self::STATUS_CLOUD_RATE_LIMITED => $status['error'] ?? '',
+            self::STATUS_KILLED => Piwik::translate('GoogleAnalyticsImporter_StatusKilledDescription'),
+        ];
+        if (isset($statuesToPretty[$status['status']])) {
+            $status['statusName'] = str_replace(
+                array_keys($statuesToPretty),
+                [
+                    Piwik::translate('GoogleAnalyticsImporter_StatusErroredName'),
+                    Piwik::translate('GoogleAnalyticsImporter_StatusRateLimitedName'),
+                    Piwik::translate('GoogleAnalyticsImporter_StatusFutureDateImportPendingName'),
+                    Piwik::translate('GoogleAnalyticsImporter_StatusRateLimitedHourlyName'),
+                    Piwik::translate('GoogleAnalyticsImporter_StatusCloudRateLimitedName'),
+                    Piwik::translate('GoogleAnalyticsImporter_StatusKilledName'),
+                ],
+                $status['status']
+            );
+            $status['statusDescription'] = $statuesToPretty[$status['status']];
+            if (in_array($status['status'], [self::STATUS_KILLED, self::STATUS_ERRORED]) && !empty($status['error'])) {
+                $status['errorDescription'] = $status['error'];
+            }
+        }
+
         return $status;
     }
     public static function getEstimatedDaysLeftToFinish($status)
