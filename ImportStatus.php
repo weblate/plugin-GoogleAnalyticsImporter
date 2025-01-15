@@ -287,7 +287,7 @@ class ImportStatus
         ) {
             $status['status'] = self::STATUS_KILLED;
         }
-        $status['statusName'] = ucwords($status['status']);
+        $status['statusName'] = isset($status['status']) ? ucwords($status['status']) : '';
         $status['statusDescription'] = '';
         $status['errorDescription'] = '';
         $statuesToPretty = [
@@ -298,7 +298,7 @@ class ImportStatus
             self::STATUS_CLOUD_RATE_LIMITED => $status['error'] ?? '',
             self::STATUS_KILLED => Piwik::translate('GoogleAnalyticsImporter_StatusKilledDescription'),
         ];
-        if (isset($statuesToPretty[$status['status']])) {
+        if (!empty($status['status']) && isset($statuesToPretty[$status['status']])) {
             $status['statusName'] = str_replace(
                 array_keys($statuesToPretty),
                 [
