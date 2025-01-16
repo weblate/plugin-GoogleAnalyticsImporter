@@ -242,6 +242,7 @@ class GoogleAnalyticsImporter extends \Piwik\Plugin
             $translationKeys[] = "ConnectAccounts_OptionQuickConnectWithGa";
             $translationKeys[] = "ConnectAccounts_OptionAdvancedConnectWithGa";
         }
+        $translationKeys[] = "GoogleAnalyticsImporter_StatusErroredName";
     }
     public function getJsFiles(&$files)
     {

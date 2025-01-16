@@ -290,8 +290,9 @@ class ImportStatus
         $status['statusName'] = isset($status['status']) ? ucwords($status['status']) : '';
         $status['statusDescription'] = '';
         $status['errorDescription'] = '';
+        $status['errorCode'] = '';
         $statuesToPretty = [
-            self::STATUS_ERRORED => Piwik::translate('GoogleAnalyticsImporter_StatusErroredDescription', ['<a href="https://forum.matomo.org/" target="_blank" rel="noreferrer noopener">', '</a>']),
+            self::STATUS_ERRORED => Piwik::translate('GoogleAnalyticsImporter_StatusErroredDescription'),
             self::STATUS_RATE_LIMITED => Piwik::translate('GoogleAnalyticsImporter_StatusRateLimitedDescription'),
             self::STATUS_FUTURE_DATE_IMPORT_PENDING => Piwik::translate('GoogleAnalyticsImporter_StatusFutureDateImportPendingDescription'),
             self::STATUS_RATE_LIMITED_HOURLY => Piwik::translate('GoogleAnalyticsImporter_StatusRateLimitedHourlyDescription'),
@@ -313,7 +314,15 @@ class ImportStatus
             );
             $status['statusDescription'] = $statuesToPretty[$status['status']];
             if (in_array($status['status'], [self::STATUS_KILLED, self::STATUS_ERRORED]) && !empty($status['error'])) {
-                $status['errorDescription'] = $status['error'];
+                $msg = str_replace('Error on day (unknown), ', '', $status['error']);
+                $jsonDecoded = json_decode($msg, true);
+                if (is_array($jsonDecoded) && !empty($jsonDecoded['error']['message'])) {
+                    $msg = $jsonDecoded['error']['message'];
+                }
+                if (!empty($jsonDecoded['error']['code'])) {
+                    $status['errorCode'] = $jsonDecoded['error']['code'];
+                }
+                $status['errorDescription'] = $msg;
             }
         }
 

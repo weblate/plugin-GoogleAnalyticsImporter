@@ -159,7 +159,7 @@
         "RecommendationButton": "Import data",
         "NoteImportNotCountedAsHit": "%1$sNote:%2$s Data imported through the Google Analytics Import does not count towards your hits quota.",
         "StatusErroredName": "Error",
-        "StatusErroredDescription": "An unexpected error occurred. Unexpected errors usually persist during a calendar day, and are automatically resolved the next day. If the error persists, please %1$sask on the forums%2$s or contact the Matomo support team. Providing access to your Google Analytics account to a member of Matomo's support team can help speed up the resolution process.",
+        "StatusErroredDescription": "An unexpected error occurred. Unexpected errors usually persist during a calendar day, and are automatically resolved the next day. If the error persists, please ask on the Matomo forum or contact the Matomo support team. Providing access to your Google Analytics account to a member of Matomo's support team can help speed up the resolution process.",
         "StatusRateLimitedName": "Rate limited (daily)",
         "StatusRateLimitedDescription": "By default, Google limits API requests for each project to 50,000 per day. This import job has exceeded that limit and will resume tomorrow.",
         "StatusFutureDateImportPendingName": "Up to date",

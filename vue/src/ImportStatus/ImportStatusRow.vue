@@ -28,7 +28,9 @@
       />
       <div v-if="status.errorDescription" style="word-wrap: break-word;">
         <br>
-        {{ translate('GoogleAnalyticsImporter_ErrorMessage') }}: {{ status.errorDescription }}
+        {{ translate('GoogleAnalyticsImporter_StatusErroredName') }}<span
+          v-if="status.errorCode">&nbsp;{{ status.errorCode }}
+      </span>: {{ status.errorDescription }}
       </div>
     </td>
     <td class="last-date-imported">
