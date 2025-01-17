@@ -20,56 +20,17 @@
     </td>
     <td class="ga-info" v-html="$sanitize(gaInfoPretty)"></td>
     <td class="status">
-      {{ status.status }}
-      <div v-if="status.status === 'rate_limited'">
-        <span
+      {{ status.statusName }}
+       <span
           class="icon icon-help"
-          :title="translate('GoogleAnalyticsImporter_RateLimitHelp')"
-        />
-        <br />
-        <span v-if="status.days_finished_since_rate_limit">
-        {{ translate(
-            'GoogleAnalyticsImporter_FinishedImportingDaysWaiting',
-            status.days_finished_since_rate_limit,
-          ) }}
-        </span>
-      </div>
-      <div v-if="status.status === 'cloud_rate_limited'">
-        <span
-          class="icon icon-help"
-          :title="status.error"
-        />
-        <br />
-        <span v-if="status.days_finished_since_rate_limit">
-        {{ translate(
-          'GoogleAnalyticsImporter_FinishedImportingDaysWaiting',
-          status.days_finished_since_rate_limit,
-        ) }}
-        </span>
-      </div>
-      <div v-if="status.status === 'rate_limited_hourly'">
-        <span
-          class="icon icon-help"
-          :title="translate('GoogleAnalyticsImporter_RateLimitHourlyHelp')"
-        />
-      </div>
-      <div v-if="status.status === 'future_date_import_pending'">
-        <span
-          class="icon icon-help"
-          :title="translate('GoogleAnalyticsImporter_FutureDateHelp', status.future_resume_date)"
-        />
-      </div>
-      <div v-else-if="status.status === 'errored'">
-        {{ translate('GoogleAnalyticsImporter_ErrorMessage') }}: {{ status.error || 'no message' }}
-        <br />
-        <span v-html="$sanitize(errorMessageBugReportRequest)"></span>
-      </div>
-      <div v-else-if="status.status === 'killed'">
-        <span
-          class="icon icon-help"
-          :title="translate('GoogleAnalyticsImporter_KilledStatusHelp')"
-        /><br>
-        {{ translate('GoogleAnalyticsImporter_ErrorMessage') }}: {{ status.error || 'no message' }}
+          v-if="status.statusDescription"
+          :title="status.statusDescription"
+      />
+      <div v-if="status.errorDescription" style="word-wrap: break-word;">
+        <br>
+        {{ translate('GoogleAnalyticsImporter_StatusErroredName') }}<span
+          v-if="status.errorCode">&nbsp;{{ status.errorCode }}
+      </span>: {{ status.errorDescription }}
       </div>
     </td>
     <td class="last-date-imported">

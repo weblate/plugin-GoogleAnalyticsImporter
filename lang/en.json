@@ -157,6 +157,19 @@
         "RecommendationTitle": "Import Google Analytics data to Matomo (recommended for you)",
         "RecommendationText": "We have detected Google Analytics on your site, so you can set up Matomo by importing your Google Analytics data.",
         "RecommendationButton": "Import data",
-        "NoteImportNotCountedAsHit": "%1$sNote:%2$s Data imported through the Google Analytics Import does not count towards your hits quota."
+        "NoteImportNotCountedAsHit": "%1$sNote:%2$s Data imported through the Google Analytics Import does not count towards your hits quota.",
+        "StatusErroredName": "Error",
+        "StatusErroredDescription": "An unexpected error occurred. Unexpected errors usually persist during a calendar day, and are automatically resolved the next day. If the error persists, please ask on the Matomo forum or contact the Matomo support team. Providing access to your Google Analytics account to a member of Matomo's support team can help speed up the resolution process.",
+        "StatusRateLimitedName": "Rate limited (daily)",
+        "StatusRateLimitedDescription": "By default, Google limits API requests for each project to 50,000 per day. This import job has exceeded that limit and will resume tomorrow.",
+        "StatusFutureDateImportPendingName": "Up to date",
+        "StatusFutureDateImportPendingDescription": "All available data has been imported. The importer will automatically retry tomorrow to ensure that newly available data is imported.",
+        "StatusRateLimitedHourlyName": "Rate limited (hourly)",
+        "StatusRateLimitedHourlyDescription": "By default, Google limits API requests for each project to 5,000 per hour. This import job has exceeded that limit and will continue after the hourly limit resets.",
+        "StatusCloudRateLimitedName": "Rate limited (account)",
+        "StatusCloudRateLimitedDescription": "Google limits API requests for data imports. This limit is prorated across Matomo cloud customers. For your account, this has been prorated to %1$s requests. You have reached this limit for today, and the importer will automatically retry tomorrow. You can bypass this limit by configuring your Google Analytics import via your Google Analytics account.",
+        "StatusKilledName": "Terminated",
+        "StatusKilledDescription": "The import job was terminated. If you did not initiate this, your host may have restricted long-running PHP processes. The import job will automatically restart within the next hour. If the problem persists, refer to the user guide for more information and workarounds, or contact Matomo support."
+
     }
 }
